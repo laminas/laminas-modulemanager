@@ -1,26 +1,25 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
+use Laminas\ModuleManager\Listener\ListenerOptions;
+use Laminas\ModuleManager\Listener\ModuleLoaderListener;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\Listener\ModuleLoaderListener;
-use Zend\ModuleManager\Listener\ListenerOptions;
-use Zend\ModuleManager\ModuleManager;
-use Zend\ModuleManager\ModuleEvent;
 
 class ModuleLoaderListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';
+        $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'laminas_module_cache_dir';
         @mkdir($this->tmpdir);
 
         $this->moduleManager = new ModuleManager(array());
