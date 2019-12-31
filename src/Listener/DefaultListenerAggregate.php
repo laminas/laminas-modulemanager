@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Listener;
+namespace Laminas\ModuleManager\Listener;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ModuleManager\ModuleEvent;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\ModuleManager\ModuleEvent;
 
 /**
  * Default listener aggregate
@@ -44,18 +43,18 @@ class DefaultListenerAggregate extends AbstractListener implements
 
         // High priority, we assume module autoloading (for FooNamespace\Module
         // classes) should be available before anything else.
-        // Register it only if use_zend_loader config is true, however.
-        if ($options->useZendLoader()) {
+        // Register it only if use_laminas_loader config is true, however.
+        if ($options->useLaminasLoader()) {
             $moduleLoaderListener = new ModuleLoaderListener($options);
             $moduleLoaderListener->attach($events);
             $this->listeners[] = $moduleLoaderListener;
         }
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener);
 
-        if ($options->useZendLoader()) {
+        if ($options->useLaminasLoader()) {
             // High priority, because most other loadModule listeners will assume
             // the module's classes are available via autoloading
-            // Register it only if use_zend_loader config is true, however.
+            // Register it only if use_laminas_loader config is true, however.
             $this->listeners[] = $events->attach(
                 ModuleEvent::EVENT_LOAD_MODULE,
                 new AutoloaderListener($options),
