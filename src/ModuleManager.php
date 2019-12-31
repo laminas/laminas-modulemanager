@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager;
+namespace Laminas\ModuleManager;
 
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerInterface;
 use Traversable;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerInterface;
 
 /**
  * Module manager
@@ -174,7 +173,7 @@ class ModuleManager implements ModuleManagerInterface
 
     /**
      * Load a module with the name
-     * @param  Zend\EventManager\EventInterface $event
+     * @param  Laminas\EventManager\EventInterface $event
      * @return mixed                            module instance
      * @throws Exception\RuntimeException
      */
