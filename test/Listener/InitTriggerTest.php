@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @link      https://github.com/zendframework/zend-modulemanager for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-modulemanager/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
-use Zend\ModuleManager\Listener\InitTrigger;
-use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\ModuleManager\Listener\InitTrigger;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
 
 /**
- * @covers \Zend\ModuleManager\Listener\AbstractListener
- * @covers \Zend\ModuleManager\Listener\InitTrigger
+ * @covers \Laminas\ModuleManager\Listener\AbstractListener
+ * @covers \Laminas\ModuleManager\Listener\InitTrigger
  */
 class InitTriggerTest extends AbstractListenerTestCase
 {

@@ -1,15 +1,16 @@
 <?php
+
 /**
- * @link      https://github.com/zendframework/zend-modulemanager for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-modulemanager/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\TestAsset;
+namespace LaminasTest\ModuleManager\TestAsset;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\Mvc\ApplicationInterface;
-use Zend\Mvc\MvcEvent;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\Mvc\ApplicationInterface;
+use Laminas\Mvc\MvcEvent;
 
 class MockApplication implements ApplicationInterface
 {
