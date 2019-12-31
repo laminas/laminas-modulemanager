@@ -1,22 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
 use ArrayObject;
+use Laminas\ModuleManager\Listener\ConfigListener;
+use Laminas\ModuleManager\Listener\ServiceListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ServiceManager\Config as ServiceConfig;
+use Laminas\ServiceManager\ServiceManager;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
-use Zend\ModuleManager\Listener\ConfigListener;
-use Zend\ModuleManager\Listener\ServiceListener;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Config as ServiceConfig;
-use Zend\ServiceManager\ServiceManager;
 
 class ServiceListenerTest extends TestCase
 {
@@ -35,7 +34,7 @@ class ServiceListenerTest extends TestCase
     {
         $this->services = new ServiceManager();
         $this->listener = new ServiceListener($this->services);
-        $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
+        $this->listener->addServiceManager($this->services, 'service_manager', 'Laminas\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
         $this->event    = new ModuleEvent();
         $this->configListener = new ConfigListener();
         $this->event->setConfigListener($this->configListener);
@@ -71,11 +70,11 @@ class ServiceListenerTest extends TestCase
                 'foo' => function ($sm) { },
             ),
             'abstract_factories' => array(
-                new \Zend\ServiceManager\Di\DiAbstractServiceFactory(new \Zend\Di\Di()),
+                new \Laminas\ServiceManager\Di\DiAbstractServiceFactory(new \Laminas\Di\Di()),
             ),
             'shared' => array(
                 'foo' => false,
-                'zendtestmodulemanagerlistenerservicelistenertest' => true,
+                'laminastestmodulemanagerlistenerservicelistenertest' => true,
             ),
             'aliases'  => array(
                 'bar' => 'foo',
@@ -125,7 +124,7 @@ class ServiceListenerTest extends TestCase
     public function testModuleServiceConfigOverridesGlobalConfig()
     {
         $this->listener = new ServiceListener($this->services, array('aliases' => array('foo' => 'bar')));
-        $this->listener->addServiceManager($this->services, 'service_manager', 'Zend\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
+        $this->listener->addServiceManager($this->services, 'service_manager', 'Laminas\ModuleManager\Feature\ServiceProviderInterface', 'getServiceConfig');
         $config = array('aliases' => array('foo' => 'baz'));
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
