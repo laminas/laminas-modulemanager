@@ -1,18 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\TestAsset;
+namespace LaminasTest\ModuleManager\TestAsset;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\Mvc\ApplicationInterface;
-use Zend\Mvc\MvcEvent;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\Mvc\ApplicationInterface;
+use Laminas\Mvc\MvcEvent;
 
 class MockApplication implements ApplicationInterface
 {
@@ -34,7 +32,7 @@ class MockApplication implements ApplicationInterface
     /**
      * Get the locator object
      *
-     * @return \Zend\ServiceManager\ServiceLocatorInterface
+     * @return \Laminas\ServiceManager\ServiceLocatorInterface
      */
     public function getServiceManager()
     {
@@ -70,7 +68,7 @@ class MockApplication implements ApplicationInterface
     /**
      * Run the application
      *
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     public function run()
     {
