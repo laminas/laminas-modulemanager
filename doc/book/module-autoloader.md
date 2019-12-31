@@ -1,13 +1,13 @@
 # The Module Autoloader
 
-zend-modulemanager ships with the default module autoloader
-`Zend\Loader\ModuleAutoloader`. It is a specialized autoloader responsible for
+laminas-modulemanager ships with the default module autoloader
+`Laminas\Loader\ModuleAutoloader`. It is a specialized autoloader responsible for
 locating and on-demand loading of, the `Module` classes from a variety of
 sources.
 
 ## Module Autoloader Usage
 
-By default, the provided `Zend\ModuleManager\Listener\DefaultListenerAggregate`
+By default, the provided `Laminas\ModuleManager\Listener\DefaultListenerAggregate`
 sets up the `ModuleAutoloader`; as a developer, you need only provide an array
 of module paths, either absolute or relative to the application's root, for the
 `ModuleAutoloader` to check when loading modules. The `DefaultListenerAggregate`
@@ -26,8 +26,8 @@ shared directory.
 
 ```php
 // public/index.php
-use Zend\ModuleManager\Listener;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\ModuleManager\Listener;
+use Laminas\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -36,7 +36,7 @@ $listenerOptions = new Listener\ListenerOptions([
     'module_paths' => [
         './module',
         './vendor',
-        '/usr/share/zfmodules',
+        '/usr/share/laminasmodules',
     ]
 ]);
 $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
@@ -69,10 +69,10 @@ $moduleManager->loadModules();
 > option to the `ListenerOptions` class:
 >
 > ```php
-> 'use_zend_loader' => false,
+> 'use_laminas_loader' => false,
 > ```
 >
-> If your project was begun from the [skeleton application](https://github.com/zendframework/ZendSkeletonApplication),
+> If your project was begun from the [skeleton application](https://github.com/laminas/LaminasSkeletonApplication),
 > place the above within the `module_listener_options` configuration of your
 > `config/application.config.php` file:
 >
@@ -80,7 +80,7 @@ $moduleManager->loadModules();
 > return [
 >     /* ... */
 >     'module_listener_options' => [
->         'use_zend_loader' => false,
+>         'use_laminas_loader' => false,
 >         /* ... */
 >     ],
 >     /* ... */
@@ -90,7 +90,7 @@ $moduleManager->loadModules();
 ## Non-Standard / Explicit Module Paths
 
 Sometimes you may want to specify exactly where a module is instead of having
-`Zend\Loader\ModuleAutoloader` try to find it in the registered paths.
+`Laminas\Loader\ModuleAutoloader` try to find it in the registered paths.
 
 ### Registering a Non-Standard / Explicit Module Path
 
@@ -100,9 +100,9 @@ back to searching any other registered module paths.
 
 ```php
 // ./public/index.php
-use Zend\Loader\ModuleAutoloader;
-use Zend\ModuleManager\Listener;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\Loader\ModuleAutoloader;
+use Laminas\ModuleManager\Listener;
+use Laminas\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -111,7 +111,7 @@ $listenerOptions = new Listener\ListenerOptions([
     'module_paths' => [
         './module',
         './vendor',
-        '/usr/share/zfmodules',
+        '/usr/share/laminasmodules',
         'MyModule' => '/path/to/mymoduledir-v1.2',
     ]
 ]);
@@ -123,7 +123,7 @@ $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
  * $moduleAutoloader = new ModuleAutoloader([
  *     './module',
  *     './vendor',
- *     '/usr/share/zfmodules',
+ *     '/usr/share/laminasmodules',
  *     'MyModule' => '/path/to/mymoduledir-v1.2',
  * ]);
  * $moduleAutoloader->register();

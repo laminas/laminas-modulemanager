@@ -1,29 +1,28 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
+use Laminas\ModuleManager\Exception;
+use Laminas\ModuleManager\Feature;
+use Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
 use PHPUnit\Framework\TestCase as TestCase;
 use stdClass;
-use Zend\ModuleManager\Exception;
-use Zend\ModuleManager\Feature;
-use Zend\ModuleManager\Listener\ModuleDependencyCheckerListener;
-use Zend\ModuleManager\ModuleManager;
-use Zend\ModuleManager\ModuleEvent;
 
 /**
- * @covers Zend\ModuleManager\Listener\ModuleDependencyCheckerListener
+ * @covers Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener
  */
 class ModuleDependencyCheckerListenerTest extends TestCase
 {
     /**
-     * @covers \Zend\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
+     * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
      */
     public function testCallsGetModuleDependenciesOnModuleImplementingInterface()
     {
@@ -45,7 +44,7 @@ class ModuleDependencyCheckerListenerTest extends TestCase
     }
 
     /**
-     * @covers \Zend\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
+     * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
      */
     public function testCallsGetModuleDependenciesOnModuleNotImplementingInterface()
     {
@@ -60,7 +59,7 @@ class ModuleDependencyCheckerListenerTest extends TestCase
     }
 
     /**
-     * @covers \Zend\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
+     * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
      */
     public function testNotFulfilledDependencyThrowsException()
     {
