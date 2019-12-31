@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Listener;
+namespace Laminas\ModuleManager\Listener;
 
-use Zend\ModuleManager\Exception;
-use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
-use Zend\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\Exception;
+use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
+use Laminas\ModuleManager\ModuleEvent;
 
 /**
  * Module resolver listener
@@ -24,7 +23,7 @@ class ModuleDependencyCheckerListener
     protected $loaded = [];
 
     /**
-     * @param \Zend\ModuleManager\ModuleEvent $e
+     * @param \Laminas\ModuleManager\ModuleEvent $e
      *
      * @throws Exception\MissingDependencyModuleException
      */

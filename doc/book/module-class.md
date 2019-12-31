@@ -2,15 +2,15 @@
 
 By default, the module system expects each module name to be capable of
 resolving to an object instance. The default module resolver,
-`Zend\ModuleManager\Listener\ModuleResolverListener`, instantiates an instance
+`Laminas\ModuleManager\Listener\ModuleResolverListener`, instantiates an instance
 of `{moduleName}\Module` for each enabled module.
 
 ## A Minimal Module
 
 As an example, provided the module name "MyModule",
-`Zend\ModuleManager\Listener\ModuleResolverListener` will expect the class
+`Laminas\ModuleManager\Listener\ModuleResolverListener` will expect the class
 `MyModule\Module` to be available. It relies on a registered autoloader
-(typically `Zend\Loader\ModuleAutoloader`) to find and include the
+(typically `Laminas\Loader\ModuleAutoloader`) to find and include the
 `MyModule\Module` class if it isn't already available.
 
 > ### Module classes
@@ -61,10 +61,10 @@ class Module
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\ClassMapAutoloader' => [
+            'Laminas\Loader\ClassMapAutoloader' => [
                 __DIR__ . '/autoload_classmap.php',
             ],
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ],
@@ -99,8 +99,8 @@ any actions after all other modules have been loaded, use the module manager's
 ### Sample Usage of "loadModules.post" Event
 
 ```php
-use Zend\EventManager\EventInterface as Event;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\EventManager\EventInterface as Event;
+use Laminas\ModuleManager\ModuleManager;
 
 class Module
 {
@@ -133,14 +133,14 @@ class Module
 
 If you are writing an MVC-oriented module, you may need access to additional
 parts of the application in your `Module` class such as the instance of
-`Zend\Mvc\Application` or its registered `ServiceManager` instance. For this,
+`Laminas\Mvc\Application` or its registered `ServiceManager` instance. For this,
 you may utilize the MVC `bootstrap` event. The bootstrap event is triggered
 after the `loadModule.post` event, once `$application->bootstrap()` is called.
 
 ### Sample Usage of the MVC "bootstrap" Event
 
 ```php
-use Zend\EventManager\EventInterface as Event;
+use Laminas\EventManager\EventInterface as Event;
 
 class Module
 {
