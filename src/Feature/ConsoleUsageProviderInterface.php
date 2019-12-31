@@ -1,27 +1,25 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Feature;
+namespace Laminas\ModuleManager\Feature;
 
-use Zend\Console\Adapter\AdapterInterface;
+use Laminas\Console\Adapter\AdapterInterface;
 
 /**
- * @category   Zend
- * @package    Zend_ModuleManager
+ * @category   Laminas
+ * @package    Laminas_ModuleManager
  * @subpackage Feature
  */
 interface ConsoleUsageProviderInterface
 {
     /**
      * Returns an array or a string containing usage information for this module's Console commands.
-     * The method is called with active Zend\Console\Adapter\AdapterInterface that can be used to directly access
+     * The method is called with active Laminas\Console\Adapter\AdapterInterface that can be used to directly access
      * Console and send output.
      *
      * If the result is a string it will be shown directly in the console window.
