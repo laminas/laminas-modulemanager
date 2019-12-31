@@ -1,6 +1,6 @@
 # Best Practices when Creating Modules
 
-When creating a ZF2 module, there are some best practices you should keep in mind.
+When creating a Laminas module, there are some best practices you should keep in mind.
 
 ## Keep the `init()` and `onBootstrap()` methods lightweight
 
@@ -11,7 +11,7 @@ methods. Such lightweight tasks will generally not have a measurable impact on t
 your application, even with many modules enabled. It is considered bad practice to utilize these
 methods for setting up or configuring instances of application resources such as a database
 connection, application logger, or mailer. Tasks such as these are better served through the
-`ServiceManager` capabilities of Zend Framework 2.
+`ServiceManager` capabilities of Laminas.
 
 ## Do not perform writes within a module
 
@@ -31,8 +31,8 @@ within a phar archive.
 ## Utilize a vendor prefix for module names
 
 To avoid module naming conflicts, you are encouraged to prefix your module namespace with a vendor
-prefix. As an example, the (incomplete) developer tools module distributed by Zend is named
-"ZendDeveloperTools" instead of simply "DeveloperTools".
+prefix. As an example, the (incomplete) developer tools module distributed by Laminas is named
+"Laminas\\DeveloperTools" instead of simply "DeveloperTools".
 
 ## Utilize a module prefix for service names
 

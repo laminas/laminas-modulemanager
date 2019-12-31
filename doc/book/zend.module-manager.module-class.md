@@ -1,15 +1,15 @@
 # The Module Class
 
-By default, the Zend Framework 2 module system simply expects each module name to be capable of
+By default, the Laminas module system simply expects each module name to be capable of
 resolving to an object instance. The default module resolver,
-`Zend\ModuleManager\Listener\ModuleResolverListener`, simply instantiates an instance of
+`Laminas\ModuleManager\Listener\ModuleResolverListener`, simply instantiates an instance of
 `{moduleName}\Module` for each enabled module.
 
 ## A Minimal Module
 
 As an example, provided the module name "MyModule",
-`Zend\ModuleManager\Listener\ModuleResolverListener` will simply expect the class `MyModule\Module`
-to be available. It relies on a registered autoloader (typically `Zend\Loader\ModuleAutoloader`) to
+`Laminas\ModuleManager\Listener\ModuleResolverListener` will simply expect the class `MyModule\Module`
+to be available. It relies on a registered autoloader (typically `Laminas\Loader\ModuleAutoloader`) to
 find and include the `MyModule\Module` class if it isn't already available.
 
 The directory structure of a module named "MyModule" might start out looking something like this:
@@ -49,10 +49,10 @@ class Module
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            'Laminas\Loader\ClassMapAutoloader' => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
+            'Laminas\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
@@ -69,8 +69,8 @@ class Module
 
 For a list of the provided module manager listeners and the interfaces and methods that `Module`
 classes may implement in order to interact with the module manager and application, see the [module
-manager listeners](zend.module-manager.module-manager.md#module-manager-listeners) and the [module
-mananger events](zend.module-manager.module-manager.md#module-manager-events) documentations.
+manager listeners](laminas.module-manager.module-manager.md#module-manager-listeners) and the [module
+mananger events](laminas.module-manager.module-manager.md#module-manager-events) documentations.
 
 ## The "loadModules.post" Event
 
@@ -80,13 +80,13 @@ been loaded, the module manager's "loadModules.post" event makes this easy.
 
 > ## Note
 For more information on methods like `init()` and `getConfig()`, refer to the [module
-manager listeners documentation](zend.module-manager.module-manager.md#module-manager-listeners).
+manager listeners documentation](laminas.module-manager.module-manager.md#module-manager-listeners).
 
 ### Sample Usage of "loadModules.post" Event
 
 ```php
-use Zend\EventManager\EventInterface as Event;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\EventManager\EventInterface as Event;
+use Laminas\ModuleManager\ModuleManager;
 
 class Module
 {
@@ -115,8 +115,8 @@ listeners.
 
 ## The MVC "bootstrap" Event
 
-If you are writing an MVC-oriented module for Zend Framework 2, you may need access to additional
-parts of the application in your `Module` class such as the instance of `Zend\Mvc\Application` or
+If you are writing an MVC-oriented module for Laminas, you may need access to additional
+parts of the application in your `Module` class such as the instance of `Laminas\Mvc\Application` or
 its registered `ServiceManager` instance. For this, you may utilize the MVC "bootstrap" event. The
 bootstrap event is triggered after the "loadModule.post" event, once *$application-&gt;bootstrap()*
 is called.
@@ -124,7 +124,7 @@ is called.
 ### Sample Usage of the MVC "bootstrap" Event
 
 ```php
-use Zend\EventManager\EventInterface as Event;
+use Laminas\EventManager\EventInterface as Event;
 
 class Module
 {

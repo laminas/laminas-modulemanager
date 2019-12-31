@@ -1,12 +1,12 @@
 # The Module Autoloader
 
-Zend Framework 2 ships with the default module autoloader `Zend\Loader\ModuleAutoloader`. It is a
+Laminas ships with the default module autoloader `Laminas\Loader\ModuleAutoloader`. It is a
 specialized autoloader responsible for locating and on-demand loading of, the `Module` classes from
 a variety of sources.
 
 ## Module Autoloader Usage
 
-By default, the provided `Zend\ModuleManager\Listener\DefaultListenerAggregate` sets up the
+By default, the provided `Laminas\ModuleManager\Listener\DefaultListenerAggregate` sets up the
 `ModuleAutoloader`; as a developer, you need only provide an array of module paths, either absolute
 or relative to the application's root, for the `ModuleAutoloader` to check when loading modules. The
 `DefaultListenerAggregate` will take care of instantiating and registering the `ModuleAutoloader`
@@ -23,8 +23,8 @@ directories of this application and the third is a system-wide shared directory.
 
 ```php
 // public/index.php
-use Zend\ModuleManager\Listener;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\ModuleManager\Listener;
+use Laminas\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -33,7 +33,7 @@ $listenerOptions = new Listener\ListenerOptions(array(
     'module_paths' => array(
         './module',
         './vendor',
-        '/usr/share/zfmodules',
+        '/usr/share/laminasmodules',
     )
 ));
 $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
@@ -58,7 +58,7 @@ autoloader will return the first one it finds.
 ## Non-Standard / Explicit Module Paths
 
 Sometimes you may want to specify exactly where a module is instead of having
-`Zend\Loader\ModuleAutoloader` try to find it in the registered paths.
+`Laminas\Loader\ModuleAutoloader` try to find it in the registered paths.
 
 ### Registering a Non-Standard / Explicit Module Path
 
@@ -68,9 +68,9 @@ other registered module paths.
 
 ```php
 // ./public/index.php
-use Zend\Loader\ModuleAutoloader;
-use Zend\ModuleManager\Listener;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\Loader\ModuleAutoloader;
+use Laminas\ModuleManager\Listener;
+use Laminas\ModuleManager\ModuleManager;
 
 chdir(dirname(__DIR__));
 
@@ -79,7 +79,7 @@ $listenerOptions = new Listener\ListenerOptions(array(
     'module_paths' => array(
         './module',
         './vendor',
-        '/usr/share/zfmodules',
+        '/usr/share/laminasmodules',
         'MyModule' => '/path/to/mymoduledir-v1.2',
     )
 ));
@@ -91,7 +91,7 @@ $defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
  * $moduleAutoloader = new ModuleAutoloader(array(
  *     './module',
  *     './vendor',
- *     '/usr/share/zfmodules',
+ *     '/usr/share/laminasmodules',
  *     'MyModule' => '/path/to/mymoduledir-v1.2',
  * ));
  * $moduleAutoloader->register();

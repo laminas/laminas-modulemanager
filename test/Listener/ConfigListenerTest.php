@@ -1,27 +1,26 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
 use ArrayObject;
 use InvalidArgumentException;
-use Zend\EventManager\Test\EventListenerIntrospectionTrait;
-use Zend\ModuleManager\Listener\ConfigListener;
-use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\Listener\ListenerOptions;
-use Zend\ModuleManager\ModuleManager;
-use Zend\ModuleManager\ModuleEvent;
-use ZendTest\ModuleManager\SetUpCacheDirTrait;
+use Laminas\EventManager\Test\EventListenerIntrospectionTrait;
+use Laminas\ModuleManager\Listener\ConfigListener;
+use Laminas\ModuleManager\Listener\ListenerOptions;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
+use LaminasTest\ModuleManager\SetUpCacheDirTrait;
 
 /**
- * @covers Zend\ModuleManager\Listener\AbstractListener
- * @covers Zend\ModuleManager\Listener\ConfigListener
+ * @covers Laminas\ModuleManager\Listener\AbstractListener
+ * @covers Laminas\ModuleManager\Listener\ConfigListener
  */
 class ConfigListenerTest extends AbstractListenerTestCase
 {
@@ -53,7 +52,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         $this->assertSame('test', $config['listener']);
         $this->assertSame('thing', $config['some']);
         $configObject = $configListener->getMergedConfig();
-        $this->assertInstanceOf('Zend\Config\Config', $configObject);
+        $this->assertInstanceOf('Laminas\Config\Config', $configObject);
     }
 
     public function testCanCacheMergedConfig()
