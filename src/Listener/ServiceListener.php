@@ -1,25 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Listener;
+namespace Laminas\ModuleManager\Listener;
 
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ServiceManager\Config as ServiceConfig;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Stdlib\ArrayUtils;
 use Traversable;
-use Zend\EventManager\EventManagerInterface;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Config as ServiceConfig;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\ArrayUtils;
 
 class ServiceListener implements ServiceListenerInterface
 {
     /**
-     * @var \Zend\Stdlib\CallbackHandler[]
+     * @var \Laminas\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
 
@@ -242,7 +241,7 @@ class ServiceListener implements ServiceListenerInterface
 
         if (!$config instanceof ServiceConfig) {
             throw new Exception\RuntimeException(sprintf(
-                'Invalid service manager configuration class provided; received "%s", expected an instance of Zend\ServiceManager\Config',
+                'Invalid service manager configuration class provided; received "%s", expected an instance of Laminas\ServiceManager\Config',
                 (is_object($config) ? get_class($config) : (is_scalar($config) ? $config : gettype($config)))
             ));
         }
