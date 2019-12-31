@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @link      https://github.com/zendframework/zend-modulemanager for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-modulemanager/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
 use InvalidArgumentException;
+use Laminas\Config\Config;
+use Laminas\ModuleManager\Listener\ListenerOptions;
 use PHPUnit\Framework\TestCase;
-use Zend\Config\Config;
-use Zend\ModuleManager\Listener\ListenerOptions;
 
 /**
- * @covers \Zend\ModuleManager\Listener\ListenerOptions
+ * @covers \Laminas\ModuleManager\Listener\ListenerOptions
  */
 class ListenerOptionsTest extends TestCase
 {
