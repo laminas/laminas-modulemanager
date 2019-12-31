@@ -1,6 +1,6 @@
 # Introduction to the Module System
 
-Zend Framework 2.0 introduced a new and powerful approach to modules. This new
+Laminas.0 introduced a new and powerful approach to modules. This new
 module system is designed with flexibility, simplicity, and re-usability in
 mind. A module may contain just about anything: PHP code, including MVC
 functionality; library code; view scripts; and/or public assets such as images,
@@ -8,18 +8,18 @@ CSS, and JavaScript. The possibilities are endless.
 
 > ### Event-based system
 >
-> The module system in ZF2 has been designed to be a generic and powerful foundation from which
+> The module system in Laminas has been designed to be a generic and powerful foundation from which
 > developers and other projects can build their own module or plugin systems.
-> For a better understanding of the event-driven concepts behind the ZF2 module system, it may be
-> helpful to read the [EventManager documentation](https://zendframework.github.io/zend-eventmanager/).
+> For a better understanding of the event-driven concepts behind the Laminas module system, it may be
+> helpful to read the [EventManager documentation](https://docs.laminas.dev/laminas-eventmanager/).
 
 The module system is made up of the following:
 
-- [The Module Autoloader](https://zendframework.github.io/zend-loader/module-autoloader/) -
-  `Zend\Loader\ModuleAutoloader` is a specialized autoloader that is responsible
+- [The Module Autoloader](https://docs.laminas.dev/laminas-loader/module-autoloader/) -
+  `Laminas\Loader\ModuleAutoloader` is a specialized autoloader that is responsible
   for the locating and loading of modules' `Module` classes from a variety of
   sources.
-- [The Module Manager](module-manager.md) - `Zend\ModuleManager\ModuleManager`
+- [The Module Manager](module-manager.md) - `Laminas\ModuleManager\ModuleManager`
   takes an array of module names and fires a sequence of events for each one,
   allowing the behavior of the module system to be defined entirely by the
   listeners which are attached to the module manager.
@@ -30,11 +30,11 @@ The module system is made up of the following:
 
 > ### Modules are PHP namespaces
 >
-> The name of a module in a Zend Framework application is a
+> The name of a module in a Laminas application is a
 > [PHP namespace](http://php.net/namespaces), and must follow all of the same
 > rules for naming.
 
-The recommended structure for an MVC-oriented ZF2 module is as follows:
+The recommended structure for an MVC-oriented Laminas module is as follows:
 
 ```text
 module_root/
@@ -76,5 +76,5 @@ The three `autoload_*.php` files are not required, but recommended. They provide
 
 The purpose of these three files is to provide reasonable default mechanisms for
 autoloading the classes contained in the module, thus providing a trivial way to
-consume the module without requiring zend-modulemanager` (e.g., for use outside
-a ZF2 application).
+consume the module without requiring laminas-modulemanager` (e.g., for use outside
+a Laminas application).

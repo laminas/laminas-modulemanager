@@ -18,28 +18,28 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#39](https://github.com/zendframework/zend-modulemanager/pull/39) and
-  [#53](https://github.com/zendframework/zend-modulemanager/pull/53) prevent
+- [zendframework/zend-modulemanager#39](https://github.com/zendframework/zend-modulemanager/pull/39) and
+  [zendframework/zend-modulemanager#53](https://github.com/zendframework/zend-modulemanager/pull/53) prevent
   race conditions when writing cache files (merged configuration).
-- [#36](https://github.com/zendframework/zend-modulemanager/pull/36) removes a
+- [zendframework/zend-modulemanager#36](https://github.com/zendframework/zend-modulemanager/pull/36) removes a
   throw from `ServiceListener::onLoadModulesPost()` that was previously emitted
   when a named plugin manager did not have an associated service present yet.
   Doing so allows plugin managers to be registered after configuration is fully
   merged, instead of requiring they be defined early. This change allows
   components to define their plugin managers via their `Module` classes.
-- [#58](https://github.com/zendframework/zend-modulemanager/pull/58) corrects
+- [zendframework/zend-modulemanager#58](https://github.com/zendframework/zend-modulemanager/pull/58) corrects
   the typehint for the `ServiceListener::$listeners` property.
 
 ## 2.7.2 - 2016-05-16
 
 ### Added
 
-- [#38](https://github.com/zendframework/zend-modulemanager/pull/38) prepares
-  and publishes the documentation to https://zendframework.github.io/zend-modulemanager/
-- [#40](https://github.com/zendframework/zend-modulemanager/pull/40) adds a
-  requirement on zend-config. Since the default use case centers around config
+- [zendframework/zend-modulemanager#38](https://github.com/zendframework/zend-modulemanager/pull/38) prepares
+  and publishes the documentation to https://docs.laminas.dev/laminas-modulemanager/
+- [zendframework/zend-modulemanager#40](https://github.com/zendframework/zend-modulemanager/pull/40) adds a
+  requirement on laminas-config. Since the default use case centers around config
   merging and requires the component, it should be required by
-  zend-modulemanager.
+  laminas-modulemanager.
 
 ### Deprecated
 
@@ -69,7 +69,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#31](https://github.com/zendframework/zend-modulemanager/pull/31) updates the
+- [zendframework/zend-modulemanager#31](https://github.com/zendframework/zend-modulemanager/pull/31) updates the
   `ServiceListener:onLoadModulesPost()` workflow to override existing services
   on a given service/plugin manager instance when configuring it. Since the
   listener operates as part of bootstrapping, this is a requirement.
@@ -90,23 +90,23 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#13](https://github.com/zendframework/zend-modulemanager/pull/13) and
-  [#28](https://github.com/zendframework/zend-modulemanager/pull/28) update the
-  component to be forwards-compatible with zend-servicemanager v3. This
+- [zendframework/zend-modulemanager#13](https://github.com/zendframework/zend-modulemanager/pull/13) and
+  [zendframework/zend-modulemanager#28](https://github.com/zendframework/zend-modulemanager/pull/28) update the
+  component to be forwards-compatible with laminas-servicemanager v3. This
   primarily affects how configuration is aggregated within the
   `ServiceListener` (as v3 has a dedicated method in the
-  `Zend\ServiceManager\ConfigInterface` for retrieving it).
+  `Laminas\ServiceManager\ConfigInterface` for retrieving it).
 
-- [#12](https://github.com/zendframework/zend-modulemanager/pull/12),
-  [#28](https://github.com/zendframework/zend-modulemanager/pull/28), and
-  [#29](https://github.com/zendframework/zend-modulemanager/pull/29) update the
-  component to be forwards-compatible with zend-eventmanager v3. Primarily, this
+- [zendframework/zend-modulemanager#12](https://github.com/zendframework/zend-modulemanager/pull/12),
+  [zendframework/zend-modulemanager#28](https://github.com/zendframework/zend-modulemanager/pull/28), and
+  [zendframework/zend-modulemanager#29](https://github.com/zendframework/zend-modulemanager/pull/29) update the
+  component to be forwards-compatible with laminas-eventmanager v3. Primarily, this
   involves:
   - Changing trigger calls to `triggerEvent()` and/or `triggerEventUntil()`, and
     ensuring the event instance is injected with the new event name prior.
   - Ensuring aggregates are attached using the `$aggregate->attach($events)`
     signature instead of the `$events->attachAggregate($aggregate)` signature.
-  - Using zend-eventmanager's `EventListenerIntrospectionTrait` to test that
+  - Using laminas-eventmanager's `EventListenerIntrospectionTrait` to test that
     listeners are attached at expected priorities.
 
 ## 2.6.1 - 2015-09-22
@@ -144,9 +144,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#10](https://github.com/zendframework/zend-modulemanager/pull/10) pins the
-  zend-stdlib version to `~2.7`, allowing it to use that version forward, and
-  ensuring compatibility with consumers of the new zend-hydrator library.
+- [zendframework/zend-modulemanager#10](https://github.com/zendframework/zend-modulemanager/pull/10) pins the
+  laminas-stdlib version to `~2.7`, allowing it to use that version forward, and
+  ensuring compatibility with consumers of the new laminas-hydrator library.
 
 ## 2.5.3 - 2015-09-22
 
@@ -183,6 +183,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#9](https://github.com/zendframework/zend-modulemanager/pull/9) pins the
-  zend-stdlib version to `>=2.5.0,<2.7.0`, as 2.7.0 deprecates the hydrators (in
-  favor of the new zend-hydrator library).
+- [zendframework/zend-modulemanager#9](https://github.com/zendframework/zend-modulemanager/pull/9) pins the
+  laminas-stdlib version to `>=2.5.0,<2.7.0`, as 2.7.0 deprecates the hydrators (in
+  favor of the new laminas-hydrator library).

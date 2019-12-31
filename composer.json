@@ -1,49 +1,59 @@
 {
-    "name": "zendframework/zend-modulemanager",
+    "name": "laminas/laminas-modulemanager",
     "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "modulemanager"
     ],
-    "homepage": "https://github.com/zendframework/zend-modulemanager",
-    "autoload": {
-        "psr-4": {
-            "Zend\\ModuleManager\\": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-modulemanager/",
+        "issues": "https://github.com/laminas/laminas-modulemanager/issues",
+        "source": "https://github.com/laminas/laminas-modulemanager",
+        "rss": "https://github.com/laminas/laminas-modulemanager/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require": {
-        "php": "^5.5 || ^7.0",
-        "zendframework/zend-config": "^2.6 || ^3.1",
-        "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0"
+    "config": {
+        "sort-packages": true
     },
-    "require-dev": {
-        "zendframework/zend-console": "^2.6",
-        "zendframework/zend-di": "^2.6",
-        "zendframework/zend-loader": "^2.5",
-        "zendframework/zend-mvc": "^2.7",
-        "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3",
-        "phpunit/PHPUnit": "~4.0",
-        "zendframework/zend-coding-standard": "~1.0.0"
-    },
-    "suggest": {
-        "zendframework/zend-console": "Zend\\Console component",
-        "zendframework/zend-loader": "Zend\\Loader component",
-        "zendframework/zend-mvc": "Zend\\Mvc component",
-        "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "2.7-dev",
             "dev-develop": "2.8-dev"
         }
     },
+    "require": {
+        "php": "^5.5 || ^7.0",
+        "laminas/laminas-config": "^2.6 || ^3.1",
+        "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
+        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-console": "^2.6",
+        "laminas/laminas-di": "^2.6",
+        "laminas/laminas-loader": "^2.5",
+        "laminas/laminas-mvc": "^2.7",
+        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+        "phpunit/phpunit": "~4.0"
+    },
+    "suggest": {
+        "laminas/laminas-console": "Laminas\\Console component",
+        "laminas/laminas-loader": "Laminas\\Loader component",
+        "laminas/laminas-mvc": "Laminas\\Mvc component",
+        "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\ModuleManager\\": "src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\ModuleManager\\": "test/"
+            "LaminasTest\\ModuleManager\\": "test/"
         }
     },
     "scripts": {
@@ -56,5 +66,8 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "upload-coverage": "coveralls -v"
+    },
+    "replace": {
+        "zendframework/zend-modulemanager": "self.version"
     }
 }
