@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modular application system for laminas-mvc applications">  
+    <link rel="canonical" href="https://docs.laminas.dev/best-practices/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Best Practices when Creating Modules - laminas-modulemanager - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="mvc">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-modulemanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-manager/" class="subnavigation__link">The Module Manager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-class/" class="subnavigation__link">The Module Class</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-autoloader/" class="subnavigation__link">The Module Autoloader</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Best Practices when Creating Modules</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Mvc
+
+                    
+                        <small class="header__subtitle">laminas-modulemanager</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-modulemanager/" class="header__link header__link--github" title="Go to repository of laminas-modulemanager">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#keep-the-init-and-onbootstrap-methods-lightweight" class="toc__link">Keep the init() and onBootstrap() methods lightweight</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#do-not-perform-writes-within-a-module" class="toc__link">Do not perform writes within a module</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#utilize-a-vendor-prefix-for-module-names" class="toc__link">Utilize a vendor prefix for module names</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#utilize-a-module-prefix-for-service-names" class="toc__link">Utilize a module prefix for service names</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-modulemanager</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Best Practices when Creating Modules</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="best-practices-when-creating-modules">Best Practices when Creating Modules</h1>
+<p>When creating a Laminas module, there are some best practices you should keep in mind.</p>
+<h2 id="keep-the-init-and-onbootstrap-methods-lightweight">Keep the <code>init()</code> and <code>onBootstrap()</code> methods lightweight</h2>
+<p>Be conservative with the actions you perform in the <code>init()</code> and <code>onBootstrap()</code>
+methods of your <code>Module</code> class. These methods are run for <strong>every</strong> page
+request, and should not perform anything heavy. As a rule of thumb, registering
+event listeners is an appropriate task to perform in these methods. Such
+lightweight tasks will generally not have a measurable impact on the performance
+of your application, even with many modules enabled. It is considered bad
+practice to utilize these methods for setting up or configuring instances of
+application resources such as a database connection, application logger, or
+mailer. Tasks such as these are better served through the <code>ServiceManager</code>
+capabilities.</p>
+<h2 id="do-not-perform-writes-within-a-module">Do not perform writes within a module</h2>
+<p>You should <strong>never</strong> code your module to perform or expect any writes within the
+module's directory.  Once installed, the files within a module's directory
+should always match the distribution verbatim.  Any user-provided configuration
+should be performed via overrides in the <code>Application</code> module or via
+application-level configuration files. Any other required filesystem writes
+should be performed in some writeable path that is outside of the module's
+directory.</p>
+<p>There are two primary advantages to following this rule. First, any modules
+which attempt to write within themselves will not be compatible with phar
+packaging. Second, by keeping the module in sync with the upstream distribution,
+updates via mechanisms such as git will be simple and trouble-free.  Of course,
+the <code>Application</code> module is a special exception to this rule, as there is
+typically no upstream distribution for this module, and it's unlikely you would
+want to run this package from within a phar archive.</p>
+<h2 id="utilize-a-vendor-prefix-for-module-names">Utilize a vendor prefix for module names</h2>
+<p>To avoid module naming conflicts, you are encouraged to prefix your module
+namespace with a vendor prefix. As an example, the developer tools module
+distributed by Laminas is named "Laminas\DeveloperTools" instead of simply
+"DeveloperTools".</p>
+<h2 id="utilize-a-module-prefix-for-service-names">Utilize a module prefix for service names</h2>
+<p>If you define services in the top-level service manager, you are encouraged to
+prefix these services with the name of your module to avoid conflicts with other
+modules' services. For example, the database adapter used by MyModule should be
+called "MyModuleDbAdapter" rather than simply "DbAdapter." If you need to share
+a service with other modules, remember that the Service Manager "alias" feature
+can be used in a merged configuration to override factories defined by
+individual modules. Ideally, modules should define their own service
+dependencies, but aliases can be configured at the application level to ensure
+that common services in individual modules all refer to the same instance.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../module-autoloader/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-modulemanager/edit/master/docs/book/best-practices.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-modulemanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-manager/" class="subnavigation__link">The Module Manager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-class/" class="subnavigation__link">The Module Class</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-autoloader/" class="subnavigation__link">The Module Autoloader</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Best Practices when Creating Modules</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-modulemanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-modulemanager//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "mvc",
+            siteName = 'laminas-modulemanager';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-modulemanager" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

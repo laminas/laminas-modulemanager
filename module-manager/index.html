@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modular application system for laminas-mvc applications">  
+    <link rel="canonical" href="https://docs.laminas.dev/module-manager/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>The Module Manager - laminas-modulemanager - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="mvc">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-modulemanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">The Module Manager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-class/" class="subnavigation__link">The Module Class</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-autoloader/" class="subnavigation__link">The Module Autoloader</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../best-practices/" class="subnavigation__link">Best Practices when Creating Modules</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Mvc
+
+                    
+                        <small class="header__subtitle">laminas-modulemanager</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-modulemanager/" class="header__link header__link--github" title="Go to repository of laminas-modulemanager">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#module-manager-events" class="toc__link">Module Manager Events</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#module-manager-listeners" class="toc__link">Module Manager Listeners</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-modulemanager</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">The Module Manager</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="the-module-manager">The Module Manager</h1>
+<p>The module manager, <code>Laminas\ModuleManager\ModuleManager</code>, is responsible for
+iterating over an array of module names and triggering a sequence of events for
+each.  Instantiation of module classes, initialization tasks, and configuration
+are all performed by attached event listeners.</p>
+<h2 id="module-manager-events">Module Manager Events</h2>
+<p>The Module Manager events are defined in <code>Laminas\ModuleManager\ModuleEvent</code>.</p>
+<h3>loadModules (<code>ModuleEvent::EVENT_LOAD_MODULES</code>)</h3>
+<p>This event is primarily used internally to help encapsulate the work of loading
+modules in event listeners, and allows the <code>loadModules.post</code> event to be more
+user-friendly. Internal listeners will attach to this event with a negative
+priority instead of <code>loadModules.post</code> so that users can safely assume things like
+config merging have been done once <code>loadModules.post</code> is triggered, without having
+to worry about priorities.</p>
+<h3>loadModule.resolve (<code>ModuleEvent::EVENT_LOAD_MODULE_RESOLVE</code>)</h3>
+<p>Triggered for each module that is to be loaded. The listener(s) to this event
+are responsible for taking a module name and resolving it to an instance of some
+class. The default module resolver looks for the class <code>{modulename}\Module</code>,
+instantiating and returning it if it exists.</p>
+<p>The name of the module may be retrieved by listeners using the <code>getModuleName()</code>
+method of the <code>Event</code> object; a listener should then take that name and resolve
+it to an object instance representing the given module. Multiple listeners can
+be attached to this event, and the module manager will trigger them in order of
+their priority until one returns an object. This allows you to attach additional
+listeners which have alternative methods of resolving modules from a given
+module name.</p>
+<h3>loadModule (<code>ModuleEvent::EVENT_LOAD_MODULE</code>)</h3>
+<p>Once a module resolver listener has resolved the module name to an object, the
+module manager then triggers this event, passing the newly created object to all
+listeners.</p>
+<h3>mergeConfig (<code>ModuleEvent::EVENT_MERGE_CONFIG</code>)</h3>
+<p>After all modules have been loaded, the <code>mergeConfig</code> event is triggered. By default,
+<code>Laminas\ModuleManager\Listener\ConfigLister</code> listens on this event at priority 1000, and merges all
+configuration. You may attach additional listeners to this event in order to manipulate the merged
+configuration. See <a href="https://getlaminas.org/manual/current/en/tutorials/config.advanced.html#manipulating-merged-configuration">the tutorial on manipulating merged configuration</a>
+for more information.</p>
+<h3>loadModules.post (<code>ModuleEvent::EVENT_LOAD_MODULES_POST</code>)</h3>
+<p>This event is triggered by the module manager to allow any listeners to perform
+work after every module has finished loading. For example, the default
+configuration listener, <code>Laminas\ModuleManager\Listener\ConfigListener</code> (covered
+later), attaches to this event to merge additional user-supplied configuration
+which is meant to override the default supplied configurations of installed
+modules.</p>
+<h2 id="module-manager-listeners">Module Manager Listeners</h2>
+<p>By default, Laminas provides several useful module manager listeners. All
+shipped listeners are in the <code>Laminas\ModuleManager\Listener</code> namespace.</p>
+<h3>DefaultListenerAggregate</h3>
+<p>To address the most common use case of the module manager, Laminas provides
+this default aggregate listener. In most cases, this will be the only listener
+you will need to attach to use the module manager, as it will take care of
+properly attaching the requisite listeners (those listed below) for the module
+system to function properly.</p>
+<h3>AutoloaderListener</h3>
+<p>This listener checks each module to see if it has implemented
+<code>Laminas\ModuleManager\Feature\AutoloaderProviderInterface</code> or defined the
+<code>getAutoloaderConfig()</code> method. If so, it calls the <code>getAutoloaderConfig()</code>
+method on the module class and passes the returned array to
+<code>Laminas\Loader\AutoloaderFactory</code>.</p>
+<h3>ModuleDependencyCheckerListener</h3>
+<p>This listener checks each module to verify if all the modules it depends on were
+loaded. When a module class implements
+<code>Laminas\ModuleManager\Feature\DependencyIndicatorInterface</code> or has defined the
+<code>getModuleDependencies()</code> method, the listener will call
+<code>getModuleDependencies()</code>. Each of the values returned by the method is checked
+against the loaded modules list: if one of the values is not in that list, a
+<code>Laminas\ModuleManager\Exception\MissingDependencyModuleException</code> is thrown.</p>
+<h3>ConfigListener</h3>
+<p>If a module class has a <code>getConfig()</code> method, or implements
+<code>Laminas\ModuleManager\Feature\ConfigProviderInterface</code>, this listener will call it
+and merge the returned array (or <code>Traversable</code> object) into the main application
+configuration.</p>
+<h3>InitTrigger</h3>
+<p>If a module class either implements <code>Laminas\ModuleManager\Feature\InitProviderInterface</code>,
+or defines an <code>init()</code> method, this listener will call <code>init()</code> and pass the
+current instance of <code>Laminas\ModuleManager\ModuleManager</code> as the sole parameter.</p>
+<p>Like the <code>OnBootstrapListener</code>, the <code>init()</code> method is called for <strong>every</strong>
+module implementing this feature, on <strong>every</strong> page request and should <strong>only</strong>
+be used for performing <strong>lightweight</strong> tasks such as registering event
+listeners.</p>
+<h3>LocatorRegistrationListener</h3>
+<p>If a module class implements <code>Laminas\ModuleManager\Feature\LocatorRegisteredInterface</code>,
+this listener will inject the module class instance into the <code>ServiceManager</code>
+using the module class name as the service name. This allows you to later
+retrieve the module class from the <code>ServiceManager</code>.</p>
+<h3>ModuleResolverListener</h3>
+<p>This is the default module resolver. It attaches to the <code>loadModule.resolve</code>
+event and returns an instance of <code>{moduleName}\Module</code>.</p>
+<p>Since 2.8.0, if the module name provided resolves to a fully qualified class
+name, it returns that verbatim.</p>
+<h3>OnBootstrapListener</h3>
+<p>If a module class implements
+<code>Laminas\ModuleManager\Feature\BootstrapListenerInterface</code>, or defines an
+<code>onBootstrap()</code> method, this listener will register the <code>onBootstrap()</code> method
+with the <code>Laminas\Mvc\Application</code> <code>bootstrap</code> event. This method will then be
+triggered during the <code>bootstrap</code> event (and passed an <code>MvcEvent</code> instance).</p>
+<p>Like the <code>InitTrigger</code>, the <code>onBootstrap()</code> method is called for <strong>every</strong>
+module implementing this feature, on <strong>every</strong> page request, and should <strong>only</strong>
+be used for performing <strong>lightweight</strong> tasks such as registering event
+listeners.</p>
+<h3>ServiceListener</h3>
+<p>If a module class implements <code>Laminas\ModuleManager\Feature\ServiceProviderInterface</code>,
+or defines an <code>getServiceConfig()</code> method, this listener will call that method
+and aggregate the return values for use in configuring the <code>ServiceManager</code>.</p>
+<p>The <code>getServiceConfig()</code> method may return either an array of configuration
+compatible with <code>Laminas\ServiceManager\Config</code>, an instance of that class, or the
+string name of a class that extends it. Values are merged and aggregated on
+completion, and then merged with any configuration from the <code>ConfigListener</code>
+falling under the <code>service_manager</code> key. For more information, see the
+<code>ServiceManager</code> documentation.</p>
+<p>Unlike the other listeners, this listener is not managed by the <code>DefaultListenerAggregate</code>;
+instead, it is created and instantiated within the
+<code>Laminas\Mvc\Service\ModuleManagerFactory</code>, where it is injected with the current
+<code>ServiceManager</code> instance before being registered with the <code>ModuleManager</code>
+events.</p>
+<p>Additionally, this listener manages a variety of plugin managers, including
+<a href="https://github.com/laminas/laminas-view">view helpers</a>,
+<a href="https://docs.laminas.dev/laminas-mvc/controllers/">controllers</a>, and
+<a href="https://docs.laminas.dev/laminas-mvc/plugins/">controller plugins</a>. In each case,
+you may either specify configuration to define plugins, or provide configuration via a <code>Module</code>
+class. Configuration follows the same format as for the <code>ServiceManager</code>. The following table
+outlines the plugin managers that may be configured this way (including the <code>ServiceManager</code>), the
+configuration key to use, the <code>ModuleManager</code> feature interface to optionally implement (all
+interfaces specified live in the <code>Laminas\ModuleManager\Feature</code> namespace) , and the module method to
+optionally define to provide configuration.</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>Plugin Manager</th>
+<th>Config Key</th>
+<th>Interface</th>
+<th>Module Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Laminas\Mvc\Controller\ControllerManager</code></td>
+<td><code>controllers</code></td>
+<td><code>ControllerProviderInterface</code></td>
+<td><code>getControllerConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Mvc\Controller\PluginManager</code></td>
+<td><code>controller_plugins</code></td>
+<td><code>ControllerPluginProviderInterface</code></td>
+<td><code>getControllerPluginConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Filter\FilterPluginManager</code></td>
+<td><code>filters</code></td>
+<td><code>FilterProviderInterface</code></td>
+<td><code>getFilterConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Form\FormElementManager</code></td>
+<td><code>form_elements</code></td>
+<td><code>FormElementProviderInterface</code></td>
+<td><code>getFormElementConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Stdlib\Hydrator\HydratorPluginManager</code></td>
+<td><code>hydrators</code></td>
+<td><code>HydratorProviderInterface</code></td>
+<td><code>getHydratorConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\InputFilter\InputFilterPluginManager</code></td>
+<td><code>input_filters</code></td>
+<td><code>InputFilterProviderInterface</code></td>
+<td><code>getInputFilterConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Mvc\Router\RoutePluginManager</code></td>
+<td><code>route_manager</code></td>
+<td><code>RouteProviderInterface</code></td>
+<td><code>getRouteConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Serializer\AdapterPluginManager</code></td>
+<td><code>serializers</code></td>
+<td><code>SerializerProviderInterface</code></td>
+<td><code>getSerializerConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\ServiceManager\ServiceManager</code></td>
+<td><code>service_manager</code></td>
+<td><code>ServiceProviderInterface</code></td>
+<td><code>getServiceConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Validator\ValidatorPluginManager</code></td>
+<td><code>validators</code></td>
+<td><code>ValidatorProviderInterface</code></td>
+<td><code>getValidatorConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\View\HelperPluginManager</code></td>
+<td><code>view_helpers</code></td>
+<td><code>ViewHelperProviderInterface</code></td>
+<td><code>getViewHelperConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Log\ProcessorPluginManager</code></td>
+<td><code>log_processors</code></td>
+<td><code>LogProcessorProviderInterface</code></td>
+<td><code>getLogProcessorConfig</code></td>
+</tr>
+<tr>
+<td><code>Laminas\Log\WriterPluginManager</code></td>
+<td><code>log_writers</code></td>
+<td><code>LogWriterProviderInterface</code></td>
+<td><code>getLogWriterConfig</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Configuration follows the examples in the ServiceManager
+<a href="https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/">configuration section</a>.
+As a brief recap, the following configuration keys and values are allowed:</p>
+<div class="table-responsive"><table>
+<thead>
+<tr>
+<th>Config Key</th>
+<th>Allowed values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>services</code></td>
+<td>service name/instance pairs (these should likely be defined only in <code>Module</code> classes</td>
+</tr>
+<tr>
+<td><code>invokables</code></td>
+<td>service name/class name pairs of classes that may be invoked without constructor arguments (deprecated with laminas-servicemanager v3; use the <code>InvokableFactory</code> instead)</td>
+</tr>
+<tr>
+<td><code>factories</code></td>
+<td>service names pointing to factories. Factories may be any PHP callable, or a string class name of a class implementing <code>Laminas\ServiceManager\FactoryInterface</code>, or of a class implementing the <code>__invoke</code> method (if a callable is used, it should be defined only in <code>Module</code> classes)</td>
+</tr>
+<tr>
+<td><code>abstract_factories</code></td>
+<td>array of either concrete instances of <code>Laminas\ServiceManager\AbstractFactoryInterface</code>, or string class names of classes implementing that interface (if an instance is used, it should be defined only in <code>Module</code> classes)</td>
+</tr>
+<tr>
+<td><code>initializers</code></td>
+<td>array of PHP callables or string class names of classes implementing <code>Laminas\ServiceManager\InitializerInterface</code> (if a callable is used, it should be defined only in <code>Module</code> classes)</td>
+</tr>
+</tbody>
+</table></div>
+<p>When working with plugin managers, you will be passed the plugin manager instance to factories,
+abstract factories, and initializers. If you need access to the application services, you can use
+the <code>getServiceLocator()</code> method, as in the following example:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>public function getViewHelperConfig()</span>
+<span class=x>{</span>
+<span class=x>    return [&#39;factories&#39; =&gt; [</span>
+<span class=x>        &#39;foo&#39; =&gt; function ($helpers) {</span>
+<span class=x>            $container   = $helpers-&gt;getServiceLocator();</span>
+<span class=x>            $someService = $container-&gt;get(&#39;SomeService&#39;);</span>
+<span class=x>            $helper      = new Helper\Foo($someService);</span>
+
+<span class=x>            return $helper;</span>
+<span class=x>        },</span>
+<span class=x>    ]];</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>This is a powerful technique, as it allows your various plugins to remain
+agnostic with regards to where and how dependencies are injected, and thus
+allows you to use Inversion of Control principals even with plugins.</p>
+<blockquote>
+<h4>Factories with laminas-servicemanager v3</h4>
+<p>Starting in the v3 releases of laminas-servicemanager, factories invoked by
+plugin managers now receive the <em>parent</em> container, and not the plugin manager
+itself. You can write your factories under v2, and prepare them for v3, by
+testing the incoming argument to see if it is a plugin manager:</p>
+<pre class=codehilite><code class=language-php>
+use Laminas\ServiceManager\AbstractPluginManager;
+
+function ($container) {
+    $container = $container instanceof AbstractPluginManager
+        ? $container-&gt;getServiceLocator()
+        : $container;
+
+    // create instance with dependencies pulled from app container...
+}
+</code></pre>
+</blockquote>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../module-class/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-modulemanager/edit/master/docs/book/module-manager.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-modulemanager</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">The Module Manager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-class/" class="subnavigation__link">The Module Class</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../module-autoloader/" class="subnavigation__link">The Module Autoloader</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../best-practices/" class="subnavigation__link">Best Practices when Creating Modules</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-modulemanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-modulemanager//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "mvc",
+            siteName = 'laminas-modulemanager';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-modulemanager" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
