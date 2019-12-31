@@ -1,21 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
-use Zend\ModuleManager\Listener\ListenerOptions;
-use Zend\ModuleManager\Listener\DefaultListenerAggregate;
-use Zend\ModuleManager\ModuleManager;
+use Laminas\ModuleManager\Listener\DefaultListenerAggregate;
+use Laminas\ModuleManager\Listener\ListenerOptions;
+use Laminas\ModuleManager\ModuleManager;
 
 /**
- * @covers Zend\ModuleManager\Listener\AbstractListener
- * @covers Zend\ModuleManager\Listener\DefaultListenerAggregate
+ * @covers Laminas\ModuleManager\Listener\AbstractListener
+ * @covers Laminas\ModuleManager\Listener\DefaultListenerAggregate
  */
 class DefaultListenerAggregateTest extends AbstractListenerTestCase
 {
@@ -43,22 +42,22 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
         $events = $moduleManager->getEventManager()->getEvents();
         $expectedEvents = [
             'loadModules' => [
-                'Zend\Loader\ModuleAutoloader',
-                'config-pre' => 'Zend\ModuleManager\Listener\ConfigListener',
-                'config-post' => 'Zend\ModuleManager\Listener\ConfigListener',
-                'Zend\ModuleManager\Listener\LocatorRegistrationListener',
-                'Zend\ModuleManager\ModuleManager',
+                'Laminas\Loader\ModuleAutoloader',
+                'config-pre' => 'Laminas\ModuleManager\Listener\ConfigListener',
+                'config-post' => 'Laminas\ModuleManager\Listener\ConfigListener',
+                'Laminas\ModuleManager\Listener\LocatorRegistrationListener',
+                'Laminas\ModuleManager\ModuleManager',
             ],
             'loadModule.resolve' => [
-                'Zend\ModuleManager\Listener\ModuleResolverListener',
+                'Laminas\ModuleManager\Listener\ModuleResolverListener',
             ],
             'loadModule' => [
-                'Zend\ModuleManager\Listener\AutoloaderListener',
-                'Zend\ModuleManager\Listener\ModuleDependencyCheckerListener',
-                'Zend\ModuleManager\Listener\InitTrigger',
-                'Zend\ModuleManager\Listener\OnBootstrapListener',
-                'Zend\ModuleManager\Listener\ConfigListener',
-                'Zend\ModuleManager\Listener\LocatorRegistrationListener',
+                'Laminas\ModuleManager\Listener\AutoloaderListener',
+                'Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener',
+                'Laminas\ModuleManager\Listener\InitTrigger',
+                'Laminas\ModuleManager\Listener\OnBootstrapListener',
+                'Laminas\ModuleManager\Listener\ConfigListener',
+                'Laminas\ModuleManager\Listener\LocatorRegistrationListener',
             ],
         ];
         foreach ($expectedEvents as $event => $expectedListeners) {
