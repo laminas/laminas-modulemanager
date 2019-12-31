@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @link      https://github.com/zendframework/zend-modulemanager for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-modulemanager/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\ModuleEvent;
 use ListenerTestModule;
 use ModuleAsClass;
-use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\ModuleEvent;
 
 /**
- * @covers \Zend\ModuleManager\Listener\AbstractListener
- * @covers \Zend\ModuleManager\Listener\ModuleResolverListener
+ * @covers \Laminas\ModuleManager\Listener\AbstractListener
+ * @covers \Laminas\ModuleManager\Listener\ModuleResolverListener
  */
 class ModuleResolverListenerTest extends AbstractListenerTestCase
 {
