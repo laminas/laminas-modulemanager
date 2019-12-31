@@ -1,15 +1,15 @@
 # The Module Manager
 
-The module manager, `Zend\ModuleManager\ModuleManager`, is a very simple class which is responsible
+The module manager, `Laminas\ModuleManager\ModuleManager`, is a very simple class which is responsible
 for iterating over an array of module names and triggering a sequence of events for each.
 Instantiation of module classes, initialization tasks, and configuration are all performed by
 attached event listeners.
 
 ## Module Manager Events
 
-The Module Manager events are defined in `Zend\ModuleManager\ModuleEvent`.
+The Module Manager events are defined in `Laminas\ModuleManager\ModuleEvent`.
 
-### Events triggered by `Zend\ModuleManager\ModuleManager`
+### Events triggered by `Laminas\ModuleManager\ModuleManager`
 
 #### loadModules (ModuleEvent::EVENT\_LOAD\_MODULES)
 
@@ -23,7 +23,7 @@ to worry about priorities at all.
 
 Triggered for each module that is to be loaded. The listener(s) to this event are responsible for
 taking a module name and resolving it to an instance of some class. The default module resolver
-shipped with ZF2 simply looks for the class `{modulename}\Module`, instantiating and returning it if
+shipped with Laminas simply looks for the class `{modulename}\Module`, instantiating and returning it if
 it exists.
 
 The name of the module may be retrieved by listeners using the `getModuleName()` method of the
@@ -41,7 +41,7 @@ triggers this event, passing the newly created object to all listeners.
 #### mergeConfig (ModuleEvent::EVENT\_MERGE\_CONFIG)
 
 After all modules have been loaded, the `mergeConfig` event is triggered. By default,
-`Zend\ModuleManager\Listener\ConfigLister` listens on this event at priority 1000, and merges all
+`Laminas\ModuleManager\Listener\ConfigLister` listens on this event at priority 1000, and merges all
 configuration. You may attach additional listeners to this event in order to manipulate the merged
 configuration. See [the tutorial on manipulating merged
 configuration](tutorials.config.advanced.manipulating-merged-configuration) for more information.
@@ -50,130 +50,130 @@ configuration](tutorials.config.advanced.manipulating-merged-configuration) for 
 
 This event is triggered by the module manager to allow any listeners to perform work after every
 module has finished loading. For example, the default configuration listener,
-`Zend\ModuleManager\Listener\ConfigListener` (covered later), attaches to this event to merge
+`Laminas\ModuleManager\Listener\ConfigListener` (covered later), attaches to this event to merge
 additional user-supplied configuration which is meant to override the default supplied
 configurations of installed modules.
 
 ## Module Manager Listeners
 
-By default, Zend Framework provides several useful module manager listeners.
+By default, Laminas provides several useful module manager listeners.
 
 ### Provided Module Manager Listeners
 
-#### Zend\\ModuleManager\\Listener\\DefaultListenerAggregate
+#### Laminas\\ModuleManager\\Listener\\DefaultListenerAggregate
 
-To help simplify the most common use case of the module manager, ZF2 provides this default aggregate
+To help simplify the most common use case of the module manager, Laminas provides this default aggregate
 listener. In most cases, this will be the only listener you will need to attach to use the module
 manager, as it will take care of properly attaching the requisite listeners (those listed below) for
 the module system to function properly.
 
-#### Zend\\ModuleManager\\Listener\\AutoloaderListener
+#### Laminas\\ModuleManager\\Listener\\AutoloaderListener
 
 This listener checks each module to see if it has implemented
-`Zend\ModuleManager\Feature\AutoloaderProviderInterface` or simply defined the
+`Laminas\ModuleManager\Feature\AutoloaderProviderInterface` or simply defined the
 `getAutoloaderConfig()` method. If so, it calls the `getAutoloaderConfig()` method on the module
-class and passes the returned array to `Zend\Loader\AutoloaderFactory`.
+class and passes the returned array to `Laminas\Loader\AutoloaderFactory`.
 
-#### Zend\\ModuleManager\\Listener\\ModuleDependencyCheckerListener
+#### Laminas\\ModuleManager\\Listener\\ModuleDependencyCheckerListener
 
 This listener checks each module to verify if all the modules it depends on were loaded. When a
-module class implements `Zend\ModuleManager\Feature\DependencyIndicatorInterface` or simply has a
+module class implements `Laminas\ModuleManager\Feature\DependencyIndicatorInterface` or simply has a
 defined `getModuleDependencies()` method, the listener will call `getModuleDependencies()`. Each of
 the values returned by the method is checked against the loaded modules list: if one of the values
-is not in that list, a `Zend\ModuleManager\Exception\MissingDependencyModuleException` is be thrown.
+is not in that list, a `Laminas\ModuleManager\Exception\MissingDependencyModuleException` is be thrown.
 
-#### Zend\\ModuleManager\\Listener\\ConfigListener
+#### Laminas\\ModuleManager\\Listener\\ConfigListener
 
 If a module class has a `getConfig()` method, or implements
-`Zend\ModuleManager\Feature\ConfigProviderInterface`, this listener will call it and merge the
+`Laminas\ModuleManager\Feature\ConfigProviderInterface`, this listener will call it and merge the
 returned array (or `Traversable` object) into the main application configuration.
 
-#### Zend\\ModuleManager\\Listener\\InitTrigger
+#### Laminas\\ModuleManager\\Listener\\InitTrigger
 
-If a module class either implements `Zend\ModuleManager\Feature\InitProviderInterface`, or simply
+If a module class either implements `Laminas\ModuleManager\Feature\InitProviderInterface`, or simply
 defines an `init()` method, this listener will call `init()` and pass the current instance of
-`Zend\ModuleManager\ModuleManager` as the sole parameter.
+`Laminas\ModuleManager\ModuleManager` as the sole parameter.
 
 Like the `OnBootstrapListener`, the `init()` method is called for **every** module implementing this
 feature, on **every** page request and should **only** be used for performing **lightweight** tasks
 such as registering event listeners.
 
-#### Zend\\ModuleManager\\Listener\\LocatorRegistrationListener
+#### Laminas\\ModuleManager\\Listener\\LocatorRegistrationListener
 
-If a module class implements `Zend\ModuleManager\Feature\LocatorRegisteredInterface`, this listener
+If a module class implements `Laminas\ModuleManager\Feature\LocatorRegisteredInterface`, this listener
 will inject the module class instance into the `ServiceManager` using the module class name as the
 service name. This allows you to later retrieve the module class from the `ServiceManager`.
 
-#### Zend\\ModuleManager\\Listener\\ModuleResolverListener
+#### Laminas\\ModuleManager\\Listener\\ModuleResolverListener
 
 nThis is the default module resolver. It attaches to the "loadModule.resolve" event and simply
 returns an instance of `{moduleName}\Module`.
 
-#### Zend\\ModuleManager\\Listener\\OnBootstrapListener
+#### Laminas\\ModuleManager\\Listener\\OnBootstrapListener
 
-If a module class implements `Zend\ModuleManager\Feature\BootstrapListenerInterface`, or simply
+If a module class implements `Laminas\ModuleManager\Feature\BootstrapListenerInterface`, or simply
 defines an `onBootstrap()` method, this listener will register the `onBootstrap()` method with the
-`Zend\Mvc\Application` `bootstrap` event. This method will then be triggered during the `bootstrap`
+`Laminas\Mvc\Application` `bootstrap` event. This method will then be triggered during the `bootstrap`
 event (and passed an `MvcEvent` instance).
 
 Like the `InitTrigger`, the `onBootstrap()` method is called for **every** module implementing this
 feature, on **every** page request, and should **only** be used for performing **lightweight** tasks
 such as registering event listeners.
 
-#### Zend\\ModuleManager\\Listener\\ServiceListener
+#### Laminas\\ModuleManager\\Listener\\ServiceListener
 
-If a module class implements `Zend\ModuleManager\Feature\ServiceProviderInterface`, or simply
+If a module class implements `Laminas\ModuleManager\Feature\ServiceProviderInterface`, or simply
 defines an `getServiceConfig()` method, this listener will call that method and aggregate the return
 values for use in configuring the `ServiceManager`.
 
 The `getServiceConfig()` method may return either an array of configuration compatible with
-`Zend\ServiceManager\Config`, an instance of that class, or the string name of a class that extends
+`Laminas\ServiceManager\Config`, an instance of that class, or the string name of a class that extends
 it. Values are merged and aggregated on completion, and then merged with any configuration from the
 `ConfigListener` falling under the `service_manager` key. For more information, see the
 `ServiceManager` documentation.
 
 Unlike the other listeners, this listener is not managed by the `DefaultListenerAggregate`; instead,
-it is created and instantiated within the `Zend\Mvc\Service\ModuleManagerFactory`, where it is
+it is created and instantiated within the `Laminas\Mvc\Service\ModuleManagerFactory`, where it is
 injected with the current `ServiceManager` instance before being registered with the `ModuleManager`
 events.
 
 Additionally, this listener manages a variety of plugin managers, including [view
-helpers](zend.view.helpers), [controllers](zend.mvc.controllers), and
-[controller plugins](zend.mvc.controller-plugins). In each case,
+helpers](laminas.view.helpers), [controllers](laminas.mvc.controllers), and
+[controller plugins](laminas.mvc.controller-plugins). In each case,
 you may either specify configuration to define plugins, or provide configuration via a `Module`
 class. Configuration follows the same format as for the `ServiceManager`. The following table
 outlines the plugin managers that may be configured this way (including the `ServiceManager`), the
 configuration key to use, the `ModuleManager` feature interface to optionally implement (all
-interfaces specified live in the `Zend\ModuleManager\Feature` namespace) , and the module method to
+interfaces specified live in the `Laminas\ModuleManager\Feature` namespace) , and the module method to
 optionally define to provide configuration.
 
 Plugin Manage | Config Key | Interface | Module Method
 --------------|------------|-----------|--------------
-`Zend\Mvc\Controller\ControllerManager` | `controllers` | `ControllerProviderInterface` | `getControllerConfig`
-`Zend\Mvc\Controller\PluginManager` | `controller_plugins` | `ControllerPluginProviderInterface` | `getControllerPluginConfig`
-`Zend\Filter\FilterPluginManager` | `filters` | `FilterProviderInterface` | `getFilterConfig`
-`Zend\Form\FormElementManager` | `form_elements` | `FormElementProviderInterface` | `getFormElementConfig`
-`Zend\Stdlib\Hydrator\HydratorPluginManager` | `hydrators` | `HydratorProviderInterface` | `getHydratorConfig`
-`Zend\InputFilter\InputFilterPluginManager` | `input_filters` | `InputFilterProviderInterface` | `getInputFilterConfig`
-`Zend\Mvc\Router\RoutePluginManager` | `route_manager` | `RouteProviderInterface` | `getRouteConfig`
-`Zend\Serializer\AdapterPluginManager` | `serializers` | `SerializerProviderInterface` | `getSerializerConfig`
-`Zend\ServiceManager\ServiceManager` | `service_manager` | `ServiceProviderInterface` | `getServiceConfig`
-`Zend\Validator\ValidatorPluginManager` | `validators` | `ValidatorProviderInterface` | `getValidatorConfig`
-`Zend\View\HelperPluginManager` | `view_helpers` | `ViewHelperProviderInterface` | `getViewHelperConfig`
-`Zend\Log\ProcessorPluginManager` | `log_processors` | `LogProcessorProviderInterface` | `getLogProcessorConfig`
-`Zend\Log\WriterPluginManager` | `log_writers` | `LogWriterProviderInterface` | `getLogWriterConfig`
+`Laminas\Mvc\Controller\ControllerManager` | `controllers` | `ControllerProviderInterface` | `getControllerConfig`
+`Laminas\Mvc\Controller\PluginManager` | `controller_plugins` | `ControllerPluginProviderInterface` | `getControllerPluginConfig`
+`Laminas\Filter\FilterPluginManager` | `filters` | `FilterProviderInterface` | `getFilterConfig`
+`Laminas\Form\FormElementManager` | `form_elements` | `FormElementProviderInterface` | `getFormElementConfig`
+`Laminas\Stdlib\Hydrator\HydratorPluginManager` | `hydrators` | `HydratorProviderInterface` | `getHydratorConfig`
+`Laminas\InputFilter\InputFilterPluginManager` | `input_filters` | `InputFilterProviderInterface` | `getInputFilterConfig`
+`Laminas\Mvc\Router\RoutePluginManager` | `route_manager` | `RouteProviderInterface` | `getRouteConfig`
+`Laminas\Serializer\AdapterPluginManager` | `serializers` | `SerializerProviderInterface` | `getSerializerConfig`
+`Laminas\ServiceManager\ServiceManager` | `service_manager` | `ServiceProviderInterface` | `getServiceConfig`
+`Laminas\Validator\ValidatorPluginManager` | `validators` | `ValidatorProviderInterface` | `getValidatorConfig`
+`Laminas\View\HelperPluginManager` | `view_helpers` | `ViewHelperProviderInterface` | `getViewHelperConfig`
+`Laminas\Log\ProcessorPluginManager` | `log_processors` | `LogProcessorProviderInterface` | `getLogProcessorConfig`
+`Laminas\Log\WriterPluginManager` | `log_writers` | `LogWriterProviderInterface` | `getLogWriterConfig`
 
 Configuration follows the examples in the ServiceManager [configuration
-section](zend.service-manager.quick-start.md#config). As a brief recap, the following
+section](laminas.service-manager.quick-start.md#config). As a brief recap, the following
 configuration keys and values are allowed:
 
 Config Key | Allowed values
 -----------|---------------
 `services` | service name/instance pairs (these should likely be defined only in `Module` classes
 `invokables` | service name/class name pairs of classes that may be invoked without constructor arguments
-`factories` | service names pointing to factories. Factories may be any PHP callable, or a string class name of a class implementing `Zend\ServiceManager\FactoryInterface`, or of a class implementing the `__invoke` method (if a callable is used, it should be defined only in `Module` classes)
-`abstract_factories` | array of either concrete instances of `Zend\ServiceManager\AbstractFactoryInterface`, or string class names of classes implementing that interface (if an instance is used, it should be defined only in `Module` classes)
-`initializers` | array of PHP callables or string class names of classes implementing `Zend\ServiceManager\InitializerInterface` (if a callable is used, it should be defined only in `Module` classes)
+`factories` | service names pointing to factories. Factories may be any PHP callable, or a string class name of a class implementing `Laminas\ServiceManager\FactoryInterface`, or of a class implementing the `__invoke` method (if a callable is used, it should be defined only in `Module` classes)
+`abstract_factories` | array of either concrete instances of `Laminas\ServiceManager\AbstractFactoryInterface`, or string class names of classes implementing that interface (if an instance is used, it should be defined only in `Module` classes)
+`initializers` | array of PHP callables or string class names of classes implementing `Laminas\ServiceManager\InitializerInterface` (if a callable is used, it should be defined only in `Module` classes)
 
 When working with plugin managers, you will be passed the plugin manager instance to factories,
 abstract factories, and initializers. If you need access to the application services, you can use

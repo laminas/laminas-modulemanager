@@ -18,23 +18,23 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#13](https://github.com/zendframework/zend-modulemanager/pull/13) and
-  [#28](https://github.com/zendframework/zend-modulemanager/pull/28) update the
-  component to be forwards-compatible with zend-servicemanager v3. This
+- [zendframework/zend-modulemanager#13](https://github.com/zendframework/zend-modulemanager/pull/13) and
+  [zendframework/zend-modulemanager#28](https://github.com/zendframework/zend-modulemanager/pull/28) update the
+  component to be forwards-compatible with laminas-servicemanager v3. This
   primarily affects how configuration is aggregated within the
   `ServiceListener` (as v3 has a dedicated method in the
-  `Zend\ServiceManager\ConfigInterface` for retrieving it).
+  `Laminas\ServiceManager\ConfigInterface` for retrieving it).
 
-- [#12](https://github.com/zendframework/zend-modulemanager/pull/12),
-  [#28](https://github.com/zendframework/zend-modulemanager/pull/28), and
-  [#29](https://github.com/zendframework/zend-modulemanager/pull/29) update the
-  component to be forwards-compatible with zend-eventmanager v3. Primarily, this
+- [zendframework/zend-modulemanager#12](https://github.com/zendframework/zend-modulemanager/pull/12),
+  [zendframework/zend-modulemanager#28](https://github.com/zendframework/zend-modulemanager/pull/28), and
+  [zendframework/zend-modulemanager#29](https://github.com/zendframework/zend-modulemanager/pull/29) update the
+  component to be forwards-compatible with laminas-eventmanager v3. Primarily, this
   involves:
   - Changing trigger calls to `triggerEvent()` and/or `triggerEventUntil()`, and
     ensuring the event instance is injected with the new event name prior.
   - Ensuring aggregates are attached using the `$aggregate->attach($events)`
     signature instead of the `$events->attachAggregate($aggregate)` signature.
-  - Using zend-eventmanager's `EventListenerIntrospectionTrait` to test that
+  - Using laminas-eventmanager's `EventListenerIntrospectionTrait` to test that
     listeners are attached at expected priorities.
 
 ## 2.6.1 - 2015-09-22
@@ -72,9 +72,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#10](https://github.com/zendframework/zend-modulemanager/pull/10) pins the
-  zend-stdlib version to `~2.7`, allowing it to use that version forward, and
-  ensuring compatibility with consumers of the new zend-hydrator library.
+- [zendframework/zend-modulemanager#10](https://github.com/zendframework/zend-modulemanager/pull/10) pins the
+  laminas-stdlib version to `~2.7`, allowing it to use that version forward, and
+  ensuring compatibility with consumers of the new laminas-hydrator library.
 
 ## 2.5.3 - 2015-09-22
 
@@ -111,6 +111,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#9](https://github.com/zendframework/zend-modulemanager/pull/9) pins the
-  zend-stdlib version to `>=2.5.0,<2.7.0`, as 2.7.0 deprecates the hydrators (in
-  favor of the new zend-hydrator library).
+- [zendframework/zend-modulemanager#9](https://github.com/zendframework/zend-modulemanager/pull/9) pins the
+  laminas-stdlib version to `>=2.5.0,<2.7.0`, as 2.7.0 deprecates the hydrators (in
+  favor of the new laminas-hydrator library).

@@ -1,26 +1,25 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager;
+namespace LaminasTest\ModuleManager;
 
+use InvalidArgumentException;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
+use Laminas\ModuleManager\Listener\DefaultListenerAggregate;
+use Laminas\ModuleManager\Listener\ListenerOptions;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
-use Zend\ModuleManager\Listener\ListenerOptions;
-use Zend\ModuleManager\Listener\DefaultListenerAggregate;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\ModuleManager\ModuleManager;
-use InvalidArgumentException;
 
 /**
- * @covers Zend\ModuleManager\ModuleManager
+ * @covers Laminas\ModuleManager\ModuleManager
  */
 class ModuleManagerTest extends TestCase
 {
@@ -49,7 +48,7 @@ class ModuleManagerTest extends TestCase
     {
         $moduleManager = new ModuleManager([]);
         $identifiers = $moduleManager->getEventManager()->getIdentifiers();
-        $expected    = ['Zend\ModuleManager\ModuleManager', 'module_manager'];
+        $expected    = ['Laminas\ModuleManager\ModuleManager', 'module_manager'];
         $this->assertEquals($expected, array_values($identifiers));
     }
 
@@ -211,7 +210,7 @@ class ModuleManagerTest extends TestCase
         $configListener = $this->defaultListeners->getConfigListener();
         $moduleManager  = new ModuleManager([new \SomeModule\Module()], $this->events);
         $this->defaultListeners->attach($this->events);
-        $this->setExpectedException('Zend\ModuleManager\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\ModuleManager\Exception\RuntimeException');
         $moduleManager->loadModules();
     }
 
