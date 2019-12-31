@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
 namespace ListenerTestModule;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\EventManager\EventInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\AutoloaderProviderInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\LocatorRegisteredInterface;
 
 class Module implements
     AutoloaderProviderInterface,
@@ -41,7 +40,7 @@ class Module implements
     {
         $this->getAutoloaderConfigCalled = true;
         return array(
-            'Zend\Loader\StandardAutoloader' => array(
+            'Laminas\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     'Foo' => __DIR__ . '/src/Foo',
                 ),
