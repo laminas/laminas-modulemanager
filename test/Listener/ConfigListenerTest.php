@@ -1,30 +1,28 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
 use ArrayObject;
 use InvalidArgumentException;
+use Laminas\Loader\AutoloaderFactory;
+use Laminas\Loader\ModuleAutoloader;
+use Laminas\ModuleManager\Listener\ConfigListener;
+use Laminas\ModuleManager\Listener\ListenerOptions;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\ModuleManager;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Loader\AutoloaderFactory;
-use Zend\Loader\ModuleAutoloader;
-use Zend\ModuleManager\Listener\ConfigListener;
-use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\Listener\ListenerOptions;
-use Zend\ModuleManager\ModuleManager;
 
 class ConfigListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';
+        $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'laminas_module_cache_dir';
         @mkdir($this->tmpdir);
         $this->configCache = $this->tmpdir . DIRECTORY_SEPARATOR . 'config.cache.php';
         // Store original autoloaders
@@ -83,7 +81,7 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('test', $config['listener']);
         $this->assertSame('thing', $config['some']);
         $configObject = $configListener->getMergedConfig();
-        $this->assertInstanceOf('Zend\Config\Config', $configObject);
+        $this->assertInstanceOf('Laminas\Config\Config', $configObject);
     }
 
     public function testCanCacheMergedConfig()
