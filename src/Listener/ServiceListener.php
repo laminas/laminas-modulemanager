@@ -1,21 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Listener;
+namespace Laminas\ModuleManager\Listener;
 
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ServiceManager\Config as ServiceConfig;
+use Laminas\ServiceManager\ConfigInterface as ServiceConfigInterface;
+use Laminas\ServiceManager\ServiceManager;
+use Laminas\Stdlib\ArrayUtils;
 use Traversable;
-use Zend\EventManager\EventManagerInterface;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Config as ServiceConfig;
-use Zend\ServiceManager\ConfigInterface as ServiceConfigInterface;
-use Zend\ServiceManager\ServiceManager;
-use Zend\Stdlib\ArrayUtils;
 
 class ServiceListener implements ServiceListenerInterface
 {
@@ -27,7 +26,7 @@ class ServiceListener implements ServiceListenerInterface
     protected $configuredServiceManager;
 
     /**
-     * @var \Zend\Stdlib\CallbackHandler[]
+     * @var \Laminas\Stdlib\CallbackHandler[]
      */
     protected $listeners = [];
 
@@ -239,7 +238,7 @@ class ServiceListener implements ServiceListenerInterface
      * @return array
      * @throws Exception\RuntimeException if resolved class name is not a
      *     ServiceConfigInterface implementation.
-     * @throws Exception\RuntimeException under zend-servicemanager v2 if the
+     * @throws Exception\RuntimeException under laminas-servicemanager v2 if the
      *     configuration instance is not specifically a ServiceConfig, as there
      *     is no way to extract service configuration in that case.
      */
@@ -259,11 +258,11 @@ class ServiceListener implements ServiceListenerInterface
         }
 
         if (method_exists($config, 'toArray')) {
-            // zend-servicemanager v3 interface
+            // laminas-servicemanager v3 interface
             return $config->toArray();
         }
 
-        // For zend-servicemanager v2, we need a Zend\ServiceManager\Config
+        // For laminas-servicemanager v2, we need a Laminas\ServiceManager\Config
         // instance specifically.
         if (! $config instanceof ServiceConfig) {
             throw new Exception\RuntimeException(sprintf(
