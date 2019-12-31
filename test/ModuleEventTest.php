@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @link      https://github.com/zendframework/zend-modulemanager for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-modulemanager/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager;
+namespace LaminasTest\ModuleManager;
 
+use Laminas\ModuleManager\Exception;
+use Laminas\ModuleManager\Listener\ConfigListener;
+use Laminas\ModuleManager\ModuleEvent;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Zend\ModuleManager\Exception;
-use Zend\ModuleManager\Listener\ConfigListener;
-use Zend\ModuleManager\ModuleEvent;
 
 /**
- * @covers \Zend\ModuleManager\ModuleEvent
+ * @covers \Laminas\ModuleManager\ModuleEvent
  */
 class ModuleEventTest extends TestCase
 {

@@ -1,28 +1,29 @@
 <?php
+
 /**
- * @link      https://github.com/zendframework/zend-modulemanager for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-modulemanager/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
 use ArrayObject;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\Test\EventListenerIntrospectionTrait;
+use Laminas\ModuleManager\Exception;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
+use Laminas\ModuleManager\Listener\ConfigListener;
+use Laminas\ModuleManager\Listener\ServiceListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ServiceManager\Config as ServiceConfig;
+use Laminas\ServiceManager\ServiceManager;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\Test\EventListenerIntrospectionTrait;
-use Zend\ModuleManager\Exception;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\Listener\ConfigListener;
-use Zend\ModuleManager\Listener\ServiceListener;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\ServiceManager\Config as ServiceConfig;
-use Zend\ServiceManager\ServiceManager;
 
 /**
- * @covers \Zend\ModuleManager\Listener\ServiceListener
+ * @covers \Laminas\ModuleManager\Listener\ServiceListener
  */
 class ServiceListenerTest extends TestCase
 {
@@ -91,7 +92,7 @@ class ServiceListenerTest extends TestCase
             ],
             'shared' => [
                 'foo' => false,
-                'zendtestmodulemanagerlistenerservicelistenertest' => true,
+                'laminastestmodulemanagerlistenerservicelistenertest' => true,
             ],
             'aliases'  => [
                 'bar' => 'foo',

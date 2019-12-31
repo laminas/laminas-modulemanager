@@ -1,15 +1,16 @@
 <?php
+
 /**
- * @link      https://github.com/zendframework/zend-modulemanager for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-modulemanager/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager;
+namespace Laminas\ModuleManager;
 
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\EventManagerInterface;
 use Traversable;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\EventManagerInterface;
 
 /**
  * Module manager
@@ -17,7 +18,7 @@ use Zend\EventManager\EventManagerInterface;
 class ModuleManager implements ModuleManagerInterface
 {
     /**#@+
-     * Reference to Zend\Mvc\MvcEvent::EVENT_BOOTSTRAP
+     * Reference to Laminas\Mvc\MvcEvent::EVENT_BOOTSTRAP
      */
     const EVENT_BOOTSTRAP = 'bootstrap';
     /**#@-*/
