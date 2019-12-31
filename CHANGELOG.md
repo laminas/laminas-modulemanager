@@ -37,9 +37,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#10](https://github.com/zendframework/zend-modulemanager/pull/10) pins the
-  zend-stdlib version to `~2.7`, allowing it to use that version forward, and
-  ensuring compatibility with consumers of the new zend-hydrator library.
+- [zendframework/zend-modulemanager#10](https://github.com/zendframework/zend-modulemanager/pull/10) pins the
+  laminas-stdlib version to `~2.7`, allowing it to use that version forward, and
+  ensuring compatibility with consumers of the new laminas-hydrator library.
 
 ## 2.5.3 - 2015-09-22
 
@@ -76,6 +76,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#9](https://github.com/zendframework/zend-modulemanager/pull/9) pins the
-  zend-stdlib version to `>=2.5.0,<2.7.0`, as 2.7.0 deprecates the hydrators (in
-  favor of the new zend-hydrator library).
+- [zendframework/zend-modulemanager#9](https://github.com/zendframework/zend-modulemanager/pull/9) pins the
+  laminas-stdlib version to `>=2.5.0,<2.7.0`, as 2.7.0 deprecates the hydrators (in
+  favor of the new laminas-hydrator library).

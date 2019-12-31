@@ -1,30 +1,29 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
-use Zend\ModuleManager\Listener\LocatorRegistrationListener;
-use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\ModuleManager;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\Mvc\Application;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceManager;
-use ZendTest\ModuleManager\TestAsset\MockApplication;
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
+use Laminas\ModuleManager\Listener\LocatorRegistrationListener;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\Application;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
+use LaminasTest\ModuleManager\TestAsset\MockApplication;
 
 require_once dirname(__DIR__) . '/TestAsset/ListenerTestModule/src/Foo/Bar.php';
 
 /**
- * @covers Zend\ModuleManager\Listener\AbstractListener
- * @covers Zend\ModuleManager\Listener\LocatorRegistrationListener
+ * @covers Laminas\ModuleManager\Listener\AbstractListener
+ * @covers Laminas\ModuleManager\Listener\LocatorRegistrationListener
  */
 class LocatorRegistrationListenerTest extends AbstractListenerTestCase
 {
@@ -57,7 +56,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
 
         $this->application = new MockApplication;
-        $events            = new EventManager(['Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application']);
+        $events            = new EventManager(['Laminas\Mvc\Application', 'LaminasTest\Module\TestAsset\MockApplication', 'application']);
         $events->setSharedManager($this->sharedEvents);
         $this->application->setEventManager($events);
 
@@ -72,7 +71,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $locator         = $this->serviceManager;
         $locator->setFactory('Foo\Bar', function (ServiceLocatorInterface $s) {
             $module   = $s->get('ListenerTestModule\Module');
-            $manager  = $s->get('Zend\ModuleManager\ModuleManager');
+            $manager  = $s->get('Laminas\ModuleManager\ModuleManager');
             $instance = new \Foo\Bar($module, $manager);
             return $instance;
         });
@@ -86,7 +85,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
 
         $this->application->bootstrap();
         $sharedInstance1 = $locator->get('ListenerTestModule\Module');
-        $sharedInstance2 = $locator->get('Zend\ModuleManager\ModuleManager');
+        $sharedInstance2 = $locator->get('Laminas\ModuleManager\ModuleManager');
 
         $this->assertInstanceOf('ListenerTestModule\Module', $sharedInstance1);
         $foo     = false;
@@ -104,7 +103,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         }
         $this->assertSame($module, $foo->module);
 
-        $this->assertInstanceOf('Zend\ModuleManager\ModuleManager', $sharedInstance2);
+        $this->assertInstanceOf('Laminas\ModuleManager\ModuleManager', $sharedInstance2);
         $this->assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
     }
 
@@ -120,10 +119,10 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $aliases = $registeredServices['aliases'];
         $instances = $registeredServices['instances'];
 
-        $this->assertContains('zendmodulemanagermodulemanager', $aliases);
+        $this->assertContains('laminasmodulemanagermodulemanager', $aliases);
         $this->assertNotContains('modulemanager', $aliases);
 
         $this->assertContains('modulemanager', $instances);
-        $this->assertNotContains('zendmodulemanagermodulemanager', $instances);
+        $this->assertNotContains('laminasmodulemanagermodulemanager', $instances);
     }
 }
