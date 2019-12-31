@@ -1,31 +1,29 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Listener;
+namespace Laminas\ModuleManager\Listener;
 
 use ArrayAccess;
+use Laminas\Config\Config;
+use Laminas\Config\Factory as ConfigFactory;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Stdlib\Glob;
 use Traversable;
-use Zend\Config\Config;
-use Zend\Config\Factory as ConfigFactory;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Glob;
 
 /**
  * Config listener
  *
- * @category   Zend
- * @package    Zend_ModuleManager
+ * @category   Laminas
+ * @package    Laminas_ModuleManager
  * @subpackage Listener
  */
 class ConfigListener extends AbstractListener implements
@@ -289,7 +287,7 @@ class ConfigListener extends AbstractListener implements
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %::%s() must be an array, '
                 . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
+                . 'instance of Laminas\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($paths))
             );
         }
@@ -330,7 +328,7 @@ class ConfigListener extends AbstractListener implements
             throw new Exception\InvalidArgumentException(
                 sprintf('Config being merged must be an array, '
                 . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.', gettype($config))
+                . 'instance of Laminas\Config\Config. %s given.', gettype($config))
             );
         }
 

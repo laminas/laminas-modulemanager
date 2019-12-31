@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Listener;
+namespace Laminas\ModuleManager\Listener;
 
+use Laminas\Stdlib\AbstractOptions;
 use Traversable;
-use Zend\Stdlib\AbstractOptions;
 
 /**
  * Listener options
  *
- * @category   Zend
- * @package    Zend_ModuleManager
+ * @category   Laminas
+ * @package    Laminas_ModuleManager
  * @subpackage Listener
  */
 class ListenerOptions extends AbstractOptions
@@ -79,7 +77,7 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
                 . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
+                . 'instance of Laminas\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($modulePaths))
             );
         }
@@ -119,7 +117,7 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
                 . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
+                . 'instance of Laminas\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($configGlobPaths))
             );
         }
@@ -139,7 +137,7 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
                 . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
+                . 'instance of Laminas\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($configStaticPaths))
             );
         }
@@ -170,7 +168,7 @@ class ListenerOptions extends AbstractOptions
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %s::%s() must be an array, '
                 . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.',
+                . 'instance of Laminas\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($extraConfig))
             );
         }

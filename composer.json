@@ -1,35 +1,50 @@
 {
-    "name": "zendframework/zend-modulemanager",
+    "name": "laminas/laminas-modulemanager",
     "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "modulemanager"
     ],
-    "autoload": {
-        "psr-4": {
-            "Zend\\ModuleManager": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-modulemanager/",
+        "issues": "https://github.com/laminas/laminas-modulemanager/issues",
+        "source": "https://github.com/laminas/laminas-modulemanager",
+        "rss": "https://github.com/laminas/laminas-modulemanager/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
     },
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-eventmanager": "self.version",
-        "zendframework/zend-stdlib": "self.version"
-    },
-    "suggest": {
-        "zendframework/zend-config": "Zend\\Config component",
-        "zendframework/zend-loader": "Zend\\Loader component",
-        "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
-    },
-    "homepage": "https://github.com/zendframework/zend-module-manager",
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\ModuleManager\\": "test/"
-        }
+        "laminas/laminas-eventmanager": "self.version",
+        "laminas/laminas-stdlib": "self.version",
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
         "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "suggest": {
+        "laminas/laminas-config": "Laminas\\Config component",
+        "laminas/laminas-loader": "Laminas\\Loader component",
+        "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\ModuleManager\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\ModuleManager\\": "test/"
+        }
+    },
+    "replace": {
+        "zendframework/zend-modulemanager": "self.version"
     }
 }

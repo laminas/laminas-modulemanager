@@ -1,26 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\ModuleManager\Listener;
+namespace Laminas\ModuleManager\Listener;
 
-use Zend\EventManager\Event;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\ModuleManager\Feature\LocatorRegisteredInterface;
-use Zend\ModuleManager\ModuleEvent;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\ModuleManager\Feature\LocatorRegisteredInterface;
+use Laminas\ModuleManager\ModuleEvent;
 
 /**
  * Locator registration listener
  *
- * @category   Zend
- * @package    Zend_ModuleManager
+ * @category   Laminas
+ * @package    Laminas_ModuleManager
  * @subpackage Listener
  */
 class LocatorRegistrationListener extends AbstractListener implements
@@ -67,7 +65,7 @@ class LocatorRegistrationListener extends AbstractListener implements
         $events        = $moduleManager->getEventManager()->getSharedManager();
 
         // Shared instance for module manager
-        $events->attach('Zend\Mvc\Application', 'bootstrap', function ($e) use ($moduleManager) {
+        $events->attach('Laminas\Mvc\Application', 'bootstrap', function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);
             $application     = $e->getApplication();
             $services        = $application->getServiceManager();
@@ -81,7 +79,7 @@ class LocatorRegistrationListener extends AbstractListener implements
         }
 
         // Attach to the bootstrap event if there are modules we need to process
-        $events->attach('Zend\Mvc\Application', 'bootstrap', array($this, 'onBootstrap'), 1000);
+        $events->attach('Laminas\Mvc\Application', 'bootstrap', array($this, 'onBootstrap'), 1000);
     }
 
     /**
