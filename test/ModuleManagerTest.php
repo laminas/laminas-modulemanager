@@ -1,28 +1,26 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_ModuleManager
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager;
+namespace LaminasTest\ModuleManager;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use Zend\EventManager\EventManager;
-use Zend\Loader\AutoloaderFactory;
-use Zend\ModuleManager\Listener\ListenerOptions;
-use Zend\ModuleManager\Listener\DefaultListenerAggregate;
-use Zend\ModuleManager\ModuleManager;
 use InvalidArgumentException;
+use Laminas\EventManager\EventManager;
+use Laminas\Loader\AutoloaderFactory;
+use Laminas\ModuleManager\Listener\DefaultListenerAggregate;
+use Laminas\ModuleManager\Listener\ListenerOptions;
+use Laminas\ModuleManager\ModuleManager;
+use PHPUnit_Framework_TestCase as TestCase;
 
 class ModuleManagerTest extends TestCase
 {
     public function setUp()
     {
-        $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';
+        $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'laminas_module_cache_dir';
         @mkdir($this->tmpdir);
         $this->configCache = $this->tmpdir . DIRECTORY_SEPARATOR . 'config.cache.php';
         // Store original autoloaders
@@ -71,7 +69,7 @@ class ModuleManagerTest extends TestCase
     {
         $moduleManager = new ModuleManager(array());
         $identifiers = $moduleManager->getEventManager()->getIdentifiers();
-        $expected    = array('Zend\ModuleManager\ModuleManager', 'module_manager');
+        $expected    = array('Laminas\ModuleManager\ModuleManager', 'module_manager');
         $this->assertEquals($expected, array_values($identifiers));
     }
 
