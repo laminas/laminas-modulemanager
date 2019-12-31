@@ -1,25 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\ModuleManager\Listener;
+namespace LaminasTest\ModuleManager\Listener;
 
+use Laminas\EventManager\EventManager;
+use Laminas\EventManager\SharedEventManager;
+use Laminas\Loader\AutoloaderFactory;
+use Laminas\Loader\ModuleAutoloader;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\Listener\OnBootstrapListener;
+use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
+use Laminas\Mvc\Application;
+use LaminasTest\ModuleManager\TestAsset\MockApplication;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\EventManager\EventManager;
-use Zend\EventManager\SharedEventManager;
-use Zend\Loader\AutoloaderFactory;
-use Zend\Loader\ModuleAutoloader;
-use Zend\ModuleManager\Listener\ModuleResolverListener;
-use Zend\ModuleManager\Listener\OnBootstrapListener;
-use Zend\ModuleManager\ModuleManager;
-use Zend\ModuleManager\ModuleEvent;
-use Zend\Mvc\Application;
-use ZendTest\ModuleManager\TestAsset\MockApplication;
 
 class OnBootstrapListenerTest extends TestCase
 {
@@ -47,7 +46,7 @@ class OnBootstrapListenerTest extends TestCase
         $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener, 1000);
 
         $this->application = new MockApplication;
-        $events            = new EventManager(array('Zend\Mvc\Application', 'ZendTest\Module\TestAsset\MockApplication', 'application'));
+        $events            = new EventManager(array('Laminas\Mvc\Application', 'LaminasTest\Module\TestAsset\MockApplication', 'application'));
         $events->setSharedManager($sharedEvents);
         $this->application->setEventManager($events);
     }
