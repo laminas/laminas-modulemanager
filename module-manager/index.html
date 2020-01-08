@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -482,19 +486,18 @@ As a brief recap, the following configuration keys and values are allowed:</p>
 <p>When working with plugin managers, you will be passed the plugin manager instance to factories,
 abstract factories, and initializers. If you need access to the application services, you can use
 the <code>getServiceLocator()</code> method, as in the following example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function getViewHelperConfig()</span>
-<span class=x>{</span>
-<span class=x>    return [&#39;factories&#39; =&gt; [</span>
-<span class=x>        &#39;foo&#39; =&gt; function ($helpers) {</span>
-<span class=x>            $container   = $helpers-&gt;getServiceLocator();</span>
-<span class=x>            $someService = $container-&gt;get(&#39;SomeService&#39;);</span>
-<span class=x>            $helper      = new Helper\Foo($someService);</span>
+<pre class=codehilite><code class=language-php>public function getViewHelperConfig()
+{
+    return ['factories' =&gt; [
+        'foo' =&gt; function ($helpers) {
+            $container   = $helpers-&gt;getServiceLocator();
+            $someService = $container-&gt;get('SomeService');
+            $helper      = new Helper\Foo($someService);
 
-<span class=x>            return $helper;</span>
-<span class=x>        },</span>
-<span class=x>    ]];</span>
-<span class=x>}</span>
-</pre></div></p>
+            return $helper;
+        },
+    ]];
+}</code></pre>
 <p>This is a powerful technique, as it allows your various plugins to remain
 agnostic with regards to where and how dependencies are injected, and thus
 allows you to use Inversion of Control principals even with plugins.</p>
@@ -504,7 +507,7 @@ allows you to use Inversion of Control principals even with plugins.</p>
 plugin managers now receive the <em>parent</em> container, and not the plugin manager
 itself. You can write your factories under v2, and prepare them for v3, by
 testing the incoming argument to see if it is a plugin manager:</p>
-<pre class=codehilite><code class=language-php>
+<pre class="codehilite"><code class="language-php">
 use Laminas\ServiceManager\AbstractPluginManager;
 
 function ($container) {
@@ -655,9 +658,10 @@ function ($container) {
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -694,7 +698,7 @@ function ($container) {
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-modulemanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -703,8 +707,8 @@ function ($container) {
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-modulemanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-modulemanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

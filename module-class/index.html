@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -262,16 +266,14 @@ you use the fully qualified class name when registering it with the
 </blockquote>
 <p>The directory structure of a module named "MyModule" might start out looking
 something like this:</p>
-<p> <div class=codehilite><pre><span></span>MyModule/
-    Module.php
-</pre></div></p>
+<pre class=codehilite><code class=language-text>MyModule/
+    Module.php</code></pre>
 <p>Within <code>Module.php</code>, you define your <code>MyModule\Module</code> class:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace MyModule;</span>
+<pre class=codehilite><code class=language-php>namespace MyModule;
 
-<span class=x>class Module</span>
-<span class=x>{</span>
-<span class=x>}</span>
-</pre></div></p>
+class Module
+{
+}</code></pre>
 <p>Though it will not serve any purpose at this point, this "MyModule" module now
 has everything required to be considered a valid module and to be loaded by the
 module system!</p>
@@ -282,30 +284,29 @@ tasks such as registering autoloader(s), services and event listeners, declaring
 dependencies, and much more.</p>
 <h2 id="a-typical-module-class">A Typical Module Class</h2>
 <p>The following example shows a more typical usage of the <code>Module</code> class:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace MyModule;</span>
+<pre class=codehilite><code class=language-php>namespace MyModule;
 
-<span class=x>class Module</span>
-<span class=x>{</span>
-<span class=x>    public function getAutoloaderConfig()</span>
-<span class=x>    {</span>
-<span class=x>        return [</span>
-<span class=x>            &#39;Laminas\Loader\ClassMapAutoloader&#39; =&gt; [</span>
-<span class=x>                __DIR__ . &#39;/autoload_classmap.php&#39;,</span>
-<span class=x>            ],</span>
-<span class=x>            &#39;Laminas\Loader\StandardAutoloader&#39; =&gt; [</span>
-<span class=x>                &#39;namespaces&#39; =&gt; [</span>
-<span class=x>                    __NAMESPACE__ =&gt; __DIR__ . &#39;/src/&#39; . __NAMESPACE__,</span>
-<span class=x>                ],</span>
-<span class=x>            ],</span>
-<span class=x>        ];</span>
-<span class=x>    }</span>
+class Module
+{
+    public function getAutoloaderConfig()
+    {
+        return [
+            'Laminas\Loader\ClassMapAutoloader' =&gt; [
+                __DIR__ . '/autoload_classmap.php',
+            ],
+            'Laminas\Loader\StandardAutoloader' =&gt; [
+                'namespaces' =&gt; [
+                    __NAMESPACE__ =&gt; __DIR__ . '/src/' . __NAMESPACE__,
+                ],
+            ],
+        ];
+    }
 
-<span class=x>    public function getConfig()</span>
-<span class=x>    {</span>
-<span class=x>        return include __DIR__ . &#39;/config/module.config.php&#39;;</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
+    }
+}</code></pre>
 <p>For a list of the provided module manager listeners and the interfaces and methods that <code>Module</code>
 classes may implement in order to interact with the module manager and application, see the
 <a href="../module-manager/#module-manager-listeners">module manager listeners</a> and the
@@ -321,29 +322,28 @@ any actions after all other modules have been loaded, use the module manager's
 <a href="../module-manager/#module-manager-listeners">module manager listeners documentation</a>.</p>
 </blockquote>
 <h3>Sample Usage of "loadModules.post" Event</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventInterface as Event;</span>
-<span class=x>use Laminas\ModuleManager\ModuleManager;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\EventInterface as Event;
+use Laminas\ModuleManager\ModuleManager;
 
-<span class=x>class Module</span>
-<span class=x>{</span>
-<span class=x>    public function init(ModuleManager $moduleManager)</span>
-<span class=x>    {</span>
-<span class=x>        // Remember to keep the init() method as lightweight as possible</span>
-<span class=x>        $events = $moduleManager-&gt;getEventManager();</span>
-<span class=x>        $events-&gt;attach(&#39;loadModules.post&#39;, [$this, &#39;modulesLoaded&#39;]);</span>
-<span class=x>    }</span>
+class Module
+{
+    public function init(ModuleManager $moduleManager)
+    {
+        // Remember to keep the init() method as lightweight as possible
+        $events = $moduleManager-&gt;getEventManager();
+        $events-&gt;attach('loadModules.post', [$this, 'modulesLoaded']);
+    }
 
-<span class=x>    public function modulesLoaded(Event $e)</span>
-<span class=x>    {</span>
-<span class=x>        // This method is called once all modules are loaded.</span>
-<span class=x>        $moduleManager = $e-&gt;getTarget();</span>
-<span class=x>        $loadedModules = $moduleManager-&gt;getLoadedModules();</span>
+    public function modulesLoaded(Event $e)
+    {
+        // This method is called once all modules are loaded.
+        $moduleManager = $e-&gt;getTarget();
+        $loadedModules = $moduleManager-&gt;getLoadedModules();
 
-<span class=x>        // To get the configuration from another module named &#39;FooModule&#39;</span>
-<span class=x>        $config = $moduleManager-&gt;getModule(&#39;FooModule&#39;)-&gt;getConfig();</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        // To get the configuration from another module named 'FooModule'
+        $config = $moduleManager-&gt;getModule('FooModule')-&gt;getConfig();
+    }
+}</code></pre>
 <blockquote>
 <h3>Use init() sparingly</h3>
 <p>The <code>init()</code> method is called for <strong>every</strong> module implementing this feature,
@@ -357,18 +357,17 @@ parts of the application in your <code>Module</code> class such as the instance 
 you may utilize the MVC <code>bootstrap</code> event. The bootstrap event is triggered
 after the <code>loadModule.post</code> event, once <code>$application-&gt;bootstrap()</code> is called.</p>
 <h3>Sample Usage of the MVC "bootstrap" Event</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\EventManager\EventInterface as Event;</span>
+<pre class=codehilite><code class=language-php>use Laminas\EventManager\EventInterface as Event;
 
-<span class=x>class Module</span>
-<span class=x>{</span>
-<span class=x>    public function onBootstrap(Event $e)</span>
-<span class=x>    {</span>
-<span class=x>        // This method is called once the MVC bootstrapping is complete</span>
-<span class=x>        $application = $e-&gt;getApplication();</span>
-<span class=x>        $services    = $application-&gt;getServiceManager();</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+class Module
+{
+    public function onBootstrap(Event $e)
+    {
+        // This method is called once the MVC bootstrapping is complete
+        $application = $e-&gt;getApplication();
+        $services    = $application-&gt;getServiceManager();
+    }
+}</code></pre>
 <blockquote>
 <h3>Use onBootstrap() sparingly</h3>
 <p>The <code>onBootstrap()</code> method is called for <strong>every</strong> module implementing this
@@ -514,9 +513,10 @@ feature, on <strong>every</strong> page request, and should <strong>only</strong
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -553,7 +553,7 @@ feature, on <strong>every</strong> page request, and should <strong>only</strong
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-modulemanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -562,8 +562,8 @@ feature, on <strong>every</strong> page request, and should <strong>only</strong
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-modulemanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-modulemanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

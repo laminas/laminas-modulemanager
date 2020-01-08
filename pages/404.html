@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Modular application system for laminas-mvc applications">  
-    <link rel="canonical" href="https://docs.laminas.dev/best-practices/">
     <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Best Practices when Creating Modules - laminas-modulemanager - Laminas Docs</title>
+    <title>laminas-modulemanager - Laminas Docs</title>
 
     <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -59,7 +58,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-modulemanager</a>
+            <a href="../.">laminas-modulemanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -110,8 +109,8 @@
 
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Best Practices when Creating Modules</a>
+    <li class="subnavigation__list-item ">
+        <a href="../best-practices/" class="subnavigation__link">Best Practices when Creating Modules</a>
     </li>
 
                                     
@@ -180,149 +179,21 @@
         <div class="row">
             <div class="col-md-2 col-sm-12">
                 
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#keep-the-init-and-onbootstrap-methods-lightweight" class="toc__link">Keep the init() and onBootstrap() methods lightweight</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#do-not-perform-writes-within-a-module" class="toc__link">Do not perform writes within a module</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#utilize-a-vendor-prefix-for-module-names" class="toc__link">Utilize a vendor prefix for module names</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#utilize-a-module-prefix-for-service-names" class="toc__link">Utilize a module prefix for service names</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
             </div>
             <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
                 
-                    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-            <li class="breadcrumb-item"><a href="">Overview</a></li>
 
-            
-                <li class="breadcrumb-item"><a href="..">laminas-modulemanager</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-                
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
-
-                <li class="breadcrumb-item active" aria-current="page">Best Practices when Creating Modules</li>
-            
-        
-    </ol>
-</nav>
+<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-
-
-
-    
-    
-        <h2 class="chapter__headline">Reference</h2>
-    
-
-    <h1 id="best-practices-when-creating-modules">Best Practices when Creating Modules</h1>
-<p>When creating a Laminas module, there are some best practices you should keep in mind.</p>
-<h2 id="keep-the-init-and-onbootstrap-methods-lightweight">Keep the <code>init()</code> and <code>onBootstrap()</code> methods lightweight</h2>
-<p>Be conservative with the actions you perform in the <code>init()</code> and <code>onBootstrap()</code>
-methods of your <code>Module</code> class. These methods are run for <strong>every</strong> page
-request, and should not perform anything heavy. As a rule of thumb, registering
-event listeners is an appropriate task to perform in these methods. Such
-lightweight tasks will generally not have a measurable impact on the performance
-of your application, even with many modules enabled. It is considered bad
-practice to utilize these methods for setting up or configuring instances of
-application resources such as a database connection, application logger, or
-mailer. Tasks such as these are better served through the <code>ServiceManager</code>
-capabilities.</p>
-<h2 id="do-not-perform-writes-within-a-module">Do not perform writes within a module</h2>
-<p>You should <strong>never</strong> code your module to perform or expect any writes within the
-module's directory.  Once installed, the files within a module's directory
-should always match the distribution verbatim.  Any user-provided configuration
-should be performed via overrides in the <code>Application</code> module or via
-application-level configuration files. Any other required filesystem writes
-should be performed in some writeable path that is outside of the module's
-directory.</p>
-<p>There are two primary advantages to following this rule. First, any modules
-which attempt to write within themselves will not be compatible with phar
-packaging. Second, by keeping the module in sync with the upstream distribution,
-updates via mechanisms such as git will be simple and trouble-free.  Of course,
-the <code>Application</code> module is a special exception to this rule, as there is
-typically no upstream distribution for this module, and it's unlikely you would
-want to run this package from within a phar archive.</p>
-<h2 id="utilize-a-vendor-prefix-for-module-names">Utilize a vendor prefix for module names</h2>
-<p>To avoid module naming conflicts, you are encouraged to prefix your module
-namespace with a vendor prefix. As an example, the developer tools module
-distributed by Laminas is named "Laminas\DeveloperTools" instead of simply
-"DeveloperTools".</p>
-<h2 id="utilize-a-module-prefix-for-service-names">Utilize a module prefix for service names</h2>
-<p>If you define services in the top-level service manager, you are encouraged to
-prefix these services with the name of your module to avoid conflicts with other
-modules' services. For example, the database adapter used by MyModule should be
-called "MyModuleDbAdapter" rather than simply "DbAdapter." If you need to share
-a service with other modules, remember that the Service Manager "alias" feature
-can be used in a merged configuration to override factories defined by
-individual modules. Ideally, modules should define their own service
-dependencies, but aliases can be configured at the application level to ensure
-that common services in individual modules all refer to the same instance.</p>
-
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../module-autoloader/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-modulemanager/edit/master/docs/book/best-practices.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 
@@ -337,7 +208,7 @@ that common services in individual modules all refer to the same instance.</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-modulemanager</a>
+            <a href="../.">laminas-modulemanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -388,8 +259,8 @@ that common services in individual modules all refer to the same instance.</p>
 
                                     
                                         
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Best Practices when Creating Modules</a>
+    <li class="subnavigation__list-item ">
+        <a href="../best-practices/" class="subnavigation__link">Best Practices when Creating Modules</a>
     </li>
 
                                     

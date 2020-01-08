@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -256,33 +260,32 @@ have the directive <code>chdir(dirname(__DIR__));</code> in your <code>public/in
 <p>The following example will search for modules in three different <code>module_paths</code>.
 Two are local directories of this application and the third is a system-wide
 shared directory.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// public/index.php</span>
-<span class=x>use Laminas\ModuleManager\Listener;</span>
-<span class=x>use Laminas\ModuleManager\ModuleManager;</span>
+<pre class=codehilite><code class=language-php>// public/index.php
+use Laminas\ModuleManager\Listener;
+use Laminas\ModuleManager\ModuleManager;
 
-<span class=x>chdir(dirname(__DIR__));</span>
+chdir(dirname(__DIR__));
 
-<span class=x>// Instantiate and configure the default listener aggregate</span>
-<span class=x>$listenerOptions = new Listener\ListenerOptions([</span>
-<span class=x>    &#39;module_paths&#39; =&gt; [</span>
-<span class=x>        &#39;./module&#39;,</span>
-<span class=x>        &#39;./vendor&#39;,</span>
-<span class=x>        &#39;/usr/share/laminasmodules&#39;,</span>
-<span class=x>    ]</span>
-<span class=x>]);</span>
-<span class=x>$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);</span>
+// Instantiate and configure the default listener aggregate
+$listenerOptions = new Listener\ListenerOptions([
+    'module_paths' =&gt; [
+        './module',
+        './vendor',
+        '/usr/share/laminasmodules',
+    ]
+]);
+$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 
-<span class=x>// Instantiate the module manager</span>
-<span class=x>$moduleManager = new ModuleManager([</span>
-<span class=x>    &#39;Application&#39;,</span>
-<span class=x>    &#39;FooModule&#39;,</span>
-<span class=x>    &#39;BarModule&#39;,</span>
-<span class=x>]);</span>
+// Instantiate the module manager
+$moduleManager = new ModuleManager([
+    'Application',
+    'FooModule',
+    'BarModule',
+]);
 
-<span class=x>// Attach the default listener aggregate and load the modules</span>
-<span class=x>$moduleManager-&gt;getEventManager()-&gt;attachAggregate($defaultListeners);</span>
-<span class=x>$moduleManager-&gt;loadModules();</span>
-</pre></div></p>
+// Attach the default listener aggregate and load the modules
+$moduleManager-&gt;getEventManager()-&gt;attachAggregate($defaultListeners);
+$moduleManager-&gt;loadModules();</code></pre>
 <blockquote>
 <h3>Module paths are FIFO</h3>
 <p>Module paths behave very similar to PHP's <code>include_path</code> and are searched in
@@ -296,13 +299,13 @@ one it finds.</p>
 <p>If you are using Composer to autoload, you may not need to use the
 <code>ModuleAutoloader</code>. As such, you can disable it by passing the following
 option to the <code>ListenerOptions</code> class:</p>
-<pre class=codehilite><code class=language-php>
+<pre class="codehilite"><code class="language-php">
 'use_laminas_loader' =&gt; false,
 </code></pre>
 <p>If your project was begun from the <a href="https://github.com/laminas/LaminasSkeletonApplication">skeleton application</a>,
 place the above within the <code>module_listener_options</code> configuration of your
 <code>config/application.config.php</code> file:</p>
-<pre class=codehilite><code class=language-php>
+<pre class="codehilite"><code class="language-php">
 return [
     /* ... */
     'module_listener_options' =&gt; [
@@ -320,48 +323,47 @@ return [
 <p>In this example, the autoloader will first check for <code>MyModule\Module</code> in
 <code>/path/to/mymoduledir-v1.2/Module.php</code>. If it's not found, then it will fall
 back to searching any other registered module paths.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// ./public/index.php</span>
-<span class=x>use Laminas\Loader\ModuleAutoloader;</span>
-<span class=x>use Laminas\ModuleManager\Listener;</span>
-<span class=x>use Laminas\ModuleManager\ModuleManager;</span>
+<pre class=codehilite><code class=language-php>// ./public/index.php
+use Laminas\Loader\ModuleAutoloader;
+use Laminas\ModuleManager\Listener;
+use Laminas\ModuleManager\ModuleManager;
 
-<span class=x>chdir(dirname(__DIR__));</span>
+chdir(dirname(__DIR__));
 
-<span class=x>// Instantiate and configure the default listener aggregate</span>
-<span class=x>$listenerOptions = new Listener\ListenerOptions([</span>
-<span class=x>    &#39;module_paths&#39; =&gt; [</span>
-<span class=x>        &#39;./module&#39;,</span>
-<span class=x>        &#39;./vendor&#39;,</span>
-<span class=x>        &#39;/usr/share/laminasmodules&#39;,</span>
-<span class=x>        &#39;MyModule&#39; =&gt; &#39;/path/to/mymoduledir-v1.2&#39;,</span>
-<span class=x>    ]</span>
-<span class=x>]);</span>
-<span class=x>$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);</span>
+// Instantiate and configure the default listener aggregate
+$listenerOptions = new Listener\ListenerOptions([
+    'module_paths' =&gt; [
+        './module',
+        './vendor',
+        '/usr/share/laminasmodules',
+        'MyModule' =&gt; '/path/to/mymoduledir-v1.2',
+    ]
+]);
+$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 
-<span class=x>/**</span>
-<span class=x> * Without DefaultListenerAggregate:</span>
-<span class=x> *</span>
-<span class=x> * $moduleAutoloader = new ModuleAutoloader([</span>
-<span class=x> *     &#39;./module&#39;,</span>
-<span class=x> *     &#39;./vendor&#39;,</span>
-<span class=x> *     &#39;/usr/share/laminasmodules&#39;,</span>
-<span class=x> *     &#39;MyModule&#39; =&gt; &#39;/path/to/mymoduledir-v1.2&#39;,</span>
-<span class=x> * ]);</span>
-<span class=x> * $moduleAutoloader-&gt;register();</span>
-<span class=x> *</span>
-<span class=x> */</span>
+/**
+ * Without DefaultListenerAggregate:
+ *
+ * $moduleAutoloader = new ModuleAutoloader([
+ *     './module',
+ *     './vendor',
+ *     '/usr/share/laminasmodules',
+ *     'MyModule' =&gt; '/path/to/mymoduledir-v1.2',
+ * ]);
+ * $moduleAutoloader-&gt;register();
+ *
+ */
 
-<span class=x>// Instantiate the module manager</span>
-<span class=x>$moduleManager = new ModuleManager([</span>
-<span class=x>    &#39;MyModule&#39;,</span>
-<span class=x>    &#39;FooModule&#39;,</span>
-<span class=x>    &#39;BarModule&#39;,</span>
-<span class=x>]);</span>
+// Instantiate the module manager
+$moduleManager = new ModuleManager([
+    'MyModule',
+    'FooModule',
+    'BarModule',
+]);
 
-<span class=x>// Attach the default listener aggregate and load the modules</span>
-<span class=x>$moduleManager-&gt;getEventManager()-&gt;attachAggregate($defaultListeners);</span>
-<span class=x>$moduleManager-&gt;loadModules();</span>
-</pre></div></p>
+// Attach the default listener aggregate and load the modules
+$moduleManager-&gt;getEventManager()-&gt;attachAggregate($defaultListeners);
+$moduleManager-&gt;loadModules();</code></pre>
 <p>This same method works if you provide the path to a phar archive.</p>
 <h2 id="packaging-modules-with-phar">Packaging Modules with Phar</h2>
 <p>If you prefer, you may easily package your module as a
@@ -515,9 +517,10 @@ archives, as it introduces unnecessary CPU overhead to each request.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -554,7 +557,7 @@ archives, as it introduces unnecessary CPU overhead to each request.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-modulemanager//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -563,8 +566,8 @@ archives, as it introduces unnecessary CPU overhead to each request.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-modulemanager//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-modulemanager/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
