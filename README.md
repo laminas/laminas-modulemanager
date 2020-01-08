@@ -1,6 +1,6 @@
 # laminas-modulemanager
 
-[![Build Status](https://travis-ci.org/laminas/laminas-modulemanager.svg?branch=master)](https://travis-ci.org/laminas/laminas-modulemanager)
+[![Build Status](https://travis-ci.com/laminas/laminas-modulemanager.svg?branch=master)](https://travis-ci.com/laminas/laminas-modulemanager)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-modulemanager/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-modulemanager?branch=master)
 
 Laminas.0 introduces a new and powerful approach to modules. This new
