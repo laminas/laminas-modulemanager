@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://docs.laminas.dev/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-modulemanager/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/intro/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-modulemanager/intro/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/module-manager/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-modulemanager/module-manager/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/module-class/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-modulemanager/module-class/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/module-autoloader/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-modulemanager/module-autoloader/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/best-practices/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-modulemanager/best-practices/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
