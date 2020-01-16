@@ -72,7 +72,7 @@ $moduleManager->loadModules();
 > 'use_laminas_loader' => false,
 > ```
 >
-> If your project was begun from the [skeleton application](https://github.com/laminas/LaminasSkeletonApplication),
+> If your project was begun from the [laminas-mvc-skeleton](https://github.com/laminas/laminas-mvc-skeleton),
 > place the above within the `module_listener_options` configuration of your
 > `config/application.config.php` file:
 >
