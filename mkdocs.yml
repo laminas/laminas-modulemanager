@@ -12,4 +12,4 @@ site_name: laminas-modulemanager
 site_description: "Modular application system for laminas-mvc applications"
 repo_url: 'https://github.com/laminas/laminas-modulemanager'
 extra:
-    project: Mvc
+    project: MVC
