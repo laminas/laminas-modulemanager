@@ -33,7 +33,7 @@ class ModuleManagerTest extends TestCase
      */
     protected $defaultListeners;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->sharedEvents = new SharedEventManager;
         $this->events       = new EventManager($this->sharedEvents);

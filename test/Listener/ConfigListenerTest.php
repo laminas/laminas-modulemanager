@@ -32,7 +32,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
      */
     protected $moduleManager;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->moduleManager = new ModuleManager([]);
         $this->moduleManager->getEventManager()->attach(

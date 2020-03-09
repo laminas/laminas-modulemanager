@@ -46,7 +46,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
      */
     protected $sharedEvents;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->sharedEvents = new SharedEventManager();
 

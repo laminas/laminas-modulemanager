@@ -24,7 +24,7 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
      */
     protected $moduleManager;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->moduleManager = new ModuleManager([]);
         $events = $this->moduleManager->getEventManager();

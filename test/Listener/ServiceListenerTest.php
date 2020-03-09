@@ -61,7 +61,7 @@ class ServiceListenerTest extends TestCase
      */
     protected $services;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->services = new ServiceManager();
         $this->listener = new ServiceListener($this->services);

@@ -26,7 +26,7 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
      */
     protected $defaultListeners;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->defaultListeners = new DefaultListenerAggregate(
             new ListenerOptions([

@@ -34,7 +34,7 @@ class OnBootstrapListenerTest extends AbstractListenerTestCase
      */
     protected $moduleManager;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $sharedEvents = new SharedEventManager();
         $events       = new EventManager($sharedEvents);
