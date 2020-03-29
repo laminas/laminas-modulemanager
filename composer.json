@@ -73,6 +73,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-modulemanager": "self.version"
+        "zendframework/zend-modulemanager": "^2.8.4"
     }
 }
