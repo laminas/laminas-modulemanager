@@ -545,7 +545,7 @@ As a brief recap, the following configuration keys and values are allowed:</p>
 <p>When working with plugin managers, you will be passed the plugin manager instance to factories,
 abstract factories, and initializers. If you need access to the application services, you can use
 the <code>getServiceLocator()</code> method, as in the following example:</p>
-<pre class=codehilite><code class=language-php>public function getViewHelperConfig()
+<pre class="highlight"><code class="language-php">public function getViewHelperConfig()
 {
     return ['factories' =&gt; [
         'foo' =&gt; function ($helpers) {
@@ -557,6 +557,7 @@ the <code>getServiceLocator()</code> method, as in the following example:</p>
         },
     ]];
 }</code></pre>
+
 <p>This is a powerful technique, as it allows your various plugins to remain
 agnostic with regards to where and how dependencies are injected, and thus
 allows you to use Inversion of Control principals even with plugins.</p>
@@ -566,8 +567,7 @@ allows you to use Inversion of Control principals even with plugins.</p>
 plugin managers now receive the <em>parent</em> container, and not the plugin manager
 itself. You can write your factories under v2, and prepare them for v3, by
 testing the incoming argument to see if it is a plugin manager:</p>
-<pre class="codehilite"><code class="language-php">
-use Laminas\ServiceManager\AbstractPluginManager;
+<pre class="highlight"><code class="language-php">use Laminas\ServiceManager\AbstractPluginManager;
 
 function ($container) {
     $container = $container instanceof AbstractPluginManager
@@ -575,8 +575,8 @@ function ($container) {
         : $container;
 
     // create instance with dependencies pulled from app container...
-}
-</code></pre>
+}</code></pre>
+
 </blockquote>
 
 

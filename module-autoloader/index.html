@@ -319,7 +319,7 @@ have the directive <code>chdir(dirname(__DIR__));</code> in your <code>public/in
 <p>The following example will search for modules in three different <code>module_paths</code>.
 Two are local directories of this application and the third is a system-wide
 shared directory.</p>
-<pre class=codehilite><code class=language-php>// public/index.php
+<pre class="highlight"><code class="language-php">// public/index.php
 use Laminas\ModuleManager\Listener;
 use Laminas\ModuleManager\ModuleManager;
 
@@ -345,6 +345,7 @@ $moduleManager = new ModuleManager([
 // Attach the default listener aggregate and load the modules
 $moduleManager-&gt;getEventManager()-&gt;attachAggregate($defaultListeners);
 $moduleManager-&gt;loadModules();</code></pre>
+
 <blockquote>
 <h3>Module paths are FIFO</h3>
 <p>Module paths behave very similar to PHP's <code>include_path</code> and are searched in
@@ -358,22 +359,20 @@ one it finds.</p>
 <p>If you are using Composer to autoload, you may not need to use the
 <code>ModuleAutoloader</code>. As such, you can disable it by passing the following
 option to the <code>ListenerOptions</code> class:</p>
-<pre class="codehilite"><code class="language-php">
-'use_laminas_loader' =&gt; false,
-</code></pre>
+<pre class="highlight"><code class="language-php">'use_laminas_loader' =&gt; false,</code></pre>
+
 <p>If your project was begun from the <a href="https://github.com/laminas/laminas-mvc-skeleton">laminas-mvc-skeleton</a>,
 place the above within the <code>module_listener_options</code> configuration of your
 <code>config/application.config.php</code> file:</p>
-<pre class="codehilite"><code class="language-php">
-return [
+<pre class="highlight"><code class="language-php">return [
     /* ... */
     'module_listener_options' =&gt; [
         'use_laminas_loader' =&gt; false,
         /* ... */
     ],
     /* ... */
-];
-</code></pre>
+];</code></pre>
+
 </blockquote>
 <h2 id="non-standard-explicit-module-paths">Non-Standard / Explicit Module Paths</h2>
 <p>Sometimes you may want to specify exactly where a module is instead of having
@@ -382,7 +381,7 @@ return [
 <p>In this example, the autoloader will first check for <code>MyModule\Module</code> in
 <code>/path/to/mymoduledir-v1.2/Module.php</code>. If it's not found, then it will fall
 back to searching any other registered module paths.</p>
-<pre class=codehilite><code class=language-php>// ./public/index.php
+<pre class="highlight"><code class="language-php">// ./public/index.php
 use Laminas\Loader\ModuleAutoloader;
 use Laminas\ModuleManager\Listener;
 use Laminas\ModuleManager\ModuleManager;
@@ -423,6 +422,7 @@ $moduleManager = new ModuleManager([
 // Attach the default listener aggregate and load the modules
 $moduleManager-&gt;getEventManager()-&gt;attachAggregate($defaultListeners);
 $moduleManager-&gt;loadModules();</code></pre>
+
 <p>This same method works if you provide the path to a phar archive.</p>
 <h2 id="packaging-modules-with-phar">Packaging Modules with Phar</h2>
 <p>If you prefer, you may easily package your module as a
