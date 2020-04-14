@@ -60,9 +60,11 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
 
         $this->application = new MockApplication;
         $events = $this->createEventManager($this->sharedEvents);
-        $events->setIdentifiers(
-            ['Laminas\Mvc\Application', 'LaminasTest\Module\TestAsset\MockApplication', 'application']
-        );
+        $events->setIdentifiers([
+            'Laminas\Mvc\Application',
+            'LaminasTest\Module\TestAsset\MockApplication',
+            'application',
+        ]);
         $this->application->setEventManager($events);
 
         $this->serviceManager = new ServiceManager();
