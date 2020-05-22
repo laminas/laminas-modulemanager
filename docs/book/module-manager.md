@@ -44,7 +44,7 @@ listeners.
 After all modules have been loaded, the `mergeConfig` event is triggered. By default,
 `Laminas\ModuleManager\Listener\ConfigLister` listens on this event at priority 1000, and merges all
 configuration. You may attach additional listeners to this event in order to manipulate the merged
-configuration. See [the tutorial on manipulating merged configuration](https://getlaminas.org/manual/current/en/tutorials/config.advanced.html#manipulating-merged-configuration)
+configuration. See [the tutorial on manipulating merged configuration](https://docs.laminas.dev/tutorials/advanced-config/#manipulating-merged-configuration)
 for more information.
 
 ### loadModules.post (`ModuleEvent::EVENT_LOAD_MODULES_POST`)
