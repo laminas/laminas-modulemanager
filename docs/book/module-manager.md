@@ -69,14 +69,6 @@ you will need to attach to use the module manager, as it will take care of
 properly attaching the requisite listeners (those listed below) for the module
 system to function properly.
 
-### AutoloaderListener
-
-This listener checks each module to see if it has implemented
-`Laminas\ModuleManager\Feature\AutoloaderProviderInterface` or defined the
-`getAutoloaderConfig()` method. If so, it calls the `getAutoloaderConfig()`
-method on the module class and passes the returned array to
-`Laminas\Loader\AutoloaderFactory`.
-
 ### ModuleDependencyCheckerListener
 
 This listener checks each module to verify if all the modules it depends on were

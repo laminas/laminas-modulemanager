@@ -30,7 +30,6 @@ use function var_export;
  */
 class ModuleManagerTest extends TestCase
 {
-    use ResetAutoloadFunctionsTrait;
     use SetUpCacheDirTrait;
 
     /**
@@ -43,11 +42,7 @@ class ModuleManagerTest extends TestCase
         $this->sharedEvents = new SharedEventManager;
         $this->events       = new EventManager($this->sharedEvents);
         $this->defaultListeners = new DefaultListenerAggregate(
-            new ListenerOptions([
-                'module_paths' => [
-                    realpath(__DIR__ . '/TestAsset'),
-                ],
-            ])
+            new ListenerOptions([])
         );
     }
 

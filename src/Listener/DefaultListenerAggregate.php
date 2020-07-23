@@ -41,26 +41,7 @@ class DefaultListenerAggregate extends AbstractListener implements
         $configListener              = $this->getConfigListener();
         $locatorRegistrationListener = new LocatorRegistrationListener($options);
 
-        // High priority, we assume module autoloading (for FooNamespace\Module
-        // classes) should be available before anything else.
-        // Register it only if use_laminas_loader config is true, however.
-        if ($options->useLaminasLoader()) {
-            $moduleLoaderListener = new ModuleLoaderListener($options);
-            $moduleLoaderListener->attach($events);
-            $this->listeners[] = $moduleLoaderListener;
-        }
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener);
-
-        if ($options->useLaminasLoader()) {
-            // High priority, because most other loadModule listeners will assume
-            // the module's classes are available via autoloading
-            // Register it only if use_laminas_loader config is true, however.
-            $this->listeners[] = $events->attach(
-                ModuleEvent::EVENT_LOAD_MODULE,
-                new AutoloaderListener($options),
-                9000
-            );
-        }
 
         if ($options->getCheckDependencies()) {
             $this->listeners[] = $events->attach(
