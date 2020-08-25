@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#8](https://github.com/laminas/laminas-modulemanager/pull/8) removes support for PHP versions prior to PHP 7.3.
 
 ### Fixed
 
