@@ -2,33 +2,11 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.9.0 - TBD
+## 2.9.0 - 2020-08-25
 
 ### Added
 
 - [#9](https://github.com/laminas/laminas-modulemanager/pull/9) adds [webimpress/safe-writer](https://github.com/webimpress/safe-writer) for saving cache files safely to avoid race conditions when the same file is written multiple times in a short time period. 
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 2.8.5 - TBD
-
-### Added
-
-- Nothing.
 
 ### Changed
 
