@@ -12,6 +12,8 @@ use Laminas\Loader\ModuleAutoloader;
 use LaminasTest\ModuleManager\ResetAutoloadFunctionsTrait;
 use PHPUnit\Framework\TestCase;
 
+use function dirname;
+
 /**
  * Common test methods for all AbstractListener children.
  */

@@ -28,7 +28,7 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         $e = new ModuleEvent;
 
         $e->setModuleName($moduleName);
-        $this->assertInstanceOf($expectedInstanceOf, $moduleResolver($e));
+        self::assertInstanceOf($expectedInstanceOf, $moduleResolver($e));
     }
 
     public function validModuleNameProvider()
@@ -47,7 +47,7 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         $e = new ModuleEvent;
 
         $e->setModuleName('DoesNotExist');
-        $this->assertFalse($moduleResolver($e));
+        self::assertFalse($moduleResolver($e));
     }
 
     public function testModuleResolverListenerPrefersModuleClassesInModuleNamespaceOverNamedClasses()
@@ -56,7 +56,7 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         $e = new ModuleEvent;
 
         $e->setModuleName('ModuleAsClass');
-        $this->assertInstanceOf(ModuleAsClass\Module::class, $moduleResolver($e));
+        self::assertInstanceOf(ModuleAsClass\Module::class, $moduleResolver($e));
     }
 
     public function testModuleResolverListenerWillNotAttemptToResolveModuleAsClassNameGenerator()
@@ -65,6 +65,6 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         $e = new ModuleEvent;
 
         $e->setModuleName('Generator');
-        $this->assertFalse($moduleResolver($e));
+        self::assertFalse($moduleResolver($e));
     }
 }

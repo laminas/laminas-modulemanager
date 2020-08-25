@@ -17,6 +17,10 @@ use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceManager;
 
+use function end;
+use function explode;
+use function get_class;
+
 /**
  * Locator registration listener
  */
@@ -73,7 +77,7 @@ class LocatorRegistrationListener extends AbstractListener implements
                 $moduleClassNameArray = explode('\\', $moduleClassName);
                 $moduleClassNameAlias = end($moduleClassNameArray);
                 $application          = $e->getApplication();
-                /* @var $services ServiceManager */
+                /** @var $services ServiceManager */
                 $services             = $application->getServiceManager();
                 if (! $services->has($moduleClassName)) {
                         $services->setAlias($moduleClassName, $moduleClassNameAlias);
@@ -104,7 +108,7 @@ class LocatorRegistrationListener extends AbstractListener implements
     public function onBootstrap(MvcEvent $e)
     {
         $application = $e->getApplication();
-        /* @var $services ServiceManager */
+        /** @var $services ServiceManager */
         $services    = $application->getServiceManager();
 
         foreach ($this->modules as $module) {

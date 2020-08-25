@@ -18,6 +18,9 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use LaminasTest\ModuleManager\SetUpCacheDirTrait;
 
+use function count;
+use function spl_object_hash;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\ConfigListener
@@ -32,7 +35,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
      */
     protected $moduleManager;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->moduleManager = new ModuleManager([]);
         $this->moduleManager->getEventManager()->attach(
@@ -52,11 +55,11 @@ class ConfigListenerTest extends AbstractListenerTestCase
         $moduleManager->loadModules();
 
         $config = $configListener->getMergedConfig(false);
-        $this->assertSame(2, count($config));
-        $this->assertSame('test', $config['listener']);
-        $this->assertSame('thing', $config['some']);
+        self::assertSame(2, count($config));
+        self::assertSame('test', $config['listener']);
+        self::assertSame('thing', $config['some']);
         $configObject = $configListener->getMergedConfig();
-        $this->assertInstanceOf('Laminas\Config\Config', $configObject);
+        self::assertInstanceOf('Laminas\Config\Config', $configObject);
     }
 
     public function testCanCacheMergedConfig()
@@ -73,7 +76,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         $moduleManager->loadModules(); // This should cache the config
 
         $modules = $moduleManager->getLoadedModules();
-        $this->assertTrue($modules['ListenerTestModule']->getConfigCalled);
+        self::assertTrue($modules['ListenerTestModule']->getConfigCalled);
 
         // Now we check to make sure it uses the config and doesn't hit
         // the module objects getConfig() method(s)
@@ -87,7 +90,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         $configListener->attach($moduleManager->getEventManager());
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
-        $this->assertFalse($modules['ListenerTestModule']->getConfigCalled);
+        self::assertFalse($modules['ListenerTestModule']->getConfigCalled);
     }
 
     public function testBadConfigValueThrowsInvalidArgumentException()
@@ -138,15 +141,15 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         // Test as object
         $configObject = $configListener->getMergedConfig();
-        $this->assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
-        $this->assertSame('loaded', $configObject->ini);
-        $this->assertSame('loaded', $configObject->php);
-        $this->assertSame('loaded', $configObject->xml);
+        self::assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
+        self::assertSame('loaded', $configObject->ini);
+        self::assertSame('loaded', $configObject->php);
+        self::assertSame('loaded', $configObject->xml);
         // Test as array
         $config = $configListener->getMergedConfig(false);
-        $this->assertSame('loaded', $config['ini']);
-        $this->assertSame('loaded', $config['php']);
-        $this->assertSame('loaded', $config['xml']);
+        self::assertSame('loaded', $config['ini']);
+        self::assertSame('loaded', $config['php']);
+        self::assertSame('loaded', $config['xml']);
     }
 
     public function testCanMergeConfigFromStaticPath()
@@ -166,15 +169,15 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         // Test as object
         $configObject = $configListener->getMergedConfig();
-        $this->assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
-        $this->assertSame('loaded', $configObject->ini);
-        $this->assertSame('loaded', $configObject->php);
-        $this->assertSame('loaded', $configObject->xml);
+        self::assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
+        self::assertSame('loaded', $configObject->ini);
+        self::assertSame('loaded', $configObject->php);
+        self::assertSame('loaded', $configObject->xml);
         // Test as array
         $config = $configListener->getMergedConfig(false);
-        $this->assertSame('loaded', $config['ini']);
-        $this->assertSame('loaded', $config['php']);
-        $this->assertSame('loaded', $config['xml']);
+        self::assertSame('loaded', $config['ini']);
+        self::assertSame('loaded', $config['php']);
+        self::assertSame('loaded', $config['xml']);
     }
 
     public function testCanMergeConfigFromStaticPaths()
@@ -196,15 +199,15 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         // Test as object
         $configObject = $configListener->getMergedConfig();
-        $this->assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
-        $this->assertSame('loaded', $configObject->ini);
-        $this->assertSame('loaded', $configObject->php);
-        $this->assertSame('loaded', $configObject->xml);
+        self::assertSame(spl_object_hash($configObjectCheck), spl_object_hash($configObject));
+        self::assertSame('loaded', $configObject->ini);
+        self::assertSame('loaded', $configObject->php);
+        self::assertSame('loaded', $configObject->xml);
         // Test as array
         $config = $configListener->getMergedConfig(false);
-        $this->assertSame('loaded', $config['ini']);
-        $this->assertSame('loaded', $config['php']);
-        $this->assertSame('loaded', $config['xml']);
+        self::assertSame('loaded', $config['ini']);
+        self::assertSame('loaded', $config['php']);
+        self::assertSame('loaded', $config['xml']);
     }
 
     public function testCanCacheMergedConfigFromGlob()
@@ -239,12 +242,12 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         // Check if values from glob object and cache object are the same
         $configObjectFromCache = $configListener->getMergedConfig();
-        $this->assertNotNull($configObjectFromGlob->ini);
-        $this->assertSame($configObjectFromGlob->ini, $configObjectFromCache->ini);
-        $this->assertNotNull($configObjectFromGlob->php);
-        $this->assertSame($configObjectFromGlob->php, $configObjectFromCache->php);
-        $this->assertNotNull($configObjectFromGlob->xml);
-        $this->assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
+        self::assertNotNull($configObjectFromGlob->ini);
+        self::assertSame($configObjectFromGlob->ini, $configObjectFromCache->ini);
+        self::assertNotNull($configObjectFromGlob->php);
+        self::assertSame($configObjectFromGlob->php, $configObjectFromCache->php);
+        self::assertNotNull($configObjectFromGlob->xml);
+        self::assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
     }
 
     public function testCanCacheMergedConfigFromStatic()
@@ -283,12 +286,12 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         // Check if values from glob object and cache object are the same
         $configObjectFromCache = $configListener->getMergedConfig();
-        $this->assertNotNull($configObjectFromGlob->ini);
-        $this->assertSame($configObjectFromGlob->ini, $configObjectFromCache->ini);
-        $this->assertNotNull($configObjectFromGlob->php);
-        $this->assertSame($configObjectFromGlob->php, $configObjectFromCache->php);
-        $this->assertNotNull($configObjectFromGlob->xml);
-        $this->assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
+        self::assertNotNull($configObjectFromGlob->ini);
+        self::assertSame($configObjectFromGlob->ini, $configObjectFromCache->ini);
+        self::assertNotNull($configObjectFromGlob->php);
+        self::assertSame($configObjectFromGlob->php, $configObjectFromCache->php);
+        self::assertNotNull($configObjectFromGlob->xml);
+        self::assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
     }
 
     public function testCanMergeConfigFromArrayOfGlobs()
@@ -308,9 +311,9 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         // Test as object
         $configObject = $configListener->getMergedConfig();
-        $this->assertSame('loaded', $configObject->ini);
-        $this->assertSame('loaded', $configObject->php);
-        $this->assertSame('loaded', $configObject->xml);
+        self::assertSame('loaded', $configObject->ini);
+        self::assertSame('loaded', $configObject->php);
+        self::assertSame('loaded', $configObject->xml);
     }
 
     public function testCanMergeConfigFromArrayOfStatic()
@@ -330,9 +333,9 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         // Test as object
         $configObject = $configListener->getMergedConfig();
-        $this->assertSame('loaded', $configObject->ini);
-        $this->assertSame('loaded', $configObject->php);
-        $this->assertSame('loaded', $configObject->xml);
+        self::assertSame('loaded', $configObject->ini);
+        self::assertSame('loaded', $configObject->php);
+        self::assertSame('loaded', $configObject->xml);
     }
 
     public function testMergesWithMergeAndReplaceBehavior()
@@ -351,8 +354,8 @@ class ConfigListenerTest extends AbstractListenerTestCase
         $moduleManager->loadModules();
 
         $mergedConfig = $configListener->getMergedConfig(false);
-        $this->assertSame(['foo', 'bar'], $mergedConfig['indexed']);
-        $this->assertSame('bar', $mergedConfig['keyed']);
+        self::assertSame(['foo', 'bar'], $mergedConfig['indexed']);
+        self::assertSame('bar', $mergedConfig['keyed']);
     }
 
     public function testConfigListenerFunctionsAsAggregateListener()
@@ -361,12 +364,12 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         $moduleManager = $this->moduleManager;
         $events        = $moduleManager->getEventManager();
-        $this->assertEquals(2, count($this->getEventsFromEventManager($events)));
+        self::assertEquals(2, count($this->getEventsFromEventManager($events)));
 
         $configListener->attach($events);
-        $this->assertEquals(4, count($this->getEventsFromEventManager($events)));
+        self::assertEquals(4, count($this->getEventsFromEventManager($events)));
 
         $configListener->detach($events);
-        $this->assertEquals(2, count($this->getEventsFromEventManager($events)));
+        self::assertEquals(2, count($this->getEventsFromEventManager($events)));
     }
 }

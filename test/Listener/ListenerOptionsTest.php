@@ -13,6 +13,8 @@ use Laminas\Config\Config;
 use Laminas\ModuleManager\Listener\ListenerOptions;
 use PHPUnit\Framework\TestCase;
 
+use function strstr;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\ListenerOptions
  */
@@ -28,14 +30,14 @@ class ListenerOptionsTest extends TestCase
             'config_glob_paths'       => ['glob', 'paths'],
             'config_static_paths'       => ['static', 'custom_paths'],
         ]);
-        $this->assertSame($options->getCacheDir(), __DIR__);
-        $this->assertTrue($options->getConfigCacheEnabled());
-        $this->assertNotNull(strstr($options->getConfigCacheFile(), __DIR__));
-        $this->assertNotNull(strstr($options->getConfigCacheFile(), '.php'));
-        $this->assertSame('foo', $options->getConfigCacheKey());
-        $this->assertSame(['module', 'paths'], $options->getModulePaths());
-        $this->assertSame(['glob', 'paths'], $options->getConfigGlobPaths());
-        $this->assertSame(['static', 'custom_paths'], $options->getConfigStaticPaths());
+        self::assertSame($options->getCacheDir(), __DIR__);
+        self::assertTrue($options->getConfigCacheEnabled());
+        self::assertNotNull(strstr($options->getConfigCacheFile(), __DIR__));
+        self::assertNotNull(strstr($options->getConfigCacheFile(), '.php'));
+        self::assertSame('foo', $options->getConfigCacheKey());
+        self::assertSame(['module', 'paths'], $options->getModulePaths());
+        self::assertSame(['glob', 'paths'], $options->getConfigGlobPaths());
+        self::assertSame(['static', 'custom_paths'], $options->getConfigStaticPaths());
     }
 
     /**
@@ -51,9 +53,9 @@ class ListenerOptionsTest extends TestCase
            'config_static_paths'     => ['static', 'custom_paths'],
         ]);
 
-        $this->assertEquals(__DIR__ . '/module-config-cache.php', $options->getConfigCacheFile());
+        self::assertEquals(__DIR__ . '/module-config-cache.php', $options->getConfigCacheFile());
         $options->setConfigCacheKey('foo');
-        $this->assertEquals(__DIR__ . '/module-config-cache.foo.php', $options->getConfigCacheFile());
+        self::assertEquals(__DIR__ . '/module-config-cache.foo.php', $options->getConfigCacheFile());
     }
 
     /**
@@ -69,9 +71,9 @@ class ListenerOptionsTest extends TestCase
            'config_static_paths'      => ['static', 'custom_paths'],
         ]);
 
-        $this->assertEquals(__DIR__ . '/module-classmap-cache.php', $options->getModuleMapCacheFile());
+        self::assertEquals(__DIR__ . '/module-classmap-cache.php', $options->getModuleMapCacheFile());
         $options->setModuleMapCacheKey('foo');
-        $this->assertEquals(__DIR__ . '/module-classmap-cache.foo.php', $options->getModuleMapCacheFile());
+        self::assertEquals(__DIR__ . '/module-classmap-cache.foo.php', $options->getModuleMapCacheFile());
     }
 
     public function testCanAccessKeysAsProperties()
@@ -84,20 +86,20 @@ class ListenerOptionsTest extends TestCase
             'config_glob_paths'       => ['glob', 'paths'],
             'config_static_paths'       => ['static', 'custom_paths'],
         ]);
-        $this->assertSame($options->cache_dir, __DIR__);
+        self::assertSame($options->cache_dir, __DIR__);
         $options->cache_dir = 'foo';
-        $this->assertSame($options->cache_dir, 'foo');
-        $this->assertTrue(isset($options->cache_dir));
+        self::assertSame($options->cache_dir, 'foo');
+        self::assertTrue(isset($options->cache_dir));
         unset($options->cache_dir);
-        $this->assertFalse(isset($options->cache_dir));
+        self::assertFalse(isset($options->cache_dir));
 
-        $this->assertTrue($options->config_cache_enabled);
+        self::assertTrue($options->config_cache_enabled);
         $options->config_cache_enabled = false;
-        $this->assertFalse($options->config_cache_enabled);
-        $this->assertEquals('foo', $options->config_cache_key);
-        $this->assertSame(['module', 'paths'], $options->module_paths);
-        $this->assertSame(['glob', 'paths'], $options->config_glob_paths);
-        $this->assertSame(['static', 'custom_paths'], $options->config_static_paths);
+        self::assertFalse($options->config_cache_enabled);
+        self::assertEquals('foo', $options->config_cache_key);
+        self::assertSame(['module', 'paths'], $options->module_paths);
+        self::assertSame(['glob', 'paths'], $options->config_glob_paths);
+        self::assertSame(['static', 'custom_paths'], $options->config_static_paths);
     }
 
     public function testSetModulePathsAcceptsConfigOrTraverable()
@@ -105,7 +107,7 @@ class ListenerOptionsTest extends TestCase
         $config = new Config([__DIR__]);
         $options = new ListenerOptions;
         $options->setModulePaths($config);
-        $this->assertSame($config, $options->getModulePaths());
+        self::assertSame($config, $options->getModulePaths());
     }
 
     public function testSetModulePathsThrowsInvalidArgumentException()
@@ -120,7 +122,7 @@ class ListenerOptionsTest extends TestCase
         $config = new Config([__DIR__]);
         $options = new ListenerOptions;
         $options->setConfigGlobPaths($config);
-        $this->assertSame($config, $options->getConfigGlobPaths());
+        self::assertSame($config, $options->getConfigGlobPaths());
     }
 
     public function testSetConfigGlobPathsThrowsInvalidArgumentException()
@@ -143,11 +145,11 @@ class ListenerOptionsTest extends TestCase
         $traversable = new Config($array);
         $options = new ListenerOptions;
 
-        $this->assertSame($options, $options->setExtraConfig($array));
-        $this->assertSame($array, $options->getExtraConfig());
+        self::assertSame($options, $options->setExtraConfig($array));
+        self::assertSame($array, $options->getExtraConfig());
 
-        $this->assertSame($options, $options->setExtraConfig($traversable));
-        $this->assertSame($traversable, $options->getExtraConfig());
+        self::assertSame($options, $options->setExtraConfig($traversable));
+        self::assertSame($traversable, $options->getExtraConfig());
     }
 
     public function testSetExtraConfigThrowsInvalidArgumentException()

@@ -19,6 +19,13 @@ use Laminas\Stdlib\ArrayUtils;
 use Laminas\Stdlib\Glob;
 use Traversable;
 
+use function file_exists;
+use function gettype;
+use function is_array;
+use function is_callable;
+use function is_string;
+use function sprintf;
+
 /**
  * Config listener
  */

@@ -12,6 +12,9 @@ use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
 use Laminas\ModuleManager\ModuleEvent;
 
+use function method_exists;
+use function sprintf;
+
 /**
  * Module resolver listener
  */

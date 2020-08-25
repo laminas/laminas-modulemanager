@@ -11,6 +11,10 @@ namespace Laminas\ModuleManager\Listener;
 use Generator;
 use Laminas\ModuleManager\ModuleEvent;
 
+use function class_exists;
+use function in_array;
+use function sprintf;
+
 /**
  * Module resolver listener
  */

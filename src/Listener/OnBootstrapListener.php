@@ -12,6 +12,8 @@ use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 
+use function method_exists;
+
 /**
  * Autoloader listener
  */

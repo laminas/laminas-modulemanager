@@ -12,6 +12,14 @@ use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerInterface;
 use Traversable;
 
+use function current;
+use function get_class;
+use function is_array;
+use function is_object;
+use function is_string;
+use function key;
+use function sprintf;
+
 /**
  * Module manager
  */

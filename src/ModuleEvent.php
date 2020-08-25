@@ -10,6 +10,11 @@ namespace Laminas\ModuleManager;
 
 use Laminas\EventManager\Event;
 
+use function gettype;
+use function is_object;
+use function is_string;
+use function sprintf;
+
 /**
  * Custom event for use with module manager
  * Composes Module objects

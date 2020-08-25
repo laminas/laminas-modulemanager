@@ -34,7 +34,7 @@ class OnBootstrapListenerTest extends AbstractListenerTestCase
      */
     protected $moduleManager;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $sharedEvents = new SharedEventManager();
         $events       = new EventManager($sharedEvents);
@@ -74,6 +74,6 @@ class OnBootstrapListenerTest extends AbstractListenerTestCase
         $moduleManager->loadModules();
         $this->application->bootstrap();
         $modules = $moduleManager->getLoadedModules();
-        $this->assertTrue($modules['ListenerTestModule']->onBootstrapCalled);
+        self::assertTrue($modules['ListenerTestModule']->onBootstrapCalled);
     }
 }
