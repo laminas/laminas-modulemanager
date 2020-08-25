@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.10.0 - TBD
+## 2.10.0 - 2020-08-25
 
 ### Added
 
@@ -27,28 +27,6 @@ All notable changes to this project will be documented in this file, in reverse 
   - laminas-eventmanger
   - laminas-servicemanager
   - laminas-stdlib
-
-### Fixed
-
-- Nothing.
-
-## 2.9.1 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
 
 ### Fixed
 
