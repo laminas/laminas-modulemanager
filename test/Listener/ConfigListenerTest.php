@@ -18,6 +18,9 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use LaminasTest\ModuleManager\SetUpCacheDirTrait;
 
+use function count;
+use function spl_object_hash;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\ConfigListener

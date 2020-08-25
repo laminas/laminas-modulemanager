@@ -13,6 +13,11 @@ use Laminas\ModuleManager\Listener\DefaultListenerAggregate;
 use Laminas\ModuleManager\Listener\ListenerOptions;
 use Laminas\ModuleManager\ModuleManager;
 
+use function count;
+use function get_class;
+use function is_array;
+use function realpath;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\DefaultListenerAggregate

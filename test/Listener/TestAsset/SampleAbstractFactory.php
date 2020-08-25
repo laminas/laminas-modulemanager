@@ -9,9 +9,9 @@
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
 use Interop\Container\ContainerInterface;
-use stdClass;
 use Laminas\ServiceManager\AbstractFactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use stdClass;
 
 class SampleAbstractFactory implements AbstractFactoryInterface
 {

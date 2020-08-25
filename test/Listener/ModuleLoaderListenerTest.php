@@ -16,6 +16,9 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use LaminasTest\ModuleManager\SetUpCacheDirTrait;
 
+use function file_put_contents;
+use function iterator_to_array;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\ModuleLoaderListener

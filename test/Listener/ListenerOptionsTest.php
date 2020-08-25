@@ -13,6 +13,8 @@ use Laminas\Config\Config;
 use Laminas\ModuleManager\Listener\ListenerOptions;
 use PHPUnit\Framework\TestCase;
 
+use function strstr;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\ListenerOptions
  */

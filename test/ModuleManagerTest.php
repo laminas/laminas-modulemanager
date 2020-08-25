@@ -20,6 +20,11 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use stdClass;
 
+use function array_values;
+use function count;
+use function realpath;
+use function var_export;
+
 /**
  * @covers \Laminas\ModuleManager\ModuleManager
  */

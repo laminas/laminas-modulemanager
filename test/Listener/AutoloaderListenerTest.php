@@ -13,6 +13,8 @@ use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 
+use function class_exists;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\AutoloaderListener

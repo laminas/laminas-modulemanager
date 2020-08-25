@@ -11,6 +11,8 @@ namespace Laminas\ModuleManager\Listener;
 use Laminas\ModuleManager\Feature\InitProviderInterface;
 use Laminas\ModuleManager\ModuleEvent;
 
+use function method_exists;
+
 /**
  * Init trigger
  */

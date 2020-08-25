@@ -22,6 +22,9 @@ use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
 
+use function array_keys;
+use function sprintf;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\ServiceListener
  */

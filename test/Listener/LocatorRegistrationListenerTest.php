@@ -20,6 +20,11 @@ use LaminasTest\ModuleManager\TestAsset\MockApplication;
 use ReflectionClass;
 use ReflectionProperty;
 
+use function array_keys;
+use function method_exists;
+use function str_replace;
+use function strtolower;
+
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\LocatorRegistrationListener
