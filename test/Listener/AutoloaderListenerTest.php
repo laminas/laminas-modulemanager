@@ -24,7 +24,7 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
      */
     protected $moduleManager;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->moduleManager = new ModuleManager([]);
         $events = $this->moduleManager->getEventManager();
@@ -38,8 +38,8 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
         $moduleManager->setModules(['ListenerTestModule']);
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
-        $this->assertTrue($modules['ListenerTestModule']->getAutoloaderConfigCalled);
-        $this->assertTrue(class_exists('Foo\Bar'));
+        self::assertTrue($modules['ListenerTestModule']->getAutoloaderConfigCalled);
+        self::assertTrue(class_exists('Foo\Bar'));
     }
     // @codingStandardsIgnoreStart
     public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod()
@@ -48,8 +48,8 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
         $moduleManager->setModules(['NotAutoloaderModule']);
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
-        $this->assertTrue($modules['NotAutoloaderModule']->getAutoloaderConfigCalled);
-        $this->assertTrue(class_exists('Foo\Bar'));
+        self::assertTrue($modules['NotAutoloaderModule']->getAutoloaderConfigCalled);
+        self::assertTrue(class_exists('Foo\Bar'));
     }
    // @codingStandardsIgnoreEnd
 }

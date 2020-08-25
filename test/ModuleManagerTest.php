@@ -33,7 +33,7 @@ class ModuleManagerTest extends TestCase
      */
     protected $defaultListeners;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->sharedEvents = new SharedEventManager;
         $this->events       = new EventManager($this->sharedEvents);
@@ -51,7 +51,7 @@ class ModuleManagerTest extends TestCase
         $moduleManager = new ModuleManager([]);
         $identifiers = $moduleManager->getEventManager()->getIdentifiers();
         $expected    = ['Laminas\ModuleManager\ModuleManager', 'module_manager'];
-        $this->assertEquals($expected, array_values($identifiers));
+        self::assertEquals($expected, array_values($identifiers));
     }
 
     public function testCanLoadSomeModule()
@@ -61,9 +61,9 @@ class ModuleManagerTest extends TestCase
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
-        $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
-        $this->assertSame($config->some, 'thing', var_export($config, true));
+        self::assertSame($config->some, 'thing', var_export($config, true));
     }
 
     public function testCanLoadMultipleModules()
@@ -73,16 +73,16 @@ class ModuleManagerTest extends TestCase
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
-        $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
-        $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
-        $this->assertInstanceOf('SubModule\Sub\Module', $loadedModules['SubModule\Sub']);
-        $this->assertInstanceOf('BarModule\Module', $moduleManager->getModule('BarModule'));
-        $this->assertInstanceOf('BazModule\Module', $moduleManager->getModule('BazModule'));
-        $this->assertInstanceOf('SubModule\Sub\Module', $moduleManager->getModule('SubModule\Sub'));
-        $this->assertNull($moduleManager->getModule('NotLoaded'));
+        self::assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
+        self::assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
+        self::assertInstanceOf('SubModule\Sub\Module', $loadedModules['SubModule\Sub']);
+        self::assertInstanceOf('BarModule\Module', $moduleManager->getModule('BarModule'));
+        self::assertInstanceOf('BazModule\Module', $moduleManager->getModule('BazModule'));
+        self::assertInstanceOf('SubModule\Sub\Module', $moduleManager->getModule('SubModule\Sub'));
+        self::assertNull($moduleManager->getModule('NotLoaded'));
         $config = $configListener->getMergedConfig();
-        $this->assertSame('foo', $config->bar);
-        $this->assertSame('bar', $config->baz);
+        self::assertSame('foo', $config->bar);
+        self::assertSame('bar', $config->baz);
     }
 
     public function testModuleLoadingBehavior()
@@ -90,13 +90,13 @@ class ModuleManagerTest extends TestCase
         $moduleManager = new ModuleManager(['BarModule'], $this->events);
         $this->defaultListeners->attach($this->events);
         $modules = $moduleManager->getLoadedModules();
-        $this->assertSame(0, count($modules));
+        self::assertSame(0, count($modules));
         $modules = $moduleManager->getLoadedModules(true);
-        $this->assertSame(1, count($modules));
+        self::assertSame(1, count($modules));
         $moduleManager->loadModules(); // should not cause any problems
         $moduleManager->loadModule('BarModule'); // should not cause any problems
         $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
-        $this->assertSame(1, count($modules));
+        self::assertSame(1, count($modules));
     }
 
     public function testConstructorThrowsInvalidArgumentException()
@@ -120,8 +120,8 @@ class ModuleManagerTest extends TestCase
         $moduleManager->loadModules();
 
         $config = $configListener->getMergedConfig();
-        $this->assertTrue(isset($config['loaded']));
-        $this->assertSame('oh, yeah baby!', $config['loaded']);
+        self::assertTrue(isset($config['loaded']));
+        self::assertSame('oh, yeah baby!', $config['loaded']);
     }
 
     /**
@@ -135,8 +135,8 @@ class ModuleManagerTest extends TestCase
         $moduleManager->loadModules();
 
         $config = $configListener->getMergedConfig();
-        $this->assertTrue(isset($config['baz']));
-        $this->assertSame('bar', $config['baz']);
+        self::assertTrue(isset($config['baz']));
+        self::assertSame('bar', $config['baz']);
     }
 
     /**
@@ -152,11 +152,11 @@ class ModuleManagerTest extends TestCase
 
         $config = $configListener->getMergedConfig();
 
-        $this->assertTrue(isset($config['bar']));
-        $this->assertSame('bar', $config['bar']);
+        self::assertTrue(isset($config['bar']));
+        self::assertSame('bar', $config['bar']);
 
-        $this->assertTrue(isset($config['foo']));
-        $this->assertSame('bar', $config['foo']);
+        self::assertTrue(isset($config['foo']));
+        self::assertSame('bar', $config['foo']);
     }
 
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()
@@ -171,9 +171,9 @@ class ModuleManagerTest extends TestCase
 
         $moduleManager->loadModules();
 
-        $this->assertTrue(isset($test->modules));
-        $this->assertArrayHasKey('BarModule', $test->modules);
-        $this->assertInstanceOf('BarModule\Module', $test->modules['BarModule']);
+        self::assertTrue(isset($test->modules));
+        self::assertArrayHasKey('BarModule', $test->modules);
+        self::assertInstanceOf('BarModule\Module', $test->modules['BarModule']);
     }
 
     public function testCanLoadSomeObjectModule()
@@ -188,9 +188,9 @@ class ModuleManagerTest extends TestCase
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
-        $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
-        $this->assertSame($config->some, 'thing');
+        self::assertSame($config->some, 'thing');
     }
 
     public function testCanLoadMultipleModulesObjectWithString()
@@ -201,9 +201,9 @@ class ModuleManagerTest extends TestCase
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
-        $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
-        $this->assertSame($config->some, 'thing');
+        self::assertSame($config->some, 'thing');
     }
 
     public function testCanNotLoadSomeObjectModuleWithoutIdentifier()
@@ -223,15 +223,15 @@ class ModuleManagerTest extends TestCase
 
         $moduleManager->setEvent($event);
 
-        $this->assertSame($event, $moduleManager->getEvent());
-        $this->assertSame($moduleManager, $event->getTarget());
+        self::assertSame($event, $moduleManager->getEvent());
+        self::assertSame($moduleManager, $event->getTarget());
     }
 
     public function testGetEventWillLazyLoadOneWithTargetSetToModuleManager()
     {
         $moduleManager = new ModuleManager([]);
         $event = $moduleManager->getEvent();
-        $this->assertInstanceOf(ModuleEvent::class, $event);
-        $this->assertSame($moduleManager, $event->getTarget());
+        self::assertInstanceOf(ModuleEvent::class, $event);
+        self::assertSame($moduleManager, $event->getTarget());
     }
 }

@@ -25,7 +25,7 @@
         }
     },
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.3",
         "laminas/laminas-config": "^3.1 || ^2.6",
         "laminas/laminas-eventmanager": "^3.2 || ^2.6.3",
         "laminas/laminas-stdlib": "^3.1 || ^2.7",
@@ -39,7 +39,7 @@
         "laminas/laminas-loader": "^2.5",
         "laminas/laminas-mvc": "^3.0 || ^2.7",
         "laminas/laminas-servicemanager": "^3.0.3 || ^2.7.5",
-        "phpunit/phpunit": "^5.7.27 || ^6.5.14 || ^7.5.16"
+        "phpunit/phpunit": "^9.3.7"
     },
     "suggest": {
         "laminas/laminas-console": "Laminas\\Console component",
