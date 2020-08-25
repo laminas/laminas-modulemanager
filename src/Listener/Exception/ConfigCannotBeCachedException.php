@@ -13,7 +13,7 @@ use RuntimeException;
 
 use function sprintf;
 
-class ConfigCannotBeCachedException extends RuntimeException
+final class ConfigCannotBeCachedException extends RuntimeException
 {
     /**
      * @param ExportException $exportException
