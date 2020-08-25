@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#9](https://github.com/laminas/laminas-modulemanager/pull/9) adds [webimpress/safe-writer](https://github.com/webimpress/safe-writer) for saving cache files safely to avoid race conditions when the same file is written multiple times in a short time period. 
 
 ### Changed
 
