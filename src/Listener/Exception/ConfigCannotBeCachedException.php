@@ -6,7 +6,7 @@
  * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\ModuleManager\Exception;
+namespace Laminas\ModuleManager\Listener\Exception;
 
 use Brick\VarExporter\ExportException;
 use RuntimeException;

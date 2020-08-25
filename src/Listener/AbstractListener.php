@@ -10,7 +10,7 @@ namespace Laminas\ModuleManager\Listener;
 
 use Brick\VarExporter\ExportException;
 use Brick\VarExporter\VarExporter;
-use Laminas\ModuleManager\Exception\ConfigCannotBeCachedException;
+use Laminas\ModuleManager\Listener\Exception\ConfigCannotBeCachedException;
 use Webimpress\SafeWriter\FileWriter;
 
 /**
