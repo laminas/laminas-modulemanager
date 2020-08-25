@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#15](https://github.com/laminas/laminas-modulemanager/pull/15) adds support for caching closures when caching configuration.
 
+- [#16](https://github.com/laminas/laminas-modulemanager/pull/16) adds support for the upcoming PHP 8.0 release.
+
 ### Changed
 
 - Nothing.
@@ -19,6 +21,12 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Removed
 
 - [#8](https://github.com/laminas/laminas-modulemanager/pull/8) removes support for PHP versions prior to PHP 7.3.
+
+- [#16](https://github.com/laminas/laminas-modulemanager/pull/16) removes support for v2 releases (deprecated) of the following components:
+  - laminas-config
+  - laminas-eventmanger
+  - laminas-servicemanager
+  - laminas-stdlib
 
 ### Fixed
 
