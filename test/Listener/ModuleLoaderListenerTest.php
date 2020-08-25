@@ -54,15 +54,15 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         $events        = $moduleManager->getEventManager();
 
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
-        $this->assertCount(1, $listeners);
+        self::assertCount(1, $listeners);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
-        $this->assertCount(0, $listeners);
+        self::assertCount(0, $listeners);
 
         $moduleLoaderListener->attach($events);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
-        $this->assertCount(2, $listeners);
+        self::assertCount(2, $listeners);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
-        $this->assertCount(1, $listeners);
+        self::assertCount(1, $listeners);
     }
 
     public function testModuleLoaderListenerFunctionsAsAggregateListenerDisabledCache()
@@ -77,15 +77,15 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         $events        = $moduleManager->getEventManager();
 
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
-        $this->assertCount(1, $listeners);
+        self::assertCount(1, $listeners);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
-        $this->assertCount(0, $listeners);
+        self::assertCount(0, $listeners);
 
         $moduleLoaderListener->attach($events);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
-        $this->assertCount(2, $listeners);
+        self::assertCount(2, $listeners);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
-        $this->assertCount(0, $listeners);
+        self::assertCount(0, $listeners);
     }
 
     public function testModuleLoaderListenerFunctionsAsAggregateListenerHasCache()
@@ -104,14 +104,14 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         $events        = $moduleManager->getEventManager();
 
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
-        $this->assertCount(1, $listeners);
+        self::assertCount(1, $listeners);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
-        $this->assertCount(0, $listeners);
+        self::assertCount(0, $listeners);
 
         $moduleLoaderListener->attach($events);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
-        $this->assertCount(2, $listeners);
+        self::assertCount(2, $listeners);
         $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
-        $this->assertCount(0, $listeners);
+        self::assertCount(0, $listeners);
     }
 }

@@ -132,7 +132,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $sharedInstance1 = $locator->get('ListenerTestModule\Module');
         $sharedInstance2 = $locator->get(ModuleManager::class);
 
-        $this->assertInstanceOf('ListenerTestModule\Module', $sharedInstance1);
+        self::assertInstanceOf('ListenerTestModule\Module', $sharedInstance1);
         $foo     = false;
         $message = '';
         try {
@@ -146,10 +146,10 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         if (! $foo) {
             $this->fail($message);
         }
-        $this->assertSame($module, $foo->module);
+        self::assertSame($module, $foo->module);
 
-        $this->assertInstanceOf(ModuleManager::class, $sharedInstance2);
-        $this->assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
+        self::assertInstanceOf(ModuleManager::class, $sharedInstance2);
+        self::assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
     }
 
     public function testNoDuplicateServicesAreDefinedForModuleManager()
@@ -166,10 +166,10 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $aliases = $registeredServices['aliases'];
         $instances = $registeredServices['instances'];
 
-        $this->assertContains($this->normalizeServiceNameForContainer(ModuleManager::class, $container), $aliases);
-        $this->assertNotContains($this->normalizeServiceNameForContainer('ModuleManager', $container), $aliases);
+        self::assertContains($this->normalizeServiceNameForContainer(ModuleManager::class, $container), $aliases);
+        self::assertNotContains($this->normalizeServiceNameForContainer('ModuleManager', $container), $aliases);
 
-        $this->assertContains($this->normalizeServiceNameForContainer('ModuleManager', $container), $instances);
-        $this->assertNotContains($this->normalizeServiceNameForContainer(ModuleManager::class, $container), $instances);
+        self::assertContains($this->normalizeServiceNameForContainer('ModuleManager', $container), $instances);
+        self::assertNotContains($this->normalizeServiceNameForContainer(ModuleManager::class, $container), $instances);
     }
 }

@@ -64,18 +64,18 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
             ],
         ];
         foreach ($expectedEvents as $event => $expectedListeners) {
-            $this->assertContains($event, $events);
+            self::assertContains($event, $events);
             $count = 0;
             foreach ($this->getListenersForEvent($event, $moduleManager->getEventManager()) as $listener) {
                 if (is_array($listener)) {
                     $listener = $listener[0];
                 }
                 $listenerClass = get_class($listener);
-                $this->assertContains($listenerClass, $expectedListeners);
+                self::assertContains($listenerClass, $expectedListeners);
                 $count += 1;
             }
 
-            $this->assertSame(count($expectedListeners), $count);
+            self::assertSame(count($expectedListeners), $count);
         }
     }
 
@@ -85,13 +85,13 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
         $moduleManager     = new ModuleManager(['ListenerTestModule']);
         $events            = $moduleManager->getEventManager();
 
-        $this->assertEquals(1, count($this->getEventsFromEventManager($events)));
+        self::assertEquals(1, count($this->getEventsFromEventManager($events)));
 
         $listenerAggregate->attach($events);
-        $this->assertEquals(4, count($this->getEventsFromEventManager($events)));
+        self::assertEquals(4, count($this->getEventsFromEventManager($events)));
 
         $listenerAggregate->detach($events);
-        $this->assertEquals(1, count($this->getEventsFromEventManager($events)));
+        self::assertEquals(1, count($this->getEventsFromEventManager($events)));
     }
 
     public function testDefaultListenerAggregateSkipsAutoloadingListenersIfLaminasLoaderIsNotUsed()
@@ -123,17 +123,17 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
             ],
         ];
         foreach ($expectedEvents as $event => $expectedListeners) {
-            $this->assertContains($event, $events);
+            self::assertContains($event, $events);
             $count = 0;
             foreach ($this->getListenersForEvent($event, $eventManager) as $listener) {
                 if (is_array($listener)) {
                     $listener = $listener[0];
                 }
                 $listenerClass = get_class($listener);
-                $this->assertContains($listenerClass, $expectedListeners);
+                self::assertContains($listenerClass, $expectedListeners);
                 $count += 1;
             }
-            $this->assertSame(count($expectedListeners), $count);
+            self::assertSame(count($expectedListeners), $count);
         }
     }
 }

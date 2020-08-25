@@ -41,6 +41,6 @@ class InitTriggerTest extends AbstractListenerTestCase
         $moduleManager->setModules(['ListenerTestModule']);
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
-        $this->assertTrue($modules['ListenerTestModule']->initCalled);
+        self::assertTrue($modules['ListenerTestModule']->initCalled);
     }
 }
