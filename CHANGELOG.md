@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#15](https://github.com/laminas/laminas-modulemanager/pull/15) adds support for caching closures when caching configuration.
 
 ### Changed
 

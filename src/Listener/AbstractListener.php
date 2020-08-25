@@ -8,6 +8,9 @@
 
 namespace Laminas\ModuleManager\Listener;
 
+use Brick\VarExporter\ExportException;
+use Brick\VarExporter\VarExporter;
+use Laminas\ModuleManager\Listener\Exception\ConfigCannotBeCachedException;
 use Webimpress\SafeWriter\FileWriter;
 
 /**
@@ -62,7 +65,15 @@ abstract class AbstractListener
      */
     protected function writeArrayToFile($filePath, $array)
     {
-        $content = "<?php\nreturn " . var_export($array, true) . ';';
+        try {
+            $content = "<?php\n" . VarExporter::export(
+                $array,
+                VarExporter::ADD_RETURN | VarExporter::CLOSURE_SNAPSHOT_USES
+            ) . ';';
+        } catch (ExportException $e) {
+            throw ConfigCannotBeCachedException::fromExporterException($e);
+        }
+
         FileWriter::writeFile($filePath, $content);
 
         return $this;
