@@ -69,7 +69,7 @@ abstract class AbstractListener
             $content = "<?php\n" . VarExporter::export(
                 $array,
                 VarExporter::ADD_RETURN | VarExporter::CLOSURE_SNAPSHOT_USES
-            ) . ';';
+            );
         } catch (ExportException $e) {
             throw ConfigCannotBeCachedException::fromExporterException($e);
         }
