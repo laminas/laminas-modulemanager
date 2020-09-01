@@ -2,28 +2,6 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.11.0 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
 ## 2.10.1 - TBD
 
 ### Added
@@ -44,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#17](https://github.com/laminas/laminas-modulemanager/pull/17) removes an extraneous ";" character from generated cache files.
 
 ## 2.10.0 - 2020-08-25
 
