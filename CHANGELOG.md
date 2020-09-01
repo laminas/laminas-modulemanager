@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.10.1 - TBD
+## 2.10.1 - 2020-09-01
 
 ### Added
 
@@ -24,6 +24,22 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#17](https://github.com/laminas/laminas-modulemanager/pull/17) removes an extraneous ";" character from generated cache files.
 
+
+-----
+
+### Release Notes for [2.10.1](https://github.com/laminas/laminas-modulemanager/milestone/4)
+
+next bugfix release (mini)
+
+### 2.10.1
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
+
+#### Bug
+
+ - [17: Fix superfluous traling semicolon in cached config](https://github.com/laminas/laminas-modulemanager/pull/17) thanks to @bcremer
 ## 2.10.0 - 2020-08-25
 
 ### Added
