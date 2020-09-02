@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Modular application system for laminas-mvc applications">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-modulemanager/intro/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Introduction - laminas-modulemanager - Laminas Docs</title>
+    <title>laminas-modulemanager - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -115,7 +114,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-modulemanager</a>
+            <a href="../.">laminas-modulemanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -129,8 +128,8 @@
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Introduction</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -238,164 +237,21 @@
                 
                 
                     
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#the-autoload_php-files" class="toc__link nav-link">The autoload_*.php Files</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
                 
 
                 
-                    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
-            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/mvc/">MVC</a></li>
 
-            
-                <li class="breadcrumb-item"><a href="..">laminas-modulemanager</a></li>
-
-                
-
-                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
-            
-        
-    </ol>
-</nav>
-
-
-
-
-
-
-    
-    
-
-    <h1 id="introduction-to-the-module-system">Introduction to the Module System</h1>
-<p>Laminas.0 introduced a new and powerful approach to modules. This new
-module system is designed with flexibility, simplicity, and re-usability in
-mind. A module may contain just about anything: PHP code, including MVC
-functionality; library code; view scripts; and/or public assets such as images,
-CSS, and JavaScript. The possibilities are endless.</p>
+<h1 class="content__title">404</h1>
 <blockquote>
-<h3>Event-based system</h3>
-<p>The module system in Laminas has been designed to be a generic and powerful foundation from which
-developers and other projects can build their own module or plugin systems.
-For a better understanding of the event-driven concepts behind the Laminas module system, it may be
-helpful to read the <a href="https://docs.laminas.dev/laminas-eventmanager/">EventManager documentation</a>.</p>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
 </blockquote>
-<p>The module system is made up of the following:</p>
-<ul>
-<li><a href="https://docs.laminas.dev/laminas-loader/module-autoloader/">The Module Autoloader</a> -
-  <code>Laminas\Loader\ModuleAutoloader</code> is a specialized autoloader that is responsible
-  for the locating and loading of modules' <code>Module</code> classes from a variety of
-  sources.</li>
-<li><a href="../module-manager/">The Module Manager</a> - <code>Laminas\ModuleManager\ModuleManager</code>
-  takes an array of module names and fires a sequence of events for each one,
-  allowing the behavior of the module system to be defined entirely by the
-  listeners which are attached to the module manager.</li>
-<li><strong>ModuleManager Listeners</strong> - Event listeners can be attached to the module
-  manager's various events. These listeners can do everything from resolving and
-  loading modules to performing complex initialization tasks and introspection
-  into each returned module object.</li>
-</ul>
-<blockquote>
-<h3>Modules are PHP namespaces</h3>
-<p>The name of a module in a Laminas application is a
-<a href="http://php.net/namespaces">PHP namespace</a>, and must follow all of the same
-rules for naming.</p>
-</blockquote>
-<p>The recommended structure for an MVC-oriented Laminas module is as follows:</p>
-<pre class="highlight"><code class="language-text">module_root/
-    Module.php
-    autoload_classmap.php
-    autoload_function.php
-    autoload_register.php
-    config/
-        module.config.php
-    public/
-        images/
-        css/
-        js/
-    src/
-        &lt;module_namespace&gt;/
-            &lt;code files&gt;
-    test/
-        phpunit.xml
-        bootstrap.php
-        &lt;module_namespace&gt;/
-            &lt;test code files&gt;
-    view/
-        &lt;dir-named-after-module-namespace&gt;/
-            &lt;dir-named-after-a-controller&gt;/
-                &lt;.phtml files&gt;</code></pre>
 
-<h2 id="the-autoload_php-files">The autoload_*.php Files</h2>
-<p>The three <code>autoload_*.php</code> files are not required, but recommended. They provide the following:</p>
-<ul>
-<li><code>autoload_classmap.php</code> should return an array classmap of class name/filename
-  pairs (with the filenames resolved via the <code>__DIR__</code> magic constant).</li>
-<li><code>autoload_function.php</code> should return a PHP callback that can be passed to
-  <code>spl_autoload_register()</code>. Typically, this callback should utilize the map
-  returned by <code>autoload_classmap.php</code>.</li>
-<li><code>autoload_register.php</code> should register a PHP callback (typically that
-  returned by <code>autoload_function.php</code> with <code>spl_autoload_register()</code>.</li>
-</ul>
-<p>The purpose of these three files is to provide reasonable default mechanisms for
-autoloading the classes contained in the module, thus providing a trivial way to
-consume the module without requiring laminas-modulemanager` (e.g., for use outside
-a Laminas application).</p>
+<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="..">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../module-manager/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-modulemanager/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 <div class="donation-banner">
@@ -418,7 +274,7 @@ a Laminas application).</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-modulemanager</a>
+            <a href="../.">laminas-modulemanager</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -432,8 +288,8 @@ a Laminas application).</p>
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Introduction</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
