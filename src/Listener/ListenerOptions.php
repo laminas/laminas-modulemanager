@@ -25,11 +25,6 @@ class ListenerOptions extends AbstractOptions
     /**
      * @var array
      */
-    protected $modulePaths = [];
-
-    /**
-     * @var array
-     */
     protected $configGlobPaths = [];
 
     /**
@@ -71,47 +66,6 @@ class ListenerOptions extends AbstractOptions
      * @var string
      */
     protected $moduleMapCacheKey;
-
-    /**
-     * @var bool
-     */
-    protected $useLaminasLoader = true;
-
-    /**
-     * Get an array of paths where modules reside
-     *
-     * @return array
-     */
-    public function getModulePaths()
-    {
-        return $this->modulePaths;
-    }
-
-    /**
-     * Set an array of paths where modules reside
-     *
-     * @param  array|Traversable $modulePaths
-     * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
-     */
-    public function setModulePaths($modulePaths)
-    {
-        if (! is_array($modulePaths) && ! $modulePaths instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(
-                sprintf(
-                    'Argument passed to %s::%s() must be an array, '
-                    . 'implement the Traversable interface, or be an '
-                    . 'instance of Laminas\Config\Config. %s given.',
-                    __CLASS__,
-                    __METHOD__,
-                    gettype($modulePaths)
-                )
-            );
-        }
-
-        $this->modulePaths = $modulePaths;
-        return $this;
-    }
 
     /**
      * Get the glob patterns to load additional config files
@@ -426,21 +380,5 @@ class ListenerOptions extends AbstractOptions
         $path = rtrim($path, '/');
         $path = rtrim($path, '\\');
         return $path;
-    }
-
-    /**
-     * @deprecated Use self::useLaminasLoader instead
-     */
-    public function useZendLoader()
-    {
-        return $this->useLaminasLoader(...func_get_args());
-    }
-
-    /**
-     * @deprecated Use self::setUseLaminasLoader instead
-     */
-    public function setUseZendLoader($flag)
-    {
-        return $this->setUseLaminasLoader(...func_get_args());
     }
 }
