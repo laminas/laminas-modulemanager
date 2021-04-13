@@ -1,7 +1,6 @@
 # laminas-modulemanager
 
-[![Build Status](https://travis-ci.com/laminas/laminas-modulemanager.svg?branch=master)](https://travis-ci.com/laminas/laminas-modulemanager)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-modulemanager/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-modulemanager?branch=master)
+[![Build Status](https://github.com/laminas/laminas-modulemanager/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-modulemanager/actions?query=workflow%3A"Continuous+Integration")
 
 `Laminas\ModuleManager` introduces a new and powerful approach to modules. This new
 module system is designed with flexibility, simplicity, and re-usability in mind.
