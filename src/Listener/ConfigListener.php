@@ -180,7 +180,8 @@ class ConfigListener extends AbstractListener implements
             && false === $this->skipConfig
         ) {
             $configFile = $this->getOptions()->getConfigCacheFile();
-            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
+            $configFileMode = $this->getOptions()->getConfigCacheFileMode();
+            $this->writeArrayToFile($configFile, $this->getMergedConfig(false), $configFileMode);
         }
 
         return $this;
