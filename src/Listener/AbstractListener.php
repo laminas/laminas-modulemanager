@@ -61,9 +61,10 @@ abstract class AbstractListener
      *
      * @param  string $filePath
      * @param  array $array
+     * @param  int $fileMode
      * @return AbstractListener
      */
-    protected function writeArrayToFile($filePath, $array)
+    protected function writeArrayToFile($filePath, $array, $fileMode = 0666)
     {
         try {
             $content = "<?php\n" . VarExporter::export(
@@ -74,7 +75,7 @@ abstract class AbstractListener
             throw ConfigCannotBeCachedException::fromExporterException($e);
         }
 
-        FileWriter::writeFile($filePath, $content);
+        FileWriter::writeFile($filePath, $content, $fileMode);
 
         return $this;
     }

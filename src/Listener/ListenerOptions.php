@@ -53,6 +53,11 @@ class ListenerOptions extends AbstractOptions
     protected $configCacheKey;
 
     /**
+     * @var int
+     */
+    protected $configCacheFileMode = 0666;
+
+    /**
      * @var string|null
      */
     protected $cacheDir;
@@ -281,6 +286,28 @@ class ListenerOptions extends AbstractOptions
         }
 
         return $this->getCacheDir() . '/module-config-cache.php';
+    }
+
+    /**
+     * Get permission mode used to create the cache file name
+     *
+     * @return int
+     */
+    public function getConfigCacheFileMode()
+    {
+        return $this->configCacheFileMode;
+    }
+
+    /**
+     * Set permission mode used to create the cache file name
+     *
+     * @param int $configCacheFileMode
+     * @return ListenerOptions
+     */
+    public function setConfigCacheFileMode($configCacheFileMode)
+    {
+        $this->configCacheFileMode = $configCacheFileMode;
+        return $this;
     }
 
     /**

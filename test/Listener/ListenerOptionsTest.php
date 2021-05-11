@@ -26,6 +26,7 @@ class ListenerOptionsTest extends TestCase
             'cache_dir'               => __DIR__,
             'config_cache_enabled'    => true,
             'config_cache_key'        => 'foo',
+            'config_cache_file_mode'  => 0123,
             'module_paths'            => ['module', 'paths'],
             'config_glob_paths'       => ['glob', 'paths'],
             'config_static_paths'       => ['static', 'custom_paths'],
@@ -35,6 +36,7 @@ class ListenerOptionsTest extends TestCase
         self::assertNotNull(strstr($options->getConfigCacheFile(), __DIR__));
         self::assertNotNull(strstr($options->getConfigCacheFile(), '.php'));
         self::assertSame('foo', $options->getConfigCacheKey());
+        self::assertSame(0123, $options->getConfigCacheFileMode());
         self::assertSame(['module', 'paths'], $options->getModulePaths());
         self::assertSame(['glob', 'paths'], $options->getConfigGlobPaths());
         self::assertSame(['static', 'custom_paths'], $options->getConfigStaticPaths());
