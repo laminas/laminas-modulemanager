@@ -1,25 +1,12 @@
 {
     "name": "laminas/laminas-modulemanager",
     "description": "Modular application system for laminas-mvc applications",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "modulemanager"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-modulemanager/",
-        "issues": "https://github.com/laminas/laminas-modulemanager/issues",
-        "source": "https://github.com/laminas/laminas-modulemanager",
-        "rss": "https://github.com/laminas/laminas-modulemanager/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ^8.0",
         "brick/varexporter": "^0.3.2",
@@ -28,6 +15,9 @@
         "laminas/laminas-stdlib": "^3.3",
         "laminas/laminas-zendframework-bridge": "^1.1",
         "webimpress/safe-writer": "^1.0.2 || ^2.1"
+    },
+    "replace": {
+        "zendframework/zend-modulemanager": "^2.8.4"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
@@ -44,21 +34,25 @@
         "laminas/laminas-mvc": "Laminas\\Mvc component",
         "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {},
     "autoload": {
         "psr-4": {
             "Laminas\\ModuleManager\\": "src/"
         }
     },
     "autoload-dev": {
-        "files": [
-            "test/autoload.php",
-            "test/TestAsset/ModuleAsClass.php"
-        ],
         "psr-4": {
             "ListenerTestModule\\": "test/TestAsset/ListenerTestModule/",
             "ModuleAsClass\\": "test/TestAsset/ModuleAsClass/",
             "LaminasTest\\ModuleManager\\": "test/"
-        }
+        },
+        "files": [
+            "test/autoload.php",
+            "test/TestAsset/ModuleAsClass.php"
+        ]
     },
     "scripts": {
         "check": [
@@ -70,7 +64,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-modulemanager": "^2.8.4"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-modulemanager/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-modulemanager",
+        "docs": "https://docs.laminas.dev/laminas-modulemanager/",
+        "rss": "https://github.com/laminas/laminas-modulemanager/releases.atom"
     }
 }
