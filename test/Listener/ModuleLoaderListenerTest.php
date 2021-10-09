@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
@@ -28,17 +24,15 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
     use EventListenerIntrospectionTrait;
     use SetUpCacheDirTrait;
 
-    /**
-     * @var ModuleManager
-     */
+    /** @var ModuleManager */
     protected $moduleManager;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->moduleManager = new ModuleManager([]);
         $this->moduleManager->getEventManager()->attach(
             ModuleEvent::EVENT_LOAD_MODULE_RESOLVE,
-            new ModuleResolverListener,
+            new ModuleResolverListener(),
             1000
         );
     }
@@ -56,15 +50,15 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         $moduleManager = $this->moduleManager;
         $events        = $moduleManager->getEventManager();
 
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
         self::assertCount(1, $listeners);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
         self::assertCount(0, $listeners);
 
         $moduleLoaderListener->attach($events);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
         self::assertCount(2, $listeners);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
         self::assertCount(1, $listeners);
     }
 
@@ -79,15 +73,15 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         $moduleManager = $this->moduleManager;
         $events        = $moduleManager->getEventManager();
 
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
         self::assertCount(1, $listeners);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
         self::assertCount(0, $listeners);
 
         $moduleLoaderListener->attach($events);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
         self::assertCount(2, $listeners);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
         self::assertCount(0, $listeners);
     }
 
@@ -106,15 +100,15 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         $moduleManager = $this->moduleManager;
         $events        = $moduleManager->getEventManager();
 
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
         self::assertCount(1, $listeners);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
         self::assertCount(0, $listeners);
 
         $moduleLoaderListener->attach($events);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES, $events));
         self::assertCount(2, $listeners);
-        $listeners     = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
+        $listeners = iterator_to_array($this->getListenersForEvent(ModuleEvent::EVENT_LOAD_MODULES_POST, $events));
         self::assertCount(0, $listeners);
     }
 }

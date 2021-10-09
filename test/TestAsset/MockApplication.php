@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\TestAsset;
 
@@ -14,9 +10,13 @@ use Laminas\Mvc\MvcEvent;
 
 class MockApplication implements ApplicationInterface
 {
+    /** @var EventManagerInterface */
     public $events;
+    /** @var mixed */
     public $request;
+    /** @var mixed */
     public $response;
+    /** @var ServiceLocatorInterface */
     public $serviceManager;
 
     public function setEventManager(EventManagerInterface $events)
@@ -24,47 +24,38 @@ class MockApplication implements ApplicationInterface
         $this->events = $events;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function getEventManager()
     {
         return $this->events;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function getServiceManager()
     {
         return $this->serviceManager;
     }
 
-    public function setServiceManager($serviceManager)
+    /** @param ServiceLocatorInterface $serviceManager */
+    public function setServiceManager($serviceManager): self
     {
         $this->serviceManager = $serviceManager;
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function getRequest()
     {
         return $this->request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function getResponse()
     {
         return $this->response;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function run()
     {
         return $this->response;

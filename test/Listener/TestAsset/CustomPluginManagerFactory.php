@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
@@ -14,20 +10,17 @@ use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class CustomPluginManagerFactory implements FactoryInterface
 {
-    /**
-     * @var null|array
-     */
+    /** @var null|array */
     protected $creationOptions;
 
     /**
      * Create and return an instance of the CustomPluginManager (v3)
      *
-     * @param ContainerInterface $container
      * @param string $name
      * @param null|array $options
      * @return CustomPluginManager
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $options = $options ?: [];
         return new CustomPluginManager($container, $options);
@@ -36,7 +29,6 @@ class CustomPluginManagerFactory implements FactoryInterface
     /**
      * Create and return an instance of the CustomPluginManager (v2)
      *
-     * @param ServiceLocatorInterface $container
      * @return CustomPluginManager
      */
     public function createService(ServiceLocatorInterface $container)

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
@@ -13,8 +9,10 @@ use Laminas\ServiceManager\Exception\InvalidServiceException;
 
 class CustomPluginManager extends AbstractPluginManager
 {
+    /** @var string */
     protected $instanceOf = CustomPluginInterface::class;
 
+    /** @param mixed $plugin */
     public function validate($plugin)
     {
         if (! $plugin instanceof $this->instanceOf) {
@@ -22,6 +20,7 @@ class CustomPluginManager extends AbstractPluginManager
         }
     }
 
+    /** @param mixed $plugin */
     public function validatePlugin($plugin)
     {
         $this->validate($plugin);

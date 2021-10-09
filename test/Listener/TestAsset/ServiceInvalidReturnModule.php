@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
@@ -12,8 +8,8 @@ use stdClass;
 
 class ServiceInvalidReturnModule
 {
-    public function getServiceConfiguration()
+    public function getServiceConfiguration(): stdClass
     {
-        return new stdClass;
+        return new stdClass();
     }
 }

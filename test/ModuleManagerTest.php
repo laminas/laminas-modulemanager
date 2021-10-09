@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager;
 
@@ -18,7 +14,9 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use SomeModule\Module;
 use stdClass;
+use SubModule\Sub\Module as SubModule;
 
 use function array_values;
 use function count;
@@ -33,15 +31,13 @@ class ModuleManagerTest extends TestCase
     use ResetAutoloadFunctionsTrait;
     use SetUpCacheDirTrait;
 
-    /**
-     * @var DefaultListenerAggregate
-     */
+    /** @var DefaultListenerAggregate */
     protected $defaultListeners;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $this->sharedEvents = new SharedEventManager;
-        $this->events       = new EventManager($this->sharedEvents);
+        $this->sharedEvents     = new SharedEventManager();
+        $this->events           = new EventManager($this->sharedEvents);
         $this->defaultListeners = new DefaultListenerAggregate(
             new ListenerOptions([
                 'module_paths' => [
@@ -54,8 +50,8 @@ class ModuleManagerTest extends TestCase
     public function testEventManagerIdentifiers()
     {
         $moduleManager = new ModuleManager([]);
-        $identifiers = $moduleManager->getEventManager()->getIdentifiers();
-        $expected    = ['Laminas\ModuleManager\ModuleManager', 'module_manager'];
+        $identifiers   = $moduleManager->getEventManager()->getIdentifiers();
+        $expected      = [ModuleManager::class, 'module_manager'];
         self::assertEquals($expected, array_values($identifiers));
     }
 
@@ -107,7 +103,7 @@ class ModuleManagerTest extends TestCase
     public function testConstructorThrowsInvalidArgumentException()
     {
         $this->expectException(InvalidArgumentException::class);
-        $moduleManager = new ModuleManager('stringShouldBeArray', $this->events);
+        new ModuleManager('stringShouldBeArray', $this->events);
     }
 
     public function testNotFoundModuleThrowsRuntimeException()
@@ -129,9 +125,7 @@ class ModuleManagerTest extends TestCase
         self::assertSame('oh, yeah baby!', $config['loaded']);
     }
 
-    /**
-     * @group 5651
-     */
+    /** @group 5651 */
     public function testLoadingModuleFromAnotherModuleDemonstratesAppropriateSideEffects()
     {
         $configListener = $this->defaultListeners->getConfigListener();
@@ -166,7 +160,7 @@ class ModuleManagerTest extends TestCase
 
     public function testModuleIsMarkedAsLoadedWhenLoadModuleEventIsTriggered()
     {
-        $test          = new stdClass;
+        $test          = new stdClass();
         $moduleManager = new ModuleManager(['BarModule'], $this->events);
         $events        = $this->events;
         $this->defaultListeners->attach($events);
@@ -187,8 +181,8 @@ class ModuleManagerTest extends TestCase
         require_once __DIR__ . '/TestAsset/SubModule/Sub/Module.php';
         $configListener = $this->defaultListeners->getConfigListener();
         $moduleManager  = new ModuleManager([
-            'SomeModule' => new \SomeModule\Module(),
-            'SubModule' => new \SubModule\Sub\Module(),
+            'SomeModule' => new Module(),
+            'SubModule'  => new SubModule(),
         ], $this->events);
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
@@ -202,7 +196,7 @@ class ModuleManagerTest extends TestCase
     {
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager  = new ModuleManager(['SomeModule' => new \SomeModule\Module(), 'BarModule'], $this->events);
+        $moduleManager  = new ModuleManager(['SomeModule' => new Module(), 'BarModule'], $this->events);
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
@@ -214,8 +208,8 @@ class ModuleManagerTest extends TestCase
     public function testCanNotLoadSomeObjectModuleWithoutIdentifier()
     {
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
-        $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager  = new ModuleManager([new \SomeModule\Module()], $this->events);
+        $this->defaultListeners->getConfigListener();
+        $moduleManager = new ModuleManager([new Module()], $this->events);
         $this->defaultListeners->attach($this->events);
         $this->expectException(Exception\RuntimeException::class);
         $moduleManager->loadModules();
@@ -224,7 +218,7 @@ class ModuleManagerTest extends TestCase
     public function testSettingEventInjectsModuleManagerAsTarget()
     {
         $moduleManager = new ModuleManager([]);
-        $event = new ModuleEvent();
+        $event         = new ModuleEvent();
 
         $moduleManager->setEvent($event);
 
@@ -235,7 +229,7 @@ class ModuleManagerTest extends TestCase
     public function testGetEventWillLazyLoadOneWithTargetSetToModuleManager()
     {
         $moduleManager = new ModuleManager([]);
-        $event = $moduleManager->getEvent();
+        $event         = $moduleManager->getEvent();
         self::assertInstanceOf(ModuleEvent::class, $event);
         self::assertSame($moduleManager, $event->getTarget());
     }

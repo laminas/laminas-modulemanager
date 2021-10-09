@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager;
 
@@ -20,19 +16,13 @@ use function spl_autoload_unregister;
  */
 trait ResetAutoloadFunctionsTrait
 {
-    /**
-     * @var callable[]
-     */
+    /** @var callable[] */
     private $loaders;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $includePath;
 
-    /**
-     * @before
-     */
+    /** @before */
     protected function preserveAutoloadFunctions()
     {
         $this->loaders = spl_autoload_functions();
@@ -43,17 +33,13 @@ trait ResetAutoloadFunctionsTrait
         }
     }
 
-    /**
-     * @before
-     */
+    /** @before */
     protected function preserveIncludePath()
     {
         $this->includePath = get_include_path();
     }
 
-    /**
-     * @after
-     */
+    /** @after */
     protected function restoreAutoloadFunctions()
     {
         $loaders = spl_autoload_functions();
@@ -66,9 +52,7 @@ trait ResetAutoloadFunctionsTrait
         }
     }
 
-    /**
-     * @before
-     */
+    /** @before */
     protected function restoreIncludePath()
     {
         set_include_path((string) $this->includePath);

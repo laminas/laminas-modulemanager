@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
@@ -19,20 +15,18 @@ use Laminas\ModuleManager\ModuleManager;
  */
 class InitTriggerTest extends AbstractListenerTestCase
 {
-    /**
-     * @var ModuleManager
-     */
+    /** @var ModuleManager */
     protected $moduleManager;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->moduleManager = new ModuleManager([]);
         $this->moduleManager->getEventManager()->attach(
             ModuleEvent::EVENT_LOAD_MODULE_RESOLVE,
-            new ModuleResolverListener,
+            new ModuleResolverListener(),
             1000
         );
-        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new InitTrigger, 2000);
+        $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new InitTrigger(), 2000);
     }
 
     public function testInitMethodCalledByInitTriggerListener()

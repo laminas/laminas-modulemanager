@@ -1,14 +1,11 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace ListenerTestModule;
 
 use Laminas\EventManager\EventInterface;
+use Laminas\Loader\StandardAutoloader;
 use Laminas\ModuleManager\Feature\AutoloaderProviderInterface;
 use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\Feature\LocatorRegisteredInterface;
@@ -18,29 +15,34 @@ class Module implements
     BootstrapListenerInterface,
     LocatorRegisteredInterface
 {
+    /** @var bool */
     public $initCalled = false;
+    /** @var bool */
     public $getConfigCalled = false;
+    /** @var bool */
     public $getAutoloaderConfigCalled = false;
+    /** @var bool */
     public $onBootstrapCalled = false;
 
+    /** @param mixed|null $moduleManager */
     public function init($moduleManager = null)
     {
         $this->initCalled = true;
     }
 
-    public function getConfig()
+    public function getConfig(): array
     {
         $this->getConfigCalled = true;
         return [
-            'listener' => 'test'
+            'listener' => 'test',
         ];
     }
 
-    public function getAutoloaderConfig()
+    public function getAutoloaderConfig(): array
     {
         $this->getAutoloaderConfigCalled = true;
         return [
-            'Laminas\Loader\StandardAutoloader' => [
+            StandardAutoloader::class => [
                 'namespaces' => [
                     'Foo' => __DIR__ . '/src/Foo',
                 ],

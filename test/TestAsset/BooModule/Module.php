@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace BooModule;
 
@@ -12,7 +8,7 @@ use Laminas\Config\Config;
 
 class Module
 {
-    public function getConfig()
+    public function getConfig(): Config
     {
         return new Config(include __DIR__ . '/configs/config.php');
     }

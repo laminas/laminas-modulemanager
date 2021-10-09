@@ -1,22 +1,21 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace NotAutoloaderModule;
 
+use Laminas\Loader\StandardAutoloader;
+
 class Module
 {
+    /** @var bool */
     public $getAutoloaderConfigCalled = false;
 
-    public function getAutoloaderConfig()
+    public function getAutoloaderConfig(): array
     {
         $this->getAutoloaderConfigCalled = true;
         return [
-            'Laminas\Loader\StandardAutoloader' => [
+            StandardAutoloader::class => [
                 'namespaces' => [
                     'Foo' => __DIR__ . '/src/Foo',
                 ],

@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager;
 
@@ -19,19 +15,17 @@ use stdClass;
  */
 class ModuleEventTest extends TestCase
 {
-    /**
-     * @var ModuleEvent
-     */
+    /** @var ModuleEvent */
     protected $event;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->event = new ModuleEvent();
     }
 
     public function testCanRetrieveModuleViaGetter()
     {
-        $module = new stdClass;
+        $module = new stdClass();
         $this->event->setModule($module);
         $test = $this->event->getModule();
         self::assertSame($module, $test);
@@ -54,12 +48,12 @@ class ModuleEventTest extends TestCase
     public function testPassingNonStringToSetModuleNameRaisesException()
     {
         $this->expectException(Exception\InvalidArgumentException::class);
-        $this->event->setModuleName(new stdClass);
+        $this->event->setModuleName(new stdClass());
     }
 
     public function testSettingConfigListenerProxiesToParameters()
     {
-        $configListener = new ConfigListener;
+        $configListener = new ConfigListener();
         $this->event->setConfigListener($configListener);
         $test = $this->event->getParam('configListener');
         self::assertSame($configListener, $test);
@@ -67,7 +61,7 @@ class ModuleEventTest extends TestCase
 
     public function testCanRetrieveConfigListenerViaGetter()
     {
-        $configListener = new ConfigListener;
+        $configListener = new ConfigListener();
         $this->event->setConfigListener($configListener);
         $test = $this->event->getConfigListener();
         self::assertSame($configListener, $test);

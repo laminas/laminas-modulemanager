@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace Laminas\ModuleManager;
 
@@ -20,42 +16,24 @@ use function is_string;
 use function key;
 use function sprintf;
 
-/**
- * Module manager
- */
 class ModuleManager implements ModuleManagerInterface
 {
-    /**#@+
-     * Reference to Laminas\Mvc\MvcEvent::EVENT_BOOTSTRAP
-     */
-    const EVENT_BOOTSTRAP = 'bootstrap';
-    /**#@-*/
+    /** Reference to Laminas\Mvc\MvcEvent::EVENT_BOOTSTRAP */
+    public const EVENT_BOOTSTRAP = 'bootstrap';
 
-    /**
-     * @var array An array of Module classes of loaded modules
-     */
+    /** @var array An array of Module classes of loaded modules */
     protected $loadedModules = [];
 
-    /**
-     * @var EventManagerInterface
-     */
+    /** @var EventManagerInterface */
     protected $events;
 
-    /**
-     * @var ModuleEvent
-     */
+    /** @var ModuleEvent */
     protected $event;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $loadFinished;
 
-    /**
-     * modules
-     *
-     * @var array|Traversable
-     */
+    /** @var array|Traversable */
     protected $modules = [];
 
     /**
@@ -65,13 +43,8 @@ class ModuleManager implements ModuleManagerInterface
      */
     protected $modulesAreLoaded = false;
 
-    /**
-     * Constructor
-     *
-     * @param  array|Traversable $modules
-     * @param  EventManagerInterface $eventManager
-     */
-    public function __construct($modules, EventManagerInterface $eventManager = null)
+    /** @param array|Traversable $modules */
+    public function __construct($modules, ?EventManagerInterface $eventManager = null)
     {
         $this->setModules($modules);
         if ($eventManager instanceof EventManagerInterface) {
@@ -152,7 +125,7 @@ class ModuleManager implements ModuleManagerInterface
         $moduleName = $module;
         if (is_array($module)) {
             $moduleName = key($module);
-            $module = current($module);
+            $module     = current($module);
         }
 
         if (isset($this->loadedModules[$moduleName])) {
@@ -173,7 +146,7 @@ class ModuleManager implements ModuleManagerInterface
             $this->loadFinished = 0;
         }
 
-        $event = ($this->loadFinished > 0) ? clone $this->getEvent() : $this->getEvent();
+        $event = $this->loadFinished > 0 ? clone $this->getEvent() : $this->getEvent();
         $event->setModuleName($moduleName);
 
         $this->loadFinished++;
@@ -194,7 +167,7 @@ class ModuleManager implements ModuleManagerInterface
 
     /**
      * Load a module with the name
-     * @param  ModuleEvent $event
+     *
      * @return mixed                            module instance
      * @throws Exception\RuntimeException
      */
@@ -202,7 +175,7 @@ class ModuleManager implements ModuleManagerInterface
     {
         $event->setName(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE);
         $result = $this->getEventManager()->triggerEventUntil(function ($r) {
-            return (is_object($r));
+            return is_object($r);
         }, $event);
 
         $module = $result->last();
@@ -270,7 +243,7 @@ class ModuleManager implements ModuleManagerInterface
             throw new Exception\InvalidArgumentException(
                 sprintf(
                     'Parameter to %s\'s %s method must be an array or implement the Traversable interface',
-                    __CLASS__,
+                    self::class,
                     __METHOD__
                 )
             );
@@ -294,7 +267,6 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Set the module event
      *
-     * @param  ModuleEvent $event
      * @return ModuleManager
      */
     public function setEvent(ModuleEvent $event)
@@ -307,14 +279,13 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Set the event manager instance used by this module manager.
      *
-     * @param  EventManagerInterface $events
      * @return ModuleManager
      */
     public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers([
-            __CLASS__,
-            get_class($this),
+            self::class,
+            static::class,
             'module_manager',
         ]);
         $this->events = $events;
@@ -341,7 +312,6 @@ class ModuleManager implements ModuleManagerInterface
      * Register the default event listeners
      *
      * @param EventManagerInterface $events
-     * @return ModuleManager
      */
     protected function attachDefaultListeners($events)
     {

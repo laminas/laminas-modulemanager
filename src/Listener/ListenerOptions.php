@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace Laminas\ModuleManager\Listener;
 
@@ -17,64 +13,39 @@ use function is_array;
 use function rtrim;
 use function sprintf;
 
-/**
- * Listener options
- */
 class ListenerOptions extends AbstractOptions
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $modulePaths = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configGlobPaths = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $configStaticPaths = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $extraConfig = [];
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $configCacheEnabled = false;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $configCacheKey;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $cacheDir;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $checkDependencies = true;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $moduleMapCacheEnabled = false;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $moduleMapCacheKey;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $useLaminasLoader = true;
 
     /**
@@ -102,7 +73,7 @@ class ListenerOptions extends AbstractOptions
                     'Argument passed to %s::%s() must be an array, '
                     . 'implement the Traversable interface, or be an '
                     . 'instance of Laminas\Config\Config. %s given.',
-                    __CLASS__,
+                    self::class,
                     __METHOD__,
                     gettype($modulePaths)
                 )
@@ -148,7 +119,7 @@ class ListenerOptions extends AbstractOptions
                     'Argument passed to %s::%s() must be an array, '
                     . 'implement the Traversable interface, or be an '
                     . 'instance of Laminas\Config\Config. %s given.',
-                    __CLASS__,
+                    self::class,
                     __METHOD__,
                     gettype($configGlobPaths)
                 )
@@ -174,7 +145,7 @@ class ListenerOptions extends AbstractOptions
                     'Argument passed to %s::%s() must be an array, '
                     . 'implement the Traversable interface, or be an '
                     . 'instance of Laminas\Config\Config. %s given.',
-                    __CLASS__,
+                    self::class,
                     __METHOD__,
                     gettype($configStaticPaths)
                 )
@@ -211,7 +182,7 @@ class ListenerOptions extends AbstractOptions
                     'Argument passed to %s::%s() must be an array, '
                     . 'implement the Traversable interface, or be an '
                     . 'instance of Laminas\Config\Config. %s given.',
-                    __CLASS__,
+                    self::class,
                     __METHOD__,
                     gettype($extraConfig)
                 )
@@ -277,7 +248,7 @@ class ListenerOptions extends AbstractOptions
     public function getConfigCacheFile()
     {
         if ($this->getConfigCacheKey()) {
-            return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey().'.php';
+            return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey() . '.php';
         }
 
         return $this->getCacheDir() . '/module-config-cache.php';
@@ -378,7 +349,6 @@ class ListenerOptions extends AbstractOptions
      * Set whether to check dependencies during module loading or not
      *
      * @param  bool $checkDependencies the value to be set
-     *
      * @return ListenerOptions
      */
     public function setCheckDependencies($checkDependencies)
@@ -428,18 +398,14 @@ class ListenerOptions extends AbstractOptions
         return $path;
     }
 
-    /**
-     * @deprecated Use self::useLaminasLoader instead
-     */
-    public function useZendLoader()
+    /** @deprecated Use self::useLaminasLoader instead */
+    public function useZendLoader(): bool
     {
         return $this->useLaminasLoader(...func_get_args());
     }
 
-    /**
-     * @deprecated Use self::setUseLaminasLoader instead
-     */
-    public function setUseZendLoader($flag)
+    /** @deprecated Use self::setUseLaminasLoader instead */
+    public function setUseZendLoader(bool $flag): ListenerOptions
     {
         return $this->setUseLaminasLoader(...func_get_args());
     }

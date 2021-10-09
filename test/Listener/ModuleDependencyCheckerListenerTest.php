@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
@@ -20,9 +16,7 @@ use stdClass;
  */
 class ModuleDependencyCheckerListenerTest extends TestCase
 {
-    /**
-     * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
-     */
+    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testCallsGetModuleDependenciesOnModuleImplementingInterface()
     {
         //$moduleManager = new ModuleManager(array());
@@ -42,9 +36,7 @@ class ModuleDependencyCheckerListenerTest extends TestCase
         $listener->__invoke($event);
     }
 
-    /**
-     * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
-     */
+    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testCallsGetModuleDependenciesOnModuleNotImplementingInterface()
     {
         $module = $this->getMockBuilder(stdClass::class)->setMethods(['getModuleDependencies'])->getMock();
@@ -57,9 +49,7 @@ class ModuleDependencyCheckerListenerTest extends TestCase
         $listener->__invoke($event);
     }
 
-    /**
-     * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke
-     */
+    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testNotFulfilledDependencyThrowsException()
     {
         $module = $this->getMockBuilder(stdClass::class)->setMethods(['getModuleDependencies'])->getMock();
