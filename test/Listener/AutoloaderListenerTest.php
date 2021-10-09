@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
@@ -21,17 +17,15 @@ use function class_exists;
  */
 class AutoloaderListenerTest extends AbstractListenerTestCase
 {
-    /**
-     * @var ModuleManager
-     */
+    /** @var ModuleManager */
     protected $moduleManager;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->moduleManager = new ModuleManager([]);
-        $events = $this->moduleManager->getEventManager();
-        $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
-        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener, 2000);
+        $events              = $this->moduleManager->getEventManager();
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener(), 1000);
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener(), 2000);
     }
 
     public function testAutoloadersRegisteredByAutoloaderListener()
@@ -43,6 +37,7 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
         self::assertTrue($modules['ListenerTestModule']->getAutoloaderConfigCalled);
         self::assertTrue(class_exists('Foo\Bar'));
     }
+
     // @codingStandardsIgnoreStart
     public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod()
     {

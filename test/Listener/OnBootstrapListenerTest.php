@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
@@ -24,30 +20,26 @@ use ReflectionClass;
  */
 class OnBootstrapListenerTest extends AbstractListenerTestCase
 {
-    /**
-     * @var Application
-     */
+    /** @var Application */
     protected $application;
 
-    /**
-     * @var ModuleManager
-     */
+    /** @var ModuleManager */
     protected $moduleManager;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
-        $sharedEvents = new SharedEventManager();
-        $events       = new EventManager($sharedEvents);
+        $sharedEvents        = new SharedEventManager();
+        $events              = new EventManager($sharedEvents);
         $this->moduleManager = new ModuleManager([]);
         $this->moduleManager->setEventManager($events);
 
-        $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener, 1000);
-        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener, 1000);
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULE_RESOLVE, new ModuleResolverListener(), 1000);
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener(), 1000);
 
-        $this->application = new MockApplication;
+        $this->application = new MockApplication();
         $appEvents         = $this->createEventManager($sharedEvents);
         $appEvents->setIdentifiers([
-            'Laminas\Mvc\Application',
+            Application::class,
             'LaminasTest\Module\TestAsset\MockApplication',
             'application',
         ]);
@@ -55,7 +47,7 @@ class OnBootstrapListenerTest extends AbstractListenerTestCase
         $this->application->setEventManager($appEvents);
     }
 
-    public function createEventManager(SharedEventManager $sharedEvents)
+    public function createEventManager(SharedEventManager $sharedEvents): EventManager
     {
         $r = new ReflectionClass(EventManager::class);
         if ($r->hasMethod('setSharedManager')) {

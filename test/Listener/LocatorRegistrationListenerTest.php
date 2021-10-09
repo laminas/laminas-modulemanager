@@ -1,13 +1,11 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
+use Exception;
+use Foo\Bar;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
 use Laminas\ModuleManager\Listener\LocatorRegistrationListener;
@@ -17,6 +15,7 @@ use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\Application;
 use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\ModuleManager\TestAsset\MockApplication;
+use ListenerTestModule\Module;
 use ReflectionClass;
 use ReflectionProperty;
 
@@ -31,27 +30,19 @@ use function strtolower;
  */
 class LocatorRegistrationListenerTest extends AbstractListenerTestCase
 {
-    /**
-     * @var Application
-     */
+    /** @var Application */
     protected $application;
 
-    /**
-     * @var ModuleManager
-     */
+    /** @var ModuleManager */
     protected $moduleManager;
 
-    /**
-     * @var ServiceManager
-     */
+    /** @var ServiceManager */
     protected $serviceManager;
 
-    /**
-     * @var SharedEventManager
-     */
+    /** @var SharedEventManager */
     protected $sharedEvents;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->sharedEvents = new SharedEventManager();
 
@@ -59,14 +50,14 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $this->moduleManager->setEventManager($this->createEventManager($this->sharedEvents));
         $this->moduleManager->getEventManager()->attach(
             ModuleEvent::EVENT_LOAD_MODULE_RESOLVE,
-            new ModuleResolverListener,
+            new ModuleResolverListener(),
             1000
         );
 
-        $this->application = new MockApplication;
-        $events = $this->createEventManager($this->sharedEvents);
+        $this->application = new MockApplication();
+        $events            = $this->createEventManager($this->sharedEvents);
         $events->setIdentifiers([
-            'Laminas\Mvc\Application',
+            Application::class,
             'LaminasTest\Module\TestAsset\MockApplication',
             'application',
         ]);
@@ -77,7 +68,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $this->application->setServiceManager($this->serviceManager);
     }
 
-    public function createEventManager(SharedEventManager $sharedEvents)
+    public function createEventManager(SharedEventManager $sharedEvents): EventManager
     {
         $r = new ReflectionClass(EventManager::class);
         if ($r->hasMethod('setSharedManager')) {
@@ -89,7 +80,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         return new EventManager($sharedEvents);
     }
 
-    public function getRegisteredServices(ServiceManager $container)
+    public function getRegisteredServices(ServiceManager $container): array
     {
         if (method_exists($container, 'getRegisteredServices')) {
             return $container->getRegisteredServices();
@@ -99,13 +90,13 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         foreach (['aliases', 'factories', 'services'] as $type) {
             $r = new ReflectionProperty($container, $type);
             $r->setAccessible(true);
-            $services[($type === 'services') ? 'instances' : $type] = array_keys($r->getValue($container));
+            $services[$type === 'services' ? 'instances' : $type] = array_keys($r->getValue($container));
         }
 
         return $services;
     }
 
-    public function normalizeServiceNameForContainer($name, $container)
+    public function normalizeServiceNameForContainer(string $name, ServiceManager $container): string
     {
         if (method_exists($container, 'configure')) {
             return $name;
@@ -119,14 +110,13 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $module  = null;
         $locator = $this->serviceManager;
         $locator->setFactory('Foo\Bar', function ($s) {
-            $module   = $s->get('ListenerTestModule\Module');
-            $manager  = $s->get('Laminas\ModuleManager\ModuleManager');
-            $instance = new \Foo\Bar($module, $manager);
-            return $instance;
+            $module  = $s->get(Module::class);
+            $manager = $s->get(ModuleManager::class);
+            return new Bar($module, $manager);
         });
 
-        $locatorRegistrationListener = new LocatorRegistrationListener;
-        $events = $this->moduleManager->getEventManager();
+        $locatorRegistrationListener = new LocatorRegistrationListener();
+        $events                      = $this->moduleManager->getEventManager();
         $locatorRegistrationListener->attach($events);
         $events->attach(ModuleEvent::EVENT_LOAD_MODULE, function (ModuleEvent $e) use (&$module) {
             $module = $e->getModule();
@@ -134,15 +124,15 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $this->moduleManager->loadModules();
 
         $this->application->bootstrap();
-        $sharedInstance1 = $locator->get('ListenerTestModule\Module');
+        $sharedInstance1 = $locator->get(Module::class);
         $sharedInstance2 = $locator->get(ModuleManager::class);
 
-        self::assertInstanceOf('ListenerTestModule\Module', $sharedInstance1);
+        self::assertInstanceOf(Module::class, $sharedInstance1);
         $foo     = false;
         $message = '';
         try {
             $foo = $locator->get('Foo\Bar');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $message = $e->getMessage();
             while ($e = $e->getPrevious()) {
                 $message .= "\n" . $e->getMessage();
@@ -159,16 +149,16 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
 
     public function testNoDuplicateServicesAreDefinedForModuleManager()
     {
-        $locatorRegistrationListener = new LocatorRegistrationListener;
-        $events = $this->moduleManager->getEventManager();
+        $locatorRegistrationListener = new LocatorRegistrationListener();
+        $events                      = $this->moduleManager->getEventManager();
         $locatorRegistrationListener->attach($events);
 
         $this->moduleManager->loadModules();
         $this->application->bootstrap();
-        $container = $this->application->getServiceManager();
+        $container          = $this->application->getServiceManager();
         $registeredServices = $this->getRegisteredServices($container);
 
-        $aliases = $registeredServices['aliases'];
+        $aliases   = $registeredServices['aliases'];
         $instances = $registeredServices['instances'];
 
         self::assertContains($this->normalizeServiceNameForContainer(ModuleManager::class, $container), $aliases);

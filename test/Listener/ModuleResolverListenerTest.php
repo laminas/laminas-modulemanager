@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
@@ -19,19 +15,17 @@ use ModuleAsClass;
  */
 class ModuleResolverListenerTest extends AbstractListenerTestCase
 {
-    /**
-     * @dataProvider validModuleNameProvider
-     */
-    public function testModuleResolverListenerCanResolveModuleClasses($moduleName, $expectedInstanceOf)
+    /** @dataProvider validModuleNameProvider */
+    public function testModuleResolverListenerCanResolveModuleClasses(string $moduleName, string $expectedInstanceOf)
     {
-        $moduleResolver = new ModuleResolverListener;
-        $e = new ModuleEvent;
+        $moduleResolver = new ModuleResolverListener();
+        $e              = new ModuleEvent();
 
         $e->setModuleName($moduleName);
         self::assertInstanceOf($expectedInstanceOf, $moduleResolver($e));
     }
 
-    public function validModuleNameProvider()
+    public function validModuleNameProvider(): array
     {
         return [
             // Description => [module name, expectedInstanceOf]
@@ -43,8 +37,8 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
 
     public function testModuleResolverListenerReturnFalseIfCannotResolveModuleClasses()
     {
-        $moduleResolver = new ModuleResolverListener;
-        $e = new ModuleEvent;
+        $moduleResolver = new ModuleResolverListener();
+        $e              = new ModuleEvent();
 
         $e->setModuleName('DoesNotExist');
         self::assertFalse($moduleResolver($e));
@@ -52,8 +46,8 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
 
     public function testModuleResolverListenerPrefersModuleClassesInModuleNamespaceOverNamedClasses()
     {
-        $moduleResolver = new ModuleResolverListener;
-        $e = new ModuleEvent;
+        $moduleResolver = new ModuleResolverListener();
+        $e              = new ModuleEvent();
 
         $e->setModuleName('ModuleAsClass');
         self::assertInstanceOf(ModuleAsClass\Module::class, $moduleResolver($e));
@@ -61,8 +55,8 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
 
     public function testModuleResolverListenerWillNotAttemptToResolveModuleAsClassNameGenerator()
     {
-        $moduleResolver = new ModuleResolverListener;
-        $e = new ModuleEvent;
+        $moduleResolver = new ModuleResolverListener();
+        $e              = new ModuleEvent();
 
         $e->setModuleName('Generator');
         self::assertFalse($moduleResolver($e));

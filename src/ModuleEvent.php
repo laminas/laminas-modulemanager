@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace Laminas\ModuleManager;
 
@@ -18,33 +14,25 @@ use function sprintf;
 /**
  * Custom event for use with module manager
  * Composes Module objects
- *
- * @method ModuleManager getTarget()
  */
 class ModuleEvent extends Event
 {
     /**
      * Module events triggered by eventmanager
      */
-    const EVENT_MERGE_CONFIG        = 'mergeConfig';
-    const EVENT_LOAD_MODULES        = 'loadModules';
-    const EVENT_LOAD_MODULE_RESOLVE = 'loadModule.resolve';
-    const EVENT_LOAD_MODULE         = 'loadModule';
-    const EVENT_LOAD_MODULES_POST   = 'loadModules.post';
+    public const EVENT_MERGE_CONFIG        = 'mergeConfig';
+    public const EVENT_LOAD_MODULES        = 'loadModules';
+    public const EVENT_LOAD_MODULE_RESOLVE = 'loadModule.resolve';
+    public const EVENT_LOAD_MODULE         = 'loadModule';
+    public const EVENT_LOAD_MODULES_POST   = 'loadModules.post';
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $module;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $moduleName;
 
-    /**
-     * @var Listener\ConfigMergerInterface
-     */
+    /** @var Listener\ConfigMergerInterface */
     protected $configListener;
 
     /**
@@ -128,7 +116,6 @@ class ModuleEvent extends Event
     /**
      * Set module object to compose in this event
      *
-     * @param  Listener\ConfigMergerInterface $configListener
      * @return ModuleEvent
      */
     public function setConfigListener(Listener\ConfigMergerInterface $configListener)

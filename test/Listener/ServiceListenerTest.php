@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
@@ -32,11 +28,10 @@ class ServiceListenerTest extends TestCase
 {
     use EventListenerIntrospectionTrait;
 
-    /**
-     * @var ConfigListener
-     */
+    /** @var ConfigListener */
     protected $configListener;
 
+    /** @var array */
     protected $defaultServiceConfig = [
         'abstract_factories' => [],
         'aliases'            => [],
@@ -49,22 +44,16 @@ class ServiceListenerTest extends TestCase
         'shared'             => [],
     ];
 
-    /**
-     * @var ModuleEvent
-     */
+    /** @var ModuleEvent */
     protected $event;
 
-    /**
-     * @var ServiceListener
-     */
+    /** @var ServiceListener */
     protected $listener;
 
-    /**
-     * @var ServiceManager
-     */
+    /** @var ServiceManager */
     protected $services;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->services = new ServiceManager();
         $this->listener = new ServiceListener($this->services);
@@ -80,7 +69,7 @@ class ServiceListenerTest extends TestCase
         $this->event->setConfigListener($this->configListener);
     }
 
-    public function getServiceConfig()
+    public function getServiceConfig(): array
     {
         // @codingStandardsIgnoreStart
         return [
@@ -104,10 +93,10 @@ class ServiceListenerTest extends TestCase
         // @codingStandardsIgnoreEnd
     }
 
-    public function getConfiguredServiceManager($listener = null)
+    public function getConfiguredServiceManager(?ServiceListener $listener = null): ServiceManager
     {
         $listener = $listener ?: $this->listener;
-        $r = new ReflectionProperty($listener, 'defaultServiceManager');
+        $r        = new ReflectionProperty($listener, 'defaultServiceManager');
         $r->setAccessible(true);
         return $r->getValue($listener);
     }
@@ -120,7 +109,7 @@ class ServiceListenerTest extends TestCase
         self::assertInstanceOf(ServiceManager::class, $services);
         self::assertSame($this->services, $services);
 
-        self::assertTrue($services->has(__CLASS__));
+        self::assertTrue($services->has(self::class));
         self::assertTrue($services->has('foo'));
         self::assertTrue($services->has('bar'));
         self::assertTrue($services->has('resolved-by-abstract'));
@@ -192,10 +181,13 @@ class ServiceListenerTest extends TestCase
 
     public function testModuleServiceConfigOverridesGlobalConfig()
     {
-        $defaultConfig = ['aliases' => ['foo' => 'bar'], 'services' => [
-            'bar' => new stdClass(),
-            'baz' => new stdClass(),
-        ]];
+        $defaultConfig  = [
+            'aliases'  => ['foo' => 'bar'],
+            'services' => [
+                'bar' => new stdClass(),
+                'baz' => new stdClass(),
+            ],
+        ];
         $this->listener = new ServiceListener($this->services, $defaultConfig);
         $this->listener->addServiceManager(
             $this->services,
@@ -228,14 +220,14 @@ class ServiceListenerTest extends TestCase
 
     public function testMergedConfigContainingServiceManagerKeyWillConfigureServiceManagerPostLoadModules()
     {
-        $config = ['service_manager' => $this->getServiceConfig()];
+        $config         = ['service_manager' => $this->getServiceConfig()];
         $configListener = new ConfigListener();
         $configListener->setMergedConfig($config);
         $this->event->setConfigListener($configListener);
         self::assertServiceManagerConfiguration();
     }
 
-    public function invalidServiceManagerTypes()
+    public function invalidServiceManagerTypes(): array
     {
         return [
             'null'       => [null],
@@ -252,6 +244,7 @@ class ServiceListenerTest extends TestCase
 
     /**
      * @dataProvider invalidServiceManagerTypes
+     * @param mixed $serviceManager
      */
     public function testUsingNonStringServiceManagerWithAddServiceManagerRaisesException($serviceManager)
     {
@@ -279,7 +272,7 @@ class ServiceListenerTest extends TestCase
         );
 
         $pluginConfig = $this->getServiceConfig();
-        $module = new TestAsset\CustomPluginProviderModule($pluginConfig);
+        $module       = new TestAsset\CustomPluginProviderModule($pluginConfig);
         $this->event->setModule($module);
         $listener->onLoadModule($this->event);
         $listener->onLoadModulesPost($this->event);
@@ -307,7 +300,7 @@ class ServiceListenerTest extends TestCase
         );
 
         $pluginConfig = $this->getServiceConfig();
-        $module = new TestAsset\CustomPluginDuckTypeProviderModule($pluginConfig);
+        $module       = new TestAsset\CustomPluginDuckTypeProviderModule($pluginConfig);
         $this->event->setModule($module);
         $listener->onLoadModule($this->event);
         $listener->onLoadModulesPost($this->event);
@@ -321,7 +314,7 @@ class ServiceListenerTest extends TestCase
         self::assertServicesFromConfigArePresent($pluginConfig, $plugins);
     }
 
-    public function testAttachesListenersAtExpectedPriorities()
+    public function testAttachesListenersAtExpectedPriorities(): array
     {
         $events = new EventManager();
         $this->listener->attach($events);
@@ -346,9 +339,7 @@ class ServiceListenerTest extends TestCase
         ];
     }
 
-    /**
-     * @depends testAttachesListenersAtExpectedPriorities
-     */
+    /** @depends testAttachesListenersAtExpectedPriorities */
     public function testCanDetachListeners(array $dependencies)
     {
         $listener = $dependencies['listener'];
@@ -378,8 +369,8 @@ class ServiceListenerTest extends TestCase
         );
 
         $module = new TestAsset\ServiceProviderModule([
-            'services' => [
-                'config' => [ 'foo' => 'bar'],
+            'services'  => [
+                'config' => ['foo' => 'bar'],
             ],
             'factories' => [
                 'foo' => function ($services) {

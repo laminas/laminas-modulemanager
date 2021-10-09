@@ -1,16 +1,20 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
 use Laminas\EventManager\Test\EventListenerIntrospectionTrait;
+use Laminas\Loader\ModuleAutoloader;
+use Laminas\ModuleManager\Listener\AutoloaderListener;
+use Laminas\ModuleManager\Listener\ConfigListener;
 use Laminas\ModuleManager\Listener\DefaultListenerAggregate;
+use Laminas\ModuleManager\Listener\InitTrigger;
 use Laminas\ModuleManager\Listener\ListenerOptions;
+use Laminas\ModuleManager\Listener\LocatorRegistrationListener;
+use Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
+use Laminas\ModuleManager\Listener\OnBootstrapListener;
 use Laminas\ModuleManager\ModuleManager;
 
 use function count;
@@ -26,16 +30,14 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
 {
     use EventListenerIntrospectionTrait;
 
-    /**
-     * @var DefaultListenerAggregate
-     */
+    /** @var DefaultListenerAggregate */
     protected $defaultListeners;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->defaultListeners = new DefaultListenerAggregate(
             new ListenerOptions([
-                'module_paths'         => [
+                'module_paths' => [
                     realpath(__DIR__ . '/TestAsset'),
                 ],
             ])
@@ -45,27 +47,27 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
     public function testDefaultListenerAggregateCanAttachItself()
     {
         $moduleManager = new ModuleManager(['ListenerTestModule']);
-        (new DefaultListenerAggregate)->attach($moduleManager->getEventManager());
+        (new DefaultListenerAggregate())->attach($moduleManager->getEventManager());
 
-        $events = $this->getEventsFromEventManager($moduleManager->getEventManager());
+        $events         = $this->getEventsFromEventManager($moduleManager->getEventManager());
         $expectedEvents = [
-            'loadModules' => [
-                'Laminas\Loader\ModuleAutoloader',
-                'config-pre' => 'Laminas\ModuleManager\Listener\ConfigListener',
-                'config-post' => 'Laminas\ModuleManager\Listener\ConfigListener',
-                'Laminas\ModuleManager\Listener\LocatorRegistrationListener',
-                'Laminas\ModuleManager\ModuleManager',
+            'loadModules'        => [
+                ModuleAutoloader::class,
+                'config-pre'  => ConfigListener::class,
+                'config-post' => ConfigListener::class,
+                LocatorRegistrationListener::class,
+                ModuleManager::class,
             ],
             'loadModule.resolve' => [
-                'Laminas\ModuleManager\Listener\ModuleResolverListener',
+                ModuleResolverListener::class,
             ],
-            'loadModule' => [
-                'Laminas\ModuleManager\Listener\AutoloaderListener',
-                'Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener',
-                'Laminas\ModuleManager\Listener\InitTrigger',
-                'Laminas\ModuleManager\Listener\OnBootstrapListener',
-                'Laminas\ModuleManager\Listener\ConfigListener',
-                'Laminas\ModuleManager\Listener\LocatorRegistrationListener',
+            'loadModule'         => [
+                AutoloaderListener::class,
+                ModuleDependencyCheckerListener::class,
+                InitTrigger::class,
+                OnBootstrapListener::class,
+                ConfigListener::class,
+                LocatorRegistrationListener::class,
             ],
         ];
         foreach ($expectedEvents as $event => $expectedListeners) {
@@ -86,7 +88,7 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
 
     public function testDefaultListenerAggregateCanDetachItself()
     {
-        $listenerAggregate = new DefaultListenerAggregate;
+        $listenerAggregate = new DefaultListenerAggregate();
         $moduleManager     = new ModuleManager(['ListenerTestModule']);
         $events            = $moduleManager->getEventManager();
 
@@ -101,30 +103,30 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
 
     public function testDefaultListenerAggregateSkipsAutoloadingListenersIfLaminasLoaderIsNotUsed()
     {
-        $moduleManager = new ModuleManager(['ListenerTestModule']);
-        $eventManager = $moduleManager->getEventManager();
+        $moduleManager     = new ModuleManager(['ListenerTestModule']);
+        $eventManager      = $moduleManager->getEventManager();
         $listenerAggregate = new DefaultListenerAggregate(new ListenerOptions([
             'use_laminas_loader' => false,
         ]));
         $listenerAggregate->attach($eventManager);
 
-        $events = $this->getEventsFromEventManager($eventManager);
+        $events         = $this->getEventsFromEventManager($eventManager);
         $expectedEvents = [
-            'loadModules' => [
-                'config-pre' => 'Laminas\ModuleManager\Listener\ConfigListener',
-                'config-post' => 'Laminas\ModuleManager\Listener\ConfigListener',
-                'Laminas\ModuleManager\Listener\LocatorRegistrationListener',
-                'Laminas\ModuleManager\ModuleManager',
+            'loadModules'        => [
+                'config-pre'  => ConfigListener::class,
+                'config-post' => ConfigListener::class,
+                LocatorRegistrationListener::class,
+                ModuleManager::class,
             ],
             'loadModule.resolve' => [
-                'Laminas\ModuleManager\Listener\ModuleResolverListener',
+                ModuleResolverListener::class,
             ],
-            'loadModule' => [
-                'Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener',
-                'Laminas\ModuleManager\Listener\InitTrigger',
-                'Laminas\ModuleManager\Listener\OnBootstrapListener',
-                'Laminas\ModuleManager\Listener\ConfigListener',
-                'Laminas\ModuleManager\Listener\LocatorRegistrationListener',
+            'loadModule'         => [
+                ModuleDependencyCheckerListener::class,
+                InitTrigger::class,
+                OnBootstrapListener::class,
+                ConfigListener::class,
+                LocatorRegistrationListener::class,
             ],
         ];
         foreach ($expectedEvents as $event => $expectedListeners) {

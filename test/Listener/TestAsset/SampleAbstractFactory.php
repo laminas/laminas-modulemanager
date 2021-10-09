@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
@@ -15,21 +11,25 @@ use stdClass;
 
 class SampleAbstractFactory implements AbstractFactoryInterface
 {
+    /** {@inheritDoc} */
     public function canCreate(ContainerInterface $container, $name)
     {
         return true;
     }
 
+    /** {@inheritDoc} */
     public function canCreateServiceWithName(ServiceLocatorInterface $container, $name, $requestedName)
     {
         return true;
     }
 
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    /** {@inheritDoc} */
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
-        return new stdClass;
+        return new stdClass();
     }
 
+    /** {@inheritDoc} */
     public function createServiceWithName(ServiceLocatorInterface $container, $name, $requestedName)
     {
         return $this($container, '');

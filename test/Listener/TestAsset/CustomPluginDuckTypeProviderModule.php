@@ -1,22 +1,21 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
 class CustomPluginDuckTypeProviderModule
 {
+    /** @var mixed */
     public $config;
 
+    /** @param mixed $config */
     public function __construct($config)
     {
         $this->config = $config;
     }
 
+    /** @return mixed */
     public function getCustomPluginConfig()
     {
         return $this->config;

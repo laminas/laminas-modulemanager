@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-modulemanager for the canonical source repository
- * @copyright https://github.com/laminas/laminas-modulemanager/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-modulemanager/blob/master/LICENSE.md New BSD License
- */
+declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager;
 
@@ -21,19 +17,13 @@ use const DIRECTORY_SEPARATOR;
  */
 trait SetUpCacheDirTrait
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $tmpdir;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $configCache;
 
-    /**
-     * @before
-     */
+    /** @before */
     protected function createTmpDir()
     {
         $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'laminas_module_cache_dir';
@@ -42,9 +32,7 @@ trait SetUpCacheDirTrait
         $this->configCache = $this->tmpdir . DIRECTORY_SEPARATOR . 'config.cache.php';
     }
 
-    /**
-     * @after
-     */
+    /** @after */
     protected function removeTmpDir()
     {
         $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');
