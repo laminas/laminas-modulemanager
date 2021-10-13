@@ -6,6 +6,7 @@ mind. A module may contain just about anything: PHP code, including MVC
 functionality; library code; view scripts; and/or public assets such as images,
 CSS, and JavaScript. The possibilities are endless.
 
+<!-- markdownlint-disable-next-line MD001 -->
 > ### Event-based system
 >
 > The module system in Laminas has been designed to be a generic and powerful foundation from which
