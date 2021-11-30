@@ -54,10 +54,8 @@ class ModuleManager implements ModuleManagerInterface
 
     /**
      * Handle the loadModules event
-     *
-     * @return void
      */
-    public function onLoadModules()
+    public function onLoadModules(): void
     {
         if (true === $this->modulesAreLoaded) {
             return;
@@ -83,11 +81,12 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load the provided modules.
      *
+     * {@inheritDoc}
+     *
      * @triggers loadModules
      * @triggers loadModules.post
-     * @return   ModuleManager
      */
-    public function loadModules()
+    public function loadModules(): ModuleManager
     {
         if (true === $this->modulesAreLoaded) {
             return $this;
@@ -114,11 +113,12 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Load a specific module by name.
      *
+     * {@inheritDoc}
+     *
      * @param  string|array               $module
      * @throws Exception\RuntimeException
      * @triggers loadModule.resolve
      * @triggers loadModule
-     * @return mixed Module's Module class
      */
     public function loadModule($module)
     {
@@ -189,13 +189,8 @@ class ModuleManager implements ModuleManagerInterface
         return $module;
     }
 
-    /**
-     * Get an array of the loaded modules.
-     *
-     * @param  bool  $loadModules If true, load modules if they're not already
-     * @return array An array of Module objects, keyed by module name
-     */
-    public function getLoadedModules($loadModules = false)
+    /** {@inheritDoc} */
+    public function getLoadedModules($loadModules = false): array
     {
         if (true === $loadModules) {
             $this->loadModules();
@@ -207,10 +202,9 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Get an instance of a module class by the module name
      *
-     * @param  string $moduleName
      * @return mixed
      */
-    public function getModule($moduleName)
+    public function getModule(string $moduleName)
     {
         if (! isset($this->loadedModules[$moduleName])) {
             return;
@@ -221,7 +215,7 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Get the array of module names that this manager should load.
      *
-     * @return array
+     * @return Traversable|array
      */
     public function getModules()
     {
@@ -229,13 +223,11 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
-     * Set an array or Traversable of module names that this module manager should load.
+     * {@inheritDoc}
      *
-     * @param  mixed $modules array or Traversable of module names
      * @throws Exception\InvalidArgumentException
-     * @return ModuleManager
      */
-    public function setModules($modules)
+    public function setModules($modules): ModuleManager
     {
         if (is_array($modules) || $modules instanceof Traversable) {
             $this->modules = $modules;
@@ -251,12 +243,7 @@ class ModuleManager implements ModuleManagerInterface
         return $this;
     }
 
-    /**
-     * Get the module event
-     *
-     * @return ModuleEvent
-     */
-    public function getEvent()
+    public function getEvent(): ModuleEvent
     {
         if (! $this->event instanceof ModuleEvent) {
             $this->setEvent(new ModuleEvent());
@@ -264,24 +251,15 @@ class ModuleManager implements ModuleManagerInterface
         return $this->event;
     }
 
-    /**
-     * Set the module event
-     *
-     * @return ModuleManager
-     */
-    public function setEvent(ModuleEvent $event)
+    public function setEvent(ModuleEvent $event): ModuleManager
     {
         $event->setTarget($this);
         $this->event = $event;
         return $this;
     }
 
-    /**
-     * Set the event manager instance used by this module manager.
-     *
-     * @return ModuleManager
-     */
-    public function setEventManager(EventManagerInterface $events)
+    /** {@inheritDoc} */
+    public function setEventManager(EventManagerInterface $events): ModuleManager
     {
         $events->setIdentifiers([
             self::class,
@@ -293,14 +271,8 @@ class ModuleManager implements ModuleManagerInterface
         return $this;
     }
 
-    /**
-     * Retrieve the event manager
-     *
-     * Lazy-loads an EventManager instance if none registered.
-     *
-     * @return EventManagerInterface
-     */
-    public function getEventManager()
+    /** {@inheritDoc} */
+    public function getEventManager(): EventManagerInterface
     {
         if (! $this->events instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
@@ -310,10 +282,8 @@ class ModuleManager implements ModuleManagerInterface
 
     /**
      * Register the default event listeners
-     *
-     * @param EventManagerInterface $events
      */
-    protected function attachDefaultListeners($events)
+    protected function attachDefaultListeners(EventManagerInterface $events): void
     {
         $events->attach(ModuleEvent::EVENT_LOAD_MODULES, [$this, 'onLoadModules']);
     }

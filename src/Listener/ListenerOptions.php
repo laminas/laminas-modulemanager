@@ -15,16 +15,16 @@ use function sprintf;
 
 class ListenerOptions extends AbstractOptions
 {
-    /** @var array */
+    /** @var array|Traversable */
     protected $modulePaths = [];
 
-    /** @var array */
+    /** @var array|Traversable */
     protected $configGlobPaths = [];
 
-    /** @var array */
+    /** @var array|Traversable */
     protected $configStaticPaths = [];
 
-    /** @var array */
+    /** @var array|Traversable */
     protected $extraConfig = [];
 
     /** @var bool */
@@ -51,7 +51,7 @@ class ListenerOptions extends AbstractOptions
     /**
      * Get an array of paths where modules reside
      *
-     * @return array
+     * @return array|Traversable
      */
     public function getModulePaths()
     {
@@ -63,9 +63,8 @@ class ListenerOptions extends AbstractOptions
      *
      * @param  array|Traversable $modulePaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
      */
-    public function setModulePaths($modulePaths)
+    public function setModulePaths($modulePaths): ListenerOptions
     {
         if (! is_array($modulePaths) && ! $modulePaths instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
@@ -87,7 +86,7 @@ class ListenerOptions extends AbstractOptions
     /**
      * Get the glob patterns to load additional config files
      *
-     * @return array
+     * @return array|Traversable
      */
     public function getConfigGlobPaths()
     {
@@ -97,7 +96,7 @@ class ListenerOptions extends AbstractOptions
     /**
      * Get the static paths to load additional config files
      *
-     * @return array
+     * @return array|Traversable
      */
     public function getConfigStaticPaths()
     {
@@ -109,9 +108,8 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configGlobPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
      */
-    public function setConfigGlobPaths($configGlobPaths)
+    public function setConfigGlobPaths($configGlobPaths): ListenerOptions
     {
         if (! is_array($configGlobPaths) && ! $configGlobPaths instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
@@ -135,9 +133,8 @@ class ListenerOptions extends AbstractOptions
      *
      * @param array|Traversable $configStaticPaths
      * @throws Exception\InvalidArgumentException
-     * @return ListenerOptions Provides fluent interface
      */
-    public function setConfigStaticPaths($configStaticPaths)
+    public function setConfigStaticPaths($configStaticPaths): ListenerOptions
     {
         if (! is_array($configStaticPaths) && ! $configStaticPaths instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
@@ -174,7 +171,7 @@ class ListenerOptions extends AbstractOptions
      * @throws Exception\InvalidArgumentException
      * @return ListenerOptions Provides fluent interface
      */
-    public function setExtraConfig($extraConfig)
+    public function setExtraConfig($extraConfig): ListenerOptions
     {
         if (! is_array($extraConfig) && ! $extraConfig instanceof Traversable) {
             throw new Exception\InvalidArgumentException(
@@ -195,10 +192,8 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Check if the config cache is enabled
-     *
-     * @return bool
      */
-    public function getConfigCacheEnabled()
+    public function getConfigCacheEnabled(): bool
     {
         return $this->configCacheEnabled;
     }
@@ -206,10 +201,9 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set if the config cache should be enabled or not
      *
-     * @param  bool $enabled
-     * @return ListenerOptions
+     * @param bool $enabled
      */
-    public function setConfigCacheEnabled($enabled)
+    public function setConfigCacheEnabled($enabled): ListenerOptions
     {
         $this->configCacheEnabled = (bool) $enabled;
         return $this;
@@ -217,10 +211,8 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Get key used to create the cache file name
-     *
-     * @return string
      */
-    public function getConfigCacheKey()
+    public function getConfigCacheKey(): string
     {
         return (string) $this->configCacheKey;
     }
@@ -229,9 +221,8 @@ class ListenerOptions extends AbstractOptions
      * Set key used to create the cache file name
      *
      * @param  string $configCacheKey the value to be set
-     * @return ListenerOptions
      */
-    public function setConfigCacheKey($configCacheKey)
+    public function setConfigCacheKey($configCacheKey): ListenerOptions
     {
         $this->configCacheKey = $configCacheKey;
         return $this;
@@ -242,12 +233,10 @@ class ListenerOptions extends AbstractOptions
      *
      * Should this be an option, or should the dir option include the
      * filename, or should it simply remain hard-coded? Thoughts?
-     *
-     * @return string
      */
-    public function getConfigCacheFile()
+    public function getConfigCacheFile(): string
     {
-        if ($this->getConfigCacheKey()) {
+        if ($this->getCacheDir() && $this->getConfigCacheKey()) {
             return $this->getCacheDir() . '/module-config-cache.' . $this->getConfigCacheKey() . '.php';
         }
 
@@ -256,10 +245,8 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Get the path where cache file(s) are stored
-     *
-     * @return string|null
      */
-    public function getCacheDir()
+    public function getCacheDir(): ?string
     {
         return $this->cacheDir;
     }
@@ -267,10 +254,9 @@ class ListenerOptions extends AbstractOptions
     /**
      * Set the path where cache files can be stored
      *
-     * @param  string|null $cacheDir the value to be set
-     * @return ListenerOptions
+     * @param string|null $cacheDir the value to be set
      */
-    public function setCacheDir($cacheDir)
+    public function setCacheDir(?string $cacheDir): ListenerOptions
     {
         $this->cacheDir = $cacheDir ? static::normalizePath($cacheDir) : null;
 
@@ -279,21 +265,16 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Check if the module class map cache is enabled
-     *
-     * @return bool
      */
-    public function getModuleMapCacheEnabled()
+    public function getModuleMapCacheEnabled(): bool
     {
         return $this->moduleMapCacheEnabled;
     }
 
     /**
      * Set if the module class map cache should be enabled or not
-     *
-     * @param  bool $enabled
-     * @return ListenerOptions
      */
-    public function setModuleMapCacheEnabled($enabled)
+    public function setModuleMapCacheEnabled(bool $enabled): ListenerOptions
     {
         $this->moduleMapCacheEnabled = (bool) $enabled;
         return $this;
@@ -301,10 +282,8 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Get key used to create the cache file name
-     *
-     * @return string
      */
-    public function getModuleMapCacheKey()
+    public function getModuleMapCacheKey(): string
     {
         return (string) $this->moduleMapCacheKey;
     }
@@ -313,9 +292,8 @@ class ListenerOptions extends AbstractOptions
      * Set key used to create the cache file name
      *
      * @param  string $moduleMapCacheKey the value to be set
-     * @return ListenerOptions
      */
-    public function setModuleMapCacheKey($moduleMapCacheKey)
+    public function setModuleMapCacheKey(string $moduleMapCacheKey): ListenerOptions
     {
         $this->moduleMapCacheKey = $moduleMapCacheKey;
         return $this;
@@ -323,12 +301,10 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Get the path to the module class map cache
-     *
-     * @return string
      */
-    public function getModuleMapCacheFile()
+    public function getModuleMapCacheFile(): string
     {
-        if ($this->getModuleMapCacheKey()) {
+        if ($this->getCacheDir() && $this->getModuleMapCacheKey()) {
             return $this->getCacheDir() . '/module-classmap-cache.' . $this->getModuleMapCacheKey() . '.php';
         }
 
@@ -337,10 +313,8 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Set whether to check dependencies during module loading or not
-     *
-     * @return bool
      */
-    public function getCheckDependencies()
+    public function getCheckDependencies(): bool
     {
         return $this->checkDependencies;
     }
@@ -349,9 +323,8 @@ class ListenerOptions extends AbstractOptions
      * Set whether to check dependencies during module loading or not
      *
      * @param  bool $checkDependencies the value to be set
-     * @return ListenerOptions
      */
-    public function setCheckDependencies($checkDependencies)
+    public function setCheckDependencies(bool $checkDependencies): ListenerOptions
     {
         $this->checkDependencies = (bool) $checkDependencies;
 
@@ -360,10 +333,8 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Whether or not to use laminas-loader to autoload modules.
-     *
-     * @return bool
      */
-    public function useLaminasLoader()
+    public function useLaminasLoader(): bool
     {
         return $this->useLaminasLoader;
     }
@@ -375,11 +346,8 @@ class ListenerOptions extends AbstractOptions
      * other means of autoloading to be used (e.g., Composer).
      *
      * If disabled, the AutoloaderProvider feature will be disabled as well
-     *
-     * @param  bool $flag
-     * @return ListenerOptions
      */
-    public function setUseLaminasLoader($flag)
+    public function setUseLaminasLoader(bool $flag): ListenerOptions
     {
         $this->useLaminasLoader = (bool) $flag;
         return $this;
@@ -387,11 +355,8 @@ class ListenerOptions extends AbstractOptions
 
     /**
      * Normalize a path for insertion in the stack
-     *
-     * @param  string $path
-     * @return string
      */
-    public static function normalizePath($path)
+    public static function normalizePath(string $path): string
     {
         $path = rtrim($path, '/');
         $path = rtrim($path, '\\');

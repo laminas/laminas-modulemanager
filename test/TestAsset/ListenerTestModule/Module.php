@@ -25,11 +25,15 @@ class Module implements
     public $onBootstrapCalled = false;
 
     /** @param mixed|null $moduleManager */
-    public function init($moduleManager = null)
+    public function init($moduleManager = null): void
     {
         $this->initCalled = true;
     }
 
+    /**
+     * @return string[]
+     * @psalm-return array<string, string>
+     */
     public function getConfig(): array
     {
         $this->getConfigCalled = true;
@@ -50,7 +54,7 @@ class Module implements
         ];
     }
 
-    public function onBootstrap(EventInterface $e)
+    public function onBootstrap(EventInterface $e): void
     {
         $this->onBootstrapCalled = true;
     }

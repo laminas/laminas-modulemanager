@@ -16,8 +16,10 @@ use ModuleAsClass;
 class ModuleResolverListenerTest extends AbstractListenerTestCase
 {
     /** @dataProvider validModuleNameProvider */
-    public function testModuleResolverListenerCanResolveModuleClasses(string $moduleName, string $expectedInstanceOf)
-    {
+    public function testModuleResolverListenerCanResolveModuleClasses(
+        string $moduleName,
+        string $expectedInstanceOf
+    ): void {
         $moduleResolver = new ModuleResolverListener();
         $e              = new ModuleEvent();
 
@@ -35,7 +37,7 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         ];
     }
 
-    public function testModuleResolverListenerReturnFalseIfCannotResolveModuleClasses()
+    public function testModuleResolverListenerReturnFalseIfCannotResolveModuleClasses(): void
     {
         $moduleResolver = new ModuleResolverListener();
         $e              = new ModuleEvent();
@@ -44,7 +46,7 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         self::assertFalse($moduleResolver($e));
     }
 
-    public function testModuleResolverListenerPrefersModuleClassesInModuleNamespaceOverNamedClasses()
+    public function testModuleResolverListenerPrefersModuleClassesInModuleNamespaceOverNamedClasses(): void
     {
         $moduleResolver = new ModuleResolverListener();
         $e              = new ModuleEvent();
@@ -53,7 +55,7 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         self::assertInstanceOf(ModuleAsClass\Module::class, $moduleResolver($e));
     }
 
-    public function testModuleResolverListenerWillNotAttemptToResolveModuleAsClassNameGenerator()
+    public function testModuleResolverListenerWillNotAttemptToResolveModuleAsClassNameGenerator(): void
     {
         $moduleResolver = new ModuleResolverListener();
         $e              = new ModuleEvent();

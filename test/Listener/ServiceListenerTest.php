@@ -31,7 +31,7 @@ class ServiceListenerTest extends TestCase
     /** @var ConfigListener */
     protected $configListener;
 
-    /** @var array */
+    /** @var array<string, array> */
     protected $defaultServiceConfig = [
         'abstract_factories' => [],
         'aliases'            => [],
@@ -77,7 +77,7 @@ class ServiceListenerTest extends TestCase
                 __CLASS__ => __CLASS__
             ],
             'factories' => [
-                'foo' => function ($sm) { },
+                'foo' => static function () {},
             ],
             'abstract_factories' => [
                 new TestAsset\SampleAbstractFactory(),
@@ -101,7 +101,7 @@ class ServiceListenerTest extends TestCase
         return $r->getValue($listener);
     }
 
-    public function assertServiceManagerConfiguration()
+    public function assertServiceManagerConfiguration(): void
     {
         $this->listener->onLoadModulesPost($this->event);
         $services = $this->getConfiguredServiceManager();
@@ -115,7 +115,7 @@ class ServiceListenerTest extends TestCase
         self::assertTrue($services->has('resolved-by-abstract'));
     }
 
-    public function assertServicesFromConfigArePresent(array $config, ServiceManager $serviceManager)
+    public function assertServicesFromConfigArePresent(array $config, ServiceManager $serviceManager): void
     {
         foreach ($config as $type => $services) {
             switch ($type) {
@@ -141,7 +141,7 @@ class ServiceListenerTest extends TestCase
         }
     }
 
-    public function testPassingInvalidModuleDoesNothing()
+    public function testPassingInvalidModuleDoesNothing(): void
     {
         $module = new stdClass();
         $this->event->setModule($module);
@@ -150,7 +150,7 @@ class ServiceListenerTest extends TestCase
         self::assertSame($this->services, $this->getConfiguredServiceManager());
     }
 
-    public function testInvalidReturnFromModuleDoesNothing()
+    public function testInvalidReturnFromModuleDoesNothing(): void
     {
         $module = new TestAsset\ServiceInvalidReturnModule();
         $this->event->setModule($module);
@@ -159,27 +159,27 @@ class ServiceListenerTest extends TestCase
         self::assertSame($this->services, $this->getConfiguredServiceManager());
     }
 
-    public function testModuleReturningArrayConfiguresServiceManager()
+    public function testModuleReturningArrayConfiguresServiceManager(): void
     {
         $config = $this->getServiceConfig();
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
         $this->listener->onLoadModule($this->event);
-        $services = $this->getConfiguredServiceManager();
-        self::assertServiceManagerConfiguration();
+        $this->getConfiguredServiceManager();
+        $this->assertServiceManagerConfiguration();
     }
 
-    public function testModuleReturningTraversableConfiguresServiceManager()
+    public function testModuleReturningTraversableConfiguresServiceManager(): void
     {
         $config = $this->getServiceConfig();
         $config = new ArrayObject($config);
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
         $this->listener->onLoadModule($this->event);
-        self::assertServiceManagerConfiguration();
+        $this->assertServiceManagerConfiguration();
     }
 
-    public function testModuleServiceConfigOverridesGlobalConfig()
+    public function testModuleServiceConfigOverridesGlobalConfig(): void
     {
         $defaultConfig  = [
             'aliases'  => ['foo' => 'bar'],
@@ -208,25 +208,26 @@ class ServiceListenerTest extends TestCase
         self::assertSame($services->get('foo'), $services->get('baz'));
     }
 
-    public function testModuleReturningServiceConfigConfiguresServiceManager()
+    public function testModuleReturningServiceConfigConfiguresServiceManager(): void
     {
         $config = $this->getServiceConfig();
         $config = new ServiceConfig($config);
         $module = new TestAsset\ServiceProviderModule($config);
         $this->event->setModule($module);
         $this->listener->onLoadModule($this->event);
-        self::assertServiceManagerConfiguration();
+        $this->assertServiceManagerConfiguration();
     }
 
-    public function testMergedConfigContainingServiceManagerKeyWillConfigureServiceManagerPostLoadModules()
+    public function testMergedConfigContainingServiceManagerKeyWillConfigureServiceManagerPostLoadModules(): void
     {
         $config         = ['service_manager' => $this->getServiceConfig()];
         $configListener = new ConfigListener();
         $configListener->setMergedConfig($config);
         $this->event->setConfigListener($configListener);
-        self::assertServiceManagerConfiguration();
+        $this->assertServiceManagerConfiguration();
     }
 
+    /** @psalm-return array<string, array<int, scalar|array<int, string>|object|null>> */
     public function invalidServiceManagerTypes(): array
     {
         return [
@@ -244,9 +245,9 @@ class ServiceListenerTest extends TestCase
 
     /**
      * @dataProvider invalidServiceManagerTypes
-     * @param mixed $serviceManager
+     * @psalm-param scalar|array<int, string>|object|null $serviceManager
      */
-    public function testUsingNonStringServiceManagerWithAddServiceManagerRaisesException($serviceManager)
+    public function testUsingNonStringServiceManagerWithAddServiceManagerRaisesException($serviceManager): void
     {
         $this->expectException(Exception\RuntimeException::class);
         $this->expectExceptionMessage('expected ServiceManager or string');
@@ -258,7 +259,7 @@ class ServiceListenerTest extends TestCase
         );
     }
 
-    public function testCreatesPluginManagerBasedOnModuleImplementingSpecifiedProviderInterface()
+    public function testCreatesPluginManagerBasedOnModuleImplementingSpecifiedProviderInterface(): void
     {
         $services = $this->services;
         $services->setFactory('CustomPluginManager', TestAsset\CustomPluginManagerFactory::class);
@@ -283,10 +284,10 @@ class ServiceListenerTest extends TestCase
         $plugins = $configuredServices->get('CustomPluginManager');
         self::assertInstanceOf(TestAsset\CustomPluginManager::class, $plugins);
 
-        self::assertServicesFromConfigArePresent($pluginConfig, $plugins);
+        $this->assertServicesFromConfigArePresent($pluginConfig, $plugins);
     }
 
-    public function testCreatesPluginManagerBasedOnModuleDuckTypingSpecifiedProviderInterface()
+    public function testCreatesPluginManagerBasedOnModuleDuckTypingSpecifiedProviderInterface(): void
     {
         $services = $this->services;
         $services->setFactory('CustomPluginManager', TestAsset\CustomPluginManagerFactory::class);
@@ -311,21 +312,25 @@ class ServiceListenerTest extends TestCase
         $plugins = $configuredServices->get('CustomPluginManager');
         self::assertInstanceOf(TestAsset\CustomPluginManager::class, $plugins);
 
-        self::assertServicesFromConfigArePresent($pluginConfig, $plugins);
+        $this->assertServicesFromConfigArePresent($pluginConfig, $plugins);
     }
 
+    /**
+     * @return (EventManager|ServiceListener)[]
+     * @psalm-return array{listener: ServiceListener, events: EventManager}
+     */
     public function testAttachesListenersAtExpectedPriorities(): array
     {
         $events = new EventManager();
         $this->listener->attach($events);
-        self::assertListenerAtPriority(
+        $this->assertListenerAtPriority(
             [$this->listener, 'onLoadModule'],
             1,
             ModuleEvent::EVENT_LOAD_MODULE,
             $events,
             'onLoadModule not registered at expected priority'
         );
-        self::assertListenerAtPriority(
+        $this->assertListenerAtPriority(
             [$this->listener, 'onLoadModulesPost'],
             1,
             ModuleEvent::EVENT_LOAD_MODULES_POST,
@@ -340,7 +345,7 @@ class ServiceListenerTest extends TestCase
     }
 
     /** @depends testAttachesListenersAtExpectedPriorities */
-    public function testCanDetachListeners(array $dependencies)
+    public function testCanDetachListeners(array $dependencies): void
     {
         $listener = $dependencies['listener'];
         $events   = $dependencies['events'];
@@ -353,11 +358,11 @@ class ServiceListenerTest extends TestCase
         self::assertCount(0, $listeners);
     }
 
-    public function testListenerCanOverrideServicesInServiceManagers()
+    public function testListenerCanOverrideServicesInServiceManagers(): void
     {
         $services = new ServiceManager();
         $services->setService('config', []);
-        $services->setFactory('foo', function ($services) {
+        $services->setFactory('foo', static function ($services) {
             return $services;
         });
         $listener = new ServiceListener($services);
@@ -373,7 +378,7 @@ class ServiceListenerTest extends TestCase
                 'config' => ['foo' => 'bar'],
             ],
             'factories' => [
-                'foo' => function ($services) {
+                'foo' => static function () {
                     return new stdClass();
                 },
             ],
@@ -393,7 +398,7 @@ class ServiceListenerTest extends TestCase
         self::assertInstanceOf(stdClass::class, $services->get('foo'), 'Foo service was not overridden');
     }
 
-    public function testOnLoadModulesPostShouldNotRaiseExceptionIfNamedServiceManagerDoesNotExist()
+    public function testOnLoadModulesPostShouldNotRaiseExceptionIfNamedServiceManagerDoesNotExist(): void
     {
         $services = new ServiceManager();
         $services->setService('config', []);
@@ -418,7 +423,7 @@ class ServiceListenerTest extends TestCase
             $listener->onLoadModulesPost($event);
             self::assertFalse($services->has('UndefinedPluginManager'));
         } catch (\Exception $e) {
-            $this->fail('Exception should not be raised when encountering unknown plugin manager services');
+            self::fail('Exception should not be raised when encountering unknown plugin manager services');
         }
     }
 }

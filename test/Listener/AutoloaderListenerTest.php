@@ -28,7 +28,7 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
         $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener(), 2000);
     }
 
-    public function testAutoloadersRegisteredByAutoloaderListener()
+    public function testAutoloadersRegisteredByAutoloaderListener(): void
     {
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(['ListenerTestModule']);
@@ -39,7 +39,7 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
     }
 
     // @codingStandardsIgnoreStart
-    public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod()
+    public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod(): void
     {
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(['NotAutoloaderModule']);

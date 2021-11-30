@@ -53,7 +53,7 @@ class ServiceListener implements ServiceListenerInterface
     protected $serviceManagers = [];
 
     /** @param null|array $configuration */
-    public function __construct(ServiceManager $serviceManager, $configuration = null)
+    public function __construct(ServiceManager $serviceManager, ?array $configuration = null)
     {
         $this->defaultServiceManager = $serviceManager;
 
@@ -62,18 +62,15 @@ class ServiceListener implements ServiceListenerInterface
         }
     }
 
-    /**
-     * @param  array $configuration
-     * @return ServiceListener
-     */
-    public function setDefaultServiceConfig($configuration)
+    /** {@inheritDoc} */
+    public function setDefaultServiceConfig($configuration): ServiceListener
     {
         $this->defaultServiceConfig = $configuration;
         return $this;
     }
 
     /** {@inheritDoc} */
-    public function addServiceManager($serviceManager, $key, $moduleInterface, $method)
+    public function addServiceManager($serviceManager, $key, $moduleInterface, $method): ServiceListener
     {
         if (is_string($serviceManager)) {
             $smKey = $serviceManager;
@@ -102,18 +99,18 @@ class ServiceListener implements ServiceListenerInterface
     }
 
     /**
-     * @param  int $priority
-     * @return ServiceListener
+     * @param int $priority
+     * {@inheritDoc}
      */
-    public function attach(EventManagerInterface $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = 1): self
     {
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, [$this, 'onLoadModule']);
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES_POST, [$this, 'onLoadModulesPost']);
         return $this;
     }
 
-    /** @return void */
-    public function detach(EventManagerInterface $events)
+    /** {@inheritDoc} */
+    public function detach(EventManagerInterface $events): void
     {
         foreach ($this->listeners as $key => $listener) {
             if ($events->detach($listener)) {
@@ -133,10 +130,8 @@ class ServiceListener implements ServiceListenerInterface
      *
      * The interface and method name can be set by adding a new service manager
      * via the addServiceManager() method.
-     *
-     * @return void
      */
-    public function onLoadModule(ModuleEvent $e)
+    public function onLoadModule(ModuleEvent $e): void
     {
         $module = $e->getModule();
 
@@ -166,7 +161,7 @@ class ServiceListener implements ServiceListenerInterface
             // We are keeping track of which modules provided which configuration to which service managers.
             // The actual merging takes place later. Doing it this way will enable us to provide more powerful
             // debugging tools for showing which modules overrode what.
-            $fullname = $e->getModuleName() . '::' . $sm['module_class_method'] . '()'; /** @codingStandardsIgnoreLine */
+            $fullname = $e->getModuleName() . '::' . (string) $sm['module_class_method'] . '()'; /** @codingStandardsIgnoreLine */
             $this->serviceManagers[$key]['configuration'][$fullname] = $config;
         }
     }
@@ -179,27 +174,26 @@ class ServiceListener implements ServiceListenerInterface
      * used to configure the service manager.
      *
      * @throws Exception\RuntimeException
-     * @return void
      */
-    public function onLoadModulesPost(ModuleEvent $e)
+    public function onLoadModulesPost(ModuleEvent $e): void
     {
         $configListener = $e->getConfigListener();
         $config         = $configListener->getMergedConfig(false);
 
         foreach ($this->serviceManagers as $key => $sm) {
-            $smConfig = $this->mergeServiceConfiguration($key, $sm, $config);
+            $smConfig = $this->mergeServiceConfiguration((string) $key, $sm, $config);
 
             if (! $sm['service_manager'] instanceof ServiceManager) {
-                if (! $this->defaultServiceManager->has($sm['service_manager'])) {
+                if (! $this->defaultServiceManager->has((string) $sm['service_manager'])) {
                     // No plugin manager registered by that name; nothing to configure.
                     continue;
                 }
 
-                $instance = $this->defaultServiceManager->get($sm['service_manager']);
+                $instance = $this->defaultServiceManager->get((string) $sm['service_manager']);
                 if (! $instance instanceof ServiceManager) {
                     throw new Exception\RuntimeException(sprintf(
                         'Could not find a valid ServiceManager for %s',
-                        $sm['service_manager']
+                        (string) $sm['service_manager']
                     ));
                 }
 
@@ -233,7 +227,7 @@ class ServiceListener implements ServiceListenerInterface
      *     configuration instance is not specifically a ServiceConfig, as there
      *     is no way to extract service configuration in that case.
      */
-    protected function serviceConfigToArray($config)
+    protected function serviceConfigToArray($config): array
     {
         if (is_string($config) && class_exists($config)) {
             $class  = $config;
@@ -284,7 +278,7 @@ class ServiceListener implements ServiceListenerInterface
      * @param array $config Merged configuration
      * @return array Service manager-specific configuration
      */
-    private function mergeServiceConfiguration($key, array $metadata, array $config)
+    private function mergeServiceConfiguration(string $key, array $metadata, array $config): array
     {
         if (
             isset($config[$metadata['config_key']])
@@ -296,7 +290,7 @@ class ServiceListener implements ServiceListenerInterface
 
         // Merge all of the things!
         $serviceConfig = [];
-        foreach ($this->serviceManagers[$key]['configuration'] as $name => $configs) {
+        foreach ($this->serviceManagers[$key]['configuration'] as $configs) {
             if (isset($configs['configuration_classes'])) {
                 foreach ($configs['configuration_classes'] as $class) {
                     $configs = ArrayUtils::merge($configs, $this->serviceConfigToArray($class));

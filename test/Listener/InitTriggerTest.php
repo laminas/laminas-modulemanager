@@ -29,7 +29,7 @@ class InitTriggerTest extends AbstractListenerTestCase
         $this->moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new InitTrigger(), 2000);
     }
 
-    public function testInitMethodCalledByInitTriggerListener()
+    public function testInitMethodCalledByInitTriggerListener(): void
     {
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(['ListenerTestModule']);

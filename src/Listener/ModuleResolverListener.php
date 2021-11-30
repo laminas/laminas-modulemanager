@@ -17,6 +17,7 @@ class ModuleResolverListener extends AbstractListener
      * Class names that are invalid as module classes, due to inability to instantiate.
      *
      * @var string[]
+     * @psalm-var array<int, class-string<Generator>>
      */
     protected $invalidClassNames = [
         Generator::class,

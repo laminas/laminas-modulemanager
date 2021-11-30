@@ -40,7 +40,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     }
 
     /** {@inheritDoc} */
-    public function attach(EventManagerInterface $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = 1): void
     {
         $this->callbacks[] = $events->attach(
             ModuleEvent::EVENT_LOAD_MODULES,
@@ -57,7 +57,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     }
 
     /** {@inheritDoc} */
-    public function detach(EventManagerInterface $events)
+    public function detach(EventManagerInterface $events): void
     {
         foreach ($this->callbacks as $index => $callback) {
             if ($events->detach($callback)) {
@@ -66,8 +66,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
         }
     }
 
-    /** @return bool */
-    protected function hasCachedClassMap()
+    protected function hasCachedClassMap(): bool
     {
         if (
             $this->options->getModuleMapCacheEnabled()
@@ -80,7 +79,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     }
 
     /** @return array */
-    protected function getCachedConfig()
+    protected function getCachedConfig(): array
     {
         return include $this->options->getModuleMapCacheFile();
     }
@@ -88,7 +87,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     /**
      * Unregisters the ModuleLoader and generates the module class map cache.
      */
-    public function onLoadModulesPost(ModuleEvent $event)
+    public function onLoadModulesPost(ModuleEvent $event): void
     {
         $this->moduleLoader->unregister();
         $this->writeArrayToFile(

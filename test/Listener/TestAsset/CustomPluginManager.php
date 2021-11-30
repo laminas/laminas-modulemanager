@@ -13,7 +13,7 @@ class CustomPluginManager extends AbstractPluginManager
     protected $instanceOf = CustomPluginInterface::class;
 
     /** @param mixed $plugin */
-    public function validate($plugin)
+    public function validate($plugin): void
     {
         if (! $plugin instanceof $this->instanceOf) {
             throw new InvalidServiceException();
@@ -21,7 +21,7 @@ class CustomPluginManager extends AbstractPluginManager
     }
 
     /** @param mixed $plugin */
-    public function validatePlugin($plugin)
+    public function validatePlugin($plugin): void
     {
         $this->validate($plugin);
     }

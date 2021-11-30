@@ -18,7 +18,7 @@ class AbstractListenerTestCase extends TestCase
     use ResetAutoloadFunctionsTrait;
 
     /** @before */
-    protected function registerTestAssetsOnModuleAutoloader()
+    protected function registerTestAssetsOnModuleAutoloader(): void
     {
         $autoloader = new ModuleAutoloader([
             dirname(__DIR__) . '/TestAsset',

@@ -17,13 +17,8 @@ class DefaultListenerAggregate extends AbstractListener implements
     /** @var ConfigMergerInterface */
     protected $configListener;
 
-    /**
-     * Attach one or more listeners
-     *
-     * @param  int $priority
-     * @return DefaultListenerAggregate
-     */
-    public function attach(EventManagerInterface $events, $priority = 1)
+    /** {@inheritDoc} */
+    public function attach(EventManagerInterface $events, $priority = 1): self
     {
         $options                     = $this->getOptions();
         $configListener              = $this->getConfigListener();
@@ -68,12 +63,8 @@ class DefaultListenerAggregate extends AbstractListener implements
         return $this;
     }
 
-    /**
-     * Detach all previously attached listeners
-     *
-     * @return void
-     */
-    public function detach(EventManagerInterface $events)
+    /** {@inheritDoc} */
+    public function detach(EventManagerInterface $events): void
     {
         foreach ($this->listeners as $key => $listener) {
             if ($listener instanceof ListenerAggregateInterface) {
@@ -87,12 +78,7 @@ class DefaultListenerAggregate extends AbstractListener implements
         }
     }
 
-    /**
-     * Get the config merger.
-     *
-     * @return ConfigMergerInterface
-     */
-    public function getConfigListener()
+    public function getConfigListener(): ConfigMergerInterface
     {
         if (! $this->configListener instanceof ConfigMergerInterface) {
             $this->setConfigListener(new ConfigListener($this->getOptions()));
@@ -100,12 +86,7 @@ class DefaultListenerAggregate extends AbstractListener implements
         return $this->configListener;
     }
 
-    /**
-     * Set the config merger to use.
-     *
-     * @return DefaultListenerAggregate
-     */
-    public function setConfigListener(ConfigMergerInterface $configListener)
+    public function setConfigListener(ConfigMergerInterface $configListener): DefaultListenerAggregate
     {
         $this->configListener = $configListener;
         return $this;

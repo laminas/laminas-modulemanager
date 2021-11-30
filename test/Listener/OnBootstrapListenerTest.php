@@ -59,7 +59,7 @@ class OnBootstrapListenerTest extends AbstractListenerTestCase
         return new EventManager($sharedEvents);
     }
 
-    public function testOnBootstrapMethodCalledByOnBootstrapListener()
+    public function testOnBootstrapMethodCalledByOnBootstrapListener(): void
     {
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(['ListenerTestModule']);

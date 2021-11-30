@@ -105,7 +105,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         return strtolower(str_replace(['_', '-', '\\', '.', ' '], '', $name));
     }
 
-    public function testModuleClassIsRegisteredWithDiAndInjectedWithSharedInstances()
+    public function testModuleClassIsRegisteredWithDiAndInjectedWithSharedInstances(): void
     {
         $module  = null;
         $locator = $this->serviceManager;
@@ -139,7 +139,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
             }
         }
         if (! $foo) {
-            $this->fail($message);
+            self::fail($message);
         }
         self::assertSame($module, $foo->module);
 
@@ -147,7 +147,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         self::assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
     }
 
-    public function testNoDuplicateServicesAreDefinedForModuleManager()
+    public function testNoDuplicateServicesAreDefinedForModuleManager(): void
     {
         $locatorRegistrationListener = new LocatorRegistrationListener();
         $events                      = $this->moduleManager->getEventManager();
