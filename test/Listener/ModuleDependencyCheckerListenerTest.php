@@ -13,8 +13,8 @@ use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 use SomeModule\Module as SomeModule;
+use stdClass;
 
 /**
  * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener
