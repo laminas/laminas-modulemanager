@@ -14,7 +14,7 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use SomeModule\Module;
+use SomeModule\Module as SomeModule;
 use stdClass;
 use SubModule\Sub\Module as SubModule;
 
@@ -62,7 +62,7 @@ class ModuleManagerTest extends TestCase
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
-        self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        self::assertInstanceOf(SomeModule::class, $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
         self::assertSame($config->some, 'thing', var_export($config, true));
     }
@@ -181,13 +181,13 @@ class ModuleManagerTest extends TestCase
         require_once __DIR__ . '/TestAsset/SubModule/Sub/Module.php';
         $configListener = $this->defaultListeners->getConfigListener();
         $moduleManager  = new ModuleManager([
-            'SomeModule' => new Module(),
+            'SomeModule' => new SomeModule(),
             'SubModule'  => new SubModule(),
         ], $this->events);
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
-        self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        self::assertInstanceOf(SomeModule::class, $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
         self::assertSame($config->some, 'thing');
     }
@@ -196,11 +196,11 @@ class ModuleManagerTest extends TestCase
     {
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager  = new ModuleManager(['SomeModule' => new Module(), 'BarModule'], $this->events);
+        $moduleManager  = new ModuleManager(['SomeModule' => new SomeModule(), 'BarModule'], $this->events);
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
-        self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        self::assertInstanceOf(SomeModule::class, $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
         self::assertSame($config->some, 'thing');
     }
@@ -209,7 +209,7 @@ class ModuleManagerTest extends TestCase
     {
         require_once __DIR__ . '/TestAsset/SomeModule/Module.php';
         $this->defaultListeners->getConfigListener();
-        $moduleManager = new ModuleManager([new Module()], $this->events);
+        $moduleManager = new ModuleManager([new SomeModule()], $this->events);
         $this->defaultListeners->attach($this->events);
         $this->expectException(Exception\RuntimeException::class);
         $moduleManager->loadModules();

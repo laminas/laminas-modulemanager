@@ -87,6 +87,36 @@ loaded. When a module class implements
 against the loaded modules list: if one of the values is not in that list, a
 `Laminas\ModuleManager\Exception\MissingDependencyModuleException` is thrown.
 
+> ### Enable the Dependency Autoloader
+>
+> If the option load dependencies is activated, the ModuleDependencyCheckerListener will try to reload a missing
+> dependency. So no `Laminas\ModuleManager\Exception\MissingDependencyModuleException` is thrown!
+>
+> - Since 2.12.0
+>
+> If you are using Composer to autoload, you may not need to use the
+> `ModuleAutoloader`. As such, you can enable it by passing the following
+> option to the `ListenerOptions` class:
+>
+> ```php
+> 'load_dependencies' => true,
+> ```
+>
+> If your project was begun from the [laminas-mvc-skeleton](https://github.com/laminas/laminas-mvc-skeleton),
+> place the above within the `module_listener_options` configuration of your
+> `config/application.config.php` file:
+>
+> ```php
+> return [
+>     /* ... */
+>     'module_listener_options' => [
+>         'load_dependencies' => true,
+>         /* ... */
+>     ],
+>     /* ... */
+> ];
+> ```
+
 ### ConfigListener
 
 If a module class has a `getConfig()` method, or implements

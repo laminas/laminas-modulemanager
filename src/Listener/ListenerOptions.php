@@ -40,6 +40,9 @@ class ListenerOptions extends AbstractOptions
     protected $checkDependencies = true;
 
     /** @var bool */
+    protected $loadDependencies = false;
+
+    /** @var bool */
     protected $moduleMapCacheEnabled = false;
 
     /** @var string */
@@ -336,7 +339,7 @@ class ListenerOptions extends AbstractOptions
     }
 
     /**
-     * Set whether to check dependencies during module loading or not
+     * Get whether to check dependencies during module loading or not
      *
      * @return bool
      */
@@ -356,6 +359,29 @@ class ListenerOptions extends AbstractOptions
         $this->checkDependencies = (bool) $checkDependencies;
 
         return $this;
+    }
+
+    /**
+     * Set whether to load missing dependencies before throwing an exception
+     *
+     * @param bool $loadDependencies should missing dependencies are loaded
+     * @return ListenerOptions
+     */
+    public function setLoadDependencies($loadDependencies)
+    {
+        $this->loadDependencies = (bool) $loadDependencies;
+
+        return $this;
+    }
+
+    /**
+     * Get whether to load missing dependencies before throwing an exception
+     *
+     * @return bool
+     */
+    public function getLoadDependencies()
+    {
+        return $this->loadDependencies;
     }
 
     /**
