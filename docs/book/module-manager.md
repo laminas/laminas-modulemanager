@@ -89,9 +89,9 @@ against the loaded modules list: if one of the values is not in that list, a
 
 > ### Enable the Dependency Autoloader
 >
-> If the option load dependencies is activated, the ModuleDependencyCheckerListener will try to reload a missing 
+> If the option load dependencies is activated, the ModuleDependencyCheckerListener will try to reload a missing
 > dependency. So no `Laminas\ModuleManager\Exception\MissingDependencyModuleException` is thrown!
-> 
+>
 > - Since 2.12.0
 >
 > If you are using Composer to autoload, you may not need to use the
