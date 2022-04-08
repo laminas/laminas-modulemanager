@@ -346,7 +346,7 @@ class ModuleManager implements ModuleManagerInterface
     {
         $verifiedModulName = $moduleName;
 
-        if (!class_exists($moduleName) && class_exists($moduleName . '\Module')) {
+        if (! class_exists($moduleName) && class_exists($moduleName . '\Module')) {
             $verifiedModulName = $moduleName . '\Module';
         }
 

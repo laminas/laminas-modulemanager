@@ -108,8 +108,6 @@ class ModuleManagerTest extends TestCase
         self::assertSame(0, count($modules));
         $modules = $moduleManager->getLoadedModules(true);
         self::assertSame(1, count($modules));
-
-
         $moduleManager->loadModules(); // should not cause any problems
         $moduleManager->loadModule(Module::class); // should not cause any problems
         $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
@@ -124,8 +122,6 @@ class ModuleManagerTest extends TestCase
         self::assertSame(0, count($modules));
         $modules = $moduleManager->getLoadedModules(true);
         self::assertSame(1, count($modules));
-
-
         $moduleManager->loadModules(); // should not cause any problems
         $moduleManager->loadModule('SomeModule'); // should not cause any problems
         $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
