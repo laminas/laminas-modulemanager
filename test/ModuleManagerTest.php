@@ -111,14 +111,14 @@ class ModuleManagerTest extends TestCase
 
 
         $moduleManager->loadModules(); // should not cause any problems
-        $moduleManager->loadModule(\SomeModule\Module::class); // should not cause any problems
+        $moduleManager->loadModule(Module::class); // should not cause any problems
         $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
         self::assertSame(1, count($modules));
     }
 
     public function testModuleLoadingBehaviorWithModuleClassStringsVersion2()
     {
-        $moduleManager = new ModuleManager([\SomeModule\Module::class], $this->events);
+        $moduleManager = new ModuleManager([Module::class], $this->events);
         $this->defaultListeners->attach($this->events);
         $modules = $moduleManager->getLoadedModules();
         self::assertSame(0, count($modules));

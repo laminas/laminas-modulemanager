@@ -6,8 +6,10 @@ namespace Laminas\ModuleManager;
 
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerInterface;
+use ReflectionClass;
 use Traversable;
 
+use function class_exists;
 use function current;
 use function get_class;
 use function is_array;
@@ -141,7 +143,7 @@ class ModuleManager implements ModuleManagerInterface
 
         // when no class-string is found, try search for a namespace
         if (class_exists($verifiedModulName)) {
-            $moduleReflection = new \ReflectionClass($verifiedModulName);
+            $moduleReflection = new ReflectionClass($verifiedModulName);
 
             if (isset($this->loadedModules[$moduleReflection->getNamespaceName()])) {
                 return $this->loadedModules[$moduleReflection->getNamespaceName()];
@@ -337,15 +339,15 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * determines the class string of the module
      *
-     * @param $moduleName
+     * @param string $moduleName
      * @return string
      */
     private function getVerifiedModuleName($moduleName)
     {
         $verifiedModulName = $moduleName;
 
-        if (!class_exists($moduleName) && class_exists($moduleName.'\Module')) {
-            $verifiedModulName = $moduleName.'\Module';
+        if (!class_exists($moduleName) && class_exists($moduleName . '\Module')) {
+            $verifiedModulName = $moduleName . '\Module';
         }
 
         return $verifiedModulName;
