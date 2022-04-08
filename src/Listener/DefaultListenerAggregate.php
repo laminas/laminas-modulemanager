@@ -53,7 +53,7 @@ class DefaultListenerAggregate extends AbstractListener implements
         if ($options->getCheckDependencies()) {
             $this->listeners[] = $events->attach(
                 ModuleEvent::EVENT_LOAD_MODULE,
-                new ModuleDependencyCheckerListener(),
+                new ModuleDependencyCheckerListener($options),
                 8000
             );
         }

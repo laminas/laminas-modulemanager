@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
+use DependencyModule\Module;
 use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Feature;
+use Laminas\ModuleManager\Listener\ListenerOptions;
 use Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener;
+use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
+use Laminas\ModuleManager\ModuleManager;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -61,5 +65,46 @@ class ModuleDependencyCheckerListenerTest extends TestCase
         $listener = new ModuleDependencyCheckerListener();
         $this->expectException(Exception\MissingDependencyModuleException::class);
         $listener->__invoke($event);
+    }
+
+    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
+    public function testNotFulfilledDependencyThrowsExceptionViaEvent()
+    {
+        $listenerOptions = new ListenerOptions();
+
+        $moduleManager = new ModuleManager([]);
+        $moduleManager->getEventManager()->attach(
+            ModuleEvent::EVENT_LOAD_MODULE_RESOLVE,
+            new ModuleResolverListener(),
+            1000
+        );
+        $moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new ModuleDependencyCheckerListener($listenerOptions), 2000);
+
+        $this->expectException(Exception\MissingDependencyModuleException::class);
+
+        $moduleManager->loadModule(Module::class);
+    }
+
+    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
+    public function testNotFulfilledDependencyIsLoadedViaEvent()
+    {
+        $listenerOptions = new ListenerOptions();
+        $listenerOptions->setLoadDependencies(true);
+
+        $moduleManager = new ModuleManager([]);
+        $moduleManager->getEventManager()->attach(
+            ModuleEvent::EVENT_LOAD_MODULE_RESOLVE,
+            new ModuleResolverListener(),
+            1000
+        );
+        $moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new ModuleDependencyCheckerListener($listenerOptions), 2000);
+        $moduleManager->loadModule(Module::class);
+
+        $loadedModules = $moduleManager->getLoadedModules();
+
+        self::assertCount(2, $loadedModules);
+
+        self::assertArrayHasKey('DependencyModule\Module', $loadedModules);
+        self::assertArrayHasKey('SomeModule\Module', $loadedModules);
     }
 }

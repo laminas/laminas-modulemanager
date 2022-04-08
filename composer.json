@@ -53,6 +53,8 @@
         "psr-4": {
             "ListenerTestModule\\": "test/TestAsset/ListenerTestModule/",
             "ModuleAsClass\\": "test/TestAsset/ModuleAsClass/",
+            "DependencyModule\\": "test/TestAsset/DependencyModule/",
+            "SomeModule\\": "test/TestAsset/SomeModule/",
             "LaminasTest\\ModuleManager\\": "test/"
         }
     },

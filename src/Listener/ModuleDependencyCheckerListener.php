@@ -8,10 +8,12 @@ use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
 use Laminas\ModuleManager\ModuleEvent;
 
+use Laminas\ModuleManager\ModuleManagerInterface;
+
 use function method_exists;
 use function sprintf;
 
-class ModuleDependencyCheckerListener
+class ModuleDependencyCheckerListener extends AbstractListener
 {
     /** @var array of already loaded modules, indexed by module name */
     protected $loaded = [];
@@ -26,13 +28,17 @@ class ModuleDependencyCheckerListener
 
             foreach ($dependencies as $dependencyModule) {
                 if (! isset($this->loaded[$dependencyModule])) {
-                    throw new Exception\MissingDependencyModuleException(
-                        sprintf(
-                            'Module "%s" depends on module "%s", which was not initialized before it',
-                            $e->getModuleName(),
-                            $dependencyModule
-                        )
-                    );
+                    if ($this->getOptions()->getLoadDependencies()) {
+                        $e->getTarget()->loadModule($dependencyModule);
+                    } else {
+                        throw new Exception\MissingDependencyModuleException(
+                            sprintf(
+                                'Module "%s" depends on module "%s", which was not initialized before it',
+                                $e->getModuleName(),
+                                $dependencyModule
+                            )
+                        );
+                    }
                 }
             }
         }
