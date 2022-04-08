@@ -6,6 +6,7 @@ namespace DependencyModule;
 
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
+use SomeModule\Module as SomeModule;
 
 class Module implements ConfigProviderInterface, DependencyIndicatorInterface
 {
@@ -23,7 +24,7 @@ class Module implements ConfigProviderInterface, DependencyIndicatorInterface
     public function getModuleDependencies()
     {
         return [
-            \SomeModule\Module::class,
+            SomeModule::class,
         ];
     }
 }
