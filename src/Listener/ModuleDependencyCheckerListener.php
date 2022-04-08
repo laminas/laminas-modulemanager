@@ -8,8 +8,6 @@ use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
 use Laminas\ModuleManager\ModuleEvent;
 
-use Laminas\ModuleManager\ModuleManagerInterface;
-
 use function method_exists;
 use function sprintf;
 

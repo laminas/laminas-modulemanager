@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
-use DependencyModule\Module;
+use DependencyModule\Module as DependencyModule;
 use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Feature;
 use Laminas\ModuleManager\Listener\ListenerOptions;
@@ -14,6 +14,7 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use SomeModule\Module as SomeModule;
 
 /**
  * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener
@@ -78,11 +79,15 @@ class ModuleDependencyCheckerListenerTest extends TestCase
             new ModuleResolverListener(),
             1000
         );
-        $moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new ModuleDependencyCheckerListener($listenerOptions), 2000);
+        $moduleManager->getEventManager()->attach(
+            ModuleEvent::EVENT_LOAD_MODULE,
+            new ModuleDependencyCheckerListener($listenerOptions),
+            2000
+        );
 
         $this->expectException(Exception\MissingDependencyModuleException::class);
 
-        $moduleManager->loadModule(Module::class);
+        $moduleManager->loadModule(DependencyModule::class);
     }
 
     /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
@@ -97,14 +102,18 @@ class ModuleDependencyCheckerListenerTest extends TestCase
             new ModuleResolverListener(),
             1000
         );
-        $moduleManager->getEventManager()->attach(ModuleEvent::EVENT_LOAD_MODULE, new ModuleDependencyCheckerListener($listenerOptions), 2000);
-        $moduleManager->loadModule(Module::class);
+        $moduleManager->getEventManager()->attach(
+            ModuleEvent::EVENT_LOAD_MODULE,
+            new ModuleDependencyCheckerListener($listenerOptions),
+            2000
+        );
+        $moduleManager->loadModule(DependencyModule::class);
 
         $loadedModules = $moduleManager->getLoadedModules();
 
         self::assertCount(2, $loadedModules);
 
-        self::assertArrayHasKey('DependencyModule\Module', $loadedModules);
-        self::assertArrayHasKey('SomeModule\Module', $loadedModules);
+        self::assertArrayHasKey(DependencyModule::class, $loadedModules);
+        self::assertArrayHasKey(SomeModule::class, $loadedModules);
     }
 }

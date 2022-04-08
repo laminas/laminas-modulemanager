@@ -9,11 +9,17 @@ use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
 
 class Module implements ConfigProviderInterface, DependencyIndicatorInterface
 {
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function getModuleDependencies()
     {
         return [
