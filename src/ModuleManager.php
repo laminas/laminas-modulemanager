@@ -6,8 +6,10 @@ namespace Laminas\ModuleManager;
 
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerInterface;
+use ReflectionClass;
 use Traversable;
 
+use function class_exists;
 use function current;
 use function get_class;
 use function is_array;
@@ -128,8 +130,24 @@ class ModuleManager implements ModuleManagerInterface
             $module     = current($module);
         }
 
+        // search for a specific name
         if (isset($this->loadedModules[$moduleName])) {
             return $this->loadedModules[$moduleName];
+        }
+
+        // when no specific name is found, try the complete class-string
+        $verifiedModulName = $this->getVerifiedModuleName($moduleName);
+        if (isset($this->loadedModules[$verifiedModulName])) {
+            return $this->loadedModules[$verifiedModulName];
+        }
+
+        // when no class-string is found, try search for a namespace
+        if (class_exists($verifiedModulName)) {
+            $moduleReflection = new ReflectionClass($verifiedModulName);
+
+            if (isset($this->loadedModules[$moduleReflection->getNamespaceName()])) {
+                return $this->loadedModules[$moduleReflection->getNamespaceName()];
+            }
         }
 
         /*
@@ -316,5 +334,22 @@ class ModuleManager implements ModuleManagerInterface
     protected function attachDefaultListeners($events)
     {
         $events->attach(ModuleEvent::EVENT_LOAD_MODULES, [$this, 'onLoadModules']);
+    }
+
+    /**
+     * determines the class string of the module
+     *
+     * @param string $moduleName
+     * @return string
+     */
+    private function getVerifiedModuleName($moduleName)
+    {
+        $verifiedModulName = $moduleName;
+
+        if (! class_exists($moduleName) && class_exists($moduleName . '\Module')) {
+            $verifiedModulName = $moduleName . '\Module';
+        }
+
+        return $verifiedModulName;
     }
 }
