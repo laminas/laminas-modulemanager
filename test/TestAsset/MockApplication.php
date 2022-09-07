@@ -7,6 +7,8 @@ namespace LaminasTest\ModuleManager\TestAsset;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\Mvc\ApplicationInterface;
 use Laminas\Mvc\MvcEvent;
+use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\ServiceManager;
 
 class MockApplication implements ApplicationInterface
 {
@@ -19,7 +21,7 @@ class MockApplication implements ApplicationInterface
     /** @var ServiceLocatorInterface */
     public $serviceManager;
 
-    public function setEventManager(EventManagerInterface $events)
+    public function setEventManager(EventManagerInterface $events): void
     {
         $this->events = $events;
     }
@@ -36,8 +38,7 @@ class MockApplication implements ApplicationInterface
         return $this->serviceManager;
     }
 
-    /** @param ServiceLocatorInterface $serviceManager */
-    public function setServiceManager($serviceManager): self
+    public function setServiceManager(ServiceManager $serviceManager): self
     {
         $this->serviceManager = $serviceManager;
         return $this;
@@ -61,7 +62,7 @@ class MockApplication implements ApplicationInterface
         return $this->response;
     }
 
-    public function bootstrap()
+    public function bootstrap(): void
     {
         $event = new MvcEvent();
         $event->setApplication($this);

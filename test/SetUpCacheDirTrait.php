@@ -24,7 +24,7 @@ trait SetUpCacheDirTrait
     protected $configCache;
 
     /** @before */
-    protected function createTmpDir()
+    protected function createTmpDir(): void
     {
         $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'laminas_module_cache_dir';
         @mkdir($this->tmpdir);
@@ -33,7 +33,7 @@ trait SetUpCacheDirTrait
     }
 
     /** @after */
-    protected function removeTmpDir()
+    protected function removeTmpDir(): void
     {
         $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');
         if (isset($file[0])) {

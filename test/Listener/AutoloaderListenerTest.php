@@ -8,6 +8,7 @@ use Laminas\ModuleManager\Listener\AutoloaderListener;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
+use NotAutoloaderModule\Bar;
 
 use function class_exists;
 
@@ -28,7 +29,7 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
         $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new AutoloaderListener(), 2000);
     }
 
-    public function testAutoloadersRegisteredByAutoloaderListener()
+    public function testAutoloadersRegisteredByAutoloaderListener(): void
     {
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(['ListenerTestModule']);
@@ -39,14 +40,15 @@ class AutoloaderListenerTest extends AbstractListenerTestCase
     }
 
     // @codingStandardsIgnoreStart
-    public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod()
+    /** @runInSeparateProcess */
+    public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod(): void
     {
+        // @codingStandardsIgnoreEnd
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(['NotAutoloaderModule']);
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
         self::assertTrue($modules['NotAutoloaderModule']->getAutoloaderConfigCalled);
-        self::assertTrue(class_exists('Foo\Bar'));
+        self::assertTrue(class_exists(Bar::class));
     }
-   // @codingStandardsIgnoreEnd
 }

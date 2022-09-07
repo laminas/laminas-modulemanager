@@ -16,11 +16,9 @@ class CustomPluginManagerFactory implements FactoryInterface
     /**
      * Create and return an instance of the CustomPluginManager (v3)
      *
-     * @param string $name
-     * @param null|array $options
-     * @return CustomPluginManager
+     * {@inheritDoc}
      */
-    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null): CustomPluginManager
     {
         $options = $options ?: [];
         return new CustomPluginManager($container, $options);
@@ -29,7 +27,7 @@ class CustomPluginManagerFactory implements FactoryInterface
     /**
      * Create and return an instance of the CustomPluginManager (v2)
      *
-     * @return CustomPluginManager
+     * {@inheritDoc}
      */
     public function createService(ServiceLocatorInterface $container)
     {
@@ -41,7 +39,7 @@ class CustomPluginManagerFactory implements FactoryInterface
      *
      * @param array $options
      */
-    public function setCreationOptions(array $options)
+    public function setCreationOptions(array $options): void
     {
         $this->creationOptions = $options;
     }

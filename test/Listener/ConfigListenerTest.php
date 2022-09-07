@@ -40,7 +40,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         );
     }
 
-    public function testMultipleConfigsAreMerged()
+    public function testMultipleConfigsAreMerged(): void
     {
         $configListener = new ConfigListener();
 
@@ -57,7 +57,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertInstanceOf(Config::class, $configObject);
     }
 
-    public function testCanCacheMergedConfig()
+    public function testCanCacheMergedConfig(): void
     {
         $options        = new ListenerOptions([
             'cache_dir'            => $this->tmpdir,
@@ -88,7 +88,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertFalse($modules['ListenerTestModule']->getConfigCalled);
     }
 
-    public function testBadConfigValueThrowsInvalidArgumentException()
+    public function testBadConfigValueThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -100,28 +100,28 @@ class ConfigListenerTest extends AbstractListenerTestCase
         $moduleManager->loadModules();
     }
 
-    public function testBadGlobPathTrowsInvalidArgumentException()
+    public function testBadGlobPathTrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $configListener = new ConfigListener();
         $configListener->addConfigGlobPath(['asd']);
     }
 
-    public function testBadGlobPathArrayTrowsInvalidArgumentException()
+    public function testBadGlobPathArrayTrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $configListener = new ConfigListener();
         $configListener->addConfigGlobPaths('asd');
     }
 
-    public function testBadStaticPathArrayTrowsInvalidArgumentException()
+    public function testBadStaticPathArrayTrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $configListener = new ConfigListener();
         $configListener->addConfigStaticPaths('asd');
     }
 
-    public function testCanMergeConfigFromGlob()
+    public function testCanMergeConfigFromGlob(): void
     {
         $configListener = new ConfigListener();
         $configListener->addConfigGlobPath(__DIR__ . '/_files/good/*.{ini,php,xml}');
@@ -147,7 +147,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame('loaded', $config['xml']);
     }
 
-    public function testCanMergeConfigFromStaticPath()
+    public function testCanMergeConfigFromStaticPath(): void
     {
         $configListener = new ConfigListener();
         $configListener->addConfigStaticPath(__DIR__ . '/_files/good/config.ini');
@@ -175,7 +175,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame('loaded', $config['xml']);
     }
 
-    public function testCanMergeConfigFromStaticPaths()
+    public function testCanMergeConfigFromStaticPaths(): void
     {
         $configListener = new ConfigListener();
         $configListener->addConfigStaticPaths([
@@ -205,7 +205,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame('loaded', $config['xml']);
     }
 
-    public function testCanCacheMergedConfigFromGlob()
+    public function testCanCacheMergedConfigFromGlob(): void
     {
         $options        = new ListenerOptions([
             'cache_dir'            => $this->tmpdir,
@@ -245,7 +245,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
     }
 
-    public function testCanCacheMergedConfigFromStatic()
+    public function testCanCacheMergedConfigFromStatic(): void
     {
         $options        = new ListenerOptions([
             'cache_dir'            => $this->tmpdir,
@@ -289,7 +289,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
     }
 
-    public function testCanMergeConfigFromArrayOfGlobs()
+    public function testCanMergeConfigFromArrayOfGlobs(): void
     {
         $configListener = new ConfigListener();
         $configListener->addConfigGlobPaths(new ArrayObject([
@@ -311,7 +311,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame('loaded', $configObject->xml);
     }
 
-    public function testCanMergeConfigFromArrayOfStatic()
+    public function testCanMergeConfigFromArrayOfStatic(): void
     {
         $configListener = new ConfigListener();
         $configListener->addConfigStaticPaths(new ArrayObject([
@@ -333,7 +333,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame('loaded', $configObject->xml);
     }
 
-    public function testMergesWithMergeAndReplaceBehavior()
+    public function testMergesWithMergeAndReplaceBehavior(): void
     {
         $configListener = new ConfigListener();
 
@@ -353,7 +353,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
         self::assertSame('bar', $mergedConfig['keyed']);
     }
 
-    public function testConfigListenerFunctionsAsAggregateListener()
+    public function testConfigListenerFunctionsAsAggregateListener(): void
     {
         $configListener = new ConfigListener();
 

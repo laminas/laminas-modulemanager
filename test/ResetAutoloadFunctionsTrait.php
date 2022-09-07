@@ -23,7 +23,7 @@ trait ResetAutoloadFunctionsTrait
     private $includePath;
 
     /** @before */
-    protected function preserveAutoloadFunctions()
+    protected function preserveAutoloadFunctions(): void
     {
         $this->loaders = spl_autoload_functions();
         if (! is_array($this->loaders)) {
@@ -34,13 +34,13 @@ trait ResetAutoloadFunctionsTrait
     }
 
     /** @before */
-    protected function preserveIncludePath()
+    protected function preserveIncludePath(): void
     {
         $this->includePath = get_include_path();
     }
 
     /** @after */
-    protected function restoreAutoloadFunctions()
+    protected function restoreAutoloadFunctions(): void
     {
         $loaders = spl_autoload_functions();
         if (is_array($loaders)) {
@@ -53,7 +53,7 @@ trait ResetAutoloadFunctionsTrait
     }
 
     /** @before */
-    protected function restoreIncludePath()
+    protected function restoreIncludePath(): void
     {
         set_include_path((string) $this->includePath);
     }

@@ -44,7 +44,7 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
         );
     }
 
-    public function testDefaultListenerAggregateCanAttachItself()
+    public function testDefaultListenerAggregateCanAttachItself(): void
     {
         $moduleManager = new ModuleManager(['ListenerTestModule']);
         (new DefaultListenerAggregate())->attach($moduleManager->getEventManager());
@@ -86,7 +86,7 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
         }
     }
 
-    public function testDefaultListenerAggregateCanDetachItself()
+    public function testDefaultListenerAggregateCanDetachItself(): void
     {
         $listenerAggregate = new DefaultListenerAggregate();
         $moduleManager     = new ModuleManager(['ListenerTestModule']);
@@ -101,7 +101,7 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
         self::assertEquals(1, count($this->getEventsFromEventManager($events)));
     }
 
-    public function testDefaultListenerAggregateSkipsAutoloadingListenersIfLaminasLoaderIsNotUsed()
+    public function testDefaultListenerAggregateSkipsAutoloadingListenersIfLaminasLoaderIsNotUsed(): void
     {
         $moduleManager     = new ModuleManager(['ListenerTestModule']);
         $eventManager      = $moduleManager->getEventManager();

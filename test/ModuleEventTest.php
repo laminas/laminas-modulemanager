@@ -23,7 +23,7 @@ class ModuleEventTest extends TestCase
         $this->event = new ModuleEvent();
     }
 
-    public function testCanRetrieveModuleViaGetter()
+    public function testCanRetrieveModuleViaGetter(): void
     {
         $module = new stdClass();
         $this->event->setModule($module);
@@ -31,13 +31,13 @@ class ModuleEventTest extends TestCase
         self::assertSame($module, $test);
     }
 
-    public function testPassingNonObjectToSetModuleRaisesException()
+    public function testPassingNonObjectToSetModuleRaisesException(): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->event->setModule('foo');
     }
 
-    public function testCanRetrieveModuleNameViaGetter()
+    public function testCanRetrieveModuleNameViaGetter(): void
     {
         $moduleName = 'MyModule';
         $this->event->setModuleName($moduleName);
@@ -45,13 +45,13 @@ class ModuleEventTest extends TestCase
         self::assertSame($moduleName, $test);
     }
 
-    public function testPassingNonStringToSetModuleNameRaisesException()
+    public function testPassingNonStringToSetModuleNameRaisesException(): void
     {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->event->setModuleName(new stdClass());
     }
 
-    public function testSettingConfigListenerProxiesToParameters()
+    public function testSettingConfigListenerProxiesToParameters(): void
     {
         $configListener = new ConfigListener();
         $this->event->setConfigListener($configListener);
@@ -59,7 +59,7 @@ class ModuleEventTest extends TestCase
         self::assertSame($configListener, $test);
     }
 
-    public function testCanRetrieveConfigListenerViaGetter()
+    public function testCanRetrieveConfigListenerViaGetter(): void
     {
         $configListener = new ConfigListener();
         $this->event->setConfigListener($configListener);

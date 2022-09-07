@@ -37,7 +37,7 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         );
     }
 
-    public function testModuleLoaderListenerFunctionsAsAggregateListenerEnabledCache()
+    public function testModuleLoaderListenerFunctionsAsAggregateListenerEnabledCache(): void
     {
         $options = new ListenerOptions([
             'cache_dir'                => $this->tmpdir,
@@ -62,7 +62,7 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         self::assertCount(1, $listeners);
     }
 
-    public function testModuleLoaderListenerFunctionsAsAggregateListenerDisabledCache()
+    public function testModuleLoaderListenerFunctionsAsAggregateListenerDisabledCache(): void
     {
         $options = new ListenerOptions([
             'cache_dir' => $this->tmpdir,
@@ -85,7 +85,7 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
         self::assertCount(0, $listeners);
     }
 
-    public function testModuleLoaderListenerFunctionsAsAggregateListenerHasCache()
+    public function testModuleLoaderListenerFunctionsAsAggregateListenerHasCache(): void
     {
         $options = new ListenerOptions([
             'cache_dir'                => $this->tmpdir,

@@ -16,7 +16,7 @@ use function strstr;
  */
 class ListenerOptionsTest extends TestCase
 {
-    public function testCanConfigureWithArrayInConstructor()
+    public function testCanConfigureWithArrayInConstructor(): void
     {
         $options = new ListenerOptions([
             'cache_dir'            => __DIR__,
@@ -37,7 +37,7 @@ class ListenerOptionsTest extends TestCase
     }
 
     /** @group 6552 */
-    public function testConfigCacheFileWithEmptyCacheKey()
+    public function testConfigCacheFileWithEmptyCacheKey(): void
     {
         $options = new ListenerOptions([
             'cache_dir'            => __DIR__,
@@ -53,7 +53,7 @@ class ListenerOptionsTest extends TestCase
     }
 
     /** @group 6552 */
-    public function testModuleMapCacheFileWithEmptyCacheKey()
+    public function testModuleMapCacheFileWithEmptyCacheKey(): void
     {
         $options = new ListenerOptions([
             'cache_dir'                => __DIR__,
@@ -68,7 +68,7 @@ class ListenerOptionsTest extends TestCase
         self::assertEquals(__DIR__ . '/module-classmap-cache.foo.php', $options->getModuleMapCacheFile());
     }
 
-    public function testCanAccessKeysAsProperties()
+    public function testCanAccessKeysAsProperties(): void
     {
         $options = new ListenerOptions([
             'cache_dir'            => __DIR__,
@@ -94,7 +94,7 @@ class ListenerOptionsTest extends TestCase
         self::assertSame(['static', 'custom_paths'], $options->config_static_paths);
     }
 
-    public function testSetModulePathsAcceptsConfigOrTraverable()
+    public function testSetModulePathsAcceptsConfigOrTraverable(): void
     {
         $config  = new Config([__DIR__]);
         $options = new ListenerOptions();
@@ -102,14 +102,14 @@ class ListenerOptionsTest extends TestCase
         self::assertSame($config, $options->getModulePaths());
     }
 
-    public function testSetModulePathsThrowsInvalidArgumentException()
+    public function testSetModulePathsThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $options = new ListenerOptions();
         $options->setModulePaths('asd');
     }
 
-    public function testSetConfigGlobPathsAcceptsConfigOrTraverable()
+    public function testSetConfigGlobPathsAcceptsConfigOrTraverable(): void
     {
         $config  = new Config([__DIR__]);
         $options = new ListenerOptions();
@@ -117,21 +117,21 @@ class ListenerOptionsTest extends TestCase
         self::assertSame($config, $options->getConfigGlobPaths());
     }
 
-    public function testSetConfigGlobPathsThrowsInvalidArgumentException()
+    public function testSetConfigGlobPathsThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $options = new ListenerOptions();
         $options->setConfigGlobPaths('asd');
     }
 
-    public function testSetConfigStaticPathsThrowsInvalidArgumentException()
+    public function testSetConfigStaticPathsThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $options = new ListenerOptions();
         $options->setConfigStaticPaths('asd');
     }
 
-    public function testSetExtraConfigAcceptsArrayOrTraverable()
+    public function testSetExtraConfigAcceptsArrayOrTraverable(): void
     {
         $array       = [__DIR__];
         $traversable = new Config($array);
@@ -144,7 +144,7 @@ class ListenerOptionsTest extends TestCase
         self::assertSame($traversable, $options->getExtraConfig());
     }
 
-    public function testSetExtraConfigThrowsInvalidArgumentException()
+    public function testSetExtraConfigThrowsInvalidArgumentException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $options = new ListenerOptions();
