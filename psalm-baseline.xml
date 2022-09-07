@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.10.0@916b098b008f6de4543892b1e0651c1c3b92cbfa">
+<files psalm-version="4.27.0@faf106e717c37b8c81721845dba9de3d8deed8ff">
   <file src="src/Feature/ConsoleBannerProviderInterface.php">
     <UndefinedClass occurrences="1">
       <code>AdapterInterface</code>
@@ -17,6 +17,9 @@
     <MixedAssignment occurrences="1">
       <code>$autoloaderConfig</code>
     </MixedAssignment>
+    <PossiblyNullArgument occurrences="1">
+      <code>$module</code>
+    </PossiblyNullArgument>
   </file>
   <file src="src/Listener/ConfigListener.php">
     <DocblockTypeContradiction occurrences="3">
@@ -30,9 +33,15 @@
     <InvalidPropertyAssignmentValue occurrences="1">
       <code>$this-&gt;getOptions()-&gt;getExtraConfig() ?: []</code>
     </InvalidPropertyAssignmentValue>
-    <MixedArgument occurrences="6">
+    <MissingReturnType occurrences="1">
+      <code>addConfigPaths</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="9">
       <code>$config</code>
       <code>$config</code>
+      <code>$file</code>
+      <code>$file</code>
+      <code>$path</code>
       <code>$path['path']</code>
       <code>$path['type']</code>
       <code>$this-&gt;getCachedConfig()</code>
@@ -61,9 +70,9 @@
     </UnresolvableInclude>
   </file>
   <file src="src/Listener/DefaultListenerAggregate.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$this-&gt;configListener instanceof ConfigMergerInterface</code>
-    </DocblockTypeContradiction>
+    <ImplementedReturnTypeMismatch occurrences="1">
+      <code>DefaultListenerAggregate</code>
+    </ImplementedReturnTypeMismatch>
     <MixedArgument occurrences="1">
       <code>$listener</code>
     </MixedArgument>
@@ -77,13 +86,12 @@
       <code>attach</code>
     </UndefinedInterfaceMethod>
   </file>
+  <file src="src/Listener/InitTrigger.php">
+    <PossiblyNullArgument occurrences="1">
+      <code>$module</code>
+    </PossiblyNullArgument>
+  </file>
   <file src="src/Listener/ListenerOptions.php">
-    <DocblockTypeContradiction occurrences="4">
-      <code>! is_array($configGlobPaths) &amp;&amp; ! $configGlobPaths instanceof Traversable</code>
-      <code>! is_array($configStaticPaths) &amp;&amp; ! $configStaticPaths instanceof Traversable</code>
-      <code>! is_array($extraConfig) &amp;&amp; ! $extraConfig instanceof Traversable</code>
-      <code>! is_array($modulePaths) &amp;&amp; ! $modulePaths instanceof Traversable</code>
-    </DocblockTypeContradiction>
     <InvalidPropertyAssignmentValue occurrences="4">
       <code>$configGlobPaths</code>
       <code>$configStaticPaths</code>
@@ -103,13 +111,11 @@
       <code>$configCacheKey</code>
       <code>$moduleMapCacheKey</code>
     </PropertyNotSetInConstructor>
-    <RedundantCast occurrences="3">
+    <RedundantCastGivenDocblockType occurrences="6">
       <code>(bool) $checkDependencies</code>
       <code>(bool) $enabled</code>
-      <code>(bool) $flag</code>
-    </RedundantCast>
-    <RedundantCastGivenDocblockType occurrences="3">
       <code>(bool) $enabled</code>
+      <code>(bool) $flag</code>
       <code>(string) $this-&gt;configCacheKey</code>
       <code>(string) $this-&gt;moduleMapCacheKey</code>
     </RedundantCastGivenDocblockType>
@@ -152,6 +158,9 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Listener/ModuleLoaderListener.php">
+    <MissingReturnType occurrences="1">
+      <code>onLoadModulesPost</code>
+    </MissingReturnType>
     <MixedArgument occurrences="1">
       <code>$callback</code>
     </MixedArgument>
@@ -187,25 +196,37 @@
     <PossiblyInvalidMethodCall occurrences="1">
       <code>getEventManager</code>
     </PossiblyInvalidMethodCall>
+    <PossiblyNullArgument occurrences="1">
+      <code>$module</code>
+    </PossiblyNullArgument>
   </file>
   <file src="src/Listener/ServiceListener.php">
     <DocblockTypeContradiction occurrences="1">
       <code>gettype($config)</code>
     </DocblockTypeContradiction>
     <ImplementedReturnTypeMismatch occurrences="1">
-      <code>self</code>
+      <code>ServiceListener</code>
     </ImplementedReturnTypeMismatch>
     <InvalidScalarArgument occurrences="1">
       <code>is_object($config) ? get_class($config) : (is_scalar($config) ? $config : gettype($config))</code>
     </InvalidScalarArgument>
-    <MixedArgument occurrences="6">
+    <MissingReturnType occurrences="1">
+      <code>addServiceManager</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="9">
       <code>$class</code>
       <code>$config</code>
       <code>$configs</code>
       <code>$configs</code>
       <code>$sm</code>
       <code>$sm['module_class_method']</code>
+      <code>$sm['service_manager']</code>
+      <code>$sm['service_manager']</code>
+      <code>$sm['service_manager']</code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
     <MixedArrayAccess occurrences="6">
       <code>$configs['configuration_classes']</code>
       <code>$sm['module_class_interface']</code>
@@ -224,12 +245,11 @@
       <code>$config[$metadata['config_key']]</code>
       <code>$config[$metadata['config_key']]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="7">
+    <MixedAssignment occurrences="6">
       <code>$class</code>
       <code>$config</code>
-      <code>$config</code>
       <code>$configs</code>
-      <code>$instance</code>
+      <code>$name</code>
       <code>$sm</code>
       <code>$sm</code>
     </MixedAssignment>
@@ -237,6 +257,9 @@
       <code>$sm['module_class_method']</code>
       <code>new $class()</code>
     </MixedMethodCall>
+    <MixedOperand occurrences="1">
+      <code>$sm['module_class_method']</code>
+    </MixedOperand>
     <PossiblyNullArgument occurrences="1">
       <code>$module</code>
     </PossiblyNullArgument>
@@ -267,6 +290,9 @@
       <code>getServices</code>
       <code>getShared</code>
     </UndefinedMethod>
+    <UnusedVariable occurrences="1">
+      <code>$name</code>
+    </UnusedVariable>
   </file>
   <file src="src/Listener/ServiceListenerInterface.php">
     <MissingReturnType occurrences="1">
@@ -278,6 +304,12 @@
       <code>is_object($module)</code>
       <code>is_string($moduleName)</code>
     </DocblockTypeContradiction>
+    <MixedInferredReturnType occurrences="1">
+      <code>null|object</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;module</code>
+    </MixedReturnStatement>
     <PropertyNotSetInConstructor occurrences="4">
       <code>$configListener</code>
       <code>$moduleName</code>
@@ -286,20 +318,24 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/ModuleManager.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>$this-&gt;event instanceof ModuleEvent</code>
-      <code>$this-&gt;events instanceof EventManagerInterface</code>
-    </DocblockTypeContradiction>
     <ImplementedReturnTypeMismatch occurrences="1">
-      <code>Traversable|array</code>
+      <code>ModuleManager</code>
     </ImplementedReturnTypeMismatch>
-    <InvalidPropertyAssignmentValue occurrences="2">
-      <code>$modules</code>
+    <InvalidPropertyAssignmentValue occurrences="1">
       <code>$this-&gt;loadedModules</code>
     </InvalidPropertyAssignmentValue>
+    <InvalidReturnStatement occurrences="1">
+      <code>$this-&gt;modules</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>array</code>
+    </InvalidReturnType>
     <MissingClosureParamType occurrences="1">
       <code>$r</code>
     </MissingClosureParamType>
+    <MissingReturnType occurrences="1">
+      <code>attachDefaultListeners</code>
+    </MissingReturnType>
     <MixedArgument occurrences="2">
       <code>$module</code>
       <code>$module</code>
@@ -464,9 +500,11 @@
     <MissingClosureParamType occurrences="1">
       <code>$s</code>
     </MissingClosureParamType>
-    <MixedArgument occurrences="3">
+    <MixedArgument occurrences="5">
       <code>$aliases</code>
       <code>$instances</code>
+      <code>$manager</code>
+      <code>$module</code>
       <code>$r-&gt;getValue($container)</code>
     </MixedArgument>
     <MixedAssignment occurrences="5">
@@ -490,16 +528,9 @@
     <MixedReturnStatement occurrences="1">
       <code>$container-&gt;getRegisteredServices()</code>
     </MixedReturnStatement>
-    <TooManyArguments occurrences="1">
-      <code>new Bar($module, $manager)</code>
-    </TooManyArguments>
     <UndefinedMethod occurrences="1">
       <code>setSharedManager</code>
     </UndefinedMethod>
-    <UnusedVariable occurrences="2">
-      <code>$manager</code>
-      <code>$module</code>
-    </UnusedVariable>
   </file>
   <file src="test/Listener/ModuleDependencyCheckerListenerTest.php">
     <DeprecatedMethod occurrences="2">
@@ -707,11 +738,6 @@
       <code>(string) $this-&gt;includePath</code>
     </RedundantCastGivenDocblockType>
   </file>
-  <file src="test/TestAsset/ListenerTestModule/src/Foo/Bar.php">
-    <DuplicateClass occurrences="1">
-      <code>Bar</code>
-    </DuplicateClass>
-  </file>
   <file src="test/TestAsset/MockApplication.php">
     <MissingConstructor occurrences="2">
       <code>$events</code>
@@ -727,5 +753,10 @@
       <code>$this-&gt;response</code>
       <code>$this-&gt;response</code>
     </MixedReturnStatement>
+  </file>
+  <file src="test/TestAsset/NotAutoloaderModule/src/Foo/Bar.php">
+    <DuplicateClass occurrences="1">
+      <code>Bar</code>
+    </DuplicateClass>
   </file>
 </files>
