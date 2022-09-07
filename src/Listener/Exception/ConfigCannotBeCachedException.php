@@ -12,7 +12,7 @@ use function sprintf;
 
 final class ConfigCannotBeCachedException extends RuntimeException
 {
-    private function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
+    private function __construct(string $message = "", int $code = 0, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
@@ -25,7 +25,7 @@ final class ConfigCannotBeCachedException extends RuntimeException
                 'Cannot export config into a cache file. Config contains uncacheable entries: %s',
                 $exportException->getMessage()
             ),
-            (int) $exportException->getCode(),
+            $exportException->getCode(),
             $exportException
         );
     }

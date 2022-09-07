@@ -59,7 +59,7 @@ class ConfigListener extends AbstractListener implements
     }
 
     /** {@inheritDoc} */
-    public function attach(EventManagerInterface $events, $priority = 1): void
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, [$this, 'onloadModulesPre'], 1000);
 
@@ -75,8 +75,10 @@ class ConfigListener extends AbstractListener implements
 
     /**
      * Pass self to the ModuleEvent object early so everyone has access.
+     *
+     * @return ConfigListener
      */
-    public function onloadModulesPre(ModuleEvent $e): ConfigListener
+    public function onloadModulesPre(ModuleEvent $e)
     {
         $e->setConfigListener($this);
 
@@ -85,8 +87,10 @@ class ConfigListener extends AbstractListener implements
 
     /**
      * Merge the config for each module
+     *
+     * @return ConfigListener
      */
-    public function onLoadModule(ModuleEvent $e): ConfigListener
+    public function onLoadModule(ModuleEvent $e)
     {
         $module = $e->getModule();
 
@@ -107,8 +111,10 @@ class ConfigListener extends AbstractListener implements
      * Merge all config files matched by the given glob()s
      *
      * This is only attached if config is not cached.
+     *
+     * @return ConfigListener
      */
-    public function onMergeConfig(ModuleEvent $e): ConfigListener
+    public function onMergeConfig(ModuleEvent $e)
     {
         // Load the config files
         foreach ($this->paths as $path) {
@@ -128,8 +134,10 @@ class ConfigListener extends AbstractListener implements
      * Optionally cache merged config
      *
      * This is only attached if config is not cached.
+     *
+     * @return ConfigListener
      */
-    public function onLoadModules(ModuleEvent $e): ConfigListener
+    public function onLoadModules(ModuleEvent $e)
     {
         // Trigger MERGE_CONFIG event. This is a hook to allow the merged application config to be
         // modified before it is cached (In particular, allows the removal of config keys)
@@ -168,8 +176,11 @@ class ConfigListener extends AbstractListener implements
         return $this->mergedConfig;
     }
 
-    /** @param array $config */
-    public function setMergedConfig(array $config): ConfigListener
+    /**
+     * @param  array $config
+     * @return ConfigListener
+     */
+    public function setMergedConfig(array $config)
     {
         $this->mergedConfig       = $config;
         $this->mergedConfigObject = null;
@@ -179,9 +190,10 @@ class ConfigListener extends AbstractListener implements
     /**
      * Add an array of glob paths of config files to merge after loading modules
      *
-     * @param array|Traversable $globPaths
+     * @param  array|Traversable $globPaths
+     * @return ConfigListener
      */
-    public function addConfigGlobPaths($globPaths): ConfigListener
+    public function addConfigGlobPaths($globPaths)
     {
         $this->addConfigPaths($globPaths, self::GLOB_PATH);
         return $this;
@@ -190,9 +202,10 @@ class ConfigListener extends AbstractListener implements
     /**
      * Add a glob path of config files to merge after loading modules
      *
-     * @param string $globPath
+     * @param  string $globPath
+     * @return ConfigListener
      */
-    public function addConfigGlobPath($globPath): ConfigListener
+    public function addConfigGlobPath($globPath)
     {
         $this->addConfigPath($globPath, self::GLOB_PATH);
         return $this;
@@ -201,9 +214,10 @@ class ConfigListener extends AbstractListener implements
     /**
      * Add an array of static paths of config files to merge after loading modules
      *
-     * @param array|Traversable $staticPaths
+     * @param  array|Traversable $staticPaths
+     * @return ConfigListener
      */
-    public function addConfigStaticPaths($staticPaths): ConfigListener
+    public function addConfigStaticPaths($staticPaths)
     {
         $this->addConfigPaths($staticPaths, self::STATIC_PATH);
         return $this;
@@ -211,8 +225,11 @@ class ConfigListener extends AbstractListener implements
 
     /**
      * Add a static path of config files to merge after loading modules
+     *
+     * @param  string $staticPath
+     * @return ConfigListener
      */
-    public function addConfigStaticPath(string $staticPath): ConfigListener
+    public function addConfigStaticPath($staticPath)
     {
         $this->addConfigPath($staticPath, self::STATIC_PATH);
         return $this;
@@ -222,9 +239,10 @@ class ConfigListener extends AbstractListener implements
      * Add an array of paths of config files to merge after loading modules
      *
      * @param  Traversable|array $paths
+     * @param string $type
      * @throws Exception\InvalidArgumentException
      */
-    protected function addConfigPaths($paths, string $type): void
+    protected function addConfigPaths($paths, $type)
     {
         if ($paths instanceof Traversable) {
             $paths = ArrayUtils::iteratorToArray($paths);
@@ -244,7 +262,7 @@ class ConfigListener extends AbstractListener implements
         }
 
         foreach ($paths as $path) {
-            $this->addConfigPath((string) $path, $type);
+            $this->addConfigPath($path, $type);
         }
     }
 
@@ -252,9 +270,11 @@ class ConfigListener extends AbstractListener implements
      * Add a path of config files to load and merge after loading modules
      *
      * @param  string $path
+     * @param  string $type
      * @throws Exception\InvalidArgumentException
+     * @return ConfigListener
      */
-    protected function addConfigPath($path, string $type): ConfigListener
+    protected function addConfigPath($path, $type)
     {
         if (! is_string($path)) {
             throw new Exception\InvalidArgumentException(
@@ -271,10 +291,12 @@ class ConfigListener extends AbstractListener implements
     }
 
     /**
+     * @param string $key
      * @param array|Traversable $config
      * @throws Exception\InvalidArgumentException
+     * @return ConfigListener
      */
-    protected function addConfig(string $key, $config): ConfigListener
+    protected function addConfig($key, $config)
     {
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
@@ -299,8 +321,12 @@ class ConfigListener extends AbstractListener implements
     /**
      * Given a path (glob or static), fetch the config and add it to the array
      * of configs to merge.
+     *
+     * @param string $path
+     * @param string $type
+     * @return ConfigListener
      */
-    protected function addConfigByPath(string $path, string $type): ConfigListener
+    protected function addConfigByPath($path, $type)
     {
         switch ($type) {
             case self::STATIC_PATH:
@@ -310,8 +336,8 @@ class ConfigListener extends AbstractListener implements
             case self::GLOB_PATH:
                 // We want to keep track of where each value came from so we don't
                 // use ConfigFactory::fromFiles() since it does merging internally.
-                foreach (Glob::glob($path, Glob::GLOB_BRACE) as $file) {
-                    $this->addConfig((string) $file, ConfigFactory::fromFile((string) $file));
+                foreach (Glob::glob($path, Glob::GLOB_BRACE, true) as $file) {
+                    $this->addConfig($file, ConfigFactory::fromFile($file));
                 }
                 break;
         }
@@ -319,7 +345,8 @@ class ConfigListener extends AbstractListener implements
         return $this;
     }
 
-    protected function hasCachedConfig(): bool
+    /** @return bool */
+    protected function hasCachedConfig()
     {
         if (
             ($this->getOptions()->getConfigCacheEnabled())

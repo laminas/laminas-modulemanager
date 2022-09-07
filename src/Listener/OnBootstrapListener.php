@@ -13,14 +13,10 @@ use function method_exists;
 
 class OnBootstrapListener extends AbstractListener
 {
-    public function __invoke(ModuleEvent $e): void
+    /** @return void */
+    public function __invoke(ModuleEvent $e)
     {
         $module = $e->getModule();
-
-        if ($module === null) {
-            return;
-        }
-
         if (
             ! $module instanceof BootstrapListenerInterface
             && ! method_exists($module, 'onBootstrap')

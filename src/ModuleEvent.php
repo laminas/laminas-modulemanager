@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Laminas\ModuleManager;
 
 use Laminas\EventManager\Event;
-use Laminas\ModuleManager\Listener\ConfigMergerInterface;
 
 use function gettype;
 use function is_object;
@@ -27,16 +26,20 @@ class ModuleEvent extends Event
     public const EVENT_LOAD_MODULE         = 'loadModule';
     public const EVENT_LOAD_MODULES_POST   = 'loadModules.post';
 
-    /** @var null|object */
+    /** @var mixed */
     protected $module;
 
     /** @var string */
     protected $moduleName;
 
-    /** @var ConfigMergerInterface */
+    /** @var Listener\ConfigMergerInterface */
     protected $configListener;
 
-    /** @return string */
+    /**
+     * Get the name of a given module
+     *
+     * @return string
+     */
     public function getModuleName()
     {
         return $this->moduleName;
@@ -47,8 +50,9 @@ class ModuleEvent extends Event
      *
      * @param  string $moduleName
      * @throws Exception\InvalidArgumentException
+     * @return ModuleEvent
      */
-    public function setModuleName($moduleName): ModuleEvent
+    public function setModuleName($moduleName)
     {
         if (! is_string($moduleName)) {
             throw new Exception\InvalidArgumentException(
@@ -80,8 +84,9 @@ class ModuleEvent extends Event
      *
      * @param  object $module
      * @throws Exception\InvalidArgumentException
+     * @return ModuleEvent
      */
-    public function setModule($module): ModuleEvent
+    public function setModule($module)
     {
         if (! is_object($module)) {
             throw new Exception\InvalidArgumentException(
@@ -98,15 +103,22 @@ class ModuleEvent extends Event
         return $this;
     }
 
-    public function getConfigListener(): ?ConfigMergerInterface
+    /**
+     * Get the config listener
+     *
+     * @return null|Listener\ConfigMergerInterface
+     */
+    public function getConfigListener()
     {
         return $this->configListener;
     }
 
     /**
      * Set module object to compose in this event
+     *
+     * @return ModuleEvent
      */
-    public function setConfigListener(ConfigMergerInterface $configListener): ModuleEvent
+    public function setConfigListener(Listener\ConfigMergerInterface $configListener)
     {
         $this->setParam('configListener', $configListener);
         $this->configListener = $configListener;

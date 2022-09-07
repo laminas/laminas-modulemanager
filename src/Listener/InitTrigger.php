@@ -11,14 +11,10 @@ use function method_exists;
 
 class InitTrigger extends AbstractListener
 {
-    public function __invoke(ModuleEvent $e): void
+    /** @return void */
+    public function __invoke(ModuleEvent $e)
     {
         $module = $e->getModule();
-
-        if ($module === null) {
-            return;
-        }
-
         if (
             ! $module instanceof InitProviderInterface
             && ! method_exists($module, 'init')

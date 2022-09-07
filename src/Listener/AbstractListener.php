@@ -20,12 +20,17 @@ abstract class AbstractListener
         $this->setOptions($options);
     }
 
-    public function getOptions(): ListenerOptions
+    /** @return ListenerOptions */
+    public function getOptions()
     {
         return $this->options;
     }
 
-    public function setOptions(ListenerOptions $options): AbstractListener
+    /**
+     * @param ListenerOptions $options the value to be set
+     * @return AbstractListener
+     */
+    public function setOptions(ListenerOptions $options)
     {
         $this->options = $options;
         return $this;
@@ -34,9 +39,11 @@ abstract class AbstractListener
     /**
      * Write a simple array of scalars to a file
      *
-     * @param array $array
+     * @param  string $filePath
+     * @param  array $array
+     * @return AbstractListener
      */
-    protected function writeArrayToFile(string $filePath, array $array): AbstractListener
+    protected function writeArrayToFile($filePath, $array)
     {
         try {
             $content = "<?php\n" . VarExporter::export(

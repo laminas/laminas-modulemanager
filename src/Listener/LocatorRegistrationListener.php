@@ -29,8 +29,10 @@ class LocatorRegistrationListener extends AbstractListener implements
     /**
      * Check each loaded module to see if it implements LocatorRegistered. If it
      * does, we add it to an internal array for later.
+     *
+     * @return void
      */
-    public function onLoadModule(ModuleEvent $e): void
+    public function onLoadModule(ModuleEvent $e)
     {
         if (! $e->getModule() instanceof LocatorRegisteredInterface) {
             return;
@@ -40,8 +42,10 @@ class LocatorRegistrationListener extends AbstractListener implements
 
     /**
      * Once all the modules are loaded, loop
+     *
+     * @return void
      */
-    public function onLoadModules(ModuleEvent $e): void
+    public function onLoadModules(ModuleEvent $e)
     {
         $moduleManager = $e->getTarget();
         $events        = $moduleManager->getEventManager()->getSharedManager();
@@ -62,7 +66,7 @@ class LocatorRegistrationListener extends AbstractListener implements
                 /** @var ServiceManager $services */
                 $services = $application->getServiceManager();
                 if (! $services->has($moduleClassName)) {
-                    $services->setAlias($moduleClassName, $moduleClassNameAlias);
+                        $services->setAlias($moduleClassName, $moduleClassNameAlias);
                 }
             },
             1000
@@ -82,8 +86,9 @@ class LocatorRegistrationListener extends AbstractListener implements
      *
      * @TODO: Check the application / locator / etc a bit better to make sure
      * the env looks how we're expecting it to?
+     * @return void
      */
-    public function onBootstrap(MvcEvent $e): void
+    public function onBootstrap(MvcEvent $e)
     {
         $application = $e->getApplication();
         /** @var ServiceManager $services */
@@ -98,7 +103,7 @@ class LocatorRegistrationListener extends AbstractListener implements
     }
 
     /** {@inheritDoc} */
-    public function attach(EventManagerInterface $events, $priority = 1): void
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, [$this, 'onLoadModule']);
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, [$this, 'onLoadModules'], -1000);
