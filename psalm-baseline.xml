@@ -754,9 +754,4 @@
       <code>$this-&gt;response</code>
     </MixedReturnStatement>
   </file>
-  <file src="test/TestAsset/NotAutoloaderModule/src/Foo/Bar.php">
-    <DuplicateClass occurrences="1">
-      <code>Bar</code>
-    </DuplicateClass>
-  </file>
 </files>

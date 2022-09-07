@@ -21,7 +21,7 @@ class Module
         return [
             StandardAutoloader::class => [
                 'namespaces' => [
-                    'Foo' => __DIR__ . '/src/Foo',
+                    'NotAutoloaderModule' => __DIR__ . '/src/Foo',
                 ],
             ],
         ];

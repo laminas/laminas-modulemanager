@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Foo;
+namespace NotAutoloaderModule;
 
 class Bar
 {
