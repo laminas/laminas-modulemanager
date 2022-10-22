@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.27.0@faf106e717c37b8c81721845dba9de3d8deed8ff">
+<files psalm-version="4.29.0@7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3">
   <file src="src/Feature/ConsoleBannerProviderInterface.php">
     <UndefinedClass occurrences="1">
       <code>AdapterInterface</code>
@@ -121,8 +121,7 @@
     </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Listener/LocatorRegistrationListener.php">
-    <MixedArgument occurrences="2">
-      <code>$module</code>
+    <MixedArgument occurrences="1">
       <code>$module</code>
     </MixedArgument>
     <MixedAssignment occurrences="2">
@@ -135,9 +134,6 @@
       <code>getEventManager</code>
       <code>getSharedManager</code>
     </MixedMethodCall>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$moduleManager</code>
-    </PossiblyInvalidArgument>
     <PossiblyInvalidMethodCall occurrences="1">
       <code>getEventManager</code>
     </PossiblyInvalidMethodCall>
@@ -208,7 +204,7 @@
       <code>ServiceListener</code>
     </ImplementedReturnTypeMismatch>
     <InvalidScalarArgument occurrences="1">
-      <code>is_object($config) ? get_class($config) : (is_scalar($config) ? $config : gettype($config))</code>
+      <code>is_object($config) ? $config::class : (is_scalar($config) ? $config : gettype($config))</code>
     </InvalidScalarArgument>
     <MissingReturnType occurrences="1">
       <code>addServiceManager</code>
@@ -224,8 +220,9 @@
       <code>$sm['service_manager']</code>
       <code>$sm['service_manager']</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
+    <MixedArgumentTypeCoercion occurrences="2">
       <code>$key</code>
+      <code>$smConfig</code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess occurrences="6">
       <code>$configs['configuration_classes']</code>
@@ -469,10 +466,6 @@
       <code>$moduleManager-&gt;getEventManager()</code>
       <code>$moduleManager-&gt;getEventManager()</code>
     </ArgumentTypeCoercion>
-    <MixedArgument occurrences="2">
-      <code>$listener</code>
-      <code>$listener</code>
-    </MixedArgument>
     <MixedAssignment occurrences="4">
       <code>$listener</code>
       <code>$listener</code>
@@ -497,9 +490,6 @@
     <InvalidPropertyAssignmentValue occurrences="1">
       <code>new MockApplication()</code>
     </InvalidPropertyAssignmentValue>
-    <MissingClosureParamType occurrences="1">
-      <code>$s</code>
-    </MissingClosureParamType>
     <MixedArgument occurrences="5">
       <code>$aliases</code>
       <code>$instances</code>
@@ -517,10 +507,6 @@
     <MixedInferredReturnType occurrences="1">
       <code>array</code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="2">
-      <code>get</code>
-      <code>get</code>
-    </MixedMethodCall>
     <MixedPropertyFetch occurrences="2">
       <code>$foo-&gt;module</code>
       <code>$locator-&gt;get('Foo\Bar')-&gt;moduleManager</code>
@@ -585,17 +571,12 @@
       <code>$this-&gt;services</code>
       <code>$this-&gt;services</code>
     </InvalidCast>
-    <MissingClosureParamType occurrences="1">
-      <code>$services</code>
-    </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="1">
-      <code>static function ($services) {</code>
-    </MissingClosureReturnType>
     <MixedArgument occurrences="2">
       <code>$events</code>
       <code>$services</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$config</code>
       <code>$service</code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment occurrences="3">
@@ -628,6 +609,9 @@
     <DeprecatedInterface occurrences="1">
       <code>CustomPluginManagerFactory</code>
     </DeprecatedInterface>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$options</code>
+    </MixedArgumentTypeCoercion>
     <ParamNameMismatch occurrences="1">
       <code>$container</code>
     </ParamNameMismatch>

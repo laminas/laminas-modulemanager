@@ -18,7 +18,6 @@ use Laminas\ModuleManager\Listener\OnBootstrapListener;
 use Laminas\ModuleManager\ModuleManager;
 
 use function count;
-use function get_class;
 use function is_array;
 use function realpath;
 
@@ -77,7 +76,7 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
                 if (is_array($listener)) {
                     $listener = $listener[0];
                 }
-                $listenerClass = get_class($listener);
+                $listenerClass = $listener::class;
                 self::assertContains($listenerClass, $expectedListeners);
                 $count += 1;
             }
@@ -136,7 +135,7 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
                 if (is_array($listener)) {
                     $listener = $listener[0];
                 }
-                $listenerClass = get_class($listener);
+                $listenerClass = $listener::class;
                 self::assertContains($listenerClass, $expectedListeners);
                 $count += 1;
             }

@@ -9,7 +9,6 @@ use Laminas\EventManager\EventManagerInterface;
 use Traversable;
 
 use function current;
-use function get_class;
 use function is_array;
 use function is_object;
 use function is_string;
@@ -68,7 +67,7 @@ class ModuleManager implements ModuleManagerInterface
                 if (! is_string($moduleName)) {
                     throw new Exception\RuntimeException(sprintf(
                         'Module (%s) must have a key identifier.',
-                        get_class($module)
+                        $module::class
                     ));
                 }
                 $module = [$moduleName => $module];
