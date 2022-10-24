@@ -57,7 +57,7 @@ class LocatorRegistrationListener extends AbstractListener implements
         $events->attach(
             Application::class,
             ModuleManager::EVENT_BOOTSTRAP,
-            function (MvcEvent $e) use ($moduleManager) {
+            static function (MvcEvent $e) use ($moduleManager): void {
                 $moduleClassName      = $moduleManager::class;
                 $moduleClassNameArray = explode('\\', $moduleClassName);
                 $moduleClassNameAlias = end($moduleClassNameArray);

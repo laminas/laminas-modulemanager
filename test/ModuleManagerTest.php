@@ -164,7 +164,7 @@ class ModuleManagerTest extends TestCase
         $moduleManager = new ModuleManager(['BarModule'], $this->events);
         $events        = $this->events;
         $this->defaultListeners->attach($events);
-        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, function (ModuleEvent $e) use ($test) {
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, static function (ModuleEvent $e) use ($test): void {
             $test->modules = $e->getTarget()->getLoadedModules(false);
         });
 

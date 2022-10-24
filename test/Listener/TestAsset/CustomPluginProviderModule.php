@@ -6,13 +6,8 @@ namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
 class CustomPluginProviderModule implements CustomPluginProviderInterface
 {
-    /** @var mixed */
-    public $config;
-
-    /** @param mixed $config */
-    public function __construct($config)
+    public function __construct(public mixed $config)
     {
-        $this->config = $config;
     }
 
     /** @return mixed */

@@ -35,13 +35,6 @@ class ServiceListener implements ServiceListenerInterface
     protected $listeners = [];
 
     /**
-     * Default service manager used to fulfill other SMs that need to be lazy loaded
-     *
-     * @var ServiceManager
-     */
-    protected $defaultServiceManager;
-
-    /**
      * Default service configuration for the application service manager.
      *
      * @var array
@@ -52,10 +45,13 @@ class ServiceListener implements ServiceListenerInterface
     protected $serviceManagers = [];
 
     /** @param null|array $configuration */
-    public function __construct(ServiceManager $serviceManager, $configuration = null)
-    {
-        $this->defaultServiceManager = $serviceManager;
-
+    public function __construct(
+        /**
+         * Default service manager used to fulfill other SMs that need to be lazy loaded
+         */
+        protected ServiceManager $defaultServiceManager,
+        $configuration = null
+    ) {
         if ($configuration !== null) {
             $this->setDefaultServiceConfig($configuration);
         }
