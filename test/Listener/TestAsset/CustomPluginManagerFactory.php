@@ -36,8 +36,6 @@ class CustomPluginManagerFactory implements FactoryInterface
 
     /**
      * Provide options to use during instantiation (v2).
-     *
-     * @param array $options
      */
     public function setCreationOptions(array $options): void
     {

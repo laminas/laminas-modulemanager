@@ -3,7 +3,5 @@
 declare(strict_types=1);
 
 return [
-    'toUpper' => function (string $input) {
-        return strtoupper($input);
-    },
+    'toUpper' => static fn(string $input): string => strtoupper($input),
 ];

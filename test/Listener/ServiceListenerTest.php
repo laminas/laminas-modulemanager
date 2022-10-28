@@ -74,10 +74,10 @@ class ServiceListenerTest extends TestCase
         // @codingStandardsIgnoreStart
         return [
             'invokables' => [
-                __CLASS__ => __CLASS__
+                self::class => self::class
             ],
             'factories' => [
-                'foo' => static function () {},
+                'foo' => static function (): void {},
             ],
             'abstract_factories' => [
                 new TestAsset\SampleAbstractFactory(),
@@ -362,9 +362,7 @@ class ServiceListenerTest extends TestCase
     {
         $services = new ServiceManager();
         $services->setService('config', []);
-        $services->setFactory('foo', static function ($services) {
-            return $services;
-        });
+        $services->setFactory('foo', static fn($services) => $services);
         $listener = new ServiceListener($services);
         $listener->addServiceManager(
             $services,
@@ -378,9 +376,7 @@ class ServiceListenerTest extends TestCase
                 'config' => ['foo' => 'bar'],
             ],
             'factories' => [
-                'foo' => static function () {
-                    return new stdClass();
-                },
+                'foo' => static fn(): stdClass => new stdClass(),
             ],
         ]);
 
@@ -422,7 +418,7 @@ class ServiceListenerTest extends TestCase
         try {
             $listener->onLoadModulesPost($event);
             self::assertFalse($services->has('UndefinedPluginManager'));
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             self::fail('Exception should not be raised when encountering unknown plugin manager services');
         }
     }

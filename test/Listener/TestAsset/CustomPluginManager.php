@@ -20,8 +20,7 @@ class CustomPluginManager extends AbstractPluginManager
         }
     }
 
-    /** @param mixed $plugin */
-    public function validatePlugin($plugin): void
+    public function validatePlugin(mixed $plugin): void
     {
         $this->validate($plugin);
     }

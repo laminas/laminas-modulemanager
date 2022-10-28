@@ -109,7 +109,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
     {
         $module  = null;
         $locator = $this->serviceManager;
-        $locator->setFactory('Foo\Bar', function ($s) {
+        $locator->setFactory('Foo\Bar', static function ($s): Bar {
             $module  = $s->get(Module::class);
             $manager = $s->get(ModuleManager::class);
             return new Bar($module, $manager);
@@ -118,7 +118,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $locatorRegistrationListener = new LocatorRegistrationListener();
         $events                      = $this->moduleManager->getEventManager();
         $locatorRegistrationListener->attach($events);
-        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, function (ModuleEvent $e) use (&$module) {
+        $events->attach(ModuleEvent::EVENT_LOAD_MODULE, static function (ModuleEvent $e) use (&$module): void {
             $module = $e->getModule();
         }, -1000);
         $this->moduleManager->loadModules();
