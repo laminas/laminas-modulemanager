@@ -401,7 +401,7 @@ class ListenerOptions extends AbstractOptions
     /** @deprecated Use self::useLaminasLoader instead */
     public function useZendLoader(): bool
     {
-        return $this->useLaminasLoader();
+        return $this->useLaminasLoader(...func_get_args());
     }
 
     /** @deprecated Use self::setUseLaminasLoader instead */
