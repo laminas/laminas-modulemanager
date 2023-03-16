@@ -41,7 +41,7 @@
         "laminas/laminas-servicemanager": "^3.19.0",
         "phpunit/phpunit": "^9.5.25",
         "psalm/plugin-phpunit": "^0.18.0",
-        "vimeo/psalm": "^4.29"
+        "vimeo/psalm": "^5.0"
     },
     "suggest": {
         "laminas/laminas-console": "Laminas\\Console component",
