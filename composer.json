@@ -27,7 +27,7 @@
     "extra": {
     },
     "require": {
-        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
         "brick/varexporter": "^0.3.2",
         "laminas/laminas-config": "^3.7",
         "laminas/laminas-eventmanager": "^3.4",
