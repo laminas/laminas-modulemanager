@@ -8,8 +8,8 @@ use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Feature;
 use Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener;
 use Laminas\ModuleManager\ModuleEvent;
+use LaminasTest\ModuleManager\Listener\TestAsset\StdClassWithModuleDependencies;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 /**
  * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener
@@ -27,10 +27,10 @@ class ModuleDependencyCheckerListenerTest extends TestCase
         ); */
 
         $module = $this->getMockBuilder(Feature\DependencyIndicatorInterface::class)->getMock();
-        $module->expects(self::once())->method('getModuleDependencies')->will($this->returnValue([]));
+        $module->expects(self::once())->method('getModuleDependencies')->willReturn([]);
 
         $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
-        $event->expects(self::any())->method('getModule')->will($this->returnValue($module));
+        $event->expects(self::any())->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
         $listener->__invoke($event);
@@ -39,11 +39,11 @@ class ModuleDependencyCheckerListenerTest extends TestCase
     /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testCallsGetModuleDependenciesOnModuleNotImplementingInterface(): void
     {
-        $module = $this->getMockBuilder(stdClass::class)->setMethods(['getModuleDependencies'])->getMock();
-        $module->expects(self::once())->method('getModuleDependencies')->will($this->returnValue([]));
+        $module = $this->getMockBuilder(StdClassWithModuleDependencies::class)->getMock();
+        $module->expects(self::once())->method('getModuleDependencies')->willReturn([]);
 
         $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
-        $event->expects(self::any())->method('getModule')->will($this->returnValue($module));
+        $event->expects(self::any())->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
         $listener->__invoke($event);
@@ -52,11 +52,11 @@ class ModuleDependencyCheckerListenerTest extends TestCase
     /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testNotFulfilledDependencyThrowsException(): void
     {
-        $module = $this->getMockBuilder(stdClass::class)->setMethods(['getModuleDependencies'])->getMock();
-        $module->expects(self::once())->method('getModuleDependencies')->will($this->returnValue(['OtherModule']));
+        $module = $this->getMockBuilder(StdClassWithModuleDependencies::class)->getMock();
+        $module->expects(self::once())->method('getModuleDependencies')->willReturn(['OtherModule']);
 
         $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
-        $event->expects(self::any())->method('getModule')->will($this->returnValue($module));
+        $event->expects(self::any())->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
         $this->expectException(Exception\MissingDependencyModuleException::class);
