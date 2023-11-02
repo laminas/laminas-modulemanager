@@ -771,18 +771,6 @@
     </InvalidArgument>
     <MixedArgument>
       <code><![CDATA[$test->modules]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code>$config</code>
@@ -806,24 +794,6 @@
     <PossiblyNullReference>
       <code>getLoadedModules</code>
     </PossiblyNullReference>
-    <UndefinedThisPropertyAssignment>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->sharedEvents]]></code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-      <code><![CDATA[$this->events]]></code>
-    </UndefinedThisPropertyFetch>
   </file>
   <file src="test/ResetAutoloadFunctionsTrait.php">
     <RedundantCastGivenDocblockType>
