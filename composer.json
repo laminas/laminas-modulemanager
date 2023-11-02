@@ -35,13 +35,13 @@
         "webimpress/safe-writer": "^1.0.2 || ^2.1"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "^2.4.0",
-        "laminas/laminas-loader": "^2.9.0",
-        "laminas/laminas-mvc": "^3.5.0",
-        "laminas/laminas-servicemanager": "^3.19.0",
-        "phpunit/phpunit": "^10",
-        "psalm/plugin-phpunit": "^0.18.0",
-        "vimeo/psalm": "^5"
+        "laminas/laminas-coding-standard": "^2.5",
+        "laminas/laminas-loader": "^2.10",
+        "laminas/laminas-mvc": "^3.6.1",
+        "laminas/laminas-servicemanager": "^3.22.1",
+        "phpunit/phpunit": "^10.4.2",
+        "psalm/plugin-phpunit": "^0.18.4",
+        "vimeo/psalm": "^5.15"
     },
     "suggest": {
         "laminas/laminas-console": "Laminas\\Console component",
