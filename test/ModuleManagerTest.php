@@ -33,6 +33,10 @@ class ModuleManagerTest extends TestCase
 
     /** @var DefaultListenerAggregate */
     protected $defaultListeners;
+    /** @var SharedEventManager */
+    protected $sharedEvents;
+    /** @var EventManager */
+    protected $events;
 
     protected function setUp(): void
     {

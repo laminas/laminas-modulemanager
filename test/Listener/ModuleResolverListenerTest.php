@@ -27,7 +27,7 @@ class ModuleResolverListenerTest extends AbstractListenerTestCase
         self::assertInstanceOf($expectedInstanceOf, $moduleResolver($e));
     }
 
-    public function validModuleNameProvider(): array
+    public static function validModuleNameProvider(): array
     {
         return [
             // Description => [module name, expectedInstanceOf]

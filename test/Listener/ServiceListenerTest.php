@@ -228,7 +228,7 @@ class ServiceListenerTest extends TestCase
     }
 
     /** @psalm-return array<string, array<int, scalar|array<int, string>|object|null>> */
-    public function invalidServiceManagerTypes(): array
+    public static function invalidServiceManagerTypes(): array
     {
         return [
             'null'       => [null],
