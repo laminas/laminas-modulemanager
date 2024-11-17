@@ -1,96 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="src/Feature/AutoloaderProviderInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getAutoloaderConfig]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Feature/BootstrapListenerInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[onBootstrap]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Feature/ConfigProviderInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getConfig]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Feature/ConsoleBannerProviderInterface.php">
     <UndefinedClass>
-      <code>AdapterInterface</code>
+      <code><![CDATA[AdapterInterface]]></code>
     </UndefinedClass>
+    <UnusedClass>
+      <code><![CDATA[ConsoleBannerProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/ConsoleUsageProviderInterface.php">
     <UndefinedClass>
-      <code>AdapterInterface</code>
+      <code><![CDATA[AdapterInterface]]></code>
     </UndefinedClass>
+    <UnusedClass>
+      <code><![CDATA[ConsoleUsageProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/ControllerPluginProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[ControllerPluginProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/ControllerProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[ControllerProviderInterface]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Feature/DependencyIndicatorInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getModuleDependencies]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Feature/FilterProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[FilterProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/FormElementProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[FormElementProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/HydratorProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[HydratorProviderInterface]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Feature/InitProviderInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[init]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Feature/InputFilterProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[InputFilterProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/LogProcessorProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[LogProcessorProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/LogWriterProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[LogWriterProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/RouteProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[RouteProviderInterface]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Feature/SerializerProviderInterface.php">
+    <UnusedClass>
+      <code><![CDATA[SerializerProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/ServiceProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getServiceConfig]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Feature/TranslatorPluginProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[TranslatorPluginProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/ValidatorProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[ValidatorProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Feature/ViewHelperProviderInterface.php">
     <DeprecatedClass>
-      <code>array|Config</code>
+      <code><![CDATA[array|Config]]></code>
     </DeprecatedClass>
+    <UnusedClass>
+      <code><![CDATA[ViewHelperProviderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Listener/AutoloaderListener.php">
     <MixedArgument>
-      <code>$autoloaderConfig</code>
+      <code><![CDATA[$autoloaderConfig]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$autoloaderConfig</code>
+      <code><![CDATA[$autoloaderConfig]]></code>
     </MixedAssignment>
     <PossiblyNullArgument>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/Listener/ConfigListener.php">
     <DocblockTypeContradiction>
-      <code>is_array($config)</code>
-      <code>is_array($paths)</code>
-      <code>is_string($path)</code>
+      <code><![CDATA[is_array($config)]]></code>
+      <code><![CDATA[is_array($paths)]]></code>
+      <code><![CDATA[is_string($path)]]></code>
     </DocblockTypeContradiction>
     <InvalidArgument>
       <code><![CDATA[$this->mergedConfig]]></code>
@@ -99,14 +174,14 @@
       <code><![CDATA[$this->getOptions()->getExtraConfig() ?: []]]></code>
     </InvalidPropertyAssignmentValue>
     <MissingReturnType>
-      <code>addConfigPaths</code>
+      <code><![CDATA[addConfigPaths]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$config</code>
-      <code>$config</code>
-      <code>$file</code>
-      <code>$file</code>
-      <code>$path</code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$file]]></code>
+      <code><![CDATA[$file]]></code>
+      <code><![CDATA[$path]]></code>
       <code><![CDATA[$path['path']]]></code>
       <code><![CDATA[$path['type']]]></code>
       <code><![CDATA[$this->getCachedConfig()]]></code>
@@ -117,49 +192,57 @@
       <code><![CDATA[$path['type']]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$config</code>
-      <code>$config</code>
-      <code>$file</code>
-      <code>$path</code>
-      <code>$path</code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$file]]></code>
+      <code><![CDATA[$path]]></code>
+      <code><![CDATA[$path]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>getEventManager</code>
-      <code>triggerEvent</code>
+      <code><![CDATA[getEventManager]]></code>
+      <code><![CDATA[triggerEvent]]></code>
     </MixedMethodCall>
     <PossiblyInvalidMethodCall>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyInvalidMethodCall>
     <PossiblyNullArgument>
-      <code>$originalEventName</code>
+      <code><![CDATA[$originalEventName]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyNullReference>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$e]]></code>
+    </PossiblyUnusedParam>
     <UnresolvableInclude>
       <code><![CDATA[include $this->getOptions()->getConfigCacheFile()]]></code>
     </UnresolvableInclude>
   </file>
+  <file src="src/Listener/ConfigMergerInterface.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[ConfigMergerInterface]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
   <file src="src/Listener/DefaultListenerAggregate.php">
     <ImplementedReturnTypeMismatch>
-      <code>DefaultListenerAggregate</code>
+      <code><![CDATA[DefaultListenerAggregate]]></code>
     </ImplementedReturnTypeMismatch>
     <MixedArgument>
-      <code>$listener</code>
+      <code><![CDATA[$listener]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$listener</code>
+      <code><![CDATA[$listener]]></code>
     </MixedAssignment>
     <PropertyNotSetInConstructor>
-      <code>$configListener</code>
+      <code><![CDATA[$configListener]]></code>
     </PropertyNotSetInConstructor>
     <UndefinedInterfaceMethod>
-      <code>attach</code>
+      <code><![CDATA[attach]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Listener/InitTrigger.php">
     <PossiblyNullArgument>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/Listener/ListenerOptions.php">
@@ -170,16 +253,16 @@
       <code><![CDATA[! is_array($modulePaths) && ! $modulePaths instanceof Traversable]]></code>
     </DocblockTypeContradiction>
     <InvalidPropertyAssignmentValue>
-      <code>$configGlobPaths</code>
-      <code>$configStaticPaths</code>
-      <code>$extraConfig</code>
-      <code>$modulePaths</code>
+      <code><![CDATA[$configGlobPaths]]></code>
+      <code><![CDATA[$configStaticPaths]]></code>
+      <code><![CDATA[$extraConfig]]></code>
+      <code><![CDATA[$modulePaths]]></code>
     </InvalidPropertyAssignmentValue>
     <MissingTemplateParam>
-      <code>ListenerOptions</code>
+      <code><![CDATA[ListenerOptions]]></code>
     </MissingTemplateParam>
     <MixedArgument>
-      <code>func_get_args()</code>
+      <code><![CDATA[func_get_args()]]></code>
     </MixedArgument>
     <PossiblyNullOperand>
       <code><![CDATA[$this->getCacheDir()]]></code>
@@ -187,135 +270,152 @@
       <code><![CDATA[$this->getCacheDir()]]></code>
       <code><![CDATA[$this->getCacheDir()]]></code>
     </PossiblyNullOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[setCacheDir]]></code>
+      <code><![CDATA[setCheckDependencies]]></code>
+      <code><![CDATA[setConfigCacheEnabled]]></code>
+      <code><![CDATA[setModuleMapCacheEnabled]]></code>
+      <code><![CDATA[setUseZendLoader]]></code>
+      <code><![CDATA[useZendLoader]]></code>
+    </PossiblyUnusedMethod>
     <PropertyNotSetInConstructor>
-      <code>$configCacheKey</code>
-      <code>$moduleMapCacheKey</code>
+      <code><![CDATA[$configCacheKey]]></code>
+      <code><![CDATA[$moduleMapCacheKey]]></code>
     </PropertyNotSetInConstructor>
     <RedundantCastGivenDocblockType>
-      <code>(bool) $checkDependencies</code>
-      <code>(bool) $enabled</code>
-      <code>(bool) $enabled</code>
-      <code>(bool) $flag</code>
+      <code><![CDATA[(bool) $checkDependencies]]></code>
+      <code><![CDATA[(bool) $enabled]]></code>
+      <code><![CDATA[(bool) $enabled]]></code>
+      <code><![CDATA[(bool) $flag]]></code>
       <code><![CDATA[(string) $this->configCacheKey]]></code>
       <code><![CDATA[(string) $this->moduleMapCacheKey]]></code>
     </RedundantCastGivenDocblockType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$cacheDir]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Listener/LocatorRegistrationListener.php">
     <MixedArgument>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$events</code>
-      <code>$module</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$module]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>attach</code>
-      <code>attach</code>
-      <code>getEventManager</code>
-      <code>getSharedManager</code>
+      <code><![CDATA[attach]]></code>
+      <code><![CDATA[attach]]></code>
+      <code><![CDATA[getEventManager]]></code>
+      <code><![CDATA[getSharedManager]]></code>
     </MixedMethodCall>
     <PossiblyInvalidMethodCall>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyInvalidMethodCall>
     <PossiblyNullReference>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyNullReference>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[onBootstrap]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Listener/ModuleDependencyCheckerListener.php">
     <MixedArgument>
-      <code>$dependencyModule</code>
+      <code><![CDATA[$dependencyModule]]></code>
     </MixedArgument>
     <MixedArrayOffset>
       <code><![CDATA[$this->loaded[$dependencyModule]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$dependencies</code>
-      <code>$dependencyModule</code>
+      <code><![CDATA[$dependencies]]></code>
+      <code><![CDATA[$dependencyModule]]></code>
     </MixedAssignment>
     <PossiblyNullArgument>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/Listener/ModuleLoaderListener.php">
     <MissingReturnType>
-      <code>onLoadModulesPost</code>
+      <code><![CDATA[onLoadModulesPost]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$callback</code>
+      <code><![CDATA[$callback]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$callback</code>
+      <code><![CDATA[$callback]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>array</code>
+      <code><![CDATA[array]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[include $this->options->getModuleMapCacheFile()]]></code>
     </MixedReturnStatement>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$event]]></code>
+    </PossiblyUnusedParam>
     <UnresolvableInclude>
       <code><![CDATA[include $this->options->getModuleMapCacheFile()]]></code>
     </UnresolvableInclude>
   </file>
   <file src="src/Listener/ModuleResolverListener.php">
     <MixedMethodCall>
-      <code>new $class()</code>
-      <code>new $moduleName()</code>
+      <code><![CDATA[new $class()]]></code>
+      <code><![CDATA[new $moduleName()]]></code>
     </MixedMethodCall>
   </file>
   <file src="src/Listener/OnBootstrapListener.php">
     <MixedAssignment>
-      <code>$events</code>
-      <code>$sharedEvents</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$sharedEvents]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>attach</code>
-      <code>getEventManager</code>
-      <code>getSharedManager</code>
+      <code><![CDATA[attach]]></code>
+      <code><![CDATA[getEventManager]]></code>
+      <code><![CDATA[getSharedManager]]></code>
     </MixedMethodCall>
     <PossiblyInvalidMethodCall>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyInvalidMethodCall>
     <PossiblyNullArgument>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code>getEventManager</code>
+      <code><![CDATA[getEventManager]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/Listener/ServiceListener.php">
     <ArgumentTypeCoercion>
-      <code>$smConfig</code>
+      <code><![CDATA[$smConfig]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedClass>
-      <code>ServiceConfig::class</code>
-      <code>new ServiceConfig($smConfig)</code>
+      <code><![CDATA[ServiceConfig::class]]></code>
+      <code><![CDATA[new ServiceConfig($smConfig)]]></code>
     </DeprecatedClass>
     <DeprecatedInterface>
-      <code>ServiceConfigInterface|string</code>
+      <code><![CDATA[ServiceConfigInterface|string]]></code>
     </DeprecatedInterface>
     <DocblockTypeContradiction>
-      <code>gettype($config)</code>
+      <code><![CDATA[gettype($config)]]></code>
     </DocblockTypeContradiction>
     <ImplementedReturnTypeMismatch>
-      <code>ServiceListener</code>
+      <code><![CDATA[ServiceListener]]></code>
     </ImplementedReturnTypeMismatch>
     <MissingReturnType>
-      <code>addServiceManager</code>
+      <code><![CDATA[addServiceManager]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$class</code>
-      <code>$config</code>
-      <code>$configs</code>
-      <code>$configs</code>
-      <code>$sm</code>
-      <code>is_object($serviceManager) ? $serviceManager::class : gettype($serviceManager)</code>
+      <code><![CDATA[$class]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$configs]]></code>
+      <code><![CDATA[$configs]]></code>
+      <code><![CDATA[$sm]]></code>
       <code><![CDATA[$sm['module_class_method']]]></code>
       <code><![CDATA[$sm['service_manager']]]></code>
       <code><![CDATA[$sm['service_manager']]]></code>
       <code><![CDATA[$sm['service_manager']]]></code>
+      <code><![CDATA[is_object($serviceManager) ? $serviceManager::class : gettype($serviceManager)]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$key</code>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code><![CDATA[$configs['configuration_classes']]]></code>
@@ -338,89 +438,95 @@
       <code><![CDATA[$config[$metadata['config_key']]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$class</code>
-      <code>$config</code>
-      <code>$configs</code>
-      <code>$name</code>
-      <code>$sm</code>
-      <code>$sm</code>
+      <code><![CDATA[$class]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$configs]]></code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$sm]]></code>
+      <code><![CDATA[$sm]]></code>
     </MixedAssignment>
     <MixedMethodCall>
       <code><![CDATA[$sm['module_class_method']]]></code>
-      <code>new $class()</code>
+      <code><![CDATA[new $class()]]></code>
     </MixedMethodCall>
     <MixedOperand>
       <code><![CDATA[$sm['module_class_method']]]></code>
     </MixedOperand>
     <NoValue>
-      <code>$serviceManager</code>
+      <code><![CDATA[$serviceManager]]></code>
     </NoValue>
     <PossiblyNullArgument>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code>getMergedConfig</code>
+      <code><![CDATA[getMergedConfig]]></code>
     </PossiblyNullReference>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$configuredServiceManager]]></code>
+    </PossiblyUnusedProperty>
     <PropertyNotSetInConstructor>
-      <code>$configuredServiceManager</code>
-      <code>$defaultServiceConfig</code>
+      <code><![CDATA[$configuredServiceManager]]></code>
+      <code><![CDATA[$defaultServiceConfig]]></code>
     </PropertyNotSetInConstructor>
     <RedundantCondition>
-      <code>gettype($config)</code>
-      <code>is_object($config)</code>
-      <code>$serviceManager instanceof ServiceManager</code>
-      <code>gettype($serviceManager)</code>
+      <code><![CDATA[$serviceManager instanceof ServiceManager]]></code>
+      <code><![CDATA[gettype($config)]]></code>
+      <code><![CDATA[gettype($serviceManager)]]></code>
+      <code><![CDATA[is_object($config)]]></code>
     </RedundantCondition>
     <RedundantConditionGivenDocblockType>
-      <code>is_scalar($config)</code>
-      <code>is_string($serviceManager)</code>
+      <code><![CDATA[is_scalar($config)]]></code>
+      <code><![CDATA[is_string($serviceManager)]]></code>
     </RedundantConditionGivenDocblockType>
     <TypeDoesNotContainType>
-      <code>is_scalar($config)</code>
-      <code>is_scalar($config) ? $config : gettype($config)</code>
-      <code>is_object($serviceManager)</code>
+      <code><![CDATA[is_object($serviceManager)]]></code>
+      <code><![CDATA[is_scalar($config)]]></code>
+      <code><![CDATA[is_scalar($config) ? $config : gettype($config)]]></code>
     </TypeDoesNotContainType>
     <UndefinedMethod>
-      <code>getAbstractFactories</code>
-      <code>getAliases</code>
-      <code>getDelegators</code>
-      <code>getFactories</code>
-      <code>getInitializers</code>
-      <code>getInvokables</code>
-      <code>getServices</code>
-      <code>getShared</code>
+      <code><![CDATA[getAbstractFactories]]></code>
+      <code><![CDATA[getAliases]]></code>
+      <code><![CDATA[getDelegators]]></code>
+      <code><![CDATA[getFactories]]></code>
+      <code><![CDATA[getInitializers]]></code>
+      <code><![CDATA[getInvokables]]></code>
+      <code><![CDATA[getServices]]></code>
+      <code><![CDATA[getShared]]></code>
     </UndefinedMethod>
     <UnusedVariable>
-      <code>$name</code>
+      <code><![CDATA[$name]]></code>
     </UnusedVariable>
   </file>
   <file src="src/Listener/ServiceListenerInterface.php">
     <MissingReturnType>
-      <code>addServiceManager</code>
+      <code><![CDATA[addServiceManager]]></code>
     </MissingReturnType>
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[ServiceListenerInterface]]></code>
+    </PossiblyUnusedReturnValue>
   </file>
   <file src="src/ModuleEvent.php">
     <DocblockTypeContradiction>
-      <code>is_object($module)</code>
-      <code>is_string($moduleName)</code>
+      <code><![CDATA[is_object($module)]]></code>
+      <code><![CDATA[is_string($moduleName)]]></code>
     </DocblockTypeContradiction>
     <MissingTemplateParam>
-      <code>ModuleEvent</code>
+      <code><![CDATA[ModuleEvent]]></code>
     </MissingTemplateParam>
     <MixedInferredReturnType>
-      <code>null|object</code>
+      <code><![CDATA[null|object]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->module]]></code>
     </MixedReturnStatement>
     <PropertyNotSetInConstructor>
-      <code>$configListener</code>
-      <code>$moduleName</code>
+      <code><![CDATA[$configListener]]></code>
+      <code><![CDATA[$moduleName]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/ModuleManager.php">
     <ImplementedReturnTypeMismatch>
-      <code>ModuleManager</code>
+      <code><![CDATA[ModuleManager]]></code>
     </ImplementedReturnTypeMismatch>
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$this->loadedModules]]></code>
@@ -429,41 +535,56 @@
       <code><![CDATA[$this->modules]]></code>
     </InvalidReturnStatement>
     <InvalidReturnType>
-      <code>array</code>
+      <code><![CDATA[array]]></code>
     </InvalidReturnType>
     <MissingClosureParamType>
-      <code>$r</code>
+      <code><![CDATA[$r]]></code>
     </MissingClosureParamType>
     <MissingReturnType>
-      <code>attachDefaultListeners</code>
+      <code><![CDATA[attachDefaultListeners]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$module</code>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
+      <code><![CDATA[$module]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$module</code>
-      <code>$module</code>
-      <code>$module</code>
+      <code><![CDATA[$module]]></code>
+      <code><![CDATA[$module]]></code>
+      <code><![CDATA[$module]]></code>
     </MixedAssignment>
     <ParamNameMismatch>
-      <code>$events</code>
-      <code>$module</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$module]]></code>
     </ParamNameMismatch>
     <PossiblyInvalidArgument>
-      <code>$moduleName</code>
+      <code><![CDATA[$moduleName]]></code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
-      <code>$moduleName</code>
+      <code><![CDATA[$moduleName]]></code>
     </PossiblyInvalidCast>
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[mixed]]></code>
+    </PossiblyUnusedReturnValue>
     <PropertyNotSetInConstructor>
-      <code>$event</code>
-      <code>$events</code>
-      <code>$loadFinished</code>
+      <code><![CDATA[$event]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$loadFinished]]></code>
     </PropertyNotSetInConstructor>
     <RedundantPropertyInitializationCheck>
       <code><![CDATA[isset($this->loadFinished)]]></code>
     </RedundantPropertyInitializationCheck>
+  </file>
+  <file src="src/ModuleManagerInterface.php">
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[ModuleManagerInterface]]></code>
+      <code><![CDATA[ModuleManagerInterface]]></code>
+      <code><![CDATA[mixed]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="test/Listener/AbstractListenerTestCase.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[registerTestAssetsOnModuleAutoloader]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Listener/AutoloaderListenerTest.php">
     <MixedPropertyFetch>
@@ -473,9 +594,9 @@
   </file>
   <file src="test/Listener/ConfigListenerTest.php">
     <ArgumentTypeCoercion>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
     </ArgumentTypeCoercion>
     <InvalidArgument>
       <code><![CDATA['asd']]></code>
@@ -486,13 +607,13 @@
       <code><![CDATA[['asd']]]></code>
     </InvalidCast>
     <MixedArgument>
-      <code>$config</code>
-      <code>$configObject</code>
-      <code>$configObject</code>
-      <code>$configObject</code>
-      <code>$configObjectCheck</code>
-      <code>$configObjectCheck</code>
-      <code>$configObjectCheck</code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObjectCheck]]></code>
+      <code><![CDATA[$configObjectCheck]]></code>
+      <code><![CDATA[$configObjectCheck]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$config['ini']]]></code>
@@ -510,23 +631,23 @@
       <code><![CDATA[$mergedConfig['keyed']]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$config</code>
-      <code>$config</code>
-      <code>$config</code>
-      <code>$config</code>
-      <code>$configObject</code>
-      <code>$configObject</code>
-      <code>$configObject</code>
-      <code>$configObject</code>
-      <code>$configObject</code>
-      <code>$configObjectCheck</code>
-      <code>$configObjectCheck</code>
-      <code>$configObjectCheck</code>
-      <code>$configObjectFromCache</code>
-      <code>$configObjectFromCache</code>
-      <code>$configObjectFromGlob</code>
-      <code>$configObjectFromGlob</code>
-      <code>$mergedConfig</code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObject]]></code>
+      <code><![CDATA[$configObjectCheck]]></code>
+      <code><![CDATA[$configObjectCheck]]></code>
+      <code><![CDATA[$configObjectCheck]]></code>
+      <code><![CDATA[$configObjectFromCache]]></code>
+      <code><![CDATA[$configObjectFromCache]]></code>
+      <code><![CDATA[$configObjectFromGlob]]></code>
+      <code><![CDATA[$configObjectFromGlob]]></code>
+      <code><![CDATA[$mergedConfig]]></code>
     </MixedAssignment>
     <MixedPropertyFetch>
       <code><![CDATA[$configObject->ini]]></code>
@@ -562,20 +683,23 @@
   </file>
   <file src="test/Listener/DefaultListenerAggregateTest.php">
     <ArgumentTypeCoercion>
-      <code>$eventManager</code>
-      <code>$eventManager</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
+      <code><![CDATA[$eventManager]]></code>
+      <code><![CDATA[$eventManager]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
       <code><![CDATA[$moduleManager->getEventManager()]]></code>
       <code><![CDATA[$moduleManager->getEventManager()]]></code>
     </ArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$listener</code>
-      <code>$listener</code>
-      <code>$listener</code>
-      <code>$listener</code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$listener]]></code>
     </MixedAssignment>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$defaultListeners]]></code>
+    </PossiblyUnusedProperty>
   </file>
   <file src="test/Listener/InitTriggerTest.php">
     <MixedPropertyFetch>
@@ -592,24 +716,24 @@
   </file>
   <file src="test/Listener/LocatorRegistrationListenerTest.php">
     <InvalidPropertyAssignmentValue>
-      <code>new MockApplication()</code>
+      <code><![CDATA[new MockApplication()]]></code>
     </InvalidPropertyAssignmentValue>
     <MixedArgument>
-      <code>$aliases</code>
-      <code>$instances</code>
-      <code>$manager</code>
-      <code>$module</code>
+      <code><![CDATA[$aliases]]></code>
+      <code><![CDATA[$instances]]></code>
+      <code><![CDATA[$manager]]></code>
+      <code><![CDATA[$module]]></code>
       <code><![CDATA[$r->getValue($container)]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$aliases</code>
-      <code>$foo</code>
-      <code>$instances</code>
-      <code>$manager</code>
-      <code>$module</code>
+      <code><![CDATA[$aliases]]></code>
+      <code><![CDATA[$foo]]></code>
+      <code><![CDATA[$instances]]></code>
+      <code><![CDATA[$manager]]></code>
+      <code><![CDATA[$module]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>array</code>
+      <code><![CDATA[array]]></code>
     </MixedInferredReturnType>
     <MixedPropertyFetch>
       <code><![CDATA[$foo->module]]></code>
@@ -618,143 +742,184 @@
     <MixedReturnStatement>
       <code><![CDATA[$container->getRegisteredServices()]]></code>
     </MixedReturnStatement>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $foo]]></code>
+    </RiskyTruthyFalsyComparison>
     <UndefinedMethod>
-      <code>setSharedManager</code>
+      <code><![CDATA[setSharedManager]]></code>
     </UndefinedMethod>
     <UnusedMethodCall>
-      <code>setAccessible</code>
+      <code><![CDATA[setAccessible]]></code>
     </UnusedMethodCall>
   </file>
   <file src="test/Listener/ModuleLoaderListenerTest.php">
     <ArgumentTypeCoercion>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
-      <code>$events</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$events]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="test/Listener/ModuleResolverListenerTest.php">
     <ArgumentTypeCoercion>
-      <code>$expectedInstanceOf</code>
+      <code><![CDATA[$expectedInstanceOf]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="test/Listener/OnBootstrapListenerTest.php">
     <InvalidPropertyAssignmentValue>
-      <code>new MockApplication()</code>
+      <code><![CDATA[new MockApplication()]]></code>
     </InvalidPropertyAssignmentValue>
     <MixedPropertyFetch>
       <code><![CDATA[$modules['ListenerTestModule']->onBootstrapCalled]]></code>
     </MixedPropertyFetch>
     <UndefinedMethod>
-      <code>setSharedManager</code>
+      <code><![CDATA[setSharedManager]]></code>
     </UndefinedMethod>
   </file>
   <file src="test/Listener/ServiceListenerTest.php">
     <ArgumentTypeCoercion>
-      <code>$config</code>
+      <code><![CDATA[$config]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedClass>
-      <code>new ServiceConfig($config)</code>
+      <code><![CDATA[new ServiceConfig($config)]]></code>
     </DeprecatedClass>
     <InvalidArgument>
-      <code>$serviceManager</code>
-      <code>$services</code>
+      <code><![CDATA[$serviceManager]]></code>
+      <code><![CDATA[$services]]></code>
       <code><![CDATA[$this->services]]></code>
       <code><![CDATA[$this->services]]></code>
     </InvalidArgument>
     <InvalidCast>
-      <code>$service</code>
-      <code>$services</code>
+      <code><![CDATA[$service]]></code>
+      <code><![CDATA[$services]]></code>
       <code><![CDATA[$this->services]]></code>
       <code><![CDATA[$this->services]]></code>
     </InvalidCast>
     <MixedArgument>
-      <code>$events</code>
-      <code>$services</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$services]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$service</code>
-      <code>$service</code>
+      <code><![CDATA[$service]]></code>
+      <code><![CDATA[$service]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$events</code>
-      <code>$listener</code>
-      <code>$services</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$listener]]></code>
+      <code><![CDATA[$services]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>ServiceManager</code>
+      <code><![CDATA[ServiceManager]]></code>
     </MixedInferredReturnType>
     <MixedMethodCall>
-      <code>detach</code>
+      <code><![CDATA[detach]]></code>
     </MixedMethodCall>
     <MixedReturnStatement>
       <code><![CDATA[$r->getValue($listener)]]></code>
     </MixedReturnStatement>
     <PossiblyInvalidCast>
-      <code>$serviceManager</code>
+      <code><![CDATA[$serviceManager]]></code>
     </PossiblyInvalidCast>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$defaultServiceConfig]]></code>
+    </PossiblyUnusedProperty>
     <UnusedMethodCall>
-      <code>setAccessible</code>
+      <code><![CDATA[setAccessible]]></code>
     </UnusedMethodCall>
+  </file>
+  <file src="test/Listener/TestAsset/CustomPluginDuckTypeProviderModule.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getCustomPluginConfig]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Listener/TestAsset/CustomPluginManager.php">
     <MissingTemplateParam>
-      <code>CustomPluginManager</code>
+      <code><![CDATA[CustomPluginManager]]></code>
     </MissingTemplateParam>
     <NonInvariantDocblockPropertyType>
-      <code>$instanceOf</code>
+      <code><![CDATA[$instanceOf]]></code>
     </NonInvariantDocblockPropertyType>
     <ParamNameMismatch>
-      <code>$plugin</code>
-      <code>$plugin</code>
+      <code><![CDATA[$plugin]]></code>
+      <code><![CDATA[$plugin]]></code>
     </ParamNameMismatch>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[validatePlugin]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Listener/TestAsset/CustomPluginManagerFactory.php">
     <ArgumentTypeCoercion>
-      <code>$options</code>
+      <code><![CDATA[$options]]></code>
     </ArgumentTypeCoercion>
     <DeprecatedInterface>
-      <code>CustomPluginManagerFactory</code>
+      <code><![CDATA[CustomPluginManagerFactory]]></code>
     </DeprecatedInterface>
     <ParamNameMismatch>
-      <code>$container</code>
+      <code><![CDATA[$container]]></code>
     </ParamNameMismatch>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[setCreationOptions]]></code>
+    </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$options]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/Listener/TestAsset/CustomPluginProviderInterface.php">
     <MissingReturnType>
-      <code>getCustomPluginConfig</code>
+      <code><![CDATA[getCustomPluginConfig]]></code>
     </MissingReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getCustomPluginConfig]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Listener/TestAsset/SampleAbstractFactory.php">
     <DeprecatedInterface>
-      <code>SampleAbstractFactory</code>
+      <code><![CDATA[SampleAbstractFactory]]></code>
     </DeprecatedInterface>
     <ParamNameMismatch>
-      <code>$container</code>
-      <code>$container</code>
-      <code>$name</code>
+      <code><![CDATA[$container]]></code>
+      <code><![CDATA[$container]]></code>
+      <code><![CDATA[$name]]></code>
     </ParamNameMismatch>
+  </file>
+  <file src="test/Listener/TestAsset/ServiceInvalidReturnModule.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getServiceConfiguration]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Listener/TestAsset/ServiceProviderModule.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getServiceConfig]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Listener/TestAsset/StdClassWithModuleDependencies.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getModuleDependencies]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Listener/TestAsset/UndefinedProviderInterface.php">
     <MissingReturnType>
-      <code>getUndefinedConfig</code>
+      <code><![CDATA[getUndefinedConfig]]></code>
     </MissingReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getUndefinedConfig]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/ModuleEventTest.php">
     <InvalidArgument>
       <code><![CDATA['foo']]></code>
-      <code>new stdClass()</code>
+      <code><![CDATA[new stdClass()]]></code>
     </InvalidArgument>
     <InvalidCast>
-      <code>new stdClass()</code>
+      <code><![CDATA[new stdClass()]]></code>
     </InvalidCast>
   </file>
   <file src="test/ModuleManagerTest.php">
@@ -777,13 +942,13 @@
       <code><![CDATA[$test->modules]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$config</code>
-      <code>$config</code>
-      <code>$config</code>
-      <code>$config</code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>getLoadedModules</code>
+      <code><![CDATA[getLoadedModules]]></code>
     </MixedMethodCall>
     <MixedPropertyFetch>
       <code><![CDATA[$config->bar]]></code>
@@ -793,41 +958,146 @@
       <code><![CDATA[$config->some]]></code>
     </MixedPropertyFetch>
     <PossiblyInvalidMethodCall>
-      <code>getLoadedModules</code>
+      <code><![CDATA[getLoadedModules]]></code>
     </PossiblyInvalidMethodCall>
     <PossiblyNullReference>
-      <code>getLoadedModules</code>
+      <code><![CDATA[getLoadedModules]]></code>
     </PossiblyNullReference>
   </file>
   <file src="test/ResetAutoloadFunctionsTrait.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[preserveAutoloadFunctions]]></code>
+      <code><![CDATA[preserveAutoloadFunctions]]></code>
+      <code><![CDATA[preserveIncludePath]]></code>
+      <code><![CDATA[preserveIncludePath]]></code>
+      <code><![CDATA[restoreAutoloadFunctions]]></code>
+      <code><![CDATA[restoreAutoloadFunctions]]></code>
+      <code><![CDATA[restoreIncludePath]]></code>
+      <code><![CDATA[restoreIncludePath]]></code>
+    </PossiblyUnusedMethod>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(string) $this->includePath]]></code>
     </RedundantCastGivenDocblockType>
     <RedundantCondition>
-      <code>is_array($loaders)</code>
+      <code><![CDATA[is_array($loaders)]]></code>
     </RedundantCondition>
     <TypeDoesNotContainType>
       <code><![CDATA[is_array($this->loaders)]]></code>
     </TypeDoesNotContainType>
-    <MissingConstructor>
-      <code>$loaders</code>
-      <code>$includePath</code>
-    </MissingConstructor>
+  </file>
+  <file src="test/SetUpCacheDirTrait.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[createTmpDir]]></code>
+      <code><![CDATA[createTmpDir]]></code>
+      <code><![CDATA[createTmpDir]]></code>
+      <code><![CDATA[removeTmpDir]]></code>
+      <code><![CDATA[removeTmpDir]]></code>
+      <code><![CDATA[removeTmpDir]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/TestAsset/BadConfigModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/BafModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/BamModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/BarModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/BazModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/BooModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/BorModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/ListenerTestModule/Module.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getConfig]]></code>
+      <code><![CDATA[init]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$moduleManager]]></code>
+    </PossiblyUnusedParam>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$getAutoloaderConfigCalled]]></code>
+      <code><![CDATA[$getConfigCalled]]></code>
+      <code><![CDATA[$initCalled]]></code>
+      <code><![CDATA[$onBootstrapCalled]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="test/TestAsset/ListenerTestModule/src/Foo/Bar.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$module]]></code>
+      <code><![CDATA[$moduleManager]]></code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="test/TestAsset/LoadBarModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/LoadFooModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/LoadOtherModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
   </file>
   <file src="test/TestAsset/MockApplication.php">
     <MissingConstructor>
-      <code>$events</code>
-      <code>$serviceManager</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$serviceManager]]></code>
     </MissingConstructor>
     <MixedInferredReturnType>
-      <code>getRequest</code>
-      <code>getResponse</code>
-      <code>run</code>
+      <code><![CDATA[getRequest]]></code>
+      <code><![CDATA[getResponse]]></code>
+      <code><![CDATA[run]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->request]]></code>
       <code><![CDATA[$this->response]]></code>
       <code><![CDATA[$this->response]]></code>
     </MixedReturnStatement>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[bootstrap]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/TestAsset/NotAutoloaderModule/Module.php">
+    <UnusedClass>
+      <code><![CDATA[Module]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/NotAutoloaderModule/src/Foo/Bar.php">
+    <UnusedClass>
+      <code><![CDATA[Bar]]></code>
+    </UnusedClass>
+  </file>
+  <file src="test/TestAsset/SomeModule/Module.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getConfig]]></code>
+    </PossiblyUnusedMethod>
   </file>
 </files>

@@ -13,7 +13,6 @@ interface ConfigMergerInterface
     public function getMergedConfig($returnConfigAsObject = true);
 
     /**
-     * @param  array $config
      * @return ConfigMergerInterface
      */
     public function setMergedConfig(array $config);

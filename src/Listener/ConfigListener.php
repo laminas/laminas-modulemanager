@@ -177,7 +177,6 @@ class ConfigListener extends AbstractListener implements
     }
 
     /**
-     * @param  array $config
      * @return ConfigListener
      */
     public function setMergedConfig(array $config)

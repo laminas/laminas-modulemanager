@@ -4,7 +4,16 @@
         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
         bootstrap="./vendor/autoload.php"
         colors="true"
-        cacheDirectory=".phpunit.cache">
+        cacheDirectory=".phpunit.cache"
+        failOnDeprecation="true"
+        failOnNotice="true"
+        failOnWarning="true"
+        failOnPhpunitDeprecation="true"
+        displayDetailsOnPhpunitDeprecations="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        displayDetailsOnTestsThatTriggerNotices="true"
+        displayDetailsOnTestsThatTriggerWarnings="true">
+
   <coverage includeUncoveredFiles="true"/>
   <testsuites>
     <testsuite name="laminas-modulemanager Test Suite">
