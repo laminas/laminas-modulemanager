@@ -8,12 +8,11 @@ use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Listener\ConfigListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * @covers \Laminas\ModuleManager\ModuleEvent
- */
+#[CoversClass(ModuleEvent::class)]
 final class ModuleEventTest extends TestCase
 {
     /** @var ModuleEvent */

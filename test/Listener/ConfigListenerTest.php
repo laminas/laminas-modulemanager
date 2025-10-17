@@ -8,6 +8,7 @@ use ArrayObject;
 use InvalidArgumentException;
 use Laminas\Config\Config;
 use Laminas\EventManager\Test\EventListenerIntrospectionTrait;
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\ConfigListener;
 use Laminas\ModuleManager\Listener\ListenerOptions;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
@@ -15,14 +16,13 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use LaminasTest\ModuleManager\SetUpCacheDirTrait;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 use function count;
 use function spl_object_hash;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\ConfigListener
- */
+#[CoversClass(ConfigListener::class)]
+#[CoversClass(AbstractListener::class)]
 final class ConfigListenerTest extends AbstractListenerTestCase
 {
     use EventListenerIntrospectionTrait;

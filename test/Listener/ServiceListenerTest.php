@@ -15,6 +15,9 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ServiceManager\Config as ServiceConfig;
 use Laminas\ServiceManager\ServiceManager;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
@@ -22,9 +25,7 @@ use stdClass;
 use function array_keys;
 use function sprintf;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\ServiceListener
- */
+#[CoversClass(ServiceListener::class)]
 final class ServiceListenerTest extends TestCase
 {
     use EventListenerIntrospectionTrait;
@@ -99,7 +100,6 @@ final class ServiceListenerTest extends TestCase
     {
         $listener = $listener ?: $this->listener;
         $r        = new ReflectionProperty($listener, 'defaultServiceManager');
-        $r->setAccessible(true);
         return $r->getValue($listener);
     }
 
@@ -246,9 +246,9 @@ final class ServiceListenerTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidServiceManagerTypes
      * @psalm-param scalar|array<int, string>|object|null $serviceManager
      */
+    #[DataProvider('invalidServiceManagerTypes')]
     public function testUsingNonStringServiceManagerWithAddServiceManagerRaisesException($serviceManager): void
     {
         $this->expectException(Exception\RuntimeException::class);
@@ -346,7 +346,7 @@ final class ServiceListenerTest extends TestCase
         ];
     }
 
-    /** @depends testAttachesListenersAtExpectedPriorities */
+    #[Depends('testAttachesListenersAtExpectedPriorities')]
     public function testCanDetachListeners(array $dependencies): void
     {
         $listener = $dependencies['listener'];

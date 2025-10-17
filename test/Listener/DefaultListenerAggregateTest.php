@@ -6,6 +6,7 @@ namespace LaminasTest\ModuleManager\Listener;
 
 use Laminas\EventManager\Test\EventListenerIntrospectionTrait;
 use Laminas\Loader\ModuleAutoloader;
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\AutoloaderListener;
 use Laminas\ModuleManager\Listener\ConfigListener;
 use Laminas\ModuleManager\Listener\DefaultListenerAggregate;
@@ -17,15 +18,14 @@ use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\Listener\OnBootstrapListener;
 use Laminas\ModuleManager\ModuleManager;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 use function count;
 use function is_array;
 use function realpath;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\DefaultListenerAggregate
- */
+#[CoversClass(DefaultListenerAggregate::class)]
+#[CoversClass(AbstractListener::class)]
 final class DefaultListenerAggregateTest extends AbstractListenerTestCase
 {
     use EventListenerIntrospectionTrait;

@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\AutoloaderListener;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use NotAutoloaderModule\Bar;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 
 use function class_exists;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\AutoloaderListener
- */
+#[CoversClass(AbstractListener::class)]
+#[CoversClass(AutoloaderListener::class)]
 final class AutoloaderListenerTest extends AbstractListenerTestCase
 {
     /** @var ModuleManager */
@@ -42,7 +43,7 @@ final class AutoloaderListenerTest extends AbstractListenerTestCase
     }
 
     // @codingStandardsIgnoreStart
-    /** @runInSeparateProcess */
+    #[RunInSeparateProcess]
     public function testAutoloadersRegisteredIfModuleDoesNotInheritAutoloaderProviderInterfaceButDefinesGetAutoloaderConfigMethod(): void
     {
         // @codingStandardsIgnoreEnd

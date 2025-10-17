@@ -6,6 +6,7 @@ namespace LaminasTest\ModuleManager\Listener;
 
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\Listener\OnBootstrapListener;
 use Laminas\ModuleManager\ModuleEvent;
@@ -13,12 +14,11 @@ use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\Application;
 use LaminasTest\ModuleManager\TestAsset\MockApplication;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\OnBootstrapListener
- */
+#[CoversClass(OnBootstrapListener::class)]
+#[CoversClass(AbstractListener::class)]
 final class OnBootstrapListenerTest extends AbstractListenerTestCase
 {
     /** @var Application */

@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use ListenerTestModule;
 use ModuleAsClass;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\ModuleResolverListener
- */
+#[CoversClass(ModuleResolverListener::class)]
+#[CoversClass(AbstractListener::class)]
 final class ModuleResolverListenerTest extends AbstractListenerTestCase
 {
-    /** @dataProvider validModuleNameProvider */
+    #[DataProvider('validModuleNameProvider')]
     public function testModuleResolverListenerCanResolveModuleClasses(
         string $moduleName,
         string $expectedInstanceOf

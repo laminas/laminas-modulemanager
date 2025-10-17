@@ -39,7 +39,7 @@
         "laminas/laminas-loader": "^2.11",
         "laminas/laminas-mvc": "^3.8.0",
         "laminas/laminas-servicemanager": "^3.23.0",
-        "phpunit/phpunit": "^10.5.38",
+        "phpunit/phpunit": "^11.5.42",
         "psalm/plugin-phpunit": "^0.19.5",
         "vimeo/psalm": "^6.13.1",
         "amphp/dns": "^1.24 || ^2.1.2",

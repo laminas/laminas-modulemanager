@@ -9,14 +9,12 @@ use Laminas\ModuleManager\Feature;
 use Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener;
 use Laminas\ModuleManager\ModuleEvent;
 use LaminasTest\ModuleManager\Listener\TestAsset\StdClassWithModuleDependencies;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener
- */
+#[CoversClass(ModuleDependencyCheckerListener::class)]
 final class ModuleDependencyCheckerListenerTest extends TestCase
 {
-    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testCallsGetModuleDependenciesOnModuleImplementingInterface(): void
     {
         //$moduleManager = new ModuleManager(array());
@@ -36,7 +34,6 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
         $listener->__invoke($event);
     }
 
-    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testCallsGetModuleDependenciesOnModuleNotImplementingInterface(): void
     {
         $module = $this->getMockBuilder(StdClassWithModuleDependencies::class)->getMock();
@@ -49,7 +46,6 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
         $listener->__invoke($event);
     }
 
-    /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testNotFulfilledDependencyThrowsException(): void
     {
         $module = $this->getMockBuilder(StdClassWithModuleDependencies::class)->getMock();

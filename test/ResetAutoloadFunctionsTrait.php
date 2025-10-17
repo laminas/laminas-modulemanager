@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager;
 
+use PHPUnit\Framework\Attributes\After;
+use PHPUnit\Framework\Attributes\Before;
+
 use function get_include_path;
 use function in_array;
 use function is_array;
@@ -22,7 +25,7 @@ trait ResetAutoloadFunctionsTrait
     /** @var string */
     private $includePath;
 
-    /** @before */
+    #[Before]
     protected function preserveAutoloadFunctions(): void
     {
         $this->loaders = spl_autoload_functions();
@@ -33,13 +36,13 @@ trait ResetAutoloadFunctionsTrait
         }
     }
 
-    /** @before */
+    #[Before]
     protected function preserveIncludePath(): void
     {
         $this->includePath = get_include_path();
     }
 
-    /** @after */
+    #[After]
     protected function restoreAutoloadFunctions(): void
     {
         $loaders = spl_autoload_functions();
@@ -52,7 +55,7 @@ trait ResetAutoloadFunctionsTrait
         }
     }
 
-    /** @before */
+    #[Before]
     protected function restoreIncludePath(): void
     {
         set_include_path((string) $this->includePath);

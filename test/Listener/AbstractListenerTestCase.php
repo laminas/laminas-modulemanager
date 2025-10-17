@@ -6,6 +6,7 @@ namespace LaminasTest\ModuleManager\Listener;
 
 use Laminas\Loader\ModuleAutoloader;
 use LaminasTest\ModuleManager\ResetAutoloadFunctionsTrait;
+use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\TestCase;
 
 use function dirname;
@@ -17,7 +18,7 @@ class AbstractListenerTestCase extends TestCase
 {
     use ResetAutoloadFunctionsTrait;
 
-    /** @before */
+    #[Before]
     protected function registerTestAssetsOnModuleAutoloader(): void
     {
         $autoloader = new ModuleAutoloader([
