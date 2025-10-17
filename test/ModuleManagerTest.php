@@ -13,6 +13,7 @@ use Laminas\ModuleManager\Listener\ListenerOptions;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use SomeModule\Module;
@@ -24,9 +25,7 @@ use function count;
 use function realpath;
 use function var_export;
 
-/**
- * @covers \Laminas\ModuleManager\ModuleManager
- */
+#[CoversClass(ModuleManager::class)]
 final class ModuleManagerTest extends TestCase
 {
     use ResetAutoloadFunctionsTrait;
@@ -131,7 +130,6 @@ final class ModuleManagerTest extends TestCase
         self::assertSame('oh, yeah baby!', $config['loaded']);
     }
 
-    /** @group 5651 */
     public function testLoadingModuleFromAnotherModuleDemonstratesAppropriateSideEffects(): void
     {
         $configListener = $this->defaultListeners->getConfigListener();
@@ -144,10 +142,6 @@ final class ModuleManagerTest extends TestCase
         self::assertSame('bar', $config['baz']);
     }
 
-    /**
-     * @group 5651
-     * @group 5948
-     */
     public function testLoadingModuleFromAnotherModuleDoesNotInfiniteLoop(): void
     {
         $configListener = $this->defaultListeners->getConfigListener();

@@ -7,13 +7,12 @@ namespace LaminasTest\ModuleManager\Listener;
 use InvalidArgumentException;
 use Laminas\Config\Config;
 use Laminas\ModuleManager\Listener\ListenerOptions;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function strstr;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\ListenerOptions
- */
+#[CoversClass(ListenerOptions::class)]
 final class ListenerOptionsTest extends TestCase
 {
     public function testCanConfigureWithArrayInConstructor(): void
@@ -36,7 +35,6 @@ final class ListenerOptionsTest extends TestCase
         self::assertSame(['static', 'custom_paths'], $options->getConfigStaticPaths());
     }
 
-    /** @group 6552 */
     public function testConfigCacheFileWithEmptyCacheKey(): void
     {
         $options = new ListenerOptions([
@@ -52,7 +50,6 @@ final class ListenerOptionsTest extends TestCase
         self::assertEquals(__DIR__ . '/module-config-cache.foo.php', $options->getConfigCacheFile());
     }
 
-    /** @group 6552 */
     public function testModuleMapCacheFileWithEmptyCacheKey(): void
     {
         $options = new ListenerOptions([

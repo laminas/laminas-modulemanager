@@ -8,6 +8,7 @@ use Exception;
 use Foo\Bar;
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\SharedEventManager;
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\LocatorRegistrationListener;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
@@ -17,6 +18,7 @@ use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\ModuleManager\TestAsset\MockApplication;
 use ListenerTestModule\Module;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;
 use ReflectionProperty;
 
@@ -25,10 +27,8 @@ use function method_exists;
 use function str_replace;
 use function strtolower;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\LocatorRegistrationListener
- */
+#[CoversClass(LocatorRegistrationListener::class)]
+#[CoversClass(AbstractListener::class)]
 final class LocatorRegistrationListenerTest extends AbstractListenerTestCase
 {
     /** @var Application */
@@ -91,7 +91,6 @@ final class LocatorRegistrationListenerTest extends AbstractListenerTestCase
         $services = [];
         foreach (['aliases', 'factories', 'services'] as $type) {
             $r = new ReflectionProperty($container, $type);
-            $r->setAccessible(true);
             $services[$type === 'services' ? 'instances' : $type] = array_keys($r->getValue($container));
         }
 

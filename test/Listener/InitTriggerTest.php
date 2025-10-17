@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\InitTrigger;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\InitTrigger
- */
+#[CoversClass(InitTrigger::class)]
+#[CoversClass(AbstractListener::class)]
 final class InitTriggerTest extends AbstractListenerTestCase
 {
     /** @var ModuleManager */

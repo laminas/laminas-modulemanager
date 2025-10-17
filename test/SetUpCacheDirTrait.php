@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager;
 
+use PHPUnit\Framework\Attributes\After;
+use PHPUnit\Framework\Attributes\Before;
+
 use function glob;
 use function mkdir;
 use function rmdir;
@@ -23,7 +26,7 @@ trait SetUpCacheDirTrait
     /** @var string */
     protected $configCache;
 
-    /** @before */
+    #[Before]
     protected function createTmpDir(): void
     {
         $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'laminas_module_cache_dir';
@@ -32,7 +35,7 @@ trait SetUpCacheDirTrait
         $this->configCache = $this->tmpdir . DIRECTORY_SEPARATOR . 'config.cache.php';
     }
 
-    /** @after */
+    #[After]
     protected function removeTmpDir(): void
     {
         $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');

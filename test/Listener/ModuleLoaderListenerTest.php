@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaminasTest\ModuleManager\Listener;
 
 use Laminas\EventManager\Test\EventListenerIntrospectionTrait;
+use Laminas\ModuleManager\Listener\AbstractListener;
 use Laminas\ModuleManager\Listener\ListenerOptions;
 use Laminas\ModuleManager\Listener\ModuleLoaderListener;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
@@ -12,14 +13,13 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use LaminasTest\ModuleManager\SetUpCacheDirTrait;
 use Override;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 use function file_put_contents;
 use function iterator_to_array;
 
-/**
- * @covers \Laminas\ModuleManager\Listener\AbstractListener
- * @covers \Laminas\ModuleManager\Listener\ModuleLoaderListener
- */
+#[CoversClass(ModuleLoaderListener::class)]
+#[CoversClass(AbstractListener::class)]
 final class ModuleLoaderListenerTest extends AbstractListenerTestCase
 {
     use EventListenerIntrospectionTrait;
