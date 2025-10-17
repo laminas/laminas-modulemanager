@@ -684,22 +684,6 @@
       <code><![CDATA['asd']]></code>
       <code><![CDATA['asd']]></code>
     </InvalidArgument>
-    <RedundantCondition>
-      <code><![CDATA[assertFalse]]></code>
-      <code><![CDATA[assertTrue]]></code>
-    </RedundantCondition>
-    <UndefinedMagicPropertyAssignment>
-      <code><![CDATA[$options->cache_dir]]></code>
-      <code><![CDATA[$options->config_cache_enabled]]></code>
-    </UndefinedMagicPropertyAssignment>
-    <UndefinedMagicPropertyFetch>
-      <code><![CDATA[$options->cache_dir]]></code>
-      <code><![CDATA[$options->config_cache_enabled]]></code>
-      <code><![CDATA[$options->config_cache_key]]></code>
-      <code><![CDATA[$options->config_glob_paths]]></code>
-      <code><![CDATA[$options->config_static_paths]]></code>
-      <code><![CDATA[$options->module_paths]]></code>
-    </UndefinedMagicPropertyFetch>
   </file>
   <file src="test/Listener/LocatorRegistrationListenerTest.php">
     <InvalidPropertyAssignmentValue>
@@ -732,9 +716,6 @@
     <UndefinedMethod>
       <code><![CDATA[setSharedManager]]></code>
     </UndefinedMethod>
-    <UnusedMethodCall>
-      <code><![CDATA[setAccessible]]></code>
-    </UnusedMethodCall>
   </file>
   <file src="test/Listener/ModuleLoaderListenerTest.php">
     <ArgumentTypeCoercion>
@@ -809,9 +790,6 @@
     <PossiblyUnusedProperty>
       <code><![CDATA[$defaultServiceConfig]]></code>
     </PossiblyUnusedProperty>
-    <UnusedMethodCall>
-      <code><![CDATA[setAccessible]]></code>
-    </UnusedMethodCall>
   </file>
   <file src="test/Listener/TestAsset/CustomPluginDuckTypeProviderModule.php">
     <PossiblyUnusedMethod>
