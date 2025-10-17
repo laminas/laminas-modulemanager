@@ -7,6 +7,7 @@ namespace Laminas\ModuleManager\Listener;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\ListenerAggregateInterface;
 use Laminas\ModuleManager\ModuleEvent;
+use Override;
 
 class DefaultListenerAggregate extends AbstractListener implements
     ListenerAggregateInterface
@@ -23,6 +24,7 @@ class DefaultListenerAggregate extends AbstractListener implements
      * @param  int $priority
      * @return DefaultListenerAggregate
      */
+    #[Override]
     public function attach(EventManagerInterface $events, $priority = 1)
     {
         $options                     = $this->getOptions();
@@ -73,6 +75,7 @@ class DefaultListenerAggregate extends AbstractListener implements
      *
      * @return void
      */
+    #[Override]
     public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $key => $listener) {

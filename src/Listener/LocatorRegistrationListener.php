@@ -13,6 +13,7 @@ use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\Application;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceManager;
+use Override;
 
 use function end;
 use function explode;
@@ -102,6 +103,7 @@ class LocatorRegistrationListener extends AbstractListener implements
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, [$this, 'onLoadModule']);

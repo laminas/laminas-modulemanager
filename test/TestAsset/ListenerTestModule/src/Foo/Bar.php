@@ -7,7 +7,7 @@ namespace Foo;
 use Laminas\ModuleManager\ModuleManager;
 use ListenerTestModule\Module;
 
-class Bar
+final class Bar
 {
     public function __construct(public Module $module, public ModuleManager $moduleManager)
     {

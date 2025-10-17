@@ -6,7 +6,7 @@ namespace BazModule;
 
 use Laminas\Config\Config;
 
-class Module
+final class Module
 {
     public function getConfig(): Config
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
-class CustomPluginDuckTypeProviderModule
+final class CustomPluginDuckTypeProviderModule
 {
     public function __construct(public mixed $config)
     {

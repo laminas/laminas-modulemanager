@@ -6,7 +6,7 @@ namespace LoadOtherModule;
 
 use Laminas\ModuleManager\ModuleManager;
 
-class Module
+final class Module
 {
     public function init(ModuleManager $moduleManager): void
     {

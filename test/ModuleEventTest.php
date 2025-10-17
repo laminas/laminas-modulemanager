@@ -7,17 +7,19 @@ namespace LaminasTest\ModuleManager;
 use Laminas\ModuleManager\Exception;
 use Laminas\ModuleManager\Listener\ConfigListener;
 use Laminas\ModuleManager\ModuleEvent;
+use Override;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 /**
  * @covers \Laminas\ModuleManager\ModuleEvent
  */
-class ModuleEventTest extends TestCase
+final class ModuleEventTest extends TestCase
 {
     /** @var ModuleEvent */
     protected $event;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->event = new ModuleEvent();

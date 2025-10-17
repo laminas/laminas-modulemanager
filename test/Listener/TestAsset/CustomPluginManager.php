@@ -6,13 +6,15 @@ namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
 use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Override;
 
-class CustomPluginManager extends AbstractPluginManager
+final class CustomPluginManager extends AbstractPluginManager
 {
     /** @var string */
     protected $instanceOf = CustomPluginInterface::class;
 
     /** @param mixed $plugin */
+    #[Override]
     public function validate($plugin): void
     {
         if (! $plugin instanceof $this->instanceOf) {

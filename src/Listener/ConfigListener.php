@@ -13,6 +13,7 @@ use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Stdlib\Glob;
+use Override;
 use Traversable;
 
 use function file_exists;
@@ -59,6 +60,7 @@ class ConfigListener extends AbstractListener implements
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULES, [$this, 'onloadModulesPre'], 1000);
@@ -164,6 +166,7 @@ class ConfigListener extends AbstractListener implements
      * @param  bool $returnConfigAsObject
      * @return mixed
      */
+    #[Override]
     public function getMergedConfig($returnConfigAsObject = true)
     {
         if ($returnConfigAsObject === true) {
@@ -179,6 +182,7 @@ class ConfigListener extends AbstractListener implements
     /**
      * @return ConfigListener
      */
+    #[Override]
     public function setMergedConfig(array $config)
     {
         $this->mergedConfig       = $config;

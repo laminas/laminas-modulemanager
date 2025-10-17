@@ -11,6 +11,7 @@ use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use LaminasTest\ModuleManager\SetUpCacheDirTrait;
+use Override;
 
 use function file_put_contents;
 use function iterator_to_array;
@@ -19,7 +20,7 @@ use function iterator_to_array;
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\ModuleLoaderListener
  */
-class ModuleLoaderListenerTest extends AbstractListenerTestCase
+final class ModuleLoaderListenerTest extends AbstractListenerTestCase
 {
     use EventListenerIntrospectionTrait;
     use SetUpCacheDirTrait;
@@ -27,6 +28,7 @@ class ModuleLoaderListenerTest extends AbstractListenerTestCase
     /** @var ModuleManager */
     protected $moduleManager;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->moduleManager = new ModuleManager([]);
