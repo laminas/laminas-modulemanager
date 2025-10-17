@@ -28,6 +28,7 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
         $module->expects(self::once())->method('getModuleDependencies')->willReturn([]);
 
         $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
+        $event->method('getModuleName')->willReturn(Feature\DependencyIndicatorInterface::class);
         $event->expects(self::any())->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
@@ -40,6 +41,7 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
         $module->expects(self::once())->method('getModuleDependencies')->willReturn([]);
 
         $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
+        $event->method('getModuleName')->willReturn(StdClassWithModuleDependencies::class);
         $event->expects(self::any())->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
@@ -52,6 +54,7 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
         $module->expects(self::once())->method('getModuleDependencies')->willReturn(['OtherModule']);
 
         $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
+        $event->method('getModuleName')->willReturn(StdClassWithModuleDependencies::class);
         $event->expects(self::any())->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
