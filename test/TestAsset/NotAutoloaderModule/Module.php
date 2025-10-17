@@ -6,7 +6,7 @@ namespace NotAutoloaderModule;
 
 use Laminas\Loader\StandardAutoloader;
 
-class Module
+final class Module
 {
     /** @var bool */
     public $getAutoloaderConfigCalled = false;

@@ -6,6 +6,7 @@ namespace Laminas\ModuleManager;
 
 use Laminas\EventManager\EventManager;
 use Laminas\EventManager\EventManagerInterface;
+use Override;
 use Traversable;
 
 use function current;
@@ -86,6 +87,7 @@ class ModuleManager implements ModuleManagerInterface
      * @triggers loadModules.post
      * @return   ModuleManager
      */
+    #[Override]
     public function loadModules()
     {
         if (true === $this->modulesAreLoaded) {
@@ -119,6 +121,7 @@ class ModuleManager implements ModuleManagerInterface
      * @triggers loadModule
      * @return mixed Module's Module class
      */
+    #[Override]
     public function loadModule($module)
     {
         $moduleName = $module;
@@ -192,6 +195,7 @@ class ModuleManager implements ModuleManagerInterface
      * @param  bool  $loadModules If true, load modules if they're not already
      * @return array An array of Module objects, keyed by module name
      */
+    #[Override]
     public function getLoadedModules($loadModules = false)
     {
         if (true === $loadModules) {
@@ -220,6 +224,7 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @return array
      */
+    #[Override]
     public function getModules()
     {
         return $this->modules;
@@ -232,6 +237,7 @@ class ModuleManager implements ModuleManagerInterface
      * @throws Exception\InvalidArgumentException
      * @return ModuleManager
      */
+    #[Override]
     public function setModules($modules)
     {
         if (is_array($modules) || $modules instanceof Traversable) {
@@ -278,6 +284,7 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @return ModuleManager
      */
+    #[Override]
     public function setEventManager(EventManagerInterface $events)
     {
         $events->setIdentifiers([
@@ -297,6 +304,7 @@ class ModuleManager implements ModuleManagerInterface
      *
      * @return EventManagerInterface
      */
+    #[Override]
     public function getEventManager()
     {
         if (! $this->events instanceof EventManagerInterface) {

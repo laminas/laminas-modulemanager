@@ -9,8 +9,9 @@ use Laminas\Mvc\ApplicationInterface;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\ServiceManager\ServiceManager;
+use Override;
 
-class MockApplication implements ApplicationInterface
+final class MockApplication implements ApplicationInterface
 {
     /** @var EventManagerInterface */
     public $events;
@@ -27,12 +28,14 @@ class MockApplication implements ApplicationInterface
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function getEventManager()
     {
         return $this->events;
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function getServiceManager()
     {
         return $this->serviceManager;
@@ -45,18 +48,21 @@ class MockApplication implements ApplicationInterface
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function getRequest()
     {
         return $this->request;
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function getResponse()
     {
         return $this->response;
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function run()
     {
         return $this->response;

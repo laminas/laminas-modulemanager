@@ -7,8 +7,9 @@ namespace LaminasTest\ModuleManager\Listener\TestAsset;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\FactoryInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Override;
 
-class CustomPluginManagerFactory implements FactoryInterface
+final class CustomPluginManagerFactory implements FactoryInterface
 {
     /** @var null|array */
     protected $creationOptions;
@@ -18,6 +19,7 @@ class CustomPluginManagerFactory implements FactoryInterface
      *
      * {@inheritDoc}
      */
+    #[Override]
     public function __invoke(ContainerInterface $container, $name, ?array $options = null): CustomPluginManager
     {
         $options = $options ?: [];
@@ -29,6 +31,7 @@ class CustomPluginManagerFactory implements FactoryInterface
      *
      * {@inheritDoc}
      */
+    #[Override]
     public function createService(ServiceLocatorInterface $container)
     {
         return $this($container, CustomPluginManager::class, $this->creationOptions);

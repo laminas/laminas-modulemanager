@@ -10,6 +10,7 @@ use Laminas\ServiceManager\Config as ServiceConfig;
 use Laminas\ServiceManager\ConfigInterface as ServiceConfigInterface;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\Stdlib\ArrayUtils;
+use Override;
 use Traversable;
 
 use function class_exists;
@@ -61,6 +62,7 @@ class ServiceListener implements ServiceListenerInterface
      * @param  array $configuration
      * @return ServiceListener
      */
+    #[Override]
     public function setDefaultServiceConfig($configuration)
     {
         $this->defaultServiceConfig = $configuration;
@@ -68,6 +70,7 @@ class ServiceListener implements ServiceListenerInterface
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function addServiceManager($serviceManager, $key, $moduleInterface, $method)
     {
         if (is_string($serviceManager)) {
@@ -100,6 +103,7 @@ class ServiceListener implements ServiceListenerInterface
      * @param  int $priority
      * @return ServiceListener
      */
+    #[Override]
     public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, [$this, 'onLoadModule']);
@@ -108,6 +112,7 @@ class ServiceListener implements ServiceListenerInterface
     }
 
     /** @return void */
+    #[Override]
     public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $key => $listener) {

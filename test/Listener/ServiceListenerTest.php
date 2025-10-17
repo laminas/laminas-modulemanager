@@ -14,6 +14,7 @@ use Laminas\ModuleManager\Listener\ServiceListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ServiceManager\Config as ServiceConfig;
 use Laminas\ServiceManager\ServiceManager;
+use Override;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
@@ -24,7 +25,7 @@ use function sprintf;
 /**
  * @covers \Laminas\ModuleManager\Listener\ServiceListener
  */
-class ServiceListenerTest extends TestCase
+final class ServiceListenerTest extends TestCase
 {
     use EventListenerIntrospectionTrait;
 
@@ -53,6 +54,7 @@ class ServiceListenerTest extends TestCase
     /** @var ServiceManager */
     protected $services;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->services = new ServiceManager();

@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener
  */
-class ModuleDependencyCheckerListenerTest extends TestCase
+final class ModuleDependencyCheckerListenerTest extends TestCase
 {
     /** @covers \Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener::__invoke */
     public function testCallsGetModuleDependenciesOnModuleImplementingInterface(): void

@@ -14,6 +14,7 @@ use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use LaminasTest\ModuleManager\SetUpCacheDirTrait;
+use Override;
 
 use function count;
 use function spl_object_hash;
@@ -22,7 +23,7 @@ use function spl_object_hash;
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\ConfigListener
  */
-class ConfigListenerTest extends AbstractListenerTestCase
+final class ConfigListenerTest extends AbstractListenerTestCase
 {
     use EventListenerIntrospectionTrait;
     use SetUpCacheDirTrait;
@@ -30,6 +31,7 @@ class ConfigListenerTest extends AbstractListenerTestCase
     /** @var ModuleManager */
     protected $moduleManager;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->moduleManager = new ModuleManager([]);

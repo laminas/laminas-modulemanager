@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace NotAutoloaderModule;
 
-class Bar
+final class Bar
 {
 }

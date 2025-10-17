@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace SubModule\Sub;
 
-class Module
+final class Module
 {
 }

@@ -16,6 +16,7 @@ use Laminas\Mvc\Application;
 use Laminas\ServiceManager\ServiceManager;
 use LaminasTest\ModuleManager\TestAsset\MockApplication;
 use ListenerTestModule\Module;
+use Override;
 use ReflectionClass;
 use ReflectionProperty;
 
@@ -28,7 +29,7 @@ use function strtolower;
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\LocatorRegistrationListener
  */
-class LocatorRegistrationListenerTest extends AbstractListenerTestCase
+final class LocatorRegistrationListenerTest extends AbstractListenerTestCase
 {
     /** @var Application */
     protected $application;
@@ -42,6 +43,7 @@ class LocatorRegistrationListenerTest extends AbstractListenerTestCase
     /** @var SharedEventManager */
     protected $sharedEvents;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->sharedEvents = new SharedEventManager();

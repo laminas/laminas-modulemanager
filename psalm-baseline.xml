@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
   <file src="src/Feature/AutoloaderProviderInterface.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[getAutoloaderConfig]]></code>
@@ -167,12 +167,6 @@
       <code><![CDATA[is_array($paths)]]></code>
       <code><![CDATA[is_string($path)]]></code>
     </DocblockTypeContradiction>
-    <InvalidArgument>
-      <code><![CDATA[$this->mergedConfig]]></code>
-    </InvalidArgument>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$this->getOptions()->getExtraConfig() ?: []]]></code>
-    </InvalidPropertyAssignmentValue>
     <MissingReturnType>
       <code><![CDATA[addConfigPaths]]></code>
     </MissingReturnType>
@@ -252,12 +246,6 @@
       <code><![CDATA[! is_array($extraConfig) && ! $extraConfig instanceof Traversable]]></code>
       <code><![CDATA[! is_array($modulePaths) && ! $modulePaths instanceof Traversable]]></code>
     </DocblockTypeContradiction>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$configGlobPaths]]></code>
-      <code><![CDATA[$configStaticPaths]]></code>
-      <code><![CDATA[$extraConfig]]></code>
-      <code><![CDATA[$modulePaths]]></code>
-    </InvalidPropertyAssignmentValue>
     <MissingTemplateParam>
       <code><![CDATA[ListenerOptions]]></code>
     </MissingTemplateParam>
@@ -343,9 +331,6 @@
     <MixedAssignment>
       <code><![CDATA[$callback]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[include $this->options->getModuleMapCacheFile()]]></code>
     </MixedReturnStatement>
@@ -383,9 +368,6 @@
     </PossiblyNullReference>
   </file>
   <file src="src/Listener/ServiceListener.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$smConfig]]></code>
-    </ArgumentTypeCoercion>
     <DeprecatedClass>
       <code><![CDATA[ServiceConfig::class]]></code>
       <code><![CDATA[new ServiceConfig($smConfig)]]></code>
@@ -399,9 +381,6 @@
     <ImplementedReturnTypeMismatch>
       <code><![CDATA[ServiceListener]]></code>
     </ImplementedReturnTypeMismatch>
-    <MissingReturnType>
-      <code><![CDATA[addServiceManager]]></code>
-    </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$class]]></code>
       <code><![CDATA[$config]]></code>
@@ -498,10 +477,8 @@
     </UnusedVariable>
   </file>
   <file src="src/Listener/ServiceListenerInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[addServiceManager]]></code>
-    </MissingReturnType>
     <PossiblyUnusedReturnValue>
+      <code><![CDATA[ServiceListenerInterface]]></code>
       <code><![CDATA[ServiceListenerInterface]]></code>
     </PossiblyUnusedReturnValue>
   </file>
@@ -513,9 +490,6 @@
     <MissingTemplateParam>
       <code><![CDATA[ModuleEvent]]></code>
     </MissingTemplateParam>
-    <MixedInferredReturnType>
-      <code><![CDATA[null|object]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->module]]></code>
     </MixedReturnStatement>
@@ -531,12 +505,6 @@
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$this->loadedModules]]></code>
     </InvalidPropertyAssignmentValue>
-    <InvalidReturnStatement>
-      <code><![CDATA[$this->modules]]></code>
-    </InvalidReturnStatement>
-    <InvalidReturnType>
-      <code><![CDATA[array]]></code>
-    </InvalidReturnType>
     <MissingClosureParamType>
       <code><![CDATA[$r]]></code>
     </MissingClosureParamType>
@@ -562,6 +530,9 @@
     <PossiblyInvalidCast>
       <code><![CDATA[$moduleName]]></code>
     </PossiblyInvalidCast>
+    <PossiblyNullArrayOffset>
+      <code><![CDATA[$this->loadedModules]]></code>
+    </PossiblyNullArrayOffset>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[mixed]]></code>
     </PossiblyUnusedReturnValue>
@@ -713,6 +684,22 @@
       <code><![CDATA['asd']]></code>
       <code><![CDATA['asd']]></code>
     </InvalidArgument>
+    <RedundantCondition>
+      <code><![CDATA[assertFalse]]></code>
+      <code><![CDATA[assertTrue]]></code>
+    </RedundantCondition>
+    <UndefinedMagicPropertyAssignment>
+      <code><![CDATA[$options->cache_dir]]></code>
+      <code><![CDATA[$options->config_cache_enabled]]></code>
+    </UndefinedMagicPropertyAssignment>
+    <UndefinedMagicPropertyFetch>
+      <code><![CDATA[$options->cache_dir]]></code>
+      <code><![CDATA[$options->config_cache_enabled]]></code>
+      <code><![CDATA[$options->config_cache_key]]></code>
+      <code><![CDATA[$options->config_glob_paths]]></code>
+      <code><![CDATA[$options->config_static_paths]]></code>
+      <code><![CDATA[$options->module_paths]]></code>
+    </UndefinedMagicPropertyFetch>
   </file>
   <file src="test/Listener/LocatorRegistrationListenerTest.php">
     <InvalidPropertyAssignmentValue>
@@ -732,9 +719,6 @@
       <code><![CDATA[$manager]]></code>
       <code><![CDATA[$module]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
     <MixedPropertyFetch>
       <code><![CDATA[$foo->module]]></code>
       <code><![CDATA[$locator->get('Foo\Bar')->moduleManager]]></code>
@@ -785,9 +769,6 @@
     </UndefinedMethod>
   </file>
   <file src="test/Listener/ServiceListenerTest.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$config]]></code>
-    </ArgumentTypeCoercion>
     <DeprecatedClass>
       <code><![CDATA[new ServiceConfig($config)]]></code>
     </DeprecatedClass>
@@ -816,9 +797,6 @@
       <code><![CDATA[$listener]]></code>
       <code><![CDATA[$services]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[ServiceManager]]></code>
-    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[detach]]></code>
     </MixedMethodCall>
@@ -856,9 +834,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Listener/TestAsset/CustomPluginManagerFactory.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$options]]></code>
-    </ArgumentTypeCoercion>
     <DeprecatedInterface>
       <code><![CDATA[CustomPluginManagerFactory]]></code>
     </DeprecatedInterface>
@@ -873,9 +848,6 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/Listener/TestAsset/CustomPluginProviderInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[getCustomPluginConfig]]></code>
-    </MissingReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[getCustomPluginConfig]]></code>
     </PossiblyUnusedMethod>
@@ -906,9 +878,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Listener/TestAsset/UndefinedProviderInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[getUndefinedConfig]]></code>
-    </MissingReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[getUndefinedConfig]]></code>
     </PossiblyUnusedMethod>
@@ -1035,15 +1004,15 @@
       <code><![CDATA[getConfig]]></code>
       <code><![CDATA[init]]></code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedParam>
-      <code><![CDATA[$moduleManager]]></code>
-    </PossiblyUnusedParam>
     <PossiblyUnusedProperty>
       <code><![CDATA[$getAutoloaderConfigCalled]]></code>
       <code><![CDATA[$getConfigCalled]]></code>
       <code><![CDATA[$initCalled]]></code>
       <code><![CDATA[$onBootstrapCalled]]></code>
     </PossiblyUnusedProperty>
+    <UnusedParam>
+      <code><![CDATA[$moduleManager]]></code>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/ListenerTestModule/src/Foo/Bar.php">
     <PossiblyUnusedProperty>
@@ -1071,11 +1040,6 @@
       <code><![CDATA[$events]]></code>
       <code><![CDATA[$serviceManager]]></code>
     </MissingConstructor>
-    <MixedInferredReturnType>
-      <code><![CDATA[getRequest]]></code>
-      <code><![CDATA[getResponse]]></code>
-      <code><![CDATA[run]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->request]]></code>
       <code><![CDATA[$this->response]]></code>

@@ -13,7 +13,7 @@ use ModuleAsClass;
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\ModuleResolverListener
  */
-class ModuleResolverListenerTest extends AbstractListenerTestCase
+final class ModuleResolverListenerTest extends AbstractListenerTestCase
 {
     /** @dataProvider validModuleNameProvider */
     public function testModuleResolverListenerCanResolveModuleClasses(

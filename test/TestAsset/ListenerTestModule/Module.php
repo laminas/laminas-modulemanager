@@ -9,8 +9,9 @@ use Laminas\Loader\StandardAutoloader;
 use Laminas\ModuleManager\Feature\AutoloaderProviderInterface;
 use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\Feature\LocatorRegisteredInterface;
+use Override;
 
-class Module implements
+final class Module implements
     AutoloaderProviderInterface,
     BootstrapListenerInterface,
     LocatorRegisteredInterface
@@ -42,6 +43,7 @@ class Module implements
         ];
     }
 
+    #[Override]
     public function getAutoloaderConfig(): array
     {
         $this->getAutoloaderConfigCalled = true;
@@ -54,6 +56,7 @@ class Module implements
         ];
     }
 
+    #[Override]
     public function onBootstrap(EventInterface $e): void
     {
         $this->onBootstrapCalled = true;

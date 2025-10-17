@@ -8,16 +8,18 @@ use Laminas\ModuleManager\Listener\InitTrigger;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
+use Override;
 
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\InitTrigger
  */
-class InitTriggerTest extends AbstractListenerTestCase
+final class InitTriggerTest extends AbstractListenerTestCase
 {
     /** @var ModuleManager */
     protected $moduleManager;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->moduleManager = new ModuleManager([]);

@@ -12,6 +12,7 @@ use Laminas\ModuleManager\Listener\DefaultListenerAggregate;
 use Laminas\ModuleManager\Listener\ListenerOptions;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
+use Override;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use SomeModule\Module;
@@ -26,7 +27,7 @@ use function var_export;
 /**
  * @covers \Laminas\ModuleManager\ModuleManager
  */
-class ModuleManagerTest extends TestCase
+final class ModuleManagerTest extends TestCase
 {
     use ResetAutoloadFunctionsTrait;
     use SetUpCacheDirTrait;
@@ -38,6 +39,7 @@ class ModuleManagerTest extends TestCase
     /** @var EventManager */
     protected $events;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->sharedEvents     = new SharedEventManager();

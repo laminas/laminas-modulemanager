@@ -6,7 +6,7 @@ namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
 use stdClass;
 
-class ServiceInvalidReturnModule
+final class ServiceInvalidReturnModule
 {
     public function getServiceConfiguration(): stdClass
     {

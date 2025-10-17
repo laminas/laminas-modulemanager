@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 <psalm
-    errorLevel="1"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    errorBaseline="psalm-baseline.xml"
-    findUnusedBaselineEntry="true"
+    cacheDirectory="./.psalm-cache"
+    errorLevel="1"
+    findUnusedPsalmSuppress="true"
     findUnusedCode="true"
+    findUnusedBaselineEntry="true"
+    errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="src"/>
@@ -17,17 +19,11 @@
     </projectFiles>
 
     <issueHandlers>
-        <InternalMethod>
+        <ClassMustBeFinal>
             <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
+                <directory name="src" />
             </errorLevel>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
-            </errorLevel>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
-            </errorLevel>
-        </InternalMethod>
+        </ClassMustBeFinal>
     </issueHandlers>
 
     <plugins>

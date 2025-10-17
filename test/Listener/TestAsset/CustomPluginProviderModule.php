@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
-class CustomPluginProviderModule implements CustomPluginProviderInterface
+use Override;
+
+final class CustomPluginProviderModule implements CustomPluginProviderInterface
 {
-    public function __construct(public mixed $config)
+    public function __construct(public array $config)
     {
     }
 
-    /** @return mixed */
-    public function getCustomPluginConfig()
+    #[Override]
+    public function getCustomPluginConfig(): array
     {
         return $this->config;
     }

@@ -9,6 +9,7 @@ use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use NotAutoloaderModule\Bar;
+use Override;
 
 use function class_exists;
 
@@ -16,11 +17,12 @@ use function class_exists;
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\AutoloaderListener
  */
-class AutoloaderListenerTest extends AbstractListenerTestCase
+final class AutoloaderListenerTest extends AbstractListenerTestCase
 {
     /** @var ModuleManager */
     protected $moduleManager;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->moduleManager = new ModuleManager([]);

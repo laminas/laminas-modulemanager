@@ -8,6 +8,7 @@ use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\ListenerAggregateInterface;
 use Laminas\Loader\ModuleAutoloader;
 use Laminas\ModuleManager\ModuleEvent;
+use Override;
 
 use function file_exists;
 
@@ -40,6 +41,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->callbacks[] = $events->attach(
@@ -57,6 +59,7 @@ class ModuleLoaderListener extends AbstractListener implements ListenerAggregate
     }
 
     /** {@inheritDoc} */
+    #[Override]
     public function detach(EventManagerInterface $events)
     {
         foreach ($this->callbacks as $index => $callback) {

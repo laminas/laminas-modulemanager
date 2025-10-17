@@ -6,5 +6,5 @@ namespace LaminasTest\ModuleManager\Listener\TestAsset;
 
 interface CustomPluginProviderInterface
 {
-    public function getCustomPluginConfig();
+    public function getCustomPluginConfig(): array;
 }

@@ -14,7 +14,7 @@ use function strstr;
 /**
  * @covers \Laminas\ModuleManager\Listener\ListenerOptions
  */
-class ListenerOptionsTest extends TestCase
+final class ListenerOptionsTest extends TestCase
 {
     public function testCanConfigureWithArrayInConstructor(): void
     {

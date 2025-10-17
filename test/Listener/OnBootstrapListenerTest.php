@@ -12,13 +12,14 @@ use Laminas\ModuleManager\ModuleEvent;
 use Laminas\ModuleManager\ModuleManager;
 use Laminas\Mvc\Application;
 use LaminasTest\ModuleManager\TestAsset\MockApplication;
+use Override;
 use ReflectionClass;
 
 /**
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\OnBootstrapListener
  */
-class OnBootstrapListenerTest extends AbstractListenerTestCase
+final class OnBootstrapListenerTest extends AbstractListenerTestCase
 {
     /** @var Application */
     protected $application;
@@ -26,6 +27,7 @@ class OnBootstrapListenerTest extends AbstractListenerTestCase
     /** @var ModuleManager */
     protected $moduleManager;
 
+    #[Override]
     protected function setUp(): void
     {
         $sharedEvents        = new SharedEventManager();

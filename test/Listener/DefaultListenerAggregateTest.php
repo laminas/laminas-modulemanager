@@ -16,6 +16,7 @@ use Laminas\ModuleManager\Listener\ModuleDependencyCheckerListener;
 use Laminas\ModuleManager\Listener\ModuleResolverListener;
 use Laminas\ModuleManager\Listener\OnBootstrapListener;
 use Laminas\ModuleManager\ModuleManager;
+use Override;
 
 use function count;
 use function is_array;
@@ -25,13 +26,14 @@ use function realpath;
  * @covers \Laminas\ModuleManager\Listener\AbstractListener
  * @covers \Laminas\ModuleManager\Listener\DefaultListenerAggregate
  */
-class DefaultListenerAggregateTest extends AbstractListenerTestCase
+final class DefaultListenerAggregateTest extends AbstractListenerTestCase
 {
     use EventListenerIntrospectionTrait;
 
     /** @var DefaultListenerAggregate */
     protected $defaultListeners;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->defaultListeners = new DefaultListenerAggregate(
