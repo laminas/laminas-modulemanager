@@ -24,12 +24,12 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
             2000
         ); */
 
-        $module = $this->getMockBuilder(Feature\DependencyIndicatorInterface::class)->getMock();
+        $module = $this->createMock(Feature\DependencyIndicatorInterface::class);
         $module->expects(self::once())->method('getModuleDependencies')->willReturn([]);
 
-        $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
+        $event = $this->createStub(ModuleEvent::class);
         $event->method('getModuleName')->willReturn(Feature\DependencyIndicatorInterface::class);
-        $event->expects(self::any())->method('getModule')->willReturn($module);
+        $event->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
         $listener->__invoke($event);
@@ -40,9 +40,9 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
         $module = $this->getMockBuilder(StdClassWithModuleDependencies::class)->getMock();
         $module->expects(self::once())->method('getModuleDependencies')->willReturn([]);
 
-        $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
+        $event = $this->createStub(ModuleEvent::class);
         $event->method('getModuleName')->willReturn(StdClassWithModuleDependencies::class);
-        $event->expects(self::any())->method('getModule')->willReturn($module);
+        $event->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
         $listener->__invoke($event);
@@ -53,9 +53,9 @@ final class ModuleDependencyCheckerListenerTest extends TestCase
         $module = $this->getMockBuilder(StdClassWithModuleDependencies::class)->getMock();
         $module->expects(self::once())->method('getModuleDependencies')->willReturn(['OtherModule']);
 
-        $event = $this->getMockBuilder(ModuleEvent::class)->getMock();
+        $event = $this->createStub(ModuleEvent::class);
         $event->method('getModuleName')->willReturn(StdClassWithModuleDependencies::class);
-        $event->expects(self::any())->method('getModule')->willReturn($module);
+        $event->method('getModule')->willReturn($module);
 
         $listener = new ModuleDependencyCheckerListener();
         $this->expectException(Exception\MissingDependencyModuleException::class);

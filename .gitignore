@@ -4,9 +4,8 @@
 /.psalm-cache
 /clover.xml
 /coveralls-upload.json
-/docs/html/
-/laminas-mkdoc-theme.tgz
-/laminas-mkdoc-theme/
+/psalm.xml
+/phpcs.xml
 /phpunit.xml
 /vendor/
 /.phpunit.cache/
