@@ -179,7 +179,6 @@
       <code><![CDATA[$path['path']]]></code>
       <code><![CDATA[$path['type']]]></code>
       <code><![CDATA[$this->getCachedConfig()]]></code>
-      <code><![CDATA[$this->getMergedConfig(false)]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$path['path']]]></code>
@@ -208,6 +207,9 @@
     <PossiblyUnusedParam>
       <code><![CDATA[$e]]></code>
     </PossiblyUnusedParam>
+    <RedundantCastGivenDocblockType>
+      <code><![CDATA[(string) pathinfo($path, PATHINFO_EXTENSION)]]></code>
+    </RedundantCastGivenDocblockType>
     <UnresolvableInclude>
       <code><![CDATA[include $this->getOptions()->getConfigCacheFile()]]></code>
     </UnresolvableInclude>
@@ -383,7 +385,6 @@
     </ImplementedReturnTypeMismatch>
     <MixedArgument>
       <code><![CDATA[$class]]></code>
-      <code><![CDATA[$config]]></code>
       <code><![CDATA[$configs]]></code>
       <code><![CDATA[$configs]]></code>
       <code><![CDATA[$sm]]></code>
@@ -418,7 +419,6 @@
     </MixedArrayOffset>
     <MixedAssignment>
       <code><![CDATA[$class]]></code>
-      <code><![CDATA[$config]]></code>
       <code><![CDATA[$configs]]></code>
       <code><![CDATA[$name]]></code>
       <code><![CDATA[$sm]]></code>
@@ -578,80 +578,13 @@
     <InvalidCast>
       <code><![CDATA[['asd']]]></code>
     </InvalidCast>
-    <MixedArgument>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObjectCheck]]></code>
-      <code><![CDATA[$configObjectCheck]]></code>
-      <code><![CDATA[$configObjectCheck]]></code>
-    </MixedArgument>
-    <MixedArrayAccess>
-      <code><![CDATA[$config['ini']]]></code>
-      <code><![CDATA[$config['ini']]]></code>
-      <code><![CDATA[$config['ini']]]></code>
-      <code><![CDATA[$config['listener']]]></code>
-      <code><![CDATA[$config['php']]]></code>
-      <code><![CDATA[$config['php']]]></code>
-      <code><![CDATA[$config['php']]]></code>
-      <code><![CDATA[$config['some']]]></code>
-      <code><![CDATA[$config['xml']]]></code>
-      <code><![CDATA[$config['xml']]]></code>
-      <code><![CDATA[$config['xml']]]></code>
-      <code><![CDATA[$mergedConfig['indexed']]]></code>
-      <code><![CDATA[$mergedConfig['keyed']]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObject]]></code>
-      <code><![CDATA[$configObjectCheck]]></code>
-      <code><![CDATA[$configObjectCheck]]></code>
-      <code><![CDATA[$configObjectCheck]]></code>
-      <code><![CDATA[$configObjectFromCache]]></code>
-      <code><![CDATA[$configObjectFromCache]]></code>
-      <code><![CDATA[$configObjectFromGlob]]></code>
-      <code><![CDATA[$configObjectFromGlob]]></code>
-      <code><![CDATA[$mergedConfig]]></code>
-    </MixedAssignment>
     <MixedPropertyFetch>
-      <code><![CDATA[$configObject->ini]]></code>
-      <code><![CDATA[$configObject->ini]]></code>
-      <code><![CDATA[$configObject->ini]]></code>
-      <code><![CDATA[$configObject->ini]]></code>
-      <code><![CDATA[$configObject->ini]]></code>
-      <code><![CDATA[$configObject->php]]></code>
-      <code><![CDATA[$configObject->php]]></code>
-      <code><![CDATA[$configObject->php]]></code>
-      <code><![CDATA[$configObject->php]]></code>
-      <code><![CDATA[$configObject->php]]></code>
-      <code><![CDATA[$configObject->xml]]></code>
-      <code><![CDATA[$configObject->xml]]></code>
-      <code><![CDATA[$configObject->xml]]></code>
-      <code><![CDATA[$configObject->xml]]></code>
-      <code><![CDATA[$configObject->xml]]></code>
-      <code><![CDATA[$configObjectFromCache->ini]]></code>
-      <code><![CDATA[$configObjectFromCache->ini]]></code>
-      <code><![CDATA[$configObjectFromCache->php]]></code>
-      <code><![CDATA[$configObjectFromCache->php]]></code>
-      <code><![CDATA[$configObjectFromCache->xml]]></code>
-      <code><![CDATA[$configObjectFromCache->xml]]></code>
-      <code><![CDATA[$configObjectFromGlob->ini]]></code>
-      <code><![CDATA[$configObjectFromGlob->ini]]></code>
-      <code><![CDATA[$configObjectFromGlob->php]]></code>
-      <code><![CDATA[$configObjectFromGlob->php]]></code>
-      <code><![CDATA[$configObjectFromGlob->xml]]></code>
-      <code><![CDATA[$configObjectFromGlob->xml]]></code>
       <code><![CDATA[$modules['ListenerTestModule']->getConfigCalled]]></code>
       <code><![CDATA[$modules['ListenerTestModule']->getConfigCalled]]></code>
     </MixedPropertyFetch>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[assertIsArray]]></code>
+    </RedundantConditionGivenDocblockType>
   </file>
   <file src="test/Listener/DefaultListenerAggregateTest.php">
     <ArgumentTypeCoercion>
@@ -889,22 +822,9 @@
     <MixedArgument>
       <code><![CDATA[$test->modules]]></code>
     </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$config]]></code>
-      <code><![CDATA[$config]]></code>
-    </MixedAssignment>
     <MixedMethodCall>
       <code><![CDATA[getLoadedModules]]></code>
     </MixedMethodCall>
-    <MixedPropertyFetch>
-      <code><![CDATA[$config->bar]]></code>
-      <code><![CDATA[$config->baz]]></code>
-      <code><![CDATA[$config->some]]></code>
-      <code><![CDATA[$config->some]]></code>
-      <code><![CDATA[$config->some]]></code>
-    </MixedPropertyFetch>
     <PossiblyInvalidMethodCall>
       <code><![CDATA[getLoadedModules]]></code>
     </PossiblyInvalidMethodCall>

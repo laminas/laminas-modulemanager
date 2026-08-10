@@ -7,10 +7,9 @@ namespace Laminas\ModuleManager\Listener;
 interface ConfigMergerInterface
 {
     /**
-     * @param  bool $returnConfigAsObject
-     * @return mixed
+     * @return array
      */
-    public function getMergedConfig($returnConfigAsObject = true);
+    public function getMergedConfig();
 
     /**
      * @return ConfigMergerInterface

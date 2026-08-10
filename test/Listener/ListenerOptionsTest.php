@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LaminasTest\ModuleManager\Listener;
 
+use ArrayObject;
 use InvalidArgumentException;
-use Laminas\Config\Config;
 use Laminas\ModuleManager\Listener\ListenerOptions;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -91,9 +91,9 @@ final class ListenerOptionsTest extends TestCase
         self::assertSame(['static', 'custom_paths'], $options->config_static_paths);
     }
 
-    public function testSetModulePathsAcceptsConfigOrTraverable(): void
+    public function testSetModulePathsAcceptsTraversable(): void
     {
-        $config  = new Config([__DIR__]);
+        $config  = new ArrayObject([__DIR__]);
         $options = new ListenerOptions();
         $options->setModulePaths($config);
         self::assertSame($config, $options->getModulePaths());
@@ -106,9 +106,9 @@ final class ListenerOptionsTest extends TestCase
         $options->setModulePaths('asd');
     }
 
-    public function testSetConfigGlobPathsAcceptsConfigOrTraverable(): void
+    public function testSetConfigGlobPathsAcceptsTraversable(): void
     {
-        $config  = new Config([__DIR__]);
+        $config  = new ArrayObject([__DIR__]);
         $options = new ListenerOptions();
         $options->setConfigGlobPaths($config);
         self::assertSame($config, $options->getConfigGlobPaths());
@@ -128,10 +128,10 @@ final class ListenerOptionsTest extends TestCase
         $options->setConfigStaticPaths('asd');
     }
 
-    public function testSetExtraConfigAcceptsArrayOrTraverable(): void
+    public function testSetExtraConfigAcceptsArrayOrTraversable(): void
     {
         $array       = [__DIR__];
-        $traversable = new Config($array);
+        $traversable = new ArrayObject($array);
         $options     = new ListenerOptions();
 
         self::assertSame($options, $options->setExtraConfig($array));

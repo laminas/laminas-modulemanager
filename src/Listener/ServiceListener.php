@@ -184,7 +184,7 @@ class ServiceListener implements ServiceListenerInterface
     public function onLoadModulesPost(ModuleEvent $e)
     {
         $configListener = $e->getConfigListener();
-        $config         = $configListener->getMergedConfig(false);
+        $config         = $configListener->getMergedConfig();
 
         foreach ($this->serviceManagers as $key => $sm) {
             $smConfig = $this->mergeServiceConfiguration($key, $sm, $config);

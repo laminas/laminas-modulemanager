@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Laminas\ModuleManager\Listener;
 
-use Laminas\Config\Config;
-use Laminas\Config\Factory as ConfigFactory;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\EventManager\ListenerAggregateInterface;
 use Laminas\EventManager\ListenerAggregateTrait;
@@ -20,8 +18,14 @@ use function file_exists;
 use function gettype;
 use function is_array;
 use function is_callable;
+use function is_file;
+use function is_readable;
 use function is_string;
+use function pathinfo;
 use function sprintf;
+use function strtolower;
+
+use const PATHINFO_EXTENSION;
 
 class ConfigListener extends AbstractListener implements
     ConfigMergerInterface,
@@ -37,9 +41,6 @@ class ConfigListener extends AbstractListener implements
 
     /** @var array */
     protected $mergedConfig = [];
-
-    /** @var Config|null */
-    protected $mergedConfigObject;
 
     /** @var bool */
     protected $skipConfig = false;
@@ -156,26 +157,18 @@ class ConfigListener extends AbstractListener implements
             && false === $this->skipConfig
         ) {
             $configFile = $this->getOptions()->getConfigCacheFile();
-            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
+            $this->writeArrayToFile($configFile, $this->getMergedConfig());
         }
 
         return $this;
     }
 
     /**
-     * @param  bool $returnConfigAsObject
-     * @return mixed
+     * @return array
      */
     #[Override]
-    public function getMergedConfig($returnConfigAsObject = true)
+    public function getMergedConfig()
     {
-        if ($returnConfigAsObject === true) {
-            if ($this->mergedConfigObject === null) {
-                $this->mergedConfigObject = new Config($this->mergedConfig);
-            }
-            return $this->mergedConfigObject;
-        }
-
         return $this->mergedConfig;
     }
 
@@ -185,8 +178,7 @@ class ConfigListener extends AbstractListener implements
     #[Override]
     public function setMergedConfig(array $config)
     {
-        $this->mergedConfig       = $config;
-        $this->mergedConfigObject = null;
+        $this->mergedConfig = $config;
         return $this;
     }
 
@@ -254,9 +246,8 @@ class ConfigListener extends AbstractListener implements
         if (! is_array($paths)) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
-                    'Argument passed to %s::%s() must be an array, '
-                    . 'implement the Traversable interface, or be an '
-                    . 'instance of Laminas\Config\Config. %s given.',
+                    'Argument passed to %s::%s() must be an array or '
+                    . 'implement the Traversable interface. %s given.',
                     self::class,
                     __METHOD__,
                     gettype($paths)
@@ -308,9 +299,8 @@ class ConfigListener extends AbstractListener implements
         if (! is_array($config)) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
-                    'Config being merged must be an array, '
-                    . 'implement the Traversable interface, or be an '
-                    . 'instance of Laminas\Config\Config. %s given.',
+                    'Config being merged must be an array or '
+                    . 'implement the Traversable interface. %s given.',
                     gettype($config)
                 )
             );
@@ -333,19 +323,57 @@ class ConfigListener extends AbstractListener implements
     {
         switch ($type) {
             case self::STATIC_PATH:
-                $this->addConfig($path, ConfigFactory::fromFile($path));
+                $this->addConfig($path, $this->loadConfigFile($path));
                 break;
 
             case self::GLOB_PATH:
-                // We want to keep track of where each value came from so we don't
-                // use ConfigFactory::fromFiles() since it does merging internally.
+                // We want to keep track of where each value came from, so this does not
+                // merge internally the way a batch loader would.
                 foreach (Glob::glob($path, Glob::GLOB_BRACE, true) as $file) {
-                    $this->addConfig($file, ConfigFactory::fromFile($file));
+                    $this->addConfig($file, $this->loadConfigFile($file));
                 }
                 break;
         }
 
         return $this;
+    }
+
+    /**
+     * Load a PHP config file and return the array it provides.
+     *
+     * Replaces Laminas\Config\Factory::fromFile(), which also handled ini, json, xml and
+     * yaml through reader classes. Only PHP is supported here: the other formats cost
+     * parsing on every request and defeat opcache, so they are not used.
+     *
+     * @param string $path
+     * @return array
+     * @throws Exception\InvalidArgumentException If the file is missing, is not PHP, or
+     *     does not return an array.
+     */
+    protected function loadConfigFile($path)
+    {
+        if (! is_file($path) || ! is_readable($path)) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Config file "%s" does not exist or is not readable', $path)
+            );
+        }
+
+        if (strtolower((string) pathinfo($path, PATHINFO_EXTENSION)) !== 'php') {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Config file "%s" is not a PHP file; only PHP config files are supported',
+                $path
+            ));
+        }
+
+        $config = include $path;
+
+        if (! is_array($config)) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Config file "%s" must return an array; %s returned', $path, gettype($config))
+            );
+        }
+
+        return $config;
     }
 
     /** @return bool */

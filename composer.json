@@ -28,7 +28,6 @@
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "brick/varexporter": "^0.6 || ^0.7",
-        "laminas/laminas-config": "^3.10.1",
         "laminas/laminas-eventmanager": "^3.14.0",
         "laminas/laminas-stdlib": "^3.21.0",
         "webimpress/safe-writer": "^2.2.0"

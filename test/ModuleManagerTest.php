@@ -69,7 +69,7 @@ final class ModuleManagerTest extends TestCase
         $loadedModules = $moduleManager->getLoadedModules();
         self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
-        self::assertSame($config->some, 'thing', var_export($config, true));
+        self::assertSame('thing', $config['some'], var_export($config, true));
     }
 
     public function testCanLoadMultipleModules(): void
@@ -87,8 +87,8 @@ final class ModuleManagerTest extends TestCase
         self::assertInstanceOf('SubModule\Sub\Module', $moduleManager->getModule('SubModule\Sub'));
         self::assertNull($moduleManager->getModule('NotLoaded'));
         $config = $configListener->getMergedConfig();
-        self::assertSame('foo', $config->bar);
-        self::assertSame('bar', $config->baz);
+        self::assertSame('foo', $config['bar']);
+        self::assertSame('bar', $config['baz']);
     }
 
     public function testModuleLoadingBehavior(): void
@@ -189,7 +189,7 @@ final class ModuleManagerTest extends TestCase
         $loadedModules = $moduleManager->getLoadedModules();
         self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
-        self::assertSame($config->some, 'thing');
+        self::assertSame('thing', $config['some']);
     }
 
     public function testCanLoadMultipleModulesObjectWithString(): void
@@ -202,7 +202,7 @@ final class ModuleManagerTest extends TestCase
         $loadedModules = $moduleManager->getLoadedModules();
         self::assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
         $config = $configListener->getMergedConfig();
-        self::assertSame($config->some, 'thing');
+        self::assertSame('thing', $config['some']);
     }
 
     public function testCanNotLoadSomeObjectModuleWithoutIdentifier(): void

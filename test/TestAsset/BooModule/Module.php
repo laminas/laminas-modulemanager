@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace BooModule;
 
-use Laminas\Config\Config;
+use ArrayObject;
 
 final class Module
 {
-    public function getConfig(): Config
+    public function getConfig(): ArrayObject
     {
-        return new Config(include __DIR__ . '/configs/config.php');
+        return new ArrayObject(include __DIR__ . '/configs/config.php');
     }
 }
