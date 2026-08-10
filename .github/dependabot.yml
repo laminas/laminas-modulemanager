@@ -1,0 +1,48 @@
+version: 2
+
+# Security updates run without this file; scheduled version updates do not.
+# Groups mirror the track-admin house style, trimmed to what these forks contain
+# (no npm, and no private registry — the sibling forks are public VCS repositories).
+# Monthly rather than weekly: these forks are not actively maintained between PHP hops.
+updates:
+  - package-ecosystem: composer
+    directory: "/"
+    schedule:
+      interval: monthly
+      time: "11:00"
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 10
+    groups:
+      laminas-api-tools:
+        patterns:
+          - "laminas-api-tools/*"
+      laminas:
+        patterns:
+          - "laminas/*"
+      doctrine:
+        patterns:
+          - "doctrine/*"
+      test-tooling:
+        patterns:
+          - "phpunit/*"
+          - "sebastian/*"
+          - "phpspec/*"
+      static-analysis:
+        patterns:
+          - "vimeo/psalm"
+          - "psalm/*"
+          - "squizlabs/*"
+          - "slevomat/*"
+    allow:
+      - dependency-type: direct
+      - dependency-type: indirect
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+      time: "11:00"
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 10
