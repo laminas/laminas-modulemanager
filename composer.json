@@ -40,7 +40,7 @@
         "laminas/laminas-mvc": "^3.8.0",
         "laminas/laminas-servicemanager": "^3.23.0",
         "phpunit/phpunit": "^11.5.42",
-        "psalm/plugin-phpunit": "^0.19.5",
+        "psalm/plugin-phpunit": "^0.20.0",
         "vimeo/psalm": "^6.13.1",
         "amphp/dns": "^1.24 || ^2.1.2",
         "amphp/socket": "^1.2.1 || ^2.3.1"
